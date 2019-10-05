@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:Setup"
+"ProjectName" = "8:Windows Installer Packaging"
 "LanguageId" = "3:1033"
 "CodePage" = "3:1252"
 "UILanguageId" = "3:1033"
@@ -49,6 +49,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -185,7 +193,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Shutdown Timer"
+        "ProductName" = "8:Shutdown Timer Classic"
         "ProductCode" = "8:{E23BE0EE-06C8-4402-BE9E-9D2D714F04BB}"
         "PackageCode" = "8:{3E648145-611C-4447-8E8A-37BE0D02EC50}"
         "UpgradeCode" = "8:{F88991E6-782D-40DD-BB45-C327147C087E}"
@@ -315,7 +323,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_6C2A2DD5A5F641E09B91F713864744F9"
+            "Target" = "8:_2E5BD7BDE6CC4BC884D51757F070B5AB"
             "Folder" = "8:_10B45E24D05448F3B7A5BC12530132CD"
             "WorkingFolder" = "8:_8FA09075B8784143A5EFF31E9A33E77A"
             "Icon" = "8:_2E5BD7BDE6CC4BC884D51757F070B5AB"
@@ -736,7 +744,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_6C2A2DD5A5F641E09B91F713864744F9"
             {
-            "SourcePath" = "8:..\\ShutdownTimerWin32\\obj\\Release\\ShutdownTimerWin32.exe"
+            "SourcePath" = "8:..\\ShutdownTimerWin32\\obj\\Debug\\ShutdownTimerWin32.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_8FA09075B8784143A5EFF31E9A33E77A"
