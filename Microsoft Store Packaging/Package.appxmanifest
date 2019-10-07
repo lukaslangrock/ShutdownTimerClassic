@@ -7,8 +7,8 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="7554bce7-3540-4b9c-b73b-9e6fcded24a7"
-    Publisher="CN=Lukas"
+    Name="19341LukasLangrock.ShutdownTimerClassic"
+    Publisher="CN=1590A867-40E3-4A6E-BC9F-DF5415F42DC2"
     Version="1.0.0.0" />
 
   <Properties>
