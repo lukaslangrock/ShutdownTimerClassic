@@ -11,6 +11,7 @@ namespace ShutdownTimerWin32
         public int minutes = 0;
         public int seconds = 0;
         public string method = "Shutdown";
+        public bool UI = true;
         private bool allow_close = false;
         private bool animation_switch = false;
 
@@ -21,7 +22,16 @@ namespace ShutdownTimerWin32
 
         private void Countdown_Load(object sender, EventArgs e)
         {
-            UpdateUI();
+            if (UI == true) { UpdateUI(); } // initial time label update
+            else
+            {
+                time_label.Text = "Interface disabled";
+                UpdateNameText();
+                this.TopMost = false;
+                this.ShowInTaskbar = false;
+                this.MinimizeBox = true;
+                this.WindowState = FormWindowState.Minimized;
+            }
         }
 
         private void UpdateUI()
@@ -53,6 +63,26 @@ namespace ShutdownTimerWin32
             Application.DoEvents();
         }
 
+        private void UpdateNameText()
+        {
+            // Temporary variables
+            string temp_hours;
+            string temp_minutes;
+            string temp_seconds;
+
+            // Add 0 before single digit numbers
+            if (hours < 10) { temp_hours = "0" + hours.ToString(); }
+            else { temp_hours = hours.ToString(); }
+            if (minutes < 10) { temp_minutes = "0" + minutes.ToString(); }
+            else { temp_minutes = minutes.ToString(); }
+            if (seconds < 10) { temp_seconds = "0" + seconds.ToString(); }
+            else { temp_seconds = seconds.ToString(); }
+
+            // Update time label
+            string seperator = ":";
+            this.Text = "Countdown - " + temp_hours + seperator + temp_minutes + seperator + temp_seconds;
+        }
+
         private void Warning_Animation()
         {
             if (animation_switch == true) { BackColor = Color.Red; animation_switch = false; }
@@ -61,7 +91,11 @@ namespace ShutdownTimerWin32
 
         private void Countdown_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (allow_close == false)
+            if (UI == false && allow_close == false)
+            {
+                e.Cancel = true; // ignore closing attempts while in background to prevent message box
+            }
+            else if (allow_close == false)
             {
                 e.Cancel = true;
                 string caption = "Are you sure?";
@@ -124,7 +158,8 @@ namespace ShutdownTimerWin32
                 {
                     seconds -= 1;
                 }
-                UpdateUI();
+                if (UI == true) { UpdateUI(); } // only update UI if the application is actually shown
+                else { UpdateNameText(); } // else update only the application name
             }
         }
 

@@ -42,12 +42,11 @@ namespace ShutdownTimerWin32
                     method = method_combo.Text
                 })
                 {
-                    if (background_check.Checked == true) { countdown.TopMost = false; countdown.WindowState = FormWindowState.Minimized; }
+                    if (background_check.Checked == true) { countdown.UI = false; } // disables UI updates
+                    countdown.Owner = this;
                     countdown.ShowDialog();
+                    Application.Exit(); // Exit application after countdown is closed
                 }
-
-                // Exit application after countdown is closed
-                Application.Exit();
             }
             else
             {
