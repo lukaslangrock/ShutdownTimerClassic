@@ -51,7 +51,7 @@
     <StartupObject>ShutdownTimerWin32.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>icon_transparent.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <Content Include="icon_transparent.ico" />
     <None Include="Resources\github.png" />
   </ItemGroup>
   <ItemGroup>
