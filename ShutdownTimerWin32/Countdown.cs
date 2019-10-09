@@ -120,11 +120,16 @@ namespace ShutdownTimerWin32
                 // Target reached
 
                 counter.Stop();
-                seconds = 0;
-                minutes = 0;
-                hours = 0;
+                if (UI == true)
+                {
+                    seconds = 0;
+                    minutes = 0;
+                    hours = 0;
+                }      
                 UpdateUI();
                 ShutdownWindows(method);
+                Application.DoEvents();
+                Application.Exit();
             }
             else // count down if target not reached
             {
