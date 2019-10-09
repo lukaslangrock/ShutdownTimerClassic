@@ -10,10 +10,10 @@ namespace ShutdownTimerWin32
         public int hours = 0;
         public int minutes = 0;
         public int seconds = 0;
-        public string method = "Shutdown";
-        public bool UI = true;
-        private bool allow_close = false;
-        private bool animation_switch = false;
+        public string method = "Shutdown"; // defines what power action to execute (fallback to shutdown if not changed)
+        public bool UI = true; // disables UI updates when set to false (used for running in background)
+        private bool allow_close = false; // if false displays a 'are you sure' message box when closing.
+        private bool animation_switch = false; // used to switch background colors
 
         public Countdown()
         {
@@ -23,7 +23,7 @@ namespace ShutdownTimerWin32
         private void Countdown_Load(object sender, EventArgs e)
         {
             if (UI == true) { UpdateUI(); } // initial time label update
-            else
+            else // prepares window for running in background
             {
                 time_label.Text = "Interface disabled";
                 UpdateNameText();
@@ -34,6 +34,9 @@ namespace ShutdownTimerWin32
             }
         }
 
+        /// <summary>
+        /// Updates the time label with current time left and applies the corresponding background color.
+        /// </summary>
         private void UpdateUI()
         {
             // Temporary variables
@@ -63,6 +66,9 @@ namespace ShutdownTimerWin32
             Application.DoEvents();
         }
 
+        /// <summary>
+        /// Updates the application name text so the user can see the time left in the Task-Manager when the application runs in the background.
+        /// </summary>
         private void UpdateNameText()
         {
             // Temporary variables
@@ -83,6 +89,9 @@ namespace ShutdownTimerWin32
             this.Text = "Countdown - " + temp_hours + seperator + temp_minutes + seperator + temp_seconds;
         }
 
+        /// <summary>
+        /// Switches from background color from red to black (and vice versa) when called.
+        /// </summary>
         private void Warning_Animation()
         {
             if (animation_switch == true) { BackColor = Color.Red; animation_switch = false; }

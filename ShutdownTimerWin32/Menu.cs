@@ -13,12 +13,12 @@ namespace ShutdownTimerWin32
 
         private void Menu_Load(object sender, EventArgs e)
         {
-            version_label.Text = "v" + Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf("."));
+            version_label.Text = "v" + Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf(".")); // Display current version 
         }
 
         private void Github_pb_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/Lukas34/ShutdownTimerWin32");
+            System.Diagnostics.Process.Start("https://github.com/Lukas34/ShutdownTimerWin32"); // Show GitHub page
         }
 
         private void Start_button_Click(object sender, EventArgs e)
@@ -55,6 +55,11 @@ namespace ShutdownTimerWin32
         }
 
         public string CheckResult;
+
+        /// <summary>
+        /// Checks user input before further processing
+        /// </summary>
+        /// <returns>Result of checks</returns>
         private bool RunChecks()
         {
             bool err_tracker = true; // if anything goes wrong the tracker will be set to false
