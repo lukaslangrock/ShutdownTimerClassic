@@ -26,7 +26,7 @@ namespace ShutdownTimerWin32
             else // prepares window for running in background
             {
                 time_label.Text = "Interface disabled";
-                UpdateNameText();
+                UpdateBackgroundUI();
                 this.TopMost = false;
                 this.ShowInTaskbar = false;
                 this.MinimizeBox = true;
@@ -67,9 +67,9 @@ namespace ShutdownTimerWin32
         }
 
         /// <summary>
-        /// Updates the application name text so the user can see the time left in the Task-Manager when the application runs in the background.
+        /// Updates the tray icon and the application name text so the user can see the time left in the Task-Manager when the application runs in the background.
         /// </summary>
-        private void UpdateNameText()
+        private void UpdateBackgroundUI()
         {
             // Temporary variables
             string temp_hours;
@@ -87,6 +87,13 @@ namespace ShutdownTimerWin32
             // Update time label
             string seperator = ":";
             this.Text = "Countdown - " + temp_hours + seperator + temp_minutes + seperator + temp_seconds;
+
+            // Decide what tray message to show
+            if (hours == 2 && minutes == 0 && seconds == 00) { notifyIcon.BalloonTipText = "2 hours remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+            else if (hours == 1 && minutes == 0 && seconds == 00) { notifyIcon.BalloonTipText = "1 hour remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+            else if (hours == 0 && minutes == 30 && seconds == 00) { notifyIcon.BalloonTipText = "30 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+            else if (hours == 0 && minutes == 5 && seconds == 00) { notifyIcon.BalloonTipText = "5 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+            else if (hours == 0 && minutes == 0 && seconds == 30) { notifyIcon.BalloonTipText = "30 seconds remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
         }
 
         /// <summary>
@@ -120,6 +127,31 @@ namespace ShutdownTimerWin32
                     Application.Exit();
                 }
             }
+        }
+
+        /// <summary>
+        /// Minimizes application to system tray
+        /// </summary>
+        private void Countdown_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
+                notifyIcon.Visible = true;
+            }
+        }
+
+        /// <summary>
+        /// Stop timer option in the tray menu
+        /// </summary>
+        private void timer_stop_Click(object sender, EventArgs e)
+        {
+            allow_close = true;
+            counter.Stop();
+            string caption1 = "Shutdown canceled";
+            string message1 = "Your shutdown timer was canceled successfully!\nThe application will now close.";
+            MessageBox.Show(message1, caption1, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Application.Exit();
         }
 
         private void Counter_Tick(object sender, EventArgs e)
@@ -173,7 +205,7 @@ namespace ShutdownTimerWin32
                     seconds -= 1;
                 }
                 if (UI == true) { UpdateUI(); } // only update UI if the application is actually shown
-                else { UpdateNameText(); } // else update only the application name
+                else { UpdateBackgroundUI(); } // else update only the application name
             }
         }
 
