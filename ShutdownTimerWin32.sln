@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shutdown Timer", "ShutdownT
 EndProject
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "Microsoft Store Packaging", "Microsoft Store Packaging\Microsoft Store Packaging.wapproj", "{CF85ADA3-7814-4869-BBF2-F19A4DD27F92}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{B17CEEE1-36DD-4A24-9BAB-A9BF11A308B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,16 @@ Global
 		{CF85ADA3-7814-4869-BBF2-F19A4DD27F92}.Release|x86.ActiveCfg = Release|x86
 		{CF85ADA3-7814-4869-BBF2-F19A4DD27F92}.Release|x86.Build.0 = Release|x86
 		{CF85ADA3-7814-4869-BBF2-F19A4DD27F92}.Release|x86.Deploy.0 = Release|x86
+		{B17CEEE1-36DD-4A24-9BAB-A9BF11A308B2}.Debug|Any CPU.ActiveCfg = Debug
+		{B17CEEE1-36DD-4A24-9BAB-A9BF11A308B2}.Debug|ARM.ActiveCfg = Debug
+		{B17CEEE1-36DD-4A24-9BAB-A9BF11A308B2}.Debug|ARM64.ActiveCfg = Debug
+		{B17CEEE1-36DD-4A24-9BAB-A9BF11A308B2}.Debug|x64.ActiveCfg = Debug
+		{B17CEEE1-36DD-4A24-9BAB-A9BF11A308B2}.Debug|x86.ActiveCfg = Debug
+		{B17CEEE1-36DD-4A24-9BAB-A9BF11A308B2}.Release|Any CPU.ActiveCfg = Release
+		{B17CEEE1-36DD-4A24-9BAB-A9BF11A308B2}.Release|ARM.ActiveCfg = Release
+		{B17CEEE1-36DD-4A24-9BAB-A9BF11A308B2}.Release|ARM64.ActiveCfg = Release
+		{B17CEEE1-36DD-4A24-9BAB-A9BF11A308B2}.Release|x64.ActiveCfg = Release
+		{B17CEEE1-36DD-4A24-9BAB-A9BF11A308B2}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
