@@ -9,6 +9,9 @@ namespace ShutdownTimerWin32
         public int hours = 0;
         public int minutes = 0;
         public int seconds = 0;
+        private int restoreHours;
+        private int restoreMinutes;
+        private int restoreSeconds;
         public string method = "Shutdown"; // defines what power action to execute (fallback to shutdown if not changed)
         public bool UI = true; // disables UI updates when set to false (used for running in background)
         private bool allow_close = false; // if false displays a 'are you sure' message box when closing.
@@ -21,6 +24,11 @@ namespace ShutdownTimerWin32
 
         private void Countdown_Load(object sender, EventArgs e)
         {
+            // store original values for timer restart
+            restoreHours = hours;
+            restoreMinutes = minutes;
+            restoreSeconds = seconds;
+
             if (UI == true) { UpdateUI(); } // initial time label update
             else // prepares window for running in background
             {
@@ -30,6 +38,8 @@ namespace ShutdownTimerWin32
                 this.ShowInTaskbar = false;
                 this.MinimizeBox = true;
                 this.WindowState = FormWindowState.Minimized;
+                notifyIcon.BalloonTipText = "Timer started. The power action will be executed in " + hours + " hours, " + minutes + " minutes and " + seconds + " seconds.";
+                notifyIcon.ShowBalloonTip(10000);
             }
         }
 
@@ -51,9 +61,10 @@ namespace ShutdownTimerWin32
             if (seconds < 10) { temp_seconds = "0" + seconds.ToString(); }
             else { temp_seconds = seconds.ToString(); }
 
-            // Update time label
+            // Update time labels
             string seperator = ":";
             time_label.Text = temp_hours + seperator + temp_minutes + seperator + temp_seconds;
+            timeMenuItem.Text = temp_hours + seperator + temp_minutes + seperator + temp_seconds;
 
             // Decide what color/animation to use
             if (hours > 0 || minutes >= 30) { BackColor = Color.ForestGreen; }
@@ -83,9 +94,10 @@ namespace ShutdownTimerWin32
             if (seconds < 10) { temp_seconds = "0" + seconds.ToString(); }
             else { temp_seconds = seconds.ToString(); }
 
-            // Update time label
+            // Update time labels
             string seperator = ":";
             this.Text = "Countdown - " + temp_hours + seperator + temp_minutes + seperator + temp_seconds;
+            timeMenuItem.Text = temp_hours + seperator + temp_minutes + seperator + temp_seconds;
 
             // Decide what tray message to show
             if (hours == 2 && minutes == 0 && seconds == 00) { notifyIcon.BalloonTipText = "2 hours remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
@@ -151,6 +163,33 @@ namespace ShutdownTimerWin32
             string message1 = "Your shutdown timer was canceled successfully!\nThe application will now close.";
             MessageBox.Show(message1, caption1, MessageBoxButtons.OK, MessageBoxIcon.Information);
             Application.Exit();
+        }
+
+        /// <summary>
+        /// Restores original time values and restarts the timer
+        /// </summary>
+        private void TimerRestartMenuItem_Click(object sender, EventArgs e)
+        {
+            counterTimer.Stop();
+            hours = restoreHours;
+            minutes = restoreMinutes;
+            seconds = restoreSeconds;
+            counterTimer.Start();
+            if (UI == true) { UpdateUI(); } else { UpdateBackgroundUI(); }
+            if (this.WindowState == FormWindowState.Minimized) { notifyIcon.BalloonTipText = "Timer restarted. The power action will be executed in " + hours + " hours, " + minutes + " minutes and " + seconds + " seconds."; notifyIcon.ShowBalloonTip(10000); }
+        }
+
+        /// <summary>
+        /// Restarts the application
+        /// </summary>
+        private void AppRestartMenuItem_Click(object sender, EventArgs e)
+        {
+            counterTimer.Stop();
+            time_label.Text = "Restarting";
+            timeMenuItem.Text = "Restarting";
+            allow_close = true;
+            Application.DoEvents();
+            Application.Restart();
         }
 
         private void Counter_Tick(object sender, EventArgs e)
