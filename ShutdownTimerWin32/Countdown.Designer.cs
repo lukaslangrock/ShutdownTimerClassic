@@ -33,10 +33,10 @@
             this.time_label = new System.Windows.Forms.Label();
             this.titlebar_picture = new System.Windows.Forms.PictureBox();
             this.title_label = new System.Windows.Forms.Label();
-            this.counter = new System.Windows.Forms.Timer(this.components);
+            this.counterTimer = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.timer_stop = new System.Windows.Forms.ToolStripMenuItem();
+            this.TimerStopMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.titlebar_picture)).BeginInit();
             this.trayMenu.SuspendLayout();
             this.SuspendLayout();
@@ -79,11 +79,11 @@
             this.title_label.TabIndex = 15;
             this.title_label.Text = "Shutdown Timer";
             // 
-            // counter
+            // counterTimer
             // 
-            this.counter.Enabled = true;
-            this.counter.Interval = 1000;
-            this.counter.Tick += new System.EventHandler(this.Counter_Tick);
+            this.counterTimer.Enabled = true;
+            this.counterTimer.Interval = 1000;
+            this.counterTimer.Tick += new System.EventHandler(this.Counter_Tick);
             // 
             // notifyIcon
             // 
@@ -95,16 +95,16 @@
             // trayMenu
             // 
             this.trayMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.timer_stop});
+            this.TimerStopMenuItem});
             this.trayMenu.Name = "trayMenu";
             this.trayMenu.Size = new System.Drawing.Size(150, 26);
             // 
-            // timer_stop
+            // TimerStopMenuItem
             // 
-            this.timer_stop.Name = "timer_stop";
-            this.timer_stop.Size = new System.Drawing.Size(149, 22);
-            this.timer_stop.Text = "Stop the timer";
-            this.timer_stop.Click += new System.EventHandler(this.timer_stop_Click);
+            this.TimerStopMenuItem.Name = "TimerStopMenuItem";
+            this.TimerStopMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.TimerStopMenuItem.Text = "Stop the timer";
+            this.TimerStopMenuItem.Click += new System.EventHandler(this.TimerStopMenuItem_Click);
             // 
             // Countdown
             // 
@@ -141,9 +141,9 @@
         internal System.Windows.Forms.Label time_label;
         private System.Windows.Forms.PictureBox titlebar_picture;
         private System.Windows.Forms.Label title_label;
-        private System.Windows.Forms.Timer counter;
+        private System.Windows.Forms.Timer counterTimer;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ContextMenuStrip trayMenu;
-        private System.Windows.Forms.ToolStripMenuItem timer_stop;
+        private System.Windows.Forms.ToolStripMenuItem TimerStopMenuItem;
     }
 }

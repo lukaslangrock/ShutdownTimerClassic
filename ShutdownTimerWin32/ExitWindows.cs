@@ -59,13 +59,12 @@ namespace ShutdownTimerWin32
 
         const uint SHTDN_REASON_FLAG_PLANNED = 0x80000000;
 
-        private static void getPrivileges()
+        private static void GetPrivileges()
         {
-            IntPtr hToken;
             TOKEN_PRIVILEGES tkp;
 
             OpenProcessToken(Process.GetCurrentProcess().Handle,
-              TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out hToken);
+              TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out IntPtr hToken);
             tkp.PrivilegeCount = 1;
             tkp.Privileges.Attributes = SE_PRIVILEGE_ENABLED;
             LookupPrivilegeValue("", SE_SHUTDOWN_NAME,
@@ -77,7 +76,7 @@ namespace ShutdownTimerWin32
         public static void Shutdown() { Shutdown(false); }
         public static void Shutdown(bool force)
         {
-            getPrivileges();
+            GetPrivileges();
             ExitWindowsEx(EWX_SHUTDOWN |
               (uint)(force ? EWX_FORCE : EWX_FORCE) | EWX_POWEROFF, SHTDN_REASON_FLAG_PLANNED);
         }
@@ -85,7 +84,7 @@ namespace ShutdownTimerWin32
         public static void Reboot() { Reboot(false); }
         public static void Reboot(bool force)
         {
-            getPrivileges();
+            GetPrivileges();
             ExitWindowsEx(EWX_REBOOT |
               (uint)(force ? EWX_FORCE : EWX_FORCE), SHTDN_REASON_FLAG_PLANNED);
         }
@@ -93,7 +92,7 @@ namespace ShutdownTimerWin32
         public static void LogOff() { LogOff(false); }
         public static void LogOff(bool force)
         {
-            getPrivileges();
+            GetPrivileges();
             ExitWindowsEx(EWX_LOGOFF |
               (uint)(force ? EWX_FORCE : EWX_FORCE), SHTDN_REASON_FLAG_PLANNED);
         }

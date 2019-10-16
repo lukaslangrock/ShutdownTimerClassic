@@ -119,7 +119,7 @@ namespace ShutdownTimerWin32
                 if (question == DialogResult.Yes)
                 {
                     allow_close = true;
-                    counter.Stop();
+                    counterTimer.Stop();
                     string caption2 = "Shutdown canceled";
                     string message2 = "Your shutdown timer was canceled successfully!\nThe application will now close.";
                     MessageBox.Show(message2, caption2, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -143,10 +143,10 @@ namespace ShutdownTimerWin32
         /// <summary>
         /// Stop timer option in the tray menu
         /// </summary>
-        private void timer_stop_Click(object sender, EventArgs e)
+        private void TimerStopMenuItem_Click(object sender, EventArgs e)
         {
             allow_close = true;
-            counter.Stop();
+            counterTimer.Stop();
             string caption1 = "Shutdown canceled";
             string message1 = "Your shutdown timer was canceled successfully!\nThe application will now close.";
             MessageBox.Show(message1, caption1, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -159,7 +159,7 @@ namespace ShutdownTimerWin32
             {
                 // Target reached
 
-                counter.Stop();
+                counterTimer.Stop();
                 if (UI == true)
                 {
                     seconds = 0;
@@ -183,7 +183,7 @@ namespace ShutdownTimerWin32
                             // already was on 00:00:00 and then counted another second so we would have
                             // counted one second over the desired target time.
                             // Although this should not be possible I integrated an error message anyways
-                            counter.Stop();
+                            counterTimer.Stop();
                             MessageBox.Show("You should never see this. How can you see this?", "WTF?", MessageBoxButtons.OK, MessageBoxIcon.Question);
                         }
                         else
