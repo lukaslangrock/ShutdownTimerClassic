@@ -51,7 +51,7 @@
     <StartupObject>ShutdownTimerWin32.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon_transparent.ico</ApplicationIcon>
+    <ApplicationIcon>icon_display.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -110,8 +110,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icon.ico" />
-    <Content Include="icon_transparent.ico" />
     <None Include="Resources\github.png" />
   </ItemGroup>
   <ItemGroup>
@@ -125,6 +123,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon_fullsize.ico" />
+    <Content Include="icon_display.ico" />
+    <Content Include="icon_transparent_fullsize.ico" />
+    <Content Include="icon_transparent_display.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

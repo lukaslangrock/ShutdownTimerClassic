@@ -15,13 +15,13 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_7D5604F10A504B37A4650B34F18DC8AF"
+        "MsmKey" = "8:_6B415E4521F8467F885E8FB8AF0C1A55"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A217BDDD2DD64E5F8D4745CB4DD076F3"
+        "MsmKey" = "8:_7D5604F10A504B37A4650B34F18DC8AF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -56,6 +56,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -80,6 +88,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
     }
@@ -110,9 +126,9 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A217BDDD2DD64E5F8D4745CB4DD076F3"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6B415E4521F8467F885E8FB8AF0C1A55"
             {
-            "SourcePath" = "8:..\\ShutdownTimerWin32\\icon.ico"
+            "SourcePath" = "8:..\\ShutdownTimerWin32\\icon_display.ico"
             "TargetName" = "8:icon.ico"
             "Tag" = "8:"
             "Folder" = "8:_1E58F7E2C3EA412C83810222F41244FA"
@@ -185,9 +201,9 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Shutdown Timer"
+        "ProductName" = "8:Shutdown Timer Classic"
         "ProductCode" = "8:{7307350B-A2A6-41E4-9506-FA1634D142AC}"
-        "PackageCode" = "8:{AD2A5CC0-4ADF-4DEA-A125-7C7DED088B9D}"
+        "PackageCode" = "8:{1AB19D79-505A-4AEC-8598-2334ED6BD1C0}"
         "UpgradeCode" = "8:{81E0637B-864A-4FE6-AA0F-5550A751DD9B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -198,13 +214,13 @@
         "Manufacturer" = "8:Lukas Langrock"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/Lukas34/ShutdownTimerWin32"
-        "Title" = "8:Shutdown Timer"
+        "Title" = "8:Shutdown Timer Classic"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Lukas Langrock"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:httpps://langrock.info"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_6B415E4521F8467F885E8FB8AF0C1A55"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -318,7 +334,7 @@
             "Target" = "8:_7D5604F10A504B37A4650B34F18DC8AF"
             "Folder" = "8:_FED855E55B4245FC8ED1304F6BB1A1DD"
             "WorkingFolder" = "8:_1E58F7E2C3EA412C83810222F41244FA"
-            "Icon" = "8:_A217BDDD2DD64E5F8D4745CB4DD076F3"
+            "Icon" = "8:_6B415E4521F8467F885E8FB8AF0C1A55"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8BA06445F19649F78AE58DAD5C2369C2"
@@ -332,7 +348,7 @@
             "Target" = "8:_7D5604F10A504B37A4650B34F18DC8AF"
             "Folder" = "8:_567281A0A91943B494394C9C3ED2B221"
             "WorkingFolder" = "8:_1E58F7E2C3EA412C83810222F41244FA"
-            "Icon" = "8:_A217BDDD2DD64E5F8D4745CB4DD076F3"
+            "Icon" = "8:_6B415E4521F8467F885E8FB8AF0C1A55"
             "Feature" = "8:"
             }
         }
@@ -736,7 +752,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_7D5604F10A504B37A4650B34F18DC8AF"
             {
-            "SourcePath" = "8:..\\ShutdownTimerWin32\\obj\\Release\\ShutdownTimerWin32.exe"
+            "SourcePath" = "8:..\\ShutdownTimerWin32\\obj\\Debug\\ShutdownTimerWin32.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_1E58F7E2C3EA412C83810222F41244FA"
