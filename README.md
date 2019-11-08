@@ -36,10 +36,12 @@ Here is a quick overview:
 
 # Behavior
 ## Shutdown sequence
-When a shutdown is executed all windows will be closed, regardless if they resist or not so any unsaved work will be gone. This is done so that you can be sure your PC actually shuts down and can not be stopped by some random application that waits for user input before closing or something. Please note that I am not liable for any data loss because you didn't save that extremely important document and now it's gone. That is your fault!
+When a shutdown is executed all windows will be closed, regardless if they resist or not so any unsaved work will be gone! This is done to be sure your PC shuts down and can not be stopped by another process. Please note that I am not liable for any data loss because you didn't save that extremely important document and now it's gone. That is your fault!
 
 ## Canceling the shutdown
 As long as the timer has not reached zero, you can cancel the countdown at any time by simply pressing the close button (that big X in the top right corner). A dialog will then pop up asking you if you want to cancel. If you choose so, the countdown will be immediately canceled and another message will tell you that the countdown was successfully canceled and that the application will close after clicking OK. At this point, the countdown has already stopped and you have all the time you want before clicking ok, which results in the application closing itself.
 
+If you are running it in the background, then you can go to the notification area (click on the arrow on the right side of your taskbar) and right-click on the application icon. This will bring up a menu with the option "Stop and exit". Clicking this will cancel the shutdown and tell you about the cancellation using a message box.
+
 ## Logging and Privacy
-The application is not connected to the internet and does not log any user data what so ever. The only things stored on your machine are the application itself and a small boolean, so the application knows if you have seen the license message or not (this is checked on every launch and in case you have not seen the message it will be shown before the main menu pops up).
+The application is not connected to the internet and does not log any user data when you are using the GitHub release. If you are using the Microsoft Store release, then the Store will monitor basic usage and crashes. The application also stores a small boolean on your system, so it knows if you have seen the license message or not (this is checked on every launch and in case you have not seen the message it will be shown before the main menu pops up).
