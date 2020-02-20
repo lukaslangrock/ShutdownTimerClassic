@@ -1,8 +1,7 @@
 # Shutdown Timer Classic
 Shutdown Timer Classic or otherwise known as ShutdownTimerWin32 is a small little Windows application that allows you to set a timer which will shutdown, restart, hibernate, sleep or lock your PC.
-<p align="center">
-  <img alt="Screenshot of the main menu" src="https://raw.githubusercontent.com/Lukas34/ShutdownTimerWin32/master/Images/Menu.png">
-</p>
+
+![Screenshot of the main menu](Images/Menu.png)
 
 I also have a UWP based version of this project which will be available on the Microsoft Store when it's ready but that will take some time. Once the project is ready I will update this document and my website.
 
@@ -11,9 +10,8 @@ Shutdown Timer is a very simple application hence it is easy to use.
 Just choose a power action (method) from the drop-down menu and then dial in the time span you want. If the counter reaches zero the chosen power action will be executed.
 
 By default, the countdown window will be always on top of every other window so you don't forget that you have an active shutdown timer. The countdown can also be hidden by selecting the "Run in background" checkbox under the dropdown menu.
-<p align="center">
-  <img alt="Screenshot of the main menu with extended combobox" src="https://raw.githubusercontent.com/Lukas34/ShutdownTimerWin32/master/Images/Menu2.png">
-</p>
+
+![Screenshot of the main menu with extended combobox](Images/Menu2.png)
 
 # Colors
 The countdown window has 4 different background colors to visualize the time left and one animation to draw your attention when the time is about to run out, in case you forget about the shutdown timer.
@@ -26,13 +24,11 @@ Here is a quick overview:
 | 10 - 1 min.   | Orange        | No        |
 | < 1min.       | Red / Black   | Yes       |
 
-<p align="center">
-  <img alt="Screenshot of countdown window with green background" src="https://raw.githubusercontent.com/Lukas34/ShutdownTimerWin32/master/Images/CountdownGreen.png">
-  <img alt="Screenshot of countdown window with yellow background" src="https://raw.githubusercontent.com/Lukas34/ShutdownTimerWin32/master/Images/CountdownYellow.png">
-  <img alt="Screenshot of countdown window with orangebackground" src="https://raw.githubusercontent.com/Lukas34/ShutdownTimerWin32/master/Images/CountdownOrange.png">
-  <img alt="Screenshot of countdown window with red background" src="https://raw.githubusercontent.com/Lukas34/ShutdownTimerWin32/master/Images/CountdownRed.png">
-  <img alt="Screenshot of countdown window with black background" src="https://raw.githubusercontent.com/Lukas34/ShutdownTimerWin32/master/Images/CountdownBlack.png">
-</p>
+![Screenshot of countdown window with green background](Images/CountdownGreen.png)
+![Screenshot of countdown window with yellow background](Images/CountdownYellow.png)
+![Screenshot of countdown window with orange background](Images/CountdownOrange.png)
+![Screenshot of countdown window with red background](Images/CountdownRed.png)
+![Screenshot of countdown window with black background](Images/CountdownBlack.png)
 
 # Behavior
 ## Shutdown sequence
