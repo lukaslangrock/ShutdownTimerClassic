@@ -105,37 +105,38 @@
             this.toolStripSeparator1,
             this.timeMenuItem});
             this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(181, 123);
+            this.contextMenu.Size = new System.Drawing.Size(162, 101);
             // 
             // timerStopMenuItem
             // 
             this.timerStopMenuItem.Name = "timerStopMenuItem";
-            this.timerStopMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.timerStopMenuItem.Size = new System.Drawing.Size(161, 22);
             this.timerStopMenuItem.Text = "Stop and exit";
             this.timerStopMenuItem.Click += new System.EventHandler(this.TimerStopMenuItem_Click);
             // 
             // timerRestartMenuItem
             // 
             this.timerRestartMenuItem.Name = "timerRestartMenuItem";
-            this.timerRestartMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.timerRestartMenuItem.Size = new System.Drawing.Size(161, 22);
             this.timerRestartMenuItem.Text = "Restart the timer";
             this.timerRestartMenuItem.Click += new System.EventHandler(this.TimerRestartMenuItem_Click);
             // 
             // appRestartMenuItem
             // 
             this.appRestartMenuItem.Name = "appRestartMenuItem";
-            this.appRestartMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.appRestartMenuItem.Size = new System.Drawing.Size(161, 22);
             this.appRestartMenuItem.Text = "Restart the app";
             this.appRestartMenuItem.Click += new System.EventHandler(this.AppRestartMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(158, 6);
             // 
             // timeMenuItem
             // 
             this.timeMenuItem.Enabled = false;
+            this.timeMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.timeMenuItem.Name = "timeMenuItem";
             this.timeMenuItem.ReadOnly = true;
             this.timeMenuItem.Size = new System.Drawing.Size(100, 23);

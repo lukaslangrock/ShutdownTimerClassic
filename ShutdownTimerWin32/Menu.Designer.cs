@@ -254,6 +254,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Menu";
+            this.ShowIcon = false;
             this.Text = "Shutdown Timer";
             this.Load += new System.EventHandler(this.Menu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.hours_updown)).EndInit();
