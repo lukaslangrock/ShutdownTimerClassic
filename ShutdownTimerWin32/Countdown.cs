@@ -29,7 +29,7 @@ namespace ShutdownTimerWin32
             restoreMinutes = minutes;
             restoreSeconds = seconds;
 
-            if (UI == true) { UpdateUI(); } // initial time label update
+            if (UI == true) { UpdateUI(); title_label.Text = action + " Timer"; } // initial time label update
             else // prepares window for running in background
             {
                 time_label.Text = "Interface disabled";
