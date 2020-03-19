@@ -32,7 +32,7 @@ namespace ShutdownTimerWin32
             {
                 // Disable controls
                 start_button.Enabled = false;
-                method_group.Enabled = false;
+                action_group.Enabled = false;
                 time_group.Enabled = false;
 
                 // Hide
@@ -44,7 +44,7 @@ namespace ShutdownTimerWin32
                     hours = Convert.ToInt32(hours_updown.Value),
                     minutes = Convert.ToInt32(minutes_updown.Value),
                     seconds = Convert.ToInt32(seconds_updown.Value),
-                    method = method_combo.Text
+                    action = action_combo.Text
                 })
                 {
                     if (background_check.Checked == true) { countdown.UI = false; } // disables UI updates
@@ -70,10 +70,10 @@ namespace ShutdownTimerWin32
             bool err_tracker = true; // if anything goes wrong the tracker will be set to false
             string err_message = ""; // error messages will append to this
 
-            if (!method_combo.Items.Contains(method_combo.Text))
+            if (!action_combo.Items.Contains(action_combo.Text))
             {
                 err_tracker = false;
-                err_message += "Please select a valid method from the dropdown menu!\n\n";
+                err_message += "Please select a valid action from the dropdown menu!\n\n";
             }
 
             if (hours_updown.Value == 0 && minutes_updown.Value == 0 && seconds_updown.Value == 0)

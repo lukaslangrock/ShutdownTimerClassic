@@ -38,10 +38,10 @@
             this.minutes_label = new System.Windows.Forms.Label();
             this.seconds_label = new System.Windows.Forms.Label();
             this.time_group = new System.Windows.Forms.GroupBox();
-            this.method_group = new System.Windows.Forms.GroupBox();
+            this.action_group = new System.Windows.Forms.GroupBox();
             this.background_check = new System.Windows.Forms.CheckBox();
-            this.method_label = new System.Windows.Forms.Label();
-            this.method_combo = new System.Windows.Forms.ComboBox();
+            this.action_label = new System.Windows.Forms.Label();
+            this.action_combo = new System.Windows.Forms.ComboBox();
             this.start_button = new System.Windows.Forms.Button();
             this.version_label = new System.Windows.Forms.Label();
             this.github_pb = new System.Windows.Forms.PictureBox();
@@ -50,7 +50,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.seconds_updown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.titlebar_picture)).BeginInit();
             this.time_group.SuspendLayout();
-            this.method_group.SuspendLayout();
+            this.action_group.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.github_pb)).BeginInit();
             this.SuspendLayout();
             // 
@@ -152,17 +152,17 @@
             this.time_group.TabStop = false;
             this.time_group.Text = "When to do it?";
             // 
-            // method_group
+            // action_group
             // 
-            this.method_group.Controls.Add(this.background_check);
-            this.method_group.Controls.Add(this.method_label);
-            this.method_group.Controls.Add(this.method_combo);
-            this.method_group.Location = new System.Drawing.Point(18, 64);
-            this.method_group.Name = "method_group";
-            this.method_group.Size = new System.Drawing.Size(252, 67);
-            this.method_group.TabIndex = 9;
-            this.method_group.TabStop = false;
-            this.method_group.Text = "What to do?";
+            this.action_group.Controls.Add(this.background_check);
+            this.action_group.Controls.Add(this.action_label);
+            this.action_group.Controls.Add(this.action_combo);
+            this.action_group.Location = new System.Drawing.Point(18, 64);
+            this.action_group.Name = "action_group";
+            this.action_group.Size = new System.Drawing.Size(252, 67);
+            this.action_group.TabIndex = 9;
+            this.action_group.TabStop = false;
+            this.action_group.Text = "What to do?";
             // 
             // background_check
             // 
@@ -174,32 +174,32 @@
             this.background_check.Text = "Run in background";
             this.background_check.UseVisualStyleBackColor = true;
             // 
-            // method_label
+            // action_label
             // 
-            this.method_label.AutoSize = true;
-            this.method_label.Location = new System.Drawing.Point(6, 22);
-            this.method_label.Name = "method_label";
-            this.method_label.Size = new System.Drawing.Size(87, 13);
-            this.method_label.TabIndex = 1;
-            this.method_label.Text = "Select a method:";
+            this.action_label.AutoSize = true;
+            this.action_label.Location = new System.Drawing.Point(6, 22);
+            this.action_label.Name = "action_label";
+            this.action_label.Size = new System.Drawing.Size(87, 13);
+            this.action_label.TabIndex = 1;
+            this.action_label.Text = "Select a action:";
             // 
-            // method_combo
+            // action_combo
             // 
-            this.method_combo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.method_combo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.method_combo.FormattingEnabled = true;
-            this.method_combo.Items.AddRange(new object[] {
+            this.action_combo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.action_combo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.action_combo.FormattingEnabled = true;
+            this.action_combo.Items.AddRange(new object[] {
             "Shutdown",
             "Restart",
             "Hibernate",
             "Sleep",
             "Logout",
             "Lock"});
-            this.method_combo.Location = new System.Drawing.Point(99, 19);
-            this.method_combo.Name = "method_combo";
-            this.method_combo.Size = new System.Drawing.Size(147, 21);
-            this.method_combo.TabIndex = 0;
-            this.method_combo.Text = "Shutdown";
+            this.action_combo.Location = new System.Drawing.Point(99, 19);
+            this.action_combo.Name = "action_combo";
+            this.action_combo.Size = new System.Drawing.Size(147, 21);
+            this.action_combo.TabIndex = 0;
+            this.action_combo.Text = "Shutdown";
             // 
             // start_button
             // 
@@ -246,7 +246,7 @@
             this.Controls.Add(this.github_pb);
             this.Controls.Add(this.version_label);
             this.Controls.Add(this.start_button);
-            this.Controls.Add(this.method_group);
+            this.Controls.Add(this.action_group);
             this.Controls.Add(this.time_group);
             this.Controls.Add(this.titlebar_picture);
             this.Controls.Add(this.title_label);
@@ -264,8 +264,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.titlebar_picture)).EndInit();
             this.time_group.ResumeLayout(false);
             this.time_group.PerformLayout();
-            this.method_group.ResumeLayout(false);
-            this.method_group.PerformLayout();
+            this.action_group.ResumeLayout(false);
+            this.action_group.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.github_pb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -283,10 +283,10 @@
         private System.Windows.Forms.Label minutes_label;
         private System.Windows.Forms.Label seconds_label;
         private System.Windows.Forms.GroupBox time_group;
-        private System.Windows.Forms.GroupBox method_group;
+        private System.Windows.Forms.GroupBox action_group;
         private System.Windows.Forms.Button start_button;
-        private System.Windows.Forms.Label method_label;
-        private System.Windows.Forms.ComboBox method_combo;
+        private System.Windows.Forms.Label action_label;
+        private System.Windows.Forms.ComboBox action_combo;
         private System.Windows.Forms.CheckBox background_check;
         private System.Windows.Forms.Label version_label;
         private System.Windows.Forms.PictureBox github_pb;

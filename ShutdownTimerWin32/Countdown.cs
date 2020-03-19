@@ -12,7 +12,7 @@ namespace ShutdownTimerWin32
         private int restoreHours;
         private int restoreMinutes;
         private int restoreSeconds;
-        public string method = "Shutdown"; // defines what power action to execute (fallback to shutdown if not changed)
+        public string action = "Shutdown"; // defines what power action to execute (fallback to shutdown if not changed)
         public bool UI = true; // disables UI updates when set to false (used for running in background)
         private bool allow_close = false; // if false displays a 'are you sure' message box when closing.
         private bool animation_switch = false; // used to switch background colors
@@ -206,7 +206,7 @@ namespace ShutdownTimerWin32
                     hours = 0;
                 }
                 UpdateUI();
-                ExitWindows(method);
+                ExitWindows(action);
                 Application.DoEvents();
                 Application.Exit();
             }
@@ -247,10 +247,10 @@ namespace ShutdownTimerWin32
             }
         }
 
-        public void ExitWindows(string ChoosenMethod)
+        public void ExitWindows(string ChoosenAction)
         {
             allow_close = true; // Disable close question
-            switch (ChoosenMethod)
+            switch (ChoosenAction)
             {
                 case "Shutdown":
 
