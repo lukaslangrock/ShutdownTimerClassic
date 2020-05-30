@@ -47,4 +47,4 @@ If you are running it in the background, then you can go to the notification are
 
 ## Logging and Privacy
 
-The application is not connected to the internet and does not log any user data when you are using the GitHub release. If you are using the Microsoft Store release, then the Store will monitor basic usage and crashes. The application also stores a small boolean on your system, so it knows if you have seen the license message or not (this is checked on every launch and in case you have not seen the message it will be shown before the main menu pops up).
+The application is not connected to the internet and does not log any user data when you are using the GitHub release. If you are using the Microsoft Store release, then the Store will monitor basic usage and crashes.
