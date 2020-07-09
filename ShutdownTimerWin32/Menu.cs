@@ -12,7 +12,13 @@ namespace ShutdownTimerWin32
 
         private void Menu_Load(object sender, EventArgs e)
         {
-            version_label.Text = "v" + Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf(".")); // Display current version 
+            version_label.Text = "v" + Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf(".")); // Display current version
+            info_tooltip.SetToolTip(graceful_check, "Applications that do not exit when prompted automatically get terminated by default to ensure a successful shutdown." +
+                "\n\nA graceful shutdown on the other hand will wait for all applications to exit before continuing with the shutdown." +
+                "\nThis might result in an unsuccessful shutdown if one or more applications are unresponsive or require a user interaction to exit!");
+            info_tooltip.SetToolTip(preventSleep_check, "Depending on the power settings of your system, it might go to sleep after certain amount of time due to inactivity." +
+                "\nThis option will keep the system awake to ensure the timer can properly run and execute a shutdown.");
+            info_tooltip.SetToolTip(background_check, "This will launch the countdown without a visible window but will show a tray icon in your taskbar.");
         }
 
         private void Title_label_Click(object sender, EventArgs e)
@@ -44,10 +50,12 @@ namespace ShutdownTimerWin32
                     hours = Convert.ToInt32(hours_updown.Value),
                     minutes = Convert.ToInt32(minutes_updown.Value),
                     seconds = Convert.ToInt32(seconds_updown.Value),
-                    action = action_combo.Text
+                    action = action_combo.Text,
+                    graceful = graceful_check.Checked,
+                    preventSystemSleep = preventSleep_check.Checked,
+                    UI = !background_check.Checked
                 })
                 {
-                    if (background_check.Checked == true) { countdown.UI = false; } // disables UI updates
                     countdown.Owner = this;
                     countdown.ShowDialog();
                     Application.Exit(); // Exit application after countdown is closed
@@ -84,6 +92,13 @@ namespace ShutdownTimerWin32
 
             CheckResult = err_message;
             return err_tracker;
+        }
+
+        private void action_combo_TextChanged(object sender, EventArgs e)
+        {
+            // disables graceful checkbox for all modes which can not be executed gracefully / which always execute gracefully
+            if (action_combo.Text == "Shutdown" || action_combo.Text == "Restart" || action_combo.Text == "Logout") { graceful_check.Enabled = true; }
+            else { graceful_check.Enabled = false; }
         }
     }
 }

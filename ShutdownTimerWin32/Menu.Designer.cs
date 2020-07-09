@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.hours_updown = new System.Windows.Forms.NumericUpDown();
             this.minutes_updown = new System.Windows.Forms.NumericUpDown();
@@ -39,12 +40,15 @@
             this.seconds_label = new System.Windows.Forms.Label();
             this.time_group = new System.Windows.Forms.GroupBox();
             this.action_group = new System.Windows.Forms.GroupBox();
+            this.preventSleep_check = new System.Windows.Forms.CheckBox();
+            this.graceful_check = new System.Windows.Forms.CheckBox();
             this.background_check = new System.Windows.Forms.CheckBox();
             this.action_label = new System.Windows.Forms.Label();
             this.action_combo = new System.Windows.Forms.ComboBox();
             this.start_button = new System.Windows.Forms.Button();
             this.version_label = new System.Windows.Forms.Label();
             this.github_pb = new System.Windows.Forms.PictureBox();
+            this.info_tooltip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.hours_updown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minutes_updown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.seconds_updown)).BeginInit();
@@ -145,7 +149,7 @@
             this.time_group.Controls.Add(this.minutes_label);
             this.time_group.Controls.Add(this.minutes_updown);
             this.time_group.Controls.Add(this.seconds_updown);
-            this.time_group.Location = new System.Drawing.Point(18, 137);
+            this.time_group.Location = new System.Drawing.Point(18, 189);
             this.time_group.Name = "time_group";
             this.time_group.Size = new System.Drawing.Size(252, 70);
             this.time_group.TabIndex = 8;
@@ -154,20 +158,44 @@
             // 
             // action_group
             // 
+            this.action_group.Controls.Add(this.preventSleep_check);
+            this.action_group.Controls.Add(this.graceful_check);
             this.action_group.Controls.Add(this.background_check);
             this.action_group.Controls.Add(this.action_label);
             this.action_group.Controls.Add(this.action_combo);
             this.action_group.Location = new System.Drawing.Point(18, 64);
             this.action_group.Name = "action_group";
-            this.action_group.Size = new System.Drawing.Size(252, 67);
+            this.action_group.Size = new System.Drawing.Size(252, 119);
             this.action_group.TabIndex = 9;
             this.action_group.TabStop = false;
             this.action_group.Text = "What to do?";
             // 
+            // preventSleep_check
+            // 
+            this.preventSleep_check.AutoSize = true;
+            this.preventSleep_check.Checked = true;
+            this.preventSleep_check.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.preventSleep_check.Location = new System.Drawing.Point(9, 69);
+            this.preventSleep_check.Name = "preventSleep_check";
+            this.preventSleep_check.Size = new System.Drawing.Size(190, 17);
+            this.preventSleep_check.TabIndex = 13;
+            this.preventSleep_check.Text = "Prevent system from going to sleep";
+            this.preventSleep_check.UseVisualStyleBackColor = true;
+            // 
+            // graceful_check
+            // 
+            this.graceful_check.AutoSize = true;
+            this.graceful_check.Location = new System.Drawing.Point(9, 46);
+            this.graceful_check.Name = "graceful_check";
+            this.graceful_check.Size = new System.Drawing.Size(186, 17);
+            this.graceful_check.TabIndex = 12;
+            this.graceful_check.Text = "Graceful (do not force close apps)";
+            this.graceful_check.UseVisualStyleBackColor = true;
+            // 
             // background_check
             // 
             this.background_check.AutoSize = true;
-            this.background_check.Location = new System.Drawing.Point(129, 46);
+            this.background_check.Location = new System.Drawing.Point(9, 92);
             this.background_check.Name = "background_check";
             this.background_check.Size = new System.Drawing.Size(117, 17);
             this.background_check.TabIndex = 11;
@@ -179,7 +207,7 @@
             this.action_label.AutoSize = true;
             this.action_label.Location = new System.Drawing.Point(6, 22);
             this.action_label.Name = "action_label";
-            this.action_label.Size = new System.Drawing.Size(87, 13);
+            this.action_label.Size = new System.Drawing.Size(81, 13);
             this.action_label.TabIndex = 1;
             this.action_label.Text = "Select a action:";
             // 
@@ -200,12 +228,12 @@
             this.action_combo.Size = new System.Drawing.Size(147, 21);
             this.action_combo.TabIndex = 0;
             this.action_combo.Text = "Shutdown";
+            this.action_combo.TextChanged += new System.EventHandler(this.action_combo_TextChanged);
             // 
             // start_button
             // 
-            this.start_button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.start_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.start_button.Location = new System.Drawing.Point(18, 214);
+            this.start_button.Location = new System.Drawing.Point(18, 265);
             this.start_button.Name = "start_button";
             this.start_button.Size = new System.Drawing.Size(252, 30);
             this.start_button.TabIndex = 10;
@@ -235,6 +263,14 @@
             this.github_pb.TabStop = false;
             this.github_pb.Click += new System.EventHandler(this.Github_pb_Click);
             // 
+            // info_tooltip
+            // 
+            this.info_tooltip.AutoPopDelay = 30000;
+            this.info_tooltip.InitialDelay = 500;
+            this.info_tooltip.ReshowDelay = 100;
+            this.info_tooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.info_tooltip.ToolTipTitle = "What is this?";
+            // 
             // Menu
             // 
             this.AcceptButton = this.start_button;
@@ -242,7 +278,7 @@
             this.AccessibleName = "Shutdown Timer";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 256);
+            this.ClientSize = new System.Drawing.Size(284, 307);
             this.Controls.Add(this.github_pb);
             this.Controls.Add(this.version_label);
             this.Controls.Add(this.start_button);
@@ -290,6 +326,9 @@
         private System.Windows.Forms.CheckBox background_check;
         private System.Windows.Forms.Label version_label;
         private System.Windows.Forms.PictureBox github_pb;
+        private System.Windows.Forms.CheckBox graceful_check;
+        private System.Windows.Forms.CheckBox preventSleep_check;
+        private System.Windows.Forms.ToolTip info_tooltip;
     }
 }
 

@@ -13,6 +13,8 @@ namespace ShutdownTimerWin32
         private int restoreMinutes;
         private int restoreSeconds;
         public string action = "Shutdown"; // defines what power action to execute (fallback to shutdown if not changed)
+        public bool graceful; // uses a graceful shutdown which allows apps to save their work or interrupt the shutdown
+        public bool preventSystemSleep; // tells Windows that the system should stay awake during countdown
         public bool UI = true; // disables UI updates when set to false (used for running in background)
         private bool allow_close = false; // if false displays a 'are you sure' message box when closing.
         private bool animation_switch = false; // used to switch background colors
@@ -41,6 +43,8 @@ namespace ShutdownTimerWin32
                 notifyIcon.BalloonTipText = "Timer started. The power action will be executed in " + hours + " hours, " + minutes + " minutes and " + seconds + " seconds.";
                 notifyIcon.ShowBalloonTip(10000);
             }
+
+            if (preventSystemSleep) { ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS | ExecutionState.EXECUTION_STATE.ES_SYSTEM_REQUIRED); } // give the system some coffee so it stays awake when tired using some fancy EXECUTION_STATE flags
         }
 
         /// <summary>
@@ -132,6 +136,7 @@ namespace ShutdownTimerWin32
                 {
                     allow_close = true;
                     counterTimer.Stop();
+                    ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired.
                     string caption2 = "Shutdown canceled";
                     string message2 = "Your shutdown timer was canceled successfully!\nThe application will now close.";
                     MessageBox.Show(message2, caption2, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -159,6 +164,7 @@ namespace ShutdownTimerWin32
         {
             allow_close = true;
             counterTimer.Stop();
+            ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired.
             string caption1 = "Shutdown canceled";
             string message1 = "Your shutdown timer was canceled successfully!\nThe application will now close.";
             MessageBox.Show(message1, caption1, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -188,6 +194,7 @@ namespace ShutdownTimerWin32
             time_label.Text = "Restarting";
             timeMenuItem.Text = "Restarting";
             allow_close = true;
+            ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // clear EXECUTION_STATE flags
             Application.DoEvents();
             Application.Restart();
         }
@@ -249,34 +256,36 @@ namespace ShutdownTimerWin32
 
         public void ExitWindows(string ChoosenAction)
         {
-            allow_close = true; // Disable close question
+            allow_close = true; // disable close question
+
             switch (ChoosenAction)
             {
                 case "Shutdown":
-
-                    ShutdownTimerWin32.ExitWindows.Shutdown();
+                    ShutdownTimerWin32.ExitWindows.Shutdown(!graceful);
                     break;
 
                 case "Restart":
-                    ShutdownTimerWin32.ExitWindows.Reboot();
+                    ShutdownTimerWin32.ExitWindows.Reboot(!graceful);
                     break;
 
                 case "Hibernate":
-                    Application.SetSuspendState(PowerState.Hibernate, true, true);
+                    Application.SetSuspendState(PowerState.Hibernate, false, false);
                     break;
 
                 case "Sleep":
-                    Application.SetSuspendState(PowerState.Suspend, true, true);
+                    Application.SetSuspendState(PowerState.Suspend, false, false);
                     break;
 
                 case "Logout":
-                    ShutdownTimerWin32.ExitWindows.LogOff();
+                    ShutdownTimerWin32.ExitWindows.LogOff(!graceful);
                     break;
 
                 case "Lock":
                     ShutdownTimerWin32.ExitWindows.Lock();
                     break;
             }
+
+            ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired.
         }
     }
 }

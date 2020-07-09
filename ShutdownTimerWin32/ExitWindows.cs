@@ -33,13 +33,13 @@ namespace ShutdownTimerWin32
         [DllImport("advapi32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool AdjustTokenPrivileges(IntPtr TokenHandle,
-          [MarshalAs(UnmanagedType.Bool)]bool DisableAllPrivileges,
+          [MarshalAs(UnmanagedType.Bool)] bool DisableAllPrivileges,
           ref TOKEN_PRIVILEGES NewState,
           UInt32 BufferLength,
           IntPtr PreviousState,
           IntPtr ReturnLength);
 
-        [DllImport("advapi32.dll", CharSet = CharSet.Unicode)]
+        [DllImport("advapi32.dll")]
         static extern int LookupPrivilegeValue(string lpSystemName,
           string lpName, out LUID lpLuid);
 
@@ -61,10 +61,10 @@ namespace ShutdownTimerWin32
 
         private static void GetPrivileges()
         {
+            IntPtr hToken;
             TOKEN_PRIVILEGES tkp;
-
             OpenProcessToken(Process.GetCurrentProcess().Handle,
-              TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out IntPtr hToken);
+              TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out hToken);
             tkp.PrivilegeCount = 1;
             tkp.Privileges.Attributes = SE_PRIVILEGE_ENABLED;
             LookupPrivilegeValue("", SE_SHUTDOWN_NAME,
@@ -78,7 +78,7 @@ namespace ShutdownTimerWin32
         {
             GetPrivileges();
             ExitWindowsEx(EWX_SHUTDOWN |
-              (uint)(force ? EWX_FORCE : EWX_FORCE) | EWX_POWEROFF, SHTDN_REASON_FLAG_PLANNED);
+              (uint)(force ? EWX_FORCE : 0) | EWX_POWEROFF, SHTDN_REASON_FLAG_PLANNED);
         }
 
         public static void Reboot() { Reboot(false); }
@@ -86,7 +86,7 @@ namespace ShutdownTimerWin32
         {
             GetPrivileges();
             ExitWindowsEx(EWX_REBOOT |
-              (uint)(force ? EWX_FORCE : EWX_FORCE), SHTDN_REASON_FLAG_PLANNED);
+              (uint)(force ? EWX_FORCE : 0), SHTDN_REASON_FLAG_PLANNED);
         }
 
         public static void LogOff() { LogOff(false); }
@@ -94,7 +94,7 @@ namespace ShutdownTimerWin32
         {
             GetPrivileges();
             ExitWindowsEx(EWX_LOGOFF |
-              (uint)(force ? EWX_FORCE : EWX_FORCE), SHTDN_REASON_FLAG_PLANNED);
+              (uint)(force ? EWX_FORCE : 0), SHTDN_REASON_FLAG_PLANNED);
         }
 
         // Credits: https://codehill.com/2009/01/lock-sleep-or-hibernate-windows-using-c/

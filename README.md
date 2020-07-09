@@ -37,7 +37,11 @@ Here is a quick overview:
 
 ## Shutdown sequence
 
-When a shutdown is executed all windows will be closed, regardless if they resist or not so any unsaved work will be gone! This is done to be sure your PC shuts down and can not be stopped by another process. Please note that I am not liable for any data loss because you didn't save that extremely important document and now it's gone. That is your fault!
+When a shutdown is executed all windows will be closed, regardless if they resist or not so any unsaved work will be gone! This is done to be sure your PC shuts down and can not be stopped by another process.
+
+If you wish to have a normal shutdown you may enable the graceful mode. This will not force close any apps but might lead to a failed shutdown as any apps which do not exit upon request can pause the shutdown. Apps might not close because they are unresponsive, require user interactions or are still working. 
+
+Please note that I am not liable for any data loss because you didn't save that extremely important document and now it's gone. That is your fault!
 
 ## Canceling the shutdown
 
