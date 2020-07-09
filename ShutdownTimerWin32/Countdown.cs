@@ -74,7 +74,7 @@ namespace ShutdownTimerWin32
             if (hours > 0 || minutes >= 30) { BackColor = Color.ForestGreen; }
             else if (minutes >= 10) { BackColor = Color.DarkOrange; }
             else if (minutes >= 1) { BackColor = Color.OrangeRed; }
-            else { Warning_Animation(); }
+            else { WarningAnimation(); }
 
             // Update UI
             Application.DoEvents();
@@ -114,10 +114,50 @@ namespace ShutdownTimerWin32
         /// <summary>
         /// Switches from background color from red to black (and vice versa) when called.
         /// </summary>
-        private void Warning_Animation()
+        private void WarningAnimation()
         {
             if (animation_switch == true) { BackColor = Color.Red; animation_switch = false; }
             else if (animation_switch == false) { BackColor = Color.Black; animation_switch = true; }
+        }
+
+        /// <summary>
+        /// Stops the countdown, displays an exit message and closes exits the application.
+        /// </summary>
+        private void ExitApplication()
+        {
+            allow_close = true;
+            counterTimer.Stop();
+            ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired
+            string caption1 = "Timer canceled";
+            string message1 = "Your timer was canceled successfully!\nThe application will now close.";
+            MessageBox.Show(message1, caption1, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Application.Exit();
+        }
+
+        /// <summary>
+        /// Restarts the application.
+        /// </summary>
+        private void RestartApplication()
+        {
+            allow_close = true;
+            counterTimer.Stop();
+            ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired
+            Application.DoEvents();
+            Application.Restart();
+        }
+
+        /// <summary>
+        /// Restarts the countdown with initial values.
+        /// </summary>
+        private void RestartTimer()
+        {
+            counterTimer.Stop();
+            hours = restoreHours;
+            minutes = restoreMinutes;
+            seconds = restoreSeconds;
+            counterTimer.Start();
+            if (UI == true) { UpdateUI(); } else { UpdateBackgroundUI(); }
+            if (this.WindowState == FormWindowState.Minimized) { notifyIcon.BalloonTipText = "Timer restarted. The power action will be executed in " + hours + " hours, " + minutes + " minutes and " + seconds + " seconds."; notifyIcon.ShowBalloonTip(10000); }
         }
 
         private void Countdown_FormClosing(object sender, FormClosingEventArgs e)
@@ -130,17 +170,11 @@ namespace ShutdownTimerWin32
             {
                 e.Cancel = true;
                 string caption = "Are you sure?";
-                string message = "Do you really want to cancel the shutdown timer?";
+                string message = "Do you really want to cancel the timer?";
                 DialogResult question = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (question == DialogResult.Yes)
                 {
-                    allow_close = true;
-                    counterTimer.Stop();
-                    ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired.
-                    string caption2 = "Shutdown canceled";
-                    string message2 = "Your shutdown timer was canceled successfully!\nThe application will now close.";
-                    MessageBox.Show(message2, caption2, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Application.Exit();
+                    ExitApplication();
                 }
             }
         }
@@ -157,47 +191,33 @@ namespace ShutdownTimerWin32
             }
         }
 
+        #region "tray menu events"
+
         /// <summary>
         /// Stop timer option in the tray menu
         /// </summary>
         private void TimerStopMenuItem_Click(object sender, EventArgs e)
         {
-            allow_close = true;
-            counterTimer.Stop();
-            ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired.
-            string caption1 = "Shutdown canceled";
-            string message1 = "Your shutdown timer was canceled successfully!\nThe application will now close.";
-            MessageBox.Show(message1, caption1, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Application.Exit();
+            ExitApplication();
         }
 
         /// <summary>
-        /// Restores original time values and restarts the timer
+        /// Restart timer option in the tray menu
         /// </summary>
         private void TimerRestartMenuItem_Click(object sender, EventArgs e)
         {
-            counterTimer.Stop();
-            hours = restoreHours;
-            minutes = restoreMinutes;
-            seconds = restoreSeconds;
-            counterTimer.Start();
-            if (UI == true) { UpdateUI(); } else { UpdateBackgroundUI(); }
-            if (this.WindowState == FormWindowState.Minimized) { notifyIcon.BalloonTipText = "Timer restarted. The power action will be executed in " + hours + " hours, " + minutes + " minutes and " + seconds + " seconds."; notifyIcon.ShowBalloonTip(10000); }
+            RestartTimer();
         }
 
         /// <summary>
-        /// Restarts the application
+        /// Restart application option in the tray menu
         /// </summary>
         private void AppRestartMenuItem_Click(object sender, EventArgs e)
         {
-            counterTimer.Stop();
-            time_label.Text = "Restarting";
-            timeMenuItem.Text = "Restarting";
-            allow_close = true;
-            ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // clear EXECUTION_STATE flags
-            Application.DoEvents();
-            Application.Restart();
+            RestartApplication();
         }
+
+        #endregion
 
         private void Counter_Tick(object sender, EventArgs e)
         {

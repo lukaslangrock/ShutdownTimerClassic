@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Countdown));
             this.time_label = new System.Windows.Forms.Label();
-            this.titlebar_picture = new System.Windows.Forms.PictureBox();
             this.title_label = new System.Windows.Forms.Label();
             this.counterTimer = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -41,8 +40,9 @@
             this.appRestartMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.timeMenuItem = new System.Windows.Forms.ToolStripTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.titlebar_picture)).BeginInit();
+            this.titlebar_picture = new System.Windows.Forms.PictureBox();
             this.contextMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.titlebar_picture)).BeginInit();
             this.SuspendLayout();
             // 
             // time_label
@@ -59,17 +59,6 @@
             this.time_label.TabIndex = 14;
             this.time_label.Text = "00:00:00";
             this.time_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // titlebar_picture
-            // 
-            this.titlebar_picture.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.titlebar_picture.BackColor = System.Drawing.Color.White;
-            this.titlebar_picture.Location = new System.Drawing.Point(12, 43);
-            this.titlebar_picture.Name = "titlebar_picture";
-            this.titlebar_picture.Size = new System.Drawing.Size(335, 5);
-            this.titlebar_picture.TabIndex = 16;
-            this.titlebar_picture.TabStop = false;
             // 
             // title_label
             // 
@@ -141,6 +130,17 @@
             this.timeMenuItem.ReadOnly = true;
             this.timeMenuItem.Size = new System.Drawing.Size(100, 23);
             // 
+            // titlebar_picture
+            // 
+            this.titlebar_picture.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.titlebar_picture.BackColor = System.Drawing.Color.White;
+            this.titlebar_picture.Location = new System.Drawing.Point(12, 43);
+            this.titlebar_picture.Name = "titlebar_picture";
+            this.titlebar_picture.Size = new System.Drawing.Size(335, 5);
+            this.titlebar_picture.TabIndex = 16;
+            this.titlebar_picture.TabStop = false;
+            // 
             // Countdown
             // 
             this.AccessibleDescription = "Shows the time left until power action gets executed.";
@@ -165,9 +165,9 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Countdown_FormClosing);
             this.Load += new System.EventHandler(this.Countdown_Load);
             this.Resize += new System.EventHandler(this.Countdown_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.titlebar_picture)).EndInit();
             this.contextMenu.ResumeLayout(false);
             this.contextMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.titlebar_picture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
