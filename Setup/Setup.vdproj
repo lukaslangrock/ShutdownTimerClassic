@@ -58,15 +58,10 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.8"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 und x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
-                    }
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
-                    {
-                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 und x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    "Name" = "8:Microsoft .NET Framework 4.8 (x86 und x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.8"
                     }
                 }
             }
@@ -207,15 +202,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Shutdown Timer Classic"
-        "ProductCode" = "8:{D66DAD29-97EF-4471-B0A8-F3F5BA7C6B5A}"
-        "PackageCode" = "8:{B18E890B-0E95-4C3F-837F-F3DD8737C71F}"
+        "ProductCode" = "8:{6CFD49B7-C834-4F8C-9344-C68285095295}"
+        "PackageCode" = "8:{4ABB6C7F-3D62-400B-98A1-AB38B8AB4D2C}"
         "UpgradeCode" = "8:{81E0637B-864A-4FE6-AA0F-5550A751DD9B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.3"
+        "ProductVersion" = "8:1.0.4"
         "Manufacturer" = "8:Lukas Langrock"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/Lukas34/ShutdownTimerWin32"
