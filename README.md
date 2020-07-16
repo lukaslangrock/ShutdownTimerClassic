@@ -2,7 +2,7 @@
 
 Shutdown Timer Classic or otherwise known as ShutdownTimerWin32 is a small little Windows application that allows you to set a timer that will shutdown, restart, hibernate, sleep or lock your PC.
 
-![Screenshot of the main menu](Images/Menu.png)
+![Screenshot of the main menu](Screenshots/Menu.png)
 
 I also have a UWP based version of this project in the works, but the development will take some time as the UWP platform brings some unforeseen hurdles with it and is a lot more complicated than I initially thought.
 I will update this document and my website once the project is ready.
@@ -23,7 +23,7 @@ Thus you should be careful to use this mode as it might result in a failed shutd
 
 By default, the countdown window will be always on top of every other window so you don't forget that you have an active shutdown timer. The countdown can also be hidden by selecting the "Run in background" checkbox under the dropdown menu.
 
-![Screenshot of the main menu with extended combobox](Images/Menu2.png)
+![Screenshot of the main menu with extended combobox](Screenshots/Menu2.png)
 
 # Colors
 
@@ -37,11 +37,11 @@ Here is a quick overview:
 | 10 - 1 min.   | Orange        | No        |
 | < 1min.       | Red / Black   | Yes       |
 
-![Screenshot of countdown window with green background](Images/CountdownGreen.png)
-![Screenshot of countdown window with yellow background](Images/CountdownYellow.png)
-![Screenshot of countdown window with orange background](Images/CountdownOrange.png)
-![Screenshot of countdown window with red background](Images/CountdownRed.png)
-![Screenshot of countdown window with black background](Images/CountdownBlack.png)
+![Screenshot of countdown window with green background](Screenshots/CountdownGreen.png)
+![Screenshot of countdown window with yellow background](Screenshots/CountdownYellow.png)
+![Screenshot of countdown window with orange background](Screenshots/CountdownOrange.png)
+![Screenshot of countdown window with red background](Screenshots/CountdownRed.png)
+![Screenshot of countdown window with black background](Screenshots/CountdownBlack.png)
 
 # Behavior
 
