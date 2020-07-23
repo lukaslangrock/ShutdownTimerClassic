@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using ShutdownTimerWin32.Helpers;
 
 namespace ShutdownTimerWin32
 {
@@ -233,7 +234,7 @@ namespace ShutdownTimerWin32
                     hours = 0;
                 }
                 UpdateUI();
-                ExitWindows(action);
+                ExecutePowerAction(action);
                 Application.DoEvents();
                 Application.Exit();
             }
@@ -274,18 +275,18 @@ namespace ShutdownTimerWin32
             }
         }
 
-        public void ExitWindows(string ChoosenAction)
+        public void ExecutePowerAction(string ChoosenAction)
         {
             allow_close = true; // disable close question
 
             switch (ChoosenAction)
             {
                 case "Shutdown":
-                    ShutdownTimerWin32.ExitWindows.Shutdown(!graceful);
+                    ExitWindows.Shutdown(!graceful);
                     break;
 
                 case "Restart":
-                    ShutdownTimerWin32.ExitWindows.Reboot(!graceful);
+                    ExitWindows.Reboot(!graceful);
                     break;
 
                 case "Hibernate":
@@ -297,11 +298,11 @@ namespace ShutdownTimerWin32
                     break;
 
                 case "Logout":
-                    ShutdownTimerWin32.ExitWindows.LogOff(!graceful);
+                    ExitWindows.LogOff(!graceful);
                     break;
 
                 case "Lock":
-                    ShutdownTimerWin32.ExitWindows.Lock();
+                    ExitWindows.Lock();
                     break;
             }
 

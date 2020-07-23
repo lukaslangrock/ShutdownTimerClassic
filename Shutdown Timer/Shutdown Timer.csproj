@@ -76,8 +76,8 @@
     <Compile Include="Countdown.Designer.cs">
       <DependentUpon>Countdown.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExecutionState.cs" />
-    <Compile Include="ExitWindows.cs" />
+    <Compile Include="Helpers\ExecutionState.cs" />
+    <Compile Include="Helpers\ExitWindows.cs" />
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
