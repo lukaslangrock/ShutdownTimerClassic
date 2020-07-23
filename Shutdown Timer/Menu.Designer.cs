@@ -207,9 +207,9 @@
             this.action_label.AutoSize = true;
             this.action_label.Location = new System.Drawing.Point(6, 22);
             this.action_label.Name = "action_label";
-            this.action_label.Size = new System.Drawing.Size(81, 13);
+            this.action_label.Size = new System.Drawing.Size(87, 13);
             this.action_label.TabIndex = 1;
-            this.action_label.Text = "Select a action:";
+            this.action_label.Text = "Select an action:";
             // 
             // action_combo
             // 
