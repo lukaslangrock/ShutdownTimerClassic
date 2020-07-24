@@ -59,12 +59,9 @@ namespace ShutdownTimerWin32
             string temp_seconds;
 
             // Add 0 before single digit numbers
-            if (hours < 10) { temp_hours = "0" + hours.ToString(); }
-            else { temp_hours = hours.ToString(); }
-            if (minutes < 10) { temp_minutes = "0" + minutes.ToString(); }
-            else { temp_minutes = minutes.ToString(); }
-            if (seconds < 10) { temp_seconds = "0" + seconds.ToString(); }
-            else { temp_seconds = seconds.ToString(); }
+            temp_hours = Numerics.AddZeros(hours);
+            temp_minutes = Numerics.AddZeros(minutes);
+            temp_seconds = Numerics.AddZeros(seconds);
 
             // Update time labels
             string seperator = ":";
@@ -92,12 +89,9 @@ namespace ShutdownTimerWin32
             string temp_seconds;
 
             // Add 0 before single digit numbers
-            if (hours < 10) { temp_hours = "0" + hours.ToString(); }
-            else { temp_hours = hours.ToString(); }
-            if (minutes < 10) { temp_minutes = "0" + minutes.ToString(); }
-            else { temp_minutes = minutes.ToString(); }
-            if (seconds < 10) { temp_seconds = "0" + seconds.ToString(); }
-            else { temp_seconds = seconds.ToString(); }
+            temp_hours = Numerics.AddZeros(hours);
+            temp_minutes = Numerics.AddZeros(minutes);
+            temp_seconds = Numerics.AddZeros(seconds);
 
             // Update time labels
             string seperator = ":";
