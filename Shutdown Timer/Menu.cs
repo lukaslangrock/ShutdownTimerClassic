@@ -100,6 +100,16 @@ namespace ShutdownTimerWin32
                 err_message += "The timer cannot start at 0!\n\n";
             }
 
+            try
+            {
+                Numerics.ConvertTime(Convert.ToInt32(hours_updown.Value), Convert.ToInt32(minutes_updown.Value), Convert.ToInt32(seconds_updown.Value));
+            }
+            catch
+            {
+                err_tracker = false;
+                err_message += "Time conversion failed! Please check if your time values are within a reasonable range.\n\n";
+            }
+
             CheckResult = err_message;
             return err_tracker;
         }
