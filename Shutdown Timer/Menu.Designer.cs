@@ -62,7 +62,7 @@
             // 
             this.hours_updown.Location = new System.Drawing.Point(9, 37);
             this.hours_updown.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
@@ -74,7 +74,7 @@
             // 
             this.minutes_updown.Location = new System.Drawing.Point(65, 37);
             this.minutes_updown.Maximum = new decimal(new int[] {
-            59,
+            2147483647,
             0,
             0,
             0});
@@ -86,7 +86,7 @@
             // 
             this.seconds_updown.Location = new System.Drawing.Point(121, 37);
             this.seconds_updown.Maximum = new decimal(new int[] {
-            59,
+            2147483647,
             0,
             0,
             0});
@@ -269,7 +269,7 @@
             this.info_tooltip.InitialDelay = 500;
             this.info_tooltip.ReshowDelay = 100;
             this.info_tooltip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.info_tooltip.ToolTipTitle = "What is this?";
+            this.info_tooltip.ToolTipTitle = "Help";
             // 
             // Menu
             // 

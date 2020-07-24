@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShutdownTimerWin32.Helpers;
+using System;
 using System.Windows.Forms;
 
 namespace ShutdownTimerWin32
@@ -19,6 +20,9 @@ namespace ShutdownTimerWin32
             info_tooltip.SetToolTip(preventSleep_check, "Depending on the power settings of your system, it might go to sleep after certain amount of time due to inactivity." +
                 "\nThis option will keep the system awake to ensure the timer can properly run and execute a shutdown.");
             info_tooltip.SetToolTip(background_check, "This will launch the countdown without a visible window but will show a tray icon in your taskbar.");
+            info_tooltip.SetToolTip(hours_updown, "This defines the hours to count down from. Use can use any positive whole number.");
+            info_tooltip.SetToolTip(minutes_updown, "This defines the minutes to count down from. Use can use any positive whole number.\nValues above 59 will get converted into their corresponding seconds, minutes and hours.");
+            info_tooltip.SetToolTip(seconds_updown, "This defines the seconds to count down from. Use can use any positive whole number.\nValues above 59 will get converted into their corresponding seconds, minutes and hours.");
         }
 
         private void Title_label_Click(object sender, EventArgs e)
@@ -44,12 +48,18 @@ namespace ShutdownTimerWin32
                 // Hide
                 this.Hide();
 
+                // Temporary variables
+                int tempHours, tempMinutes, tempSeconds;
+
+                // Convert time values if necessarry
+                (tempHours, tempMinutes, tempSeconds) = Numerics.ConvertTime(Convert.ToInt32(hours_updown.Value), Convert.ToInt32(minutes_updown.Value), Convert.ToInt32(seconds_updown.Value));
+
                 // Show countdown
                 using (Countdown countdown = new Countdown
                 {
-                    hours = Convert.ToInt32(hours_updown.Value),
-                    minutes = Convert.ToInt32(minutes_updown.Value),
-                    seconds = Convert.ToInt32(seconds_updown.Value),
+                    hours = tempHours,
+                    minutes = tempMinutes,
+                    seconds = tempSeconds,
                     action = action_combo.Text,
                     graceful = graceful_check.Checked,
                     preventSystemSleep = preventSleep_check.Checked,
