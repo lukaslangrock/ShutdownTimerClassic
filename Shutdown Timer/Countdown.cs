@@ -32,10 +32,10 @@ namespace ShutdownTimerWin32
             restoreMinutes = minutes;
             restoreSeconds = seconds;
 
-            if (UI == true) { UpdateUI(); title_label.Text = action + " Timer"; } // initial label update
+            if (UI == true) { UpdateUI(); titleLabel.Text = action + " Timer"; } // initial label update
             else // prepares window for running in background
             {
-                time_label.Text = "Interface disabled";
+                timeLabel.Text = "Interface disabled";
                 UpdateBackgroundUI();
                 this.TopMost = false;
                 this.ShowInTaskbar = false;
@@ -65,7 +65,7 @@ namespace ShutdownTimerWin32
 
             // Update time labels
             string seperator = ":";
-            time_label.Text = temp_hours + seperator + temp_minutes + seperator + temp_seconds;
+            timeLabel.Text = temp_hours + seperator + temp_minutes + seperator + temp_seconds;
             timeMenuItem.Text = temp_hours + seperator + temp_minutes + seperator + temp_seconds;
 
             // Decide what color/animation to use
