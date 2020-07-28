@@ -49,6 +49,7 @@
             this.versionLabel = new System.Windows.Forms.Label();
             this.githubPictureBox = new System.Windows.Forms.PictureBox();
             this.infoToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.statusLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.hoursNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minutesNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondsNumericUpDown)).BeginInit();
@@ -149,7 +150,7 @@
             this.timeGroupBox.Controls.Add(this.minutesLabel);
             this.timeGroupBox.Controls.Add(this.minutesNumericUpDown);
             this.timeGroupBox.Controls.Add(this.secondsNumericUpDown);
-            this.timeGroupBox.Location = new System.Drawing.Point(18, 189);
+            this.timeGroupBox.Location = new System.Drawing.Point(18, 192);
             this.timeGroupBox.Name = "timeGroupBox";
             this.timeGroupBox.Size = new System.Drawing.Size(252, 70);
             this.timeGroupBox.TabIndex = 8;
@@ -163,7 +164,7 @@
             this.actionGroupBox.Controls.Add(this.backgroundCheckBox);
             this.actionGroupBox.Controls.Add(this.actionLabel);
             this.actionGroupBox.Controls.Add(this.actionComboBox);
-            this.actionGroupBox.Location = new System.Drawing.Point(18, 64);
+            this.actionGroupBox.Location = new System.Drawing.Point(18, 67);
             this.actionGroupBox.Name = "actionGroupBox";
             this.actionGroupBox.Size = new System.Drawing.Size(252, 119);
             this.actionGroupBox.TabIndex = 9;
@@ -233,7 +234,7 @@
             // startButton
             // 
             this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startButton.Location = new System.Drawing.Point(18, 265);
+            this.startButton.Location = new System.Drawing.Point(18, 268);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(252, 30);
             this.startButton.TabIndex = 10;
@@ -271,6 +272,17 @@
             this.infoToolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.infoToolTip.ToolTipTitle = "Help";
             // 
+            // statusLabel
+            // 
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.statusLabel.Location = new System.Drawing.Point(15, 51);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(164, 13);
+            this.statusLabel.TabIndex = 13;
+            this.statusLabel.Text = "Status messages will appear here";
+            this.statusLabel.Visible = false;
+            // 
             // Menu
             // 
             this.AcceptButton = this.startButton;
@@ -278,7 +290,8 @@
             this.AccessibleName = "Shutdown Timer";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 307);
+            this.ClientSize = new System.Drawing.Size(284, 310);
+            this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.githubPictureBox);
             this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.startButton);
@@ -329,6 +342,7 @@
         private System.Windows.Forms.CheckBox gracefulCheckBox;
         private System.Windows.Forms.CheckBox preventSleepCheckBox;
         private System.Windows.Forms.ToolTip infoToolTip;
+        private System.Windows.Forms.Label statusLabel;
     }
 }
 

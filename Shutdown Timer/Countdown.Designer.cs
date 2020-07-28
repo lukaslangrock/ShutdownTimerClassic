@@ -41,6 +41,7 @@
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.timeMenuItem = new System.Windows.Forms.ToolStripTextBox();
             this.titlebarPictureBox = new System.Windows.Forms.PictureBox();
+            this.statusLabel = new System.Windows.Forms.Label();
             this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -94,33 +95,33 @@
             this.toolStripSeparator,
             this.timeMenuItem});
             this.contextMenuStrip.Name = "contextMenu";
-            this.contextMenuStrip.Size = new System.Drawing.Size(181, 123);
+            this.contextMenuStrip.Size = new System.Drawing.Size(162, 101);
             // 
             // timerStopMenuItem
             // 
             this.timerStopMenuItem.Name = "timerStopMenuItem";
-            this.timerStopMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.timerStopMenuItem.Size = new System.Drawing.Size(161, 22);
             this.timerStopMenuItem.Text = "Stop and exit";
             this.timerStopMenuItem.Click += new System.EventHandler(this.TimerStopMenuItem_Click);
             // 
             // timerRestartMenuItem
             // 
             this.timerRestartMenuItem.Name = "timerRestartMenuItem";
-            this.timerRestartMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.timerRestartMenuItem.Size = new System.Drawing.Size(161, 22);
             this.timerRestartMenuItem.Text = "Restart the timer";
             this.timerRestartMenuItem.Click += new System.EventHandler(this.TimerRestartMenuItem_Click);
             // 
             // appRestartMenuItem
             // 
             this.appRestartMenuItem.Name = "appRestartMenuItem";
-            this.appRestartMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.appRestartMenuItem.Size = new System.Drawing.Size(161, 22);
             this.appRestartMenuItem.Text = "Restart the app";
             this.appRestartMenuItem.Click += new System.EventHandler(this.AppRestartMenuItem_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(158, 6);
             // 
             // timeMenuItem
             // 
@@ -141,6 +142,19 @@
             this.titlebarPictureBox.TabIndex = 16;
             this.titlebarPictureBox.TabStop = false;
             // 
+            // statusLabel
+            // 
+            this.statusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusLabel.ForeColor = System.Drawing.SystemColors.Control;
+            this.statusLabel.Location = new System.Drawing.Point(12, 124);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(164, 13);
+            this.statusLabel.TabIndex = 17;
+            this.statusLabel.Text = "Status messages will appear here";
+            this.statusLabel.Visible = false;
+            // 
             // Countdown
             // 
             this.AccessibleDescription = "Shows the time left until power action gets executed.";
@@ -151,6 +165,7 @@
             this.BackColor = System.Drawing.Color.RoyalBlue;
             this.ClientSize = new System.Drawing.Size(359, 146);
             this.ContextMenuStrip = this.contextMenuStrip;
+            this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.titlebarPictureBox);
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.timeLabel);
@@ -186,5 +201,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripTextBox timeMenuItem;
         private System.Windows.Forms.ToolStripMenuItem appRestartMenuItem;
+        private System.Windows.Forms.Label statusLabel;
     }
 }

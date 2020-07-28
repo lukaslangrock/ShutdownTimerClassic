@@ -14,6 +14,7 @@ namespace ShutdownTimerWin32
         private int restoreMinutes;
         private int restoreSeconds;
         public string action = "Shutdown"; // defines what power action to execute (fallback to shutdown if not changed)
+        public string status; // Shows a status message on the bottom left corner of the countdown
         public bool graceful; // uses a graceful shutdown which allows apps to save their work or interrupt the shutdown
         public bool preventSystemSleep; // tells Windows that the system should stay awake during countdown
         public bool UI = true; // disables UI updates when set to false (used for running in background)
@@ -31,6 +32,8 @@ namespace ShutdownTimerWin32
             restoreHours = hours;
             restoreMinutes = minutes;
             restoreSeconds = seconds;
+
+            if (!string.IsNullOrWhiteSpace(status)) { statusLabel.Text = status; statusLabel.Visible = true; }
 
             if (UI == true) { UpdateUI(); titleLabel.Text = action + " Timer"; } // initial label update
             else // prepares window for running in background
@@ -269,7 +272,7 @@ namespace ShutdownTimerWin32
             }
         }
 
-        public void ExecutePowerAction(string ChoosenAction)
+        private void ExecutePowerAction(string ChoosenAction)
         {
             allow_close = true; // disable close question
 
