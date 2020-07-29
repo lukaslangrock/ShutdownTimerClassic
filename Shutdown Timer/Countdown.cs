@@ -224,13 +224,11 @@ namespace ShutdownTimerWin32
                 // Target reached
 
                 counterTimer.Stop();
-                if (UI == true)
-                {
-                    seconds = 0;
-                    minutes = 0;
-                    hours = 0;
-                }
-                UpdateUI();
+                seconds = 0;
+                minutes = 0;
+                hours = 0;
+                if (UI == true) { UpdateUI(); } // only update UI if the application is actually shown
+                else { UpdateBackgroundUI(); } // else update the tray UI
                 ExecutePowerAction(action);
                 Application.DoEvents();
                 Application.Exit();
@@ -268,7 +266,7 @@ namespace ShutdownTimerWin32
                     seconds -= 1;
                 }
                 if (UI == true) { UpdateUI(); } // only update UI if the application is actually shown
-                else { UpdateBackgroundUI(); } // else update only the application name
+                else { UpdateBackgroundUI(); } // else update the tray UI
             }
         }
 
