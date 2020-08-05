@@ -21,7 +21,7 @@ This means that all applications will have enough time to exit and nothing is fo
 Thus you should be careful to use this mode as it might result in a failed shutdown.
 *The graceful mode applies to all power actions which force close apps and is not exclusive to a shutdown.*
 
-By default, the countdown window will be always on top of every other window so you don't forget that you have an active shutdown timer. The countdown can also be hidden by selecting the "Run in background" checkbox under the dropdown menu.
+By default, the countdown window will be always on top of every other window so you don't forget that you have an active shutdown timer. The countdown can also be hidden by selecting the "Run in background" checkbox under the dropdown menu. If the countdown is already running you can just right click anywhere in the countdown window to bring up a menu with the option to minimize the countdown to the background. It can also be brought back from the background by using the tray menu (described below).
 
 ![Screenshot of the main menu with extended combobox](Screenshots/Menu2.png)
 
@@ -42,6 +42,12 @@ Here is a quick overview:
 ![Screenshot of countdown window with orange background](Screenshots/CountdownOrange.png)
 ![Screenshot of countdown window with red background](Screenshots/CountdownRed.png)
 ![Screenshot of countdown window with black background](Screenshots/CountdownBlack.png)
+
+# Tray Menu
+
+Shutdown Timer also includes a tray menu to control the application from you Taskbar tray. Just right click the icon to bring it up (you may need to click on the little arrow on the right of your Taskbar to find the Shutdown Timer icon). You can stop, restart and view the timer from it and also switch the UI mode to hide or show the countdown window.
+
+The same menu can also be accessed by right clicking in the countdown window.
 
 # Behavior
 
