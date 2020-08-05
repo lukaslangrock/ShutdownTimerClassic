@@ -128,7 +128,7 @@
         {
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6B415E4521F8467F885E8FB8AF0C1A55"
             {
-            "SourcePath" = "8:..\\Shutdown Timer\\icon_display.ico"
+            "SourcePath" = "8:..\\Shutdown Timer\\Icons\\icon.display.ico"
             "TargetName" = "8:icon.ico"
             "Tag" = "8:"
             "Folder" = "8:_1E58F7E2C3EA412C83810222F41244FA"

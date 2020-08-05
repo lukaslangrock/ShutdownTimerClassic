@@ -52,7 +52,7 @@
     <StartupObject>ShutdownTimer.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon_display.ico</ApplicationIcon>
+    <ApplicationIcon>Icons\icon.display.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -133,10 +133,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icon_fullsize.ico" />
-    <Content Include="icon_display.ico" />
-    <Content Include="icon_transparent_fullsize.ico" />
-    <Content Include="icon_transparent_display.ico" />
+    <Content Include="Icons\icon.fullsize.ico" />
+    <Content Include="Icons\icon.display.ico" />
+    <Content Include="Icons\icon.transparent.fullsize.ico" />
+    <Content Include="Icons\icon.transparent.display.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
