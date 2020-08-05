@@ -1,13 +1,12 @@
 ﻿using ShutdownTimerWin32.Helpers;
 using System;
-using System.Diagnostics.SymbolStore;
 using System.Windows.Forms;
 
 namespace ShutdownTimerWin32
 {
     public partial class Menu : Form
     {
-        private string[] startupArgs;
+        private readonly string[] startupArgs;
         private string CheckResult;
 
         public Menu(string[] args)
@@ -113,18 +112,13 @@ namespace ShutdownTimerWin32
         /// <param name="pStatus"></param>
         private void StartCountdown(string pStatus = null)
         {
-            // Temporary variables
-            int tempHours, tempMinutes, tempSeconds;
-
-            // Convert time values if necessarry
-            (tempHours, tempMinutes, tempSeconds) = Numerics.ConvertTime(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
+            // Calculate TimeSpan
+            TimeSpan timeSpan = new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
 
             // Show countdown window
             using (Countdown countdown = new Countdown
             {
-                hours = tempHours,
-                minutes = tempMinutes,
-                seconds = tempSeconds,
+                countdownTimeSpan = timeSpan,
                 action = actionComboBox.Text,
                 graceful = gracefulCheckBox.Checked,
                 preventSystemSleep = preventSleepCheckBox.Checked,

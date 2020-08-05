@@ -32,13 +32,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Countdown));
             this.timeLabel = new System.Windows.Forms.Label();
             this.titleLabel = new System.Windows.Forms.Label();
-            this.counterTimer = new System.Windows.Forms.Timer(this.components);
+            this.refreshTimer = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.timerStopMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerRestartMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.appRestartMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.timerUIHideMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timerUIShowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.timeMenuItem = new System.Windows.Forms.ToolStripTextBox();
             this.titlebarPictureBox = new System.Windows.Forms.PictureBox();
             this.statusLabel = new System.Windows.Forms.Label();
@@ -73,11 +76,10 @@
             this.titleLabel.TabIndex = 15;
             this.titleLabel.Text = "Shutdown Timer";
             // 
-            // counterTimer
+            // refreshTimer
             // 
-            this.counterTimer.Enabled = true;
-            this.counterTimer.Interval = 1000;
-            this.counterTimer.Tick += new System.EventHandler(this.Counter_Tick);
+            this.refreshTimer.Enabled = true;
+            this.refreshTimer.Tick += new System.EventHandler(this.RefreshTimer_Tick);
             // 
             // notifyIcon
             // 
@@ -85,43 +87,68 @@
             this.notifyIcon.ContextMenuStrip = this.contextMenuStrip;
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "Shutdown Timer";
+            this.notifyIcon.Visible = true;
             // 
             // contextMenuStrip
             // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.timerStopMenuItem,
             this.timerRestartMenuItem,
             this.appRestartMenuItem,
-            this.toolStripSeparator,
+            this.toolStripSeparator1,
+            this.timerUIHideMenuItem,
+            this.timerUIShowMenuItem,
+            this.toolStripSeparator2,
             this.timeMenuItem});
             this.contextMenuStrip.Name = "contextMenu";
-            this.contextMenuStrip.Size = new System.Drawing.Size(162, 101);
+            this.contextMenuStrip.Size = new System.Drawing.Size(213, 173);
             // 
             // timerStopMenuItem
             // 
             this.timerStopMenuItem.Name = "timerStopMenuItem";
-            this.timerStopMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.timerStopMenuItem.Size = new System.Drawing.Size(212, 22);
             this.timerStopMenuItem.Text = "Stop and exit";
             this.timerStopMenuItem.Click += new System.EventHandler(this.TimerStopMenuItem_Click);
             // 
             // timerRestartMenuItem
             // 
             this.timerRestartMenuItem.Name = "timerRestartMenuItem";
-            this.timerRestartMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.timerRestartMenuItem.Size = new System.Drawing.Size(212, 22);
             this.timerRestartMenuItem.Text = "Restart the timer";
             this.timerRestartMenuItem.Click += new System.EventHandler(this.TimerRestartMenuItem_Click);
             // 
             // appRestartMenuItem
             // 
             this.appRestartMenuItem.Name = "appRestartMenuItem";
-            this.appRestartMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.appRestartMenuItem.Size = new System.Drawing.Size(212, 22);
             this.appRestartMenuItem.Text = "Restart the app";
             this.appRestartMenuItem.Click += new System.EventHandler(this.AppRestartMenuItem_Click);
             // 
-            // toolStripSeparator
+            // toolStripSeparator1
             // 
-            this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(158, 6);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(209, 6);
+            // 
+            // timerUIHideMenuItem
+            // 
+            this.timerUIHideMenuItem.Name = "timerUIHideMenuItem";
+            this.timerUIHideMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.timerUIHideMenuItem.Text = "Move to background";
+            this.timerUIHideMenuItem.Click += new System.EventHandler(this.TimerUIHideMenuItem_Click);
+            // 
+            // timerUIShowMenuItem
+            // 
+            this.timerUIShowMenuItem.Enabled = false;
+            this.timerUIShowMenuItem.Name = "timerUIShowMenuItem";
+            this.timerUIShowMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.timerUIShowMenuItem.Text = "Show countdown window";
+            this.timerUIShowMenuItem.Click += new System.EventHandler(this.TimerUIShowMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(209, 6);
             // 
             // timeMenuItem
             // 
@@ -179,7 +206,6 @@
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Countdown_FormClosing);
             this.Load += new System.EventHandler(this.Countdown_Load);
-            this.Resize += new System.EventHandler(this.Countdown_Resize);
             this.contextMenuStrip.ResumeLayout(false);
             this.contextMenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).EndInit();
@@ -193,14 +219,17 @@
         internal System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.PictureBox titlebarPictureBox;
         private System.Windows.Forms.Label titleLabel;
-        private System.Windows.Forms.Timer counterTimer;
+        private System.Windows.Forms.Timer refreshTimer;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem timerStopMenuItem;
         private System.Windows.Forms.ToolStripMenuItem timerRestartMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripTextBox timeMenuItem;
         private System.Windows.Forms.ToolStripMenuItem appRestartMenuItem;
         private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.ToolStripMenuItem timerUIHideMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem timerUIShowMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

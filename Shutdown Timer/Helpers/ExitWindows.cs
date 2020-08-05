@@ -61,10 +61,9 @@ namespace ShutdownTimerWin32.Helpers
 
         private static void GetPrivileges()
         {
-            IntPtr hToken;
             TOKEN_PRIVILEGES tkp;
             OpenProcessToken(Process.GetCurrentProcess().Handle,
-              TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out hToken);
+              TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out IntPtr hToken);
             tkp.PrivilegeCount = 1;
             tkp.Privileges.Attributes = SE_PRIVILEGE_ENABLED;
             LookupPrivilegeValue("", SE_SHUTDOWN_NAME,
