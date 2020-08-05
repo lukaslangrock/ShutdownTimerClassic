@@ -1,6 +1,6 @@
 # Shutdown Timer Classic
 
-Shutdown Timer Classic or otherwise known as ShutdownTimerWin32 is a small little Windows application that allows you to set a timer that will shutdown, restart, hibernate, sleep or lock your PC.
+Shutdown Timer Classic is a small little Windows application that allows you to set a timer that will shutdown, restart, hibernate, sleep or lock your PC.
 
 ![Screenshot of the main menu](Screenshots/Menu.png)
 

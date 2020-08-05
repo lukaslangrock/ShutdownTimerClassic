@@ -1,4 +1,4 @@
-﻿namespace ShutdownTimerWin32
+﻿namespace ShutdownTimer
 {
     partial class Countdown
     {

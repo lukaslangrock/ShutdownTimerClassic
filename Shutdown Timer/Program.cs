@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ShutdownTimerWin32
+namespace ShutdownTimer
 {
     static class Program
     {

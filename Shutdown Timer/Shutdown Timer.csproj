@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{CE23BD33-08D8-4895-854C-90D91CBA02C6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ShutdownTimerWin32</RootNamespace>
-    <AssemblyName>ShutdownTimerWin32</AssemblyName>
+    <RootNamespace>ShutdownTimer</RootNamespace>
+    <AssemblyName>ShutdownTimerClassic</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -49,7 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>ShutdownTimerWin32.Program</StartupObject>
+    <StartupObject>ShutdownTimer.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>icon_display.ico</ApplicationIcon>

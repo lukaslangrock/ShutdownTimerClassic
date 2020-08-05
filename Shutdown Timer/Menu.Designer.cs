@@ -1,4 +1,4 @@
-﻿namespace ShutdownTimerWin32
+﻿namespace ShutdownTimer
 {
     partial class Menu
     {
@@ -255,7 +255,7 @@
             // 
             this.githubPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.githubPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.githubPictureBox.Image = global::ShutdownTimerWin32.Properties.Resources.github;
+            this.githubPictureBox.Image = global::ShutdownTimer.Properties.Resources.github;
             this.githubPictureBox.Location = new System.Drawing.Point(246, 12);
             this.githubPictureBox.Name = "githubPictureBox";
             this.githubPictureBox.Size = new System.Drawing.Size(24, 24);

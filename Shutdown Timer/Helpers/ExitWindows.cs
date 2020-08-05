@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace ShutdownTimerWin32.Helpers
+namespace ShutdownTimer.Helpers
 {
     public static class ExitWindows
     {

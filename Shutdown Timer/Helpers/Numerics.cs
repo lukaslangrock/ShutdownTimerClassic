@@ -1,4 +1,4 @@
-﻿namespace ShutdownTimerWin32.Helpers
+﻿namespace ShutdownTimer.Helpers
 {
     class Numerics
     {

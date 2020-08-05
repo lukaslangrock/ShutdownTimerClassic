@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace ShutdownTimerWin32.Helpers
+namespace ShutdownTimer.Helpers
 {
     public static class ExecutionState
     {

@@ -1,8 +1,8 @@
-﻿using ShutdownTimerWin32.Helpers;
+﻿using ShutdownTimer.Helpers;
 using System;
 using System.Windows.Forms;
 
-namespace ShutdownTimerWin32
+namespace ShutdownTimer
 {
     public partial class Menu : Form
     {
@@ -40,7 +40,7 @@ namespace ShutdownTimerWin32
 
         private void githubPictureBox_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/Lukas34/ShutdownTimerWin32"); // Show GitHub page
+            System.Diagnostics.Process.Start("https://github.com/Lukas34/ShutdownTimerClassic"); // Show GitHub page
         }
 
         private void actionComboBox_TextChanged(object sender, EventArgs e)

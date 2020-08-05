@@ -1,11 +1,11 @@
-﻿using ShutdownTimerWin32.Helpers;
+﻿using ShutdownTimer.Helpers;
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace ShutdownTimerWin32
+namespace ShutdownTimer
 {
     public partial class Countdown : Form
     {
