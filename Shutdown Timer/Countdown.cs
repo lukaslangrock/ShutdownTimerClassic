@@ -38,7 +38,6 @@ namespace ShutdownTimer
 
             if (!string.IsNullOrWhiteSpace(status)) { statusLabel.Text = status; statusLabel.Visible = true; }
 
-            UpdateUI(countdownTimeSpan);
             titleLabel.Text = action + " Timer";
 
             if (!UI)
@@ -53,6 +52,8 @@ namespace ShutdownTimer
                 notifyIcon.ShowBalloonTip(10000);
                 Hide();
             }
+
+            UpdateUI(countdownTimeSpan);
 
             if (preventSystemSleep) { ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS | ExecutionState.EXECUTION_STATE.ES_SYSTEM_REQUIRED); } // give the system some coffee so it stays awake when tired using some fancy EXECUTION_STATE flags
         }
