@@ -25,6 +25,8 @@ By default, the countdown window will be always on top of every other window so 
 
 ![Screenshot of the main menu with extended combobox](Screenshots/Menu2.png)
 
+![Screenshot of the right click menu](Screenshots/RightClickMenu.png)
+
 # Colors
 
 The countdown window has 4 different background colors to visualize the time left and one animation to draw your attention when the time is about to run out, in case you forget about the shutdown timer.
@@ -46,6 +48,8 @@ Here is a quick overview:
 # Tray Menu
 
 Shutdown Timer also includes a tray menu to control the application from you Taskbar tray. Just right click the icon to bring it up (you may need to click on the little arrow on the right of your Taskbar to find the Shutdown Timer icon). You can stop, restart and view the timer from it and also switch the UI mode to hide or show the countdown window.
+
+![Screenshot of the tray menu](Screenshots/TrayMenu.png)
 
 The same menu can also be accessed by right clicking in the countdown window.
 
@@ -75,7 +79,7 @@ Argument                 Description
                          These control modes define how the application will behave once started with arguments. (Default: Recommend)
 /Takeover                Overrides settings and starts the timer.
 /Lock                    Overrides settings and locks UI controls but lets user control wether or not to start the timer.
-/Recommend               Prepopulates settings but leaves the UI unlocked
+/Recommend               Prepopulates settings but leaves the UI unlocked.
 ```
 
 Example: `.\ShutdownTimerClassic.exe /SetTime 01:00 /SetAction Hibernate /Takeover`
