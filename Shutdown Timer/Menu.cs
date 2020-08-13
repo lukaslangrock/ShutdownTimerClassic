@@ -52,17 +52,14 @@ namespace ShutdownTimer
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            if (RunChecks() == true)
+            if (RunChecks())
             {
                 // Disable controls
                 startButton.Enabled = false;
                 actionGroupBox.Enabled = false;
                 timeGroupBox.Enabled = false;
 
-                // Hide
                 this.Hide();
-
-                // Start countdown
                 StartCountdown();
             }
             else
@@ -77,19 +74,19 @@ namespace ShutdownTimer
         /// <returns>Result of checks</returns>
         private bool RunChecks()
         {
-            bool err_tracker = true; // if anything goes wrong the tracker will be set to false
-            string err_message = ""; // error messages will append to this
+            bool errTracker = true; // if anything goes wrong the tracker will be set to false
+            string errMessage = null; // error messages will append to this
 
             if (!actionComboBox.Items.Contains(actionComboBox.Text))
             {
-                err_tracker = false;
-                err_message += "Please select a valid action from the dropdown menu!\n\n";
+                errTracker = false;
+                errMessage += "Please select a valid action from the dropdown menu!\n\n";
             }
 
             if (hoursNumericUpDown.Value == 0 && minutesNumericUpDown.Value == 0 && secondsNumericUpDown.Value == 0)
             {
-                err_tracker = false;
-                err_message += "The timer cannot start at 0!\n\n";
+                errTracker = false;
+                errMessage += "The timer cannot start at 0!\n\n";
             }
 
             try
@@ -98,12 +95,12 @@ namespace ShutdownTimer
             }
             catch
             {
-                err_tracker = false;
-                err_message += "Time conversion failed! Please check if your time values are within a reasonable range.\n\n";
+                errTracker = false;
+                errMessage += "Time conversion failed! Please check if your time values are within a reasonable range.\n\n";
             }
 
-            CheckResult = err_message;
-            return err_tracker;
+            CheckResult = errMessage;
+            return errTracker;
         }
 
         /// <summary>
