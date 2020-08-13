@@ -76,6 +76,7 @@
     <Compile Include="Countdown.Designer.cs">
       <DependentUpon>Countdown.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ExceptionHandler.cs" />
     <Compile Include="Helpers\ExecutionState.cs" />
     <Compile Include="Helpers\ExitWindows.cs" />
     <Compile Include="Helpers\Numerics.cs" />
