@@ -32,25 +32,25 @@ namespace ShutdownTimer
             if (startupArgs.Length > 0) { ProcessArgs(); }
         }
 
-        private void titleLabel_Click(object sender, EventArgs e)
+        private void TitleLabel_Click(object sender, EventArgs e)
         {
             MessageBox.Show("THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE." +
                     "\n\nBy using this software you agree to the above mentioned terms as this software is licensed under the MIT License. For more information visit: https://opensource.org/licenses/MIT.", "MIT License", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void githubPictureBox_Click(object sender, EventArgs e)
+        private void GithubPictureBox_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/Lukas34/ShutdownTimerClassic"); // Show GitHub page
         }
 
-        private void actionComboBox_TextChanged(object sender, EventArgs e)
+        private void ActionComboBox_TextChanged(object sender, EventArgs e)
         {
             // disables graceful checkbox for all modes which can not be executed gracefully / which always execute gracefully
             if (actionComboBox.Text == "Shutdown" || actionComboBox.Text == "Restart" || actionComboBox.Text == "Logout") { gracefulCheckBox.Enabled = true; }
             else { gracefulCheckBox.Enabled = false; }
         }
 
-        private void startButton_Click(object sender, EventArgs e)
+        private void StartButton_Click(object sender, EventArgs e)
         {
             if (RunChecks() == true)
             {

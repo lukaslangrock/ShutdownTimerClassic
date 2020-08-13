@@ -104,7 +104,7 @@
             this.titleLabel.Size = new System.Drawing.Size(215, 31);
             this.titleLabel.TabIndex = 3;
             this.titleLabel.Text = "Shutdown Timer";
-            this.titleLabel.Click += new System.EventHandler(this.titleLabel_Click);
+            this.titleLabel.Click += new System.EventHandler(this.TitleLabel_Click);
             // 
             // titlebarPictureBox
             // 
@@ -229,7 +229,7 @@
             this.actionComboBox.Size = new System.Drawing.Size(147, 21);
             this.actionComboBox.TabIndex = 0;
             this.actionComboBox.Text = "Shutdown";
-            this.actionComboBox.TextChanged += new System.EventHandler(this.actionComboBox_TextChanged);
+            this.actionComboBox.TextChanged += new System.EventHandler(this.ActionComboBox_TextChanged);
             // 
             // startButton
             // 
@@ -240,7 +240,7 @@
             this.startButton.TabIndex = 10;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            this.startButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // versionLabel
             // 
@@ -262,7 +262,7 @@
             this.githubPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.githubPictureBox.TabIndex = 12;
             this.githubPictureBox.TabStop = false;
-            this.githubPictureBox.Click += new System.EventHandler(this.githubPictureBox_Click);
+            this.githubPictureBox.Click += new System.EventHandler(this.GithubPictureBox_Click);
             // 
             // infoToolTip
             // 
