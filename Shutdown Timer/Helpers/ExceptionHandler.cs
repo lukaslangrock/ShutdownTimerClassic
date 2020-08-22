@@ -18,7 +18,7 @@ namespace ShutdownTimer.Helpers
                 "A log file containing information about the process and the error has been saved to your desktop.\n" +
                 "Please open an issue on GitHub and include the contents this log file to help identify and fix the issue.\n\n" +
                 $"Log file location: {filepath}\n" +
-                $"GitHub: https://github.com/Lukas34/ShutdownTimerClassic/issues\n" +
+                $"GitHub: https://github.com/LukasLangrock/ShutdownTimerClassic/issues\n" +
                 $"Developer Email: lukas.langrock@outlook.de";
             MessageBox.Show(message, "Shutdown Timer Classic crashed and needs to be terminated!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Process.Start(filepath); // Show log to user
@@ -34,7 +34,7 @@ namespace ShutdownTimer.Helpers
                 "A log file containing information about the process and the error has been saved to your desktop.\n" +
                 "Please open an issue on GitHub and include the contents this log file to help identify and fix the issue.\n\n" +
                 $"Log file location: {filepath}\n" +
-                $"GitHub: https://github.com/Lukas34/ShutdownTimerClassic/issues\n" +
+                $"GitHub: https://github.com/LukasLangrock/ShutdownTimerClassic/issues\n" +
                 $"Developer Email: lukas.langrock@outlook.de";
             MessageBox.Show(message, "Shutdown Timer Classic crashed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Process.Start(filepath); // Show log to user
@@ -55,7 +55,7 @@ namespace ShutdownTimer.Helpers
 
             log.Append($"{Application.ProductName}@{Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf("."))} experienced a critical exception.\n");
             log.Append("The following data includes information about your system, the exception and the internal state of the application at the time of the exception.\n");
-            log.Append("Please open an issue on https://github.com/Lukas34/ShutdownTimerClassic and include the contents this log file to help identify and fix the issue.\n");
+            log.Append("Please open an issue on https://github.com/LukasLangrock/ShutdownTimerClassic and include the contents this log file to help identify and fix the issue.\n");
 
             log.Append("\n\n---- Process Info ----\n");
             log.Append($"PID: {process.Id}\n");

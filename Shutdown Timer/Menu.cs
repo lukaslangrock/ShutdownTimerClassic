@@ -40,7 +40,7 @@ namespace ShutdownTimer
 
         private void GithubPictureBox_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/Lukas34/ShutdownTimerClassic"); // Show GitHub page
+            System.Diagnostics.Process.Start("https://github.com/LukasLangrock/ShutdownTimerClassic"); // Show GitHub page
         }
 
         private void ActionComboBox_TextChanged(object sender, EventArgs e)
