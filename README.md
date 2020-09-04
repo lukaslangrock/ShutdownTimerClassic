@@ -1,4 +1,4 @@
-# Shutdown Timer Classic
+# Shutdown Timer Classic 🕒
 
 Shutdown Timer Classic is a small little Windows application that allows you to set a timer that will shutdown, restart, hibernate, sleep or lock your PC.
 
@@ -7,7 +7,7 @@ Shutdown Timer Classic is a small little Windows application that allows you to 
 I also have a UWP based version of this project in the works, but the development will take some time as the UWP platform brings some unforeseen hurdles with it and is a lot more complicated than I initially thought.
 I will update this document and my website once the project is ready.
 
-# Usage
+# Usage ✨
 
 Shutdown Timer is a very simple application hence it is easy to use.
 Just choose a power action from the drop-down menu and then dial in the time span you want. If the counter reaches zero the chosen power action will be executed.
@@ -27,7 +27,7 @@ By default, the countdown window will be always on top of every other window so 
 
 ![Screenshot of the right click menu](Screenshots/RightClickMenu.png)
 
-# Colors
+# Colors 🎨
 
 The countdown window has 4 different background colors to visualize the time left and one animation to draw your attention when the time is about to run out, in case you forget about the shutdown timer.
 Here is a quick overview:
@@ -45,7 +45,7 @@ Here is a quick overview:
 ![Screenshot of countdown window with red background](Screenshots/CountdownRed.png)
 ![Screenshot of countdown window with black background](Screenshots/CountdownBlack.png)
 
-# Tray Menu
+# Tray Menu 🔧
 
 Shutdown Timer also includes a tray menu to control the application from you Taskbar tray. Just right click the icon to bring it up (you may need to click on the little arrow on the right of your Taskbar to find the Shutdown Timer icon). You can stop, restart and view the timer from it and also switch the UI mode to hide or show the countdown window.
 
@@ -53,7 +53,7 @@ Shutdown Timer also includes a tray menu to control the application from you Tas
 
 The same menu can also be accessed by right clicking in the countdown window.
 
-# CLI
+# CLI 🐱‍💻
 
 You can also use the command line to start the Shutdown Timer with specific arguments and settings.
 In PowerShell or CMD navigate to the folder where the executable is located.
@@ -89,7 +89,7 @@ Please note that the user will see a message explaining that the countdown has b
 
 If you want to redistribute my executable with your own app/script you are free to do so. Please just keep it updated and mention this project somewhere in the description (ie: follow the license for this project).
 
-# Behavior
+# Behavior 📄
 
 ## Shutdown sequence
 
