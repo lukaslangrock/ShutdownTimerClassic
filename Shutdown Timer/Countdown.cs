@@ -1,9 +1,11 @@
-﻿using ShutdownTimer.Helpers;
+﻿using Microsoft.Win32;
+using ShutdownTimer.Helpers;
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using Windows.UI.ViewManagement;
 
 namespace ShutdownTimer
 {
@@ -36,6 +38,18 @@ namespace ShutdownTimer
             stopwatch = new Stopwatch();
             stopwatch.Start();
 
+            // Set trayIcon icon to match the Windows theme
+            if (GetWindowsLightTheme())
+            {
+                // Windows is set to light theme -> use dark icon
+                notifyIcon.Icon = Properties.Resources.icon_dark;
+            }
+            else
+            {
+                // Windows is set to dark theme -> use light icon
+                notifyIcon.Icon = Properties.Resources.icon_light;
+            }
+
             if (!string.IsNullOrWhiteSpace(status)) { statusLabel.Text = status; statusLabel.Visible = true; }
 
             titleLabel.Text = action + " Timer";
@@ -56,6 +70,29 @@ namespace ShutdownTimer
             UpdateUI(countdownTimeSpan);
 
             if (preventSystemSleep) { ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS | ExecutionState.EXECUTION_STATE.ES_SYSTEM_REQUIRED); } // give the system some coffee so it stays awake when tired using some fancy EXECUTION_STATE flags
+        }
+
+        private bool GetWindowsLightTheme()
+        {
+            bool lighttheme = false; // default if all checks fail (may happen when not on Windows 10)
+
+            try // Get app theme as fallback
+            {
+                Windows.UI.Color winTheme = new UISettings().GetColorValue(UIColorType.Background);
+                if (winTheme.ToString() == "#FFFFFFFF") { lighttheme = true; }
+                else if (winTheme.ToString() == "#FF000000") { lighttheme = false; }
+            }
+            catch (Exception) { }
+
+            try // Get actual default Windows theme which (the same as the taskbar)
+            {
+                int key = (int)Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "SystemUsesLightTheme", null);
+                if (key == 0) { lighttheme = false; }
+                else if (key == 1) { lighttheme = true; }
+            }
+            catch (Exception) { }
+
+            return lighttheme;
         }
 
         /// <summary>

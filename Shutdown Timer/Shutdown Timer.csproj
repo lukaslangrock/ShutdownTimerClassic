@@ -138,6 +138,13 @@
     <Content Include="Icons\icon.display.ico" />
     <Content Include="Icons\icon.transparent.fullsize.ico" />
     <Content Include="Icons\icon.transparent.display.ico" />
+    <None Include="Resources\icon.dark.ico" />
+    <None Include="Resources\icon.light.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.Contracts">
+      <Version>10.0.19041.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

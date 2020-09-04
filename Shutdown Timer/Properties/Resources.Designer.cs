@@ -69,5 +69,25 @@ namespace ShutdownTimer.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
+        /// </summary>
+        internal static System.Drawing.Icon icon_dark {
+            get {
+                object obj = ResourceManager.GetObject("icon_dark", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
+        /// </summary>
+        internal static System.Drawing.Icon icon_light {
+            get {
+                object obj = ResourceManager.GetObject("icon_light", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }
