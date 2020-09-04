@@ -16,10 +16,9 @@ namespace ShutdownTimer.Helpers
 
             string message = "An unhandled exception occurred and the application needs to be terminated!\n\n" +
                 "A log file containing information about the process and the error has been saved to your desktop.\n" +
-                "Please open an issue on GitHub and include the contents this log file to help identify and fix the issue.\n\n" +
-                $"Log file location: {filepath}\n" +
-                $"GitHub: https://github.com/LukasLangrock/ShutdownTimerClassic/issues\n" +
-                $"Developer Email: lukas.langrock@outlook.de";
+                "Please create an issue on GitHub and include the contents of this log file to help identify and fix the issue.\n\n" +
+                $"GitHub: github.com/lukaslangrock/ShutdownTimerClassic/issues\n" +
+                $"Email: lukas.langrock@outlook.de";
             MessageBox.Show(message, "Shutdown Timer Classic crashed and needs to be terminated!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Process.Start(filepath); // Show log to user
         }
@@ -32,10 +31,10 @@ namespace ShutdownTimer.Helpers
 
             string message = "A thread exception occurred!\n\n" +
                 "A log file containing information about the process and the error has been saved to your desktop.\n" +
-                "Please open an issue on GitHub and include the contents this log file to help identify and fix the issue.\n\n" +
+                "Please create an issue on GitHub and include the contents of this log file to help identify and fix the issue.\n\n" +
                 $"Log file location: {filepath}\n" +
-                $"GitHub: https://github.com/LukasLangrock/ShutdownTimerClassic/issues\n" +
-                $"Developer Email: lukas.langrock@outlook.de";
+                $"GitHub: github.com/lukaslangrock/ShutdownTimerClassic/issues\n" +
+                $"Email: lukas.langrock@outlook.de";
             MessageBox.Show(message, "Shutdown Timer Classic crashed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Process.Start(filepath); // Show log to user
 
