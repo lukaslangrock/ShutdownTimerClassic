@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace ShutdownTimer
@@ -8,8 +9,11 @@ namespace ShutdownTimer
         [STAThread]
         static void Main(string[] args)
         {
-            AppDomain.CurrentDomain.UnhandledException += Helpers.ExceptionHandler.UnhandledExceptionHandler;
-            Application.ThreadException += Helpers.ExceptionHandler.ThreadExceptionHandler;
+            if (!Debugger.IsAttached)
+            {
+                AppDomain.CurrentDomain.UnhandledException += Helpers.ExceptionHandler.UnhandledExceptionHandler;
+                Application.ThreadException += Helpers.ExceptionHandler.ThreadExceptionHandler;
+            }
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
