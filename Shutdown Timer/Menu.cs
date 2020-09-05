@@ -50,7 +50,7 @@ namespace ShutdownTimer
             else { gracefulCheckBox.Enabled = false; }
         }
 
-        private void settingsButton_Click(object sender, EventArgs e)
+        private void SettingsButton_Click(object sender, EventArgs e)
         {
             Settings settings = new Settings();
             settings.ShowDialog();

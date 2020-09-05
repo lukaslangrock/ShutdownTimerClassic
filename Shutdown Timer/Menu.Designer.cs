@@ -293,7 +293,7 @@
             this.settingsButton.Size = new System.Drawing.Size(31, 31);
             this.settingsButton.TabIndex = 14;
             this.settingsButton.UseVisualStyleBackColor = true;
-            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            this.settingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
             // Menu
             // 
