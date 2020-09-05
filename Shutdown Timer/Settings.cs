@@ -81,5 +81,35 @@ namespace ShutdownTimer
 
             SettingsProvider.Save();
         }
+
+        private void AppLicenseLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/lukaslangrock/ShutdownTimerClassic/blob/master/LICENSE");
+        }
+
+        private void AppSourceLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/lukaslangrock/ShutdownTimerClassic");
+        }
+
+        private void FALicenseLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://fontawesome.com/license/free");
+        }
+
+        private void FASourceLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/FortAwesome/Font-Awesome");
+        }
+
+        private void GithubButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/lukaslangrock/ShutdownTimerClassic/issues");
+        }
+
+        private void Emailbutton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("mailto:lukas.langrock@outlook.de");
+        }
     }
 }

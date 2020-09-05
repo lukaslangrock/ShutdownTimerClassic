@@ -34,21 +34,8 @@ namespace ShutdownTimer
         private void Menu_Shown(object sender, EventArgs e)
         {
             // Load settings
-            actionComboBox.Enabled = false;
-            timeGroupBox.Enabled = false;
-            settingsButton.Enabled = false;
-            startButton.Enabled = false;
-            startButton.Text = "Loading Settings...";
             Application.DoEvents();
-
             LoadSettings();
-
-            actionComboBox.Enabled = true;
-            timeGroupBox.Enabled = true;
-            settingsButton.Enabled = true;
-            startButton.Enabled = true;
-            startButton.Text = "Start";
-            Application.DoEvents();
 
             // Check for startup arguments
             if (startupArgs.Length > 0) { ProcessArgs(); }

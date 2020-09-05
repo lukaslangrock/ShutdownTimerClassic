@@ -117,6 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="aboutRichTextBox.Text" xml:space="preserve">
+    <value>This app is a free open-source project by Lukas Langrock under the MIT license which means there is no warrenty provided and I shall not be held liable for any kind of damage!
+This is a shutdown timer after all and you may lose unsaved work or mess up another running application. Use this with caution and common sense!
+
+The app uses Windows API's to execute power actions and System.Diagnostics.Stopwatch to accurately measure elapsed time so you can expect a reliable expereince.
+I aim to keep the app rock stable and reliable, tho you may experience exceptions, crashes or malfunctions.
+
+If you enjoy using this free app, please consider writing a review on the Microsoft Store and starring the project on GitHub.
+Any contributions in the form of issues and PR's are very welcome. If you don't have a GitHub account, you can also write me an Email.
+</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
