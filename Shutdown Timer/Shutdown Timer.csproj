@@ -80,6 +80,7 @@
     <Compile Include="Helpers\ExecutionState.cs" />
     <Compile Include="Helpers\ExitWindows.cs" />
     <Compile Include="Helpers\Numerics.cs" />
+    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +155,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.Contracts">
       <Version>10.0.19041.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

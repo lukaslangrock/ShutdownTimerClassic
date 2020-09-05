@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShutdownTimer.Helpers;
+using System;
 using System.Windows.Forms;
 
 namespace ShutdownTimer
@@ -20,6 +14,7 @@ namespace ShutdownTimer
         private void Settings_Load(object sender, EventArgs e)
         {
             appLabel.Text = Application.ProductName + "@v" + Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf("."));
+            LoadSettings();
         }
 
         private void GithubLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -27,18 +22,64 @@ namespace ShutdownTimer
             System.Diagnostics.Process.Start("https://github.com/lukaslangrock/ShutdownTimerClassic");
         }
 
-        private void LicenseLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void Settings_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MessageBox.Show("MIT License\n\nCopyright (c) 2020 Lukas Langrock\n\n" +
-                "Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\n" +
-                "The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\n" +
-                "THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n" +
-                "By using this software you agree to the above mentioned terms as this software is licensed under the MIT License. For more information visit: https://opensource.org/licenses/MIT.", "MIT License", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            SaveSettings();
         }
 
-        private void FALicenseLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void RememberStateCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://fontawesome.com/license/free");
+            if (rememberStateCheckBox.Checked)
+            {
+                SettingsProvider.settings.RememberLastState = true;
+                customDefaultsGroupBox.Enabled = false;
+            }
+            else
+            {
+                SettingsProvider.settings.RememberLastState = false;
+                customDefaultsGroupBox.Enabled = true;
+            }
+        }
+
+        private void ClearSettingsButton_Click(object sender, EventArgs e)
+        {
+            SettingsProvider.ClearSettings();
+            LoadSettings();
+        }
+
+        private void LoadSettings()
+        {
+            // general controls
+            SettingsProvider.settings.RememberLastState = rememberStateCheckBox.Checked;
+
+            // default timer
+            actionComboBox.Text = SettingsProvider.settings.DefaultTimer.Action;
+            gracefulCheckBox.Checked = SettingsProvider.settings.DefaultTimer.Graceful;
+            preventSleepCheckBox.Checked = SettingsProvider.settings.DefaultTimer.PreventSleep;
+            backgroundCheckBox.Checked = SettingsProvider.settings.DefaultTimer.Background;
+            hoursNumericUpDown.Value = SettingsProvider.settings.DefaultTimer.Hours;
+            minutesNumericUpDown.Value = SettingsProvider.settings.DefaultTimer.Minutes;
+            secondsNumericUpDown.Value = SettingsProvider.settings.DefaultTimer.Seconds;
+        }
+
+        private void SaveSettings()
+        {
+            // general controls
+            SettingsProvider.settings.RememberLastState = rememberStateCheckBox.Checked;
+
+            // default timer
+            if (!SettingsProvider.settings.RememberLastState)
+            {
+                SettingsProvider.settings.DefaultTimer.Action = actionComboBox.Text;
+                SettingsProvider.settings.DefaultTimer.Graceful = gracefulCheckBox.Checked;
+                SettingsProvider.settings.DefaultTimer.PreventSleep = preventSleepCheckBox.Checked;
+                SettingsProvider.settings.DefaultTimer.Background = backgroundCheckBox.Checked;
+                SettingsProvider.settings.DefaultTimer.Hours = Convert.ToInt32(hoursNumericUpDown.Value);
+                SettingsProvider.settings.DefaultTimer.Minutes = Convert.ToInt32(minutesNumericUpDown.Value);
+                SettingsProvider.settings.DefaultTimer.Seconds = Convert.ToInt32(secondsNumericUpDown.Value);
+            }
+
+            SettingsProvider.Save();
         }
     }
 }

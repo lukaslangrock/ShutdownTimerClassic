@@ -47,7 +47,6 @@
             this.actionComboBox = new System.Windows.Forms.ComboBox();
             this.startButton = new System.Windows.Forms.Button();
             this.versionLabel = new System.Windows.Forms.Label();
-            this.githubPictureBox = new System.Windows.Forms.PictureBox();
             this.infoToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.statusLabel = new System.Windows.Forms.Label();
             this.settingsButton = new System.Windows.Forms.Button();
@@ -57,7 +56,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.timeGroupBox.SuspendLayout();
             this.actionGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.githubPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // hoursNumericUpDown
@@ -235,9 +233,9 @@
             // startButton
             // 
             this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startButton.Location = new System.Drawing.Point(55, 268);
+            this.startButton.Location = new System.Drawing.Point(18, 268);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(215, 31);
+            this.startButton.Size = new System.Drawing.Size(252, 31);
             this.startButton.TabIndex = 10;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
@@ -251,19 +249,6 @@
             this.versionLabel.Size = new System.Drawing.Size(37, 13);
             this.versionLabel.TabIndex = 11;
             this.versionLabel.Text = "v0.0.0";
-            // 
-            // githubPictureBox
-            // 
-            this.githubPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.githubPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.githubPictureBox.Image = global::ShutdownTimer.Properties.Resources.github;
-            this.githubPictureBox.Location = new System.Drawing.Point(246, 12);
-            this.githubPictureBox.Name = "githubPictureBox";
-            this.githubPictureBox.Size = new System.Drawing.Size(24, 24);
-            this.githubPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.githubPictureBox.TabIndex = 12;
-            this.githubPictureBox.TabStop = false;
-            this.githubPictureBox.Click += new System.EventHandler(this.GithubPictureBox_Click);
             // 
             // infoToolTip
             // 
@@ -288,7 +273,7 @@
             // 
             this.settingsButton.BackgroundImage = global::ShutdownTimer.Properties.Resources.fa_cog_solid;
             this.settingsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.settingsButton.Location = new System.Drawing.Point(18, 268);
+            this.settingsButton.Location = new System.Drawing.Point(239, 9);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(31, 31);
             this.settingsButton.TabIndex = 14;
@@ -305,7 +290,6 @@
             this.ClientSize = new System.Drawing.Size(284, 311);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.statusLabel);
-            this.Controls.Add(this.githubPictureBox);
             this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.actionGroupBox);
@@ -319,7 +303,9 @@
             this.Name = "Menu";
             this.ShowIcon = false;
             this.Text = "Shutdown Timer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Menu_FormClosing);
             this.Load += new System.EventHandler(this.Menu_Load);
+            this.Shown += new System.EventHandler(this.Menu_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.hoursNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minutesNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondsNumericUpDown)).EndInit();
@@ -328,7 +314,6 @@
             this.timeGroupBox.PerformLayout();
             this.actionGroupBox.ResumeLayout(false);
             this.actionGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.githubPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -351,7 +336,6 @@
         private System.Windows.Forms.ComboBox actionComboBox;
         private System.Windows.Forms.CheckBox backgroundCheckBox;
         private System.Windows.Forms.Label versionLabel;
-        private System.Windows.Forms.PictureBox githubPictureBox;
         private System.Windows.Forms.CheckBox gracefulCheckBox;
         private System.Windows.Forms.CheckBox preventSleepCheckBox;
         private System.Windows.Forms.ToolTip infoToolTip;

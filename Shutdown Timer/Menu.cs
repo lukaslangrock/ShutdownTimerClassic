@@ -1,6 +1,8 @@
 ﻿using ShutdownTimer.Helpers;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Windows.ApplicationModel.VoiceCommands;
 
 namespace ShutdownTimer
 {
@@ -27,9 +29,34 @@ namespace ShutdownTimer
             infoToolTip.SetToolTip(hoursNumericUpDown, "This defines the hours to count down from. Use can use any positive whole number.");
             infoToolTip.SetToolTip(minutesNumericUpDown, "This defines the minutes to count down from. Use can use any positive whole number.\nValues above 59 will get converted into their corresponding seconds, minutes and hours.");
             infoToolTip.SetToolTip(secondsNumericUpDown, "This defines the seconds to count down from. Use can use any positive whole number.\nValues above 59 will get converted into their corresponding seconds, minutes and hours.");
+        }
+
+        private void Menu_Shown(object sender, EventArgs e)
+        {
+            // Load settings
+            actionComboBox.Enabled = false;
+            timeGroupBox.Enabled = false;
+            settingsButton.Enabled = false;
+            startButton.Enabled = false;
+            startButton.Text = "Loading Settings...";
+            Application.DoEvents();
+
+            LoadSettings();
+
+            actionComboBox.Enabled = true;
+            timeGroupBox.Enabled = true;
+            settingsButton.Enabled = true;
+            startButton.Enabled = true;
+            startButton.Text = "Start";
+            Application.DoEvents();
 
             // Check for startup arguments
             if (startupArgs.Length > 0) { ProcessArgs(); }
+        }
+
+        private void Menu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SettingsProvider.Save();
         }
 
         private void TitleLabel_Click(object sender, EventArgs e)
@@ -64,6 +91,8 @@ namespace ShutdownTimer
                 startButton.Enabled = false;
                 actionGroupBox.Enabled = false;
                 timeGroupBox.Enabled = false;
+
+                SaveSettings();
 
                 this.Hide();
                 StartCountdown();
@@ -241,6 +270,41 @@ namespace ShutdownTimer
                     statusLabel.Visible = true;
                     break;
             }
+        }
+
+        /// <summary>
+        /// Load UI element data from settings
+        /// </summary>
+        private void LoadSettings()
+        {
+            SettingsProvider.Load();
+
+            actionComboBox.Text = SettingsProvider.settings.DefaultTimer.Action;
+            gracefulCheckBox.Checked = SettingsProvider.settings.DefaultTimer.Graceful;
+            preventSleepCheckBox.Checked = SettingsProvider.settings.DefaultTimer.PreventSleep;
+            backgroundCheckBox.Checked = SettingsProvider.settings.DefaultTimer.Background;
+            hoursNumericUpDown.Value = SettingsProvider.settings.DefaultTimer.Hours;
+            minutesNumericUpDown.Value = SettingsProvider.settings.DefaultTimer.Minutes;
+            secondsNumericUpDown.Value = SettingsProvider.settings.DefaultTimer.Seconds;
+        }
+
+        /// <summary>
+        /// Saves current timer settings as default settings if activated in settings
+        /// </summary>
+        private void SaveSettings()
+        {
+            if (SettingsProvider.settings.RememberLastState)
+            {
+                SettingsProvider.settings.DefaultTimer.Action = actionComboBox.Text;
+                SettingsProvider.settings.DefaultTimer.Graceful = gracefulCheckBox.Checked;
+                SettingsProvider.settings.DefaultTimer.PreventSleep = preventSleepCheckBox.Checked;
+                SettingsProvider.settings.DefaultTimer.Background = backgroundCheckBox.Checked;
+                SettingsProvider.settings.DefaultTimer.Hours = Convert.ToInt32(hoursNumericUpDown.Value);
+                SettingsProvider.settings.DefaultTimer.Minutes = Convert.ToInt32(minutesNumericUpDown.Value);
+                SettingsProvider.settings.DefaultTimer.Seconds = Convert.ToInt32(secondsNumericUpDown.Value);
+            }
+
+            SettingsProvider.Save();
         }
     }
 }
