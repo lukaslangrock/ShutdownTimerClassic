@@ -50,6 +50,7 @@
             this.githubPictureBox = new System.Windows.Forms.PictureBox();
             this.infoToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.statusLabel = new System.Windows.Forms.Label();
+            this.settingsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.hoursNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minutesNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondsNumericUpDown)).BeginInit();
@@ -234,9 +235,9 @@
             // startButton
             // 
             this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startButton.Location = new System.Drawing.Point(18, 268);
+            this.startButton.Location = new System.Drawing.Point(55, 268);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(252, 30);
+            this.startButton.Size = new System.Drawing.Size(215, 31);
             this.startButton.TabIndex = 10;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
@@ -283,6 +284,17 @@
             this.statusLabel.Text = "Status messages will appear here";
             this.statusLabel.Visible = false;
             // 
+            // settingsButton
+            // 
+            this.settingsButton.BackgroundImage = global::ShutdownTimer.Properties.Resources.fa_cog_solid;
+            this.settingsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.settingsButton.Location = new System.Drawing.Point(18, 268);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(31, 31);
+            this.settingsButton.TabIndex = 14;
+            this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            // 
             // Menu
             // 
             this.AcceptButton = this.startButton;
@@ -290,7 +302,8 @@
             this.AccessibleName = "Shutdown Timer";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 310);
+            this.ClientSize = new System.Drawing.Size(284, 311);
+            this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.githubPictureBox);
             this.Controls.Add(this.versionLabel);
@@ -343,6 +356,7 @@
         private System.Windows.Forms.CheckBox preventSleepCheckBox;
         private System.Windows.Forms.ToolTip infoToolTip;
         private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.Button settingsButton;
     }
 }
 

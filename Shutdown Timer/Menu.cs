@@ -40,7 +40,7 @@ namespace ShutdownTimer
 
         private void GithubPictureBox_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/LukasLangrock/ShutdownTimerClassic"); // Show GitHub page
+            System.Diagnostics.Process.Start("https://github.com/lukaslangrock/ShutdownTimerClassic"); // Show GitHub page
         }
 
         private void ActionComboBox_TextChanged(object sender, EventArgs e)
@@ -48,6 +48,12 @@ namespace ShutdownTimer
             // disables graceful checkbox for all modes which can not be executed gracefully / which always execute gracefully
             if (actionComboBox.Text == "Shutdown" || actionComboBox.Text == "Restart" || actionComboBox.Text == "Logout") { gracefulCheckBox.Enabled = true; }
             else { gracefulCheckBox.Enabled = false; }
+        }
+
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings();
+            settings.ShowDialog();
         }
 
         private void StartButton_Click(object sender, EventArgs e)
