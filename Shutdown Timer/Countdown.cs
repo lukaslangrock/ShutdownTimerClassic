@@ -38,20 +38,19 @@ namespace ShutdownTimer
             stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            // Set trayIcon icon to match the Windows theme
-            if (GetWindowsLightTheme())
-            {
-                // Windows is set to light theme -> use dark icon
-                notifyIcon.Icon = Properties.Resources.icon_dark;
-            }
-            else
-            {
-                // Windows is set to dark theme -> use light icon
-                notifyIcon.Icon = Properties.Resources.icon_light;
-            }
+            // Set trayIcon icon to the opposite of the selected theme
+            bool lighttheme;
+            if (SettingsProvider.settings.TrayIconTheme == "Light") { lighttheme = true; }
+            else if (SettingsProvider.settings.TrayIconTheme == "Dark") { lighttheme = false; }
+            else { lighttheme = GetWindowsLightTheme(); }
+
+            // When the dark theme is selected we are using the light icon to generate contrast (and vise versa), you wouldn't want a white icon on a white background.
+            if (lighttheme) { notifyIcon.Icon = Properties.Resources.icon_dark; }
+            else { notifyIcon.Icon = Properties.Resources.icon_light; }
 
             if (!string.IsNullOrWhiteSpace(status)) { statusLabel.Text = status; statusLabel.Visible = true; }
 
+            // Setup UI
             titleLabel.Text = action + " Timer";
 
             if (!UI)

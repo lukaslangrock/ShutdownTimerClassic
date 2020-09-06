@@ -46,6 +46,7 @@ namespace ShutdownTimer.Helpers
                 settings.DefaultTimer.Minutes = 0;
                 settings.DefaultTimer.Seconds = 0;
             }
+            if (settings.TrayIconTheme is null) { settings.TrayIconTheme = "Automatic"; }
         }
 
         public static void ClearSettings()
@@ -69,6 +70,8 @@ namespace ShutdownTimer.Helpers
         public bool RememberLastState { get; set; }
 
         public TimerData DefaultTimer { get; set; }
+
+        public string TrayIconTheme { get; set; }
     }
 
     public class TimerData

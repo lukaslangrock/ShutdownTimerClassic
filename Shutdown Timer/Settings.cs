@@ -17,11 +17,6 @@ namespace ShutdownTimer
             LoadSettings();
         }
 
-        private void GithubLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/lukaslangrock/ShutdownTimerClassic");
-        }
-
         private void Settings_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveSettings();
@@ -50,7 +45,8 @@ namespace ShutdownTimer
         private void LoadSettings()
         {
             // general controls
-            SettingsProvider.settings.RememberLastState = rememberStateCheckBox.Checked;
+            rememberStateCheckBox.Checked = SettingsProvider.settings.RememberLastState;
+            trayiconThemeComboBox.Text = SettingsProvider.settings.TrayIconTheme;
 
             // default timer
             actionComboBox.Text = SettingsProvider.settings.DefaultTimer.Action;
@@ -66,6 +62,7 @@ namespace ShutdownTimer
         {
             // general controls
             SettingsProvider.settings.RememberLastState = rememberStateCheckBox.Checked;
+            SettingsProvider.settings.TrayIconTheme = trayiconThemeComboBox.Text;
 
             // default timer
             if (!SettingsProvider.settings.RememberLastState)
@@ -80,6 +77,11 @@ namespace ShutdownTimer
             }
 
             SettingsProvider.Save();
+        }
+
+        private void GithubLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/lukaslangrock/ShutdownTimerClassic");
         }
 
         private void AppLicenseLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

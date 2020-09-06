@@ -63,6 +63,9 @@
             this.appSourceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appInfoLabel = new System.Windows.Forms.Label();
+            this.trayiconGroupBox = new System.Windows.Forms.GroupBox();
+            this.trayiconThemeLabel = new System.Windows.Forms.Label();
+            this.trayiconThemeComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -74,6 +77,7 @@
             this.tabPage2.SuspendLayout();
             this.aboutGroupBox.SuspendLayout();
             this.licenseGroupBox.SuspendLayout();
+            this.trayiconGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // titlebarPictureBox
@@ -111,9 +115,9 @@
             this.footerLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.footerLabel.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.footerLabel.Location = new System.Drawing.Point(12, 332);
+            this.footerLabel.Location = new System.Drawing.Point(12, 366);
             this.footerLabel.Name = "footerLabel";
-            this.footerLabel.Size = new System.Drawing.Size(310, 20);
+            this.footerLabel.Size = new System.Drawing.Size(310, 18);
             this.footerLabel.TabIndex = 9;
             this.footerLabel.Text = "Made with love in Germany";
             this.footerLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -141,24 +145,25 @@
             this.settingsTabControl.Location = new System.Drawing.Point(18, 54);
             this.settingsTabControl.Name = "settingsTabControl";
             this.settingsTabControl.SelectedIndex = 0;
-            this.settingsTabControl.Size = new System.Drawing.Size(304, 275);
+            this.settingsTabControl.Size = new System.Drawing.Size(304, 309);
             this.settingsTabControl.TabIndex = 13;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.trayiconGroupBox);
             this.tabPage1.Controls.Add(this.clearSettingsButton);
             this.tabPage1.Controls.Add(this.defaultSettingsGroupBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(296, 249);
+            this.tabPage1.Size = new System.Drawing.Size(296, 283);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Application Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // clearSettingsButton
             // 
-            this.clearSettingsButton.Location = new System.Drawing.Point(161, 220);
+            this.clearSettingsButton.Location = new System.Drawing.Point(161, 254);
             this.clearSettingsButton.Name = "clearSettingsButton";
             this.clearSettingsButton.Size = new System.Drawing.Size(129, 23);
             this.clearSettingsButton.TabIndex = 1;
@@ -305,6 +310,7 @@
             // 
             this.actionComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.actionComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.actionComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.actionComboBox.FormattingEnabled = true;
             this.actionComboBox.Items.AddRange(new object[] {
             "Shutdown",
@@ -317,7 +323,6 @@
             this.actionComboBox.Name = "actionComboBox";
             this.actionComboBox.Size = new System.Drawing.Size(147, 21);
             this.actionComboBox.TabIndex = 14;
-            this.actionComboBox.Text = "Shutdown";
             // 
             // rememberStateCheckBox
             // 
@@ -337,7 +342,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(296, 249);
+            this.tabPage2.Size = new System.Drawing.Size(296, 283);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "About";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -349,14 +354,14 @@
             this.aboutGroupBox.Controls.Add(this.aboutRichTextBox);
             this.aboutGroupBox.Location = new System.Drawing.Point(6, 61);
             this.aboutGroupBox.Name = "aboutGroupBox";
-            this.aboutGroupBox.Size = new System.Drawing.Size(284, 182);
+            this.aboutGroupBox.Size = new System.Drawing.Size(284, 216);
             this.aboutGroupBox.TabIndex = 1;
             this.aboutGroupBox.TabStop = false;
             this.aboutGroupBox.Text = "About this app";
             // 
             // emailbutton
             // 
-            this.emailbutton.Location = new System.Drawing.Point(112, 153);
+            this.emailbutton.Location = new System.Drawing.Point(112, 187);
             this.emailbutton.Name = "emailbutton";
             this.emailbutton.Size = new System.Drawing.Size(60, 23);
             this.emailbutton.TabIndex = 16;
@@ -366,11 +371,11 @@
             // 
             // githubButton
             // 
-            this.githubButton.Location = new System.Drawing.Point(178, 153);
+            this.githubButton.Location = new System.Drawing.Point(178, 187);
             this.githubButton.Name = "githubButton";
             this.githubButton.Size = new System.Drawing.Size(100, 23);
             this.githubButton.TabIndex = 15;
-            this.githubButton.Text = "GitHub";
+            this.githubButton.Text = "GitHub Issues";
             this.githubButton.UseVisualStyleBackColor = true;
             this.githubButton.Click += new System.EventHandler(this.GithubButton_Click);
             // 
@@ -378,7 +383,7 @@
             // 
             this.aboutRichTextBox.Location = new System.Drawing.Point(6, 19);
             this.aboutRichTextBox.Name = "aboutRichTextBox";
-            this.aboutRichTextBox.Size = new System.Drawing.Size(272, 128);
+            this.aboutRichTextBox.Size = new System.Drawing.Size(272, 162);
             this.aboutRichTextBox.TabIndex = 14;
             this.aboutRichTextBox.Text = resources.GetString("aboutRichTextBox.Text");
             // 
@@ -459,11 +464,44 @@
             this.appInfoLabel.TabIndex = 0;
             this.appInfoLabel.Text = "Application:";
             // 
+            // trayiconGroupBox
+            // 
+            this.trayiconGroupBox.Controls.Add(this.trayiconThemeComboBox);
+            this.trayiconGroupBox.Controls.Add(this.trayiconThemeLabel);
+            this.trayiconGroupBox.Location = new System.Drawing.Point(6, 208);
+            this.trayiconGroupBox.Name = "trayiconGroupBox";
+            this.trayiconGroupBox.Size = new System.Drawing.Size(284, 40);
+            this.trayiconGroupBox.TabIndex = 2;
+            this.trayiconGroupBox.TabStop = false;
+            this.trayiconGroupBox.Text = "Tray Menu";
+            // 
+            // trayiconThemeLabel
+            // 
+            this.trayiconThemeLabel.AutoSize = true;
+            this.trayiconThemeLabel.Location = new System.Drawing.Point(6, 16);
+            this.trayiconThemeLabel.Name = "trayiconThemeLabel";
+            this.trayiconThemeLabel.Size = new System.Drawing.Size(92, 13);
+            this.trayiconThemeLabel.TabIndex = 0;
+            this.trayiconThemeLabel.Text = "Tray menu theme:";
+            // 
+            // trayiconThemeComboBox
+            // 
+            this.trayiconThemeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.trayiconThemeComboBox.FormattingEnabled = true;
+            this.trayiconThemeComboBox.Items.AddRange(new object[] {
+            "Automatic",
+            "Light",
+            "Dark"});
+            this.trayiconThemeComboBox.Location = new System.Drawing.Point(104, 13);
+            this.trayiconThemeComboBox.Name = "trayiconThemeComboBox";
+            this.trayiconThemeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.trayiconThemeComboBox.TabIndex = 1;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 361);
+            this.ClientSize = new System.Drawing.Size(334, 393);
             this.Controls.Add(this.githubLinkLabel);
             this.Controls.Add(this.footerLabel);
             this.Controls.Add(this.appLabel);
@@ -493,6 +531,8 @@
             this.aboutGroupBox.ResumeLayout(false);
             this.licenseGroupBox.ResumeLayout(false);
             this.licenseGroupBox.PerformLayout();
+            this.trayiconGroupBox.ResumeLayout(false);
+            this.trayiconGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -534,5 +574,8 @@
         private System.Windows.Forms.Button emailbutton;
         private System.Windows.Forms.Button githubButton;
         private System.Windows.Forms.RichTextBox aboutRichTextBox;
+        private System.Windows.Forms.GroupBox trayiconGroupBox;
+        private System.Windows.Forms.ComboBox trayiconThemeComboBox;
+        private System.Windows.Forms.Label trayiconThemeLabel;
     }
 }
