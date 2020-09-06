@@ -7,9 +7,9 @@ namespace ShutdownTimer.Helpers
 {
     public static class SettingsProvider
     {
-        public static SettingsData settings; // working copy of settings
-        private static string settingsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Shutdown Timer Classic";
-        private static string settingsPath = settingsDirectory + "\\settings.json";
+        public static SettingsData Settings { get; set; } // current settings
+        private static readonly string settingsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Shutdown Timer Classic";
+        private static readonly string settingsPath = settingsDirectory + "\\settings.json";
 
         public static void Load()
         {
@@ -27,17 +27,17 @@ namespace ShutdownTimer.Helpers
                 File.WriteAllText(settingsPath, emptySettingsDataJson);
             }
             string settingsJson = File.ReadAllText(settingsPath);
-            settings = new SettingsData();
-            try { settings = JsonConvert.DeserializeObject<SettingsData>(settingsJson); } catch (Exception) { }
+            Settings = new SettingsData();
+            try { Settings = JsonConvert.DeserializeObject<SettingsData>(settingsJson); } catch (Exception) { }
             CheckSettings();
         }
 
         private static void CheckSettings()
         {
-            settings.AppVersion = Application.ProductVersion;
-            if (settings.DefaultTimer is null)
+            Settings.AppVersion = Application.ProductVersion;
+            if (Settings.DefaultTimer is null)
             {
-                settings.DefaultTimer = new TimerData
+                Settings.DefaultTimer = new TimerData
                 {
                     Action = "Shutdown",
                     Graceful = false,
@@ -48,19 +48,19 @@ namespace ShutdownTimer.Helpers
                     Seconds = 0
                 };
             }
-            if (settings.TrayIconTheme is null) { settings.TrayIconTheme = "Automatic"; }
+            if (Settings.TrayIconTheme is null) { Settings.TrayIconTheme = "Automatic"; }
         }
 
         public static void ClearSettings()
         {
-            settings = new SettingsData();
+            Settings = new SettingsData();
             CheckSettings();
             Save();
         }
 
         public static void Save()
         {
-            string settingsJson = JsonConvert.SerializeObject(settings, Formatting.Indented);
+            string settingsJson = JsonConvert.SerializeObject(Settings, Formatting.Indented);
             File.WriteAllText(settingsPath, settingsJson);
         }
     }

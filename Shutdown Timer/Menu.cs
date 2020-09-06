@@ -1,15 +1,13 @@
 ﻿using ShutdownTimer.Helpers;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Windows.ApplicationModel.VoiceCommands;
 
 namespace ShutdownTimer
 {
     public partial class Menu : Form
     {
         private readonly string[] startupArgs;
-        private string CheckResult;
+        private string checkResult;
 
         public Menu(string[] args)
         {
@@ -86,7 +84,7 @@ namespace ShutdownTimer
             }
             else
             {
-                MessageBox.Show("The following error(s) occurred:\n\n" + CheckResult + "Please try to resolve the(se) problem(s) and try again.", "There seems to be a problem!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The following error(s) occurred:\n\n" + checkResult + "Please try to resolve the(se) problem(s) and try again.", "There seems to be a problem!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -121,7 +119,7 @@ namespace ShutdownTimer
                 errMessage += "Time conversion failed! Please check if your time values are within a reasonable range.\n\n";
             }
 
-            CheckResult = errMessage;
+            checkResult = errMessage;
             return errTracker;
         }
 
@@ -137,12 +135,12 @@ namespace ShutdownTimer
             // Show countdown window
             using (Countdown countdown = new Countdown
             {
-                countdownTimeSpan = timeSpan,
-                action = actionComboBox.Text,
-                graceful = gracefulCheckBox.Checked,
-                preventSystemSleep = preventSleepCheckBox.Checked,
+                CountdownTimeSpan = timeSpan,
+                Action = actionComboBox.Text,
+                Graceful = gracefulCheckBox.Checked,
+                PreventSystemSleep = preventSleepCheckBox.Checked,
                 UI = !backgroundCheckBox.Checked,
-                status = pStatus
+                Status = pStatus
             })
             {
                 countdown.Owner = this;
@@ -266,13 +264,13 @@ namespace ShutdownTimer
         {
             SettingsProvider.Load();
 
-            actionComboBox.Text = SettingsProvider.settings.DefaultTimer.Action;
-            gracefulCheckBox.Checked = SettingsProvider.settings.DefaultTimer.Graceful;
-            preventSleepCheckBox.Checked = SettingsProvider.settings.DefaultTimer.PreventSleep;
-            backgroundCheckBox.Checked = SettingsProvider.settings.DefaultTimer.Background;
-            hoursNumericUpDown.Value = SettingsProvider.settings.DefaultTimer.Hours;
-            minutesNumericUpDown.Value = SettingsProvider.settings.DefaultTimer.Minutes;
-            secondsNumericUpDown.Value = SettingsProvider.settings.DefaultTimer.Seconds;
+            actionComboBox.Text = SettingsProvider.Settings.DefaultTimer.Action;
+            gracefulCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.Graceful;
+            preventSleepCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.PreventSleep;
+            backgroundCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.Background;
+            hoursNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Hours;
+            minutesNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Minutes;
+            secondsNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Seconds;
         }
 
         /// <summary>
@@ -280,15 +278,15 @@ namespace ShutdownTimer
         /// </summary>
         private void SaveSettings()
         {
-            if (SettingsProvider.settings.RememberLastState)
+            if (SettingsProvider.Settings.RememberLastState)
             {
-                SettingsProvider.settings.DefaultTimer.Action = actionComboBox.Text;
-                SettingsProvider.settings.DefaultTimer.Graceful = gracefulCheckBox.Checked;
-                SettingsProvider.settings.DefaultTimer.PreventSleep = preventSleepCheckBox.Checked;
-                SettingsProvider.settings.DefaultTimer.Background = backgroundCheckBox.Checked;
-                SettingsProvider.settings.DefaultTimer.Hours = Convert.ToInt32(hoursNumericUpDown.Value);
-                SettingsProvider.settings.DefaultTimer.Minutes = Convert.ToInt32(minutesNumericUpDown.Value);
-                SettingsProvider.settings.DefaultTimer.Seconds = Convert.ToInt32(secondsNumericUpDown.Value);
+                SettingsProvider.Settings.DefaultTimer.Action = actionComboBox.Text;
+                SettingsProvider.Settings.DefaultTimer.Graceful = gracefulCheckBox.Checked;
+                SettingsProvider.Settings.DefaultTimer.PreventSleep = preventSleepCheckBox.Checked;
+                SettingsProvider.Settings.DefaultTimer.Background = backgroundCheckBox.Checked;
+                SettingsProvider.Settings.DefaultTimer.Hours = Convert.ToInt32(hoursNumericUpDown.Value);
+                SettingsProvider.Settings.DefaultTimer.Minutes = Convert.ToInt32(minutesNumericUpDown.Value);
+                SettingsProvider.Settings.DefaultTimer.Seconds = Convert.ToInt32(secondsNumericUpDown.Value);
             }
 
             SettingsProvider.Save();

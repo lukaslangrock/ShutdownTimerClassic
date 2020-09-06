@@ -26,12 +26,12 @@ namespace ShutdownTimer
         {
             if (rememberStateCheckBox.Checked)
             {
-                SettingsProvider.settings.RememberLastState = true;
+                SettingsProvider.Settings.RememberLastState = true;
                 customDefaultsGroupBox.Enabled = false;
             }
             else
             {
-                SettingsProvider.settings.RememberLastState = false;
+                SettingsProvider.Settings.RememberLastState = false;
                 customDefaultsGroupBox.Enabled = true;
             }
         }
@@ -45,35 +45,35 @@ namespace ShutdownTimer
         private void LoadSettings()
         {
             // general controls
-            rememberStateCheckBox.Checked = SettingsProvider.settings.RememberLastState;
-            trayiconThemeComboBox.Text = SettingsProvider.settings.TrayIconTheme;
+            rememberStateCheckBox.Checked = SettingsProvider.Settings.RememberLastState;
+            trayiconThemeComboBox.Text = SettingsProvider.Settings.TrayIconTheme;
 
             // default timer
-            actionComboBox.Text = SettingsProvider.settings.DefaultTimer.Action;
-            gracefulCheckBox.Checked = SettingsProvider.settings.DefaultTimer.Graceful;
-            preventSleepCheckBox.Checked = SettingsProvider.settings.DefaultTimer.PreventSleep;
-            backgroundCheckBox.Checked = SettingsProvider.settings.DefaultTimer.Background;
-            hoursNumericUpDown.Value = SettingsProvider.settings.DefaultTimer.Hours;
-            minutesNumericUpDown.Value = SettingsProvider.settings.DefaultTimer.Minutes;
-            secondsNumericUpDown.Value = SettingsProvider.settings.DefaultTimer.Seconds;
+            actionComboBox.Text = SettingsProvider.Settings.DefaultTimer.Action;
+            gracefulCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.Graceful;
+            preventSleepCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.PreventSleep;
+            backgroundCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.Background;
+            hoursNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Hours;
+            minutesNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Minutes;
+            secondsNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Seconds;
         }
 
         private void SaveSettings()
         {
             // general controls
-            SettingsProvider.settings.RememberLastState = rememberStateCheckBox.Checked;
-            SettingsProvider.settings.TrayIconTheme = trayiconThemeComboBox.Text;
+            SettingsProvider.Settings.RememberLastState = rememberStateCheckBox.Checked;
+            SettingsProvider.Settings.TrayIconTheme = trayiconThemeComboBox.Text;
 
             // default timer
-            if (!SettingsProvider.settings.RememberLastState)
+            if (!SettingsProvider.Settings.RememberLastState)
             {
-                SettingsProvider.settings.DefaultTimer.Action = actionComboBox.Text;
-                SettingsProvider.settings.DefaultTimer.Graceful = gracefulCheckBox.Checked;
-                SettingsProvider.settings.DefaultTimer.PreventSleep = preventSleepCheckBox.Checked;
-                SettingsProvider.settings.DefaultTimer.Background = backgroundCheckBox.Checked;
-                SettingsProvider.settings.DefaultTimer.Hours = Convert.ToInt32(hoursNumericUpDown.Value);
-                SettingsProvider.settings.DefaultTimer.Minutes = Convert.ToInt32(minutesNumericUpDown.Value);
-                SettingsProvider.settings.DefaultTimer.Seconds = Convert.ToInt32(secondsNumericUpDown.Value);
+                SettingsProvider.Settings.DefaultTimer.Action = actionComboBox.Text;
+                SettingsProvider.Settings.DefaultTimer.Graceful = gracefulCheckBox.Checked;
+                SettingsProvider.Settings.DefaultTimer.PreventSleep = preventSleepCheckBox.Checked;
+                SettingsProvider.Settings.DefaultTimer.Background = backgroundCheckBox.Checked;
+                SettingsProvider.Settings.DefaultTimer.Hours = Convert.ToInt32(hoursNumericUpDown.Value);
+                SettingsProvider.Settings.DefaultTimer.Minutes = Convert.ToInt32(minutesNumericUpDown.Value);
+                SettingsProvider.Settings.DefaultTimer.Seconds = Convert.ToInt32(secondsNumericUpDown.Value);
             }
 
             SettingsProvider.Save();

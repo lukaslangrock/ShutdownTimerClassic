@@ -11,13 +11,13 @@ namespace ShutdownTimer
 {
     public partial class Countdown : Form
     {
-        //public
-        public TimeSpan countdownTimeSpan; // timespan after which the power action gets executed
-        public string action = "Shutdown"; // defines what power action to execute (fallback to shutdown if not changed)
-        public string status; // Shows a status message on the bottom left corner of the countdown
-        public bool graceful; // uses a graceful shutdown which allows apps to save their work or interrupt the shutdown
-        public bool preventSystemSleep; // tells Windows that the system should stay awake during countdown
-        public bool UI = true; // disables UI updates when set to false (used for running in background)
+        //properties
+        public TimeSpan CountdownTimeSpan { get; set; } // timespan after which the power action gets executed
+        public string Action { get; set; } // defines what power action to execute (fallback to shutdown if not changed)
+        public string Status { get; set; } // shows a status message on the bottom left corner of the countdown
+        public bool Graceful { get; set; } // uses a graceful shutdown which allows apps to save their work or interrupt the shutdown
+        public bool PreventSystemSleep { get; set; } // tells Windows that the system should stay awake during countdown
+        public bool UI { get; set; } // disables UI updates when set to false (used for running in background)
 
         //private
         private FormWindowState UIFormWindowStateMemeory; // used to update UI immediately after WindowState change
@@ -40,18 +40,18 @@ namespace ShutdownTimer
 
             // Set trayIcon icon to the opposite of the selected theme
             bool lighttheme;
-            if (SettingsProvider.settings.TrayIconTheme == "Light") { lighttheme = true; }
-            else if (SettingsProvider.settings.TrayIconTheme == "Dark") { lighttheme = false; }
+            if (SettingsProvider.Settings.TrayIconTheme == "Light") { lighttheme = true; }
+            else if (SettingsProvider.Settings.TrayIconTheme == "Dark") { lighttheme = false; }
             else { lighttheme = GetWindowsLightTheme(); }
 
             // When the dark theme is selected we are using the light icon to generate contrast (and vise versa), you wouldn't want a white icon on a white background.
             if (lighttheme) { notifyIcon.Icon = Properties.Resources.icon_dark; }
             else { notifyIcon.Icon = Properties.Resources.icon_light; }
 
-            if (!string.IsNullOrWhiteSpace(status)) { statusLabel.Text = status; statusLabel.Visible = true; }
+            if (!string.IsNullOrWhiteSpace(Status)) { statusLabel.Text = Status; statusLabel.Visible = true; }
 
             // Setup UI
-            titleLabel.Text = action + " Timer";
+            titleLabel.Text = Action + " Timer";
 
             if (!UI)
             {
@@ -61,14 +61,14 @@ namespace ShutdownTimer
                 WindowState = FormWindowState.Minimized;
                 timerUIHideMenuItem.Enabled = false;
                 timerUIShowMenuItem.Enabled = true;
-                notifyIcon.BalloonTipText = "Timer started. The power action will be executed in " + countdownTimeSpan.Hours + " hours, " + countdownTimeSpan.Minutes + " minutes and " + countdownTimeSpan.Seconds + " seconds.";
+                notifyIcon.BalloonTipText = "Timer started. The power action will be executed in " + CountdownTimeSpan.Hours + " hours, " + CountdownTimeSpan.Minutes + " minutes and " + CountdownTimeSpan.Seconds + " seconds.";
                 notifyIcon.ShowBalloonTip(10000);
                 Hide();
             }
 
-            UpdateUI(countdownTimeSpan);
+            UpdateUI(CountdownTimeSpan);
 
-            if (preventSystemSleep) { ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS | ExecutionState.EXECUTION_STATE.ES_SYSTEM_REQUIRED); } // give the system some coffee so it stays awake when tired using some fancy EXECUTION_STATE flags
+            if (PreventSystemSleep) { ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS | ExecutionState.EXECUTION_STATE.ES_SYSTEM_REQUIRED); } // give the system some coffee so it stays awake when tired using some fancy EXECUTION_STATE flags
         }
 
         private bool GetWindowsLightTheme()
@@ -195,8 +195,8 @@ namespace ShutdownTimer
             stopwatch.Stop();
             stopwatch = new Stopwatch();
             stopwatch.Start();
-            UpdateUI(countdownTimeSpan);
-            if (this.WindowState == FormWindowState.Minimized) { notifyIcon.BalloonTipText = "Timer restarted. The power action will be executed in " + countdownTimeSpan.Hours + " hours, " + countdownTimeSpan.Minutes + " minutes and " + countdownTimeSpan.Seconds + " seconds."; notifyIcon.ShowBalloonTip(10000); }
+            UpdateUI(CountdownTimeSpan);
+            if (this.WindowState == FormWindowState.Minimized) { notifyIcon.BalloonTipText = "Timer restarted. The power action will be executed in " + CountdownTimeSpan.Hours + " hours, " + CountdownTimeSpan.Minutes + " minutes and " + CountdownTimeSpan.Seconds + " seconds."; notifyIcon.ShowBalloonTip(10000); }
         }
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace ShutdownTimer
             WindowState = FormWindowState.Minimized;
             UI = false;
             ignoreClose = true; // Prevent closing (and closing dialog) after ShowInTaskbar changed
-            TimeSpan currentTimeSpan = countdownTimeSpan - stopwatch.Elapsed + new TimeSpan(0, 0, 1); // Calculate countdown (add 1 second for smooth start)
+            TimeSpan currentTimeSpan = CountdownTimeSpan - stopwatch.Elapsed + new TimeSpan(0, 0, 1); // Calculate countdown (add 1 second for smooth start)
             UpdateUI(currentTimeSpan);
 
             notifyIcon.BalloonTipText = "Timer has been moved to the background. Right-click the tray icon for more info.";
@@ -239,7 +239,7 @@ namespace ShutdownTimer
                 ignoreClose = false; // Re-Enable close question
             }).Start();
 
-            TimeSpan currentTimeSpan = countdownTimeSpan - stopwatch.Elapsed + new TimeSpan(0, 0, 1); // Calculate countdown (add 1 second for smooth start)
+            TimeSpan currentTimeSpan = CountdownTimeSpan - stopwatch.Elapsed + new TimeSpan(0, 0, 1); // Calculate countdown (add 1 second for smooth start)
             UpdateUI(currentTimeSpan);
         }
 
@@ -312,14 +312,14 @@ namespace ShutdownTimer
         /// </summary>
         private void RefreshTimer_Tick(object sender, EventArgs e)
         {
-            TimeSpan currentTimeSpan = countdownTimeSpan - stopwatch.Elapsed + new TimeSpan(0, 0, 1); // Calculate countdown (add 1 second for smooth start)
+            TimeSpan currentTimeSpan = CountdownTimeSpan - stopwatch.Elapsed + new TimeSpan(0, 0, 1); // Calculate countdown (add 1 second for smooth start)
             UpdateUI(currentTimeSpan);
 
             if (currentTimeSpan.Hours <= 0 && currentTimeSpan.Minutes <= 0 && currentTimeSpan.Seconds <= 0)
             {
                 stopwatch.Stop();
                 refreshTimer.Stop();
-                ExecutePowerAction(action);
+                ExecutePowerAction(Action);
                 Application.DoEvents();
                 Application.Exit();
             }
@@ -333,11 +333,11 @@ namespace ShutdownTimer
             switch (ChoosenAction)
             {
                 case "Shutdown":
-                    ExitWindows.Shutdown(!graceful);
+                    ExitWindows.Shutdown(!Graceful);
                     break;
 
                 case "Restart":
-                    ExitWindows.Reboot(!graceful);
+                    ExitWindows.Reboot(!Graceful);
                     break;
 
                 case "Hibernate":
@@ -349,7 +349,7 @@ namespace ShutdownTimer
                     break;
 
                 case "Logout":
-                    ExitWindows.LogOff(!graceful);
+                    ExitWindows.LogOff(!Graceful);
                     break;
 
                 case "Lock":
