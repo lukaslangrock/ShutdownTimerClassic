@@ -37,14 +37,16 @@ namespace ShutdownTimer.Helpers
             settings.AppVersion = Application.ProductVersion;
             if (settings.DefaultTimer is null)
             {
-                settings.DefaultTimer = new TimerData();
-                settings.DefaultTimer.Action = "Shutdown";
-                settings.DefaultTimer.Graceful = false;
-                settings.DefaultTimer.PreventSleep = true;
-                settings.DefaultTimer.Background = false;
-                settings.DefaultTimer.Hours = 0;
-                settings.DefaultTimer.Minutes = 0;
-                settings.DefaultTimer.Seconds = 0;
+                settings.DefaultTimer = new TimerData
+                {
+                    Action = "Shutdown",
+                    Graceful = false,
+                    PreventSleep = true,
+                    Background = false,
+                    Hours = 0,
+                    Minutes = 0,
+                    Seconds = 0
+                };
             }
             if (settings.TrayIconTheme is null) { settings.TrayIconTheme = "Automatic"; }
         }
