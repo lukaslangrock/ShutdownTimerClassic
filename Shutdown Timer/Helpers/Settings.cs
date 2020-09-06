@@ -8,6 +8,7 @@ namespace ShutdownTimer.Helpers
     public static class SettingsProvider
     {
         public static SettingsData Settings { get; set; } // current settings
+        public static bool SettingsLoaded = false;
         private static readonly string settingsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Shutdown Timer Classic";
         private static readonly string settingsPath = settingsDirectory + "\\settings.json";
 
@@ -30,6 +31,7 @@ namespace ShutdownTimer.Helpers
             Settings = new SettingsData();
             try { Settings = JsonConvert.DeserializeObject<SettingsData>(settingsJson); } catch (Exception) { }
             CheckSettings();
+            SettingsLoaded = true;
         }
 
         private static void CheckSettings()
@@ -60,8 +62,11 @@ namespace ShutdownTimer.Helpers
 
         public static void Save()
         {
-            string settingsJson = JsonConvert.SerializeObject(Settings, Formatting.Indented);
-            File.WriteAllText(settingsPath, settingsJson);
+            if (SettingsLoaded)
+            {
+                string settingsJson = JsonConvert.SerializeObject(Settings, Formatting.Indented);
+                File.WriteAllText(settingsPath, settingsJson);
+            }
         }
     }
 

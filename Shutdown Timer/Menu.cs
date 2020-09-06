@@ -31,12 +31,14 @@ namespace ShutdownTimer
 
         private void Menu_Shown(object sender, EventArgs e)
         {
-            // Load settings
-            Application.DoEvents();
-            LoadSettings();
-
             // Check for startup arguments
             if (startupArgs.Length > 0) { ProcessArgs(); }
+            else
+            {
+                // Load settings
+                Application.DoEvents();
+                LoadSettings();
+            }
         }
 
         private void Menu_FormClosing(object sender, FormClosingEventArgs e)
@@ -242,6 +244,7 @@ namespace ShutdownTimer
                     break;
 
                 case "Lock":
+                    settingsButton.Enabled = false;
                     actionGroupBox.Enabled = false;
                     timeGroupBox.Enabled = false;
                     statusLabel.Text = "Interface has been prefilled and locked";
@@ -249,6 +252,7 @@ namespace ShutdownTimer
                     break;
 
                 case "Recommend":
+                    settingsButton.Enabled = false;
                     actionGroupBox.Enabled = true;
                     timeGroupBox.Enabled = true;
                     statusLabel.Text = "Recommended settings have been prefilled";
@@ -278,18 +282,21 @@ namespace ShutdownTimer
         /// </summary>
         private void SaveSettings()
         {
-            if (SettingsProvider.Settings.RememberLastState)
+            if (SettingsProvider.SettingsLoaded)
             {
-                SettingsProvider.Settings.DefaultTimer.Action = actionComboBox.Text;
-                SettingsProvider.Settings.DefaultTimer.Graceful = gracefulCheckBox.Checked;
-                SettingsProvider.Settings.DefaultTimer.PreventSleep = preventSleepCheckBox.Checked;
-                SettingsProvider.Settings.DefaultTimer.Background = backgroundCheckBox.Checked;
-                SettingsProvider.Settings.DefaultTimer.Hours = Convert.ToInt32(hoursNumericUpDown.Value);
-                SettingsProvider.Settings.DefaultTimer.Minutes = Convert.ToInt32(minutesNumericUpDown.Value);
-                SettingsProvider.Settings.DefaultTimer.Seconds = Convert.ToInt32(secondsNumericUpDown.Value);
-            }
+                if (SettingsProvider.Settings.RememberLastState)
+                {
+                    SettingsProvider.Settings.DefaultTimer.Action = actionComboBox.Text;
+                    SettingsProvider.Settings.DefaultTimer.Graceful = gracefulCheckBox.Checked;
+                    SettingsProvider.Settings.DefaultTimer.PreventSleep = preventSleepCheckBox.Checked;
+                    SettingsProvider.Settings.DefaultTimer.Background = backgroundCheckBox.Checked;
+                    SettingsProvider.Settings.DefaultTimer.Hours = Convert.ToInt32(hoursNumericUpDown.Value);
+                    SettingsProvider.Settings.DefaultTimer.Minutes = Convert.ToInt32(minutesNumericUpDown.Value);
+                    SettingsProvider.Settings.DefaultTimer.Seconds = Convert.ToInt32(secondsNumericUpDown.Value);
+                }
 
-            SettingsProvider.Save();
+                SettingsProvider.Save();
+            }
         }
     }
 }
