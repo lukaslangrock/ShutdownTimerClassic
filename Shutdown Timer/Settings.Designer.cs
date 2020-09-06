@@ -36,44 +36,44 @@
             this.githubLinkLabel = new System.Windows.Forms.LinkLabel();
             this.settingsTabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.clearSettingsButton = new System.Windows.Forms.Button();
             this.defaultSettingsGroupBox = new System.Windows.Forms.GroupBox();
-            this.rememberStateCheckBox = new System.Windows.Forms.CheckBox();
             this.customDefaultsGroupBox = new System.Windows.Forms.GroupBox();
-            this.preventSleepCheckBox = new System.Windows.Forms.CheckBox();
-            this.gracefulCheckBox = new System.Windows.Forms.CheckBox();
-            this.backgroundCheckBox = new System.Windows.Forms.CheckBox();
-            this.actionLabel = new System.Windows.Forms.Label();
-            this.actionComboBox = new System.Windows.Forms.ComboBox();
             this.hoursNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.secondsLabel = new System.Windows.Forms.Label();
             this.hoursLabel = new System.Windows.Forms.Label();
             this.minutesLabel = new System.Windows.Forms.Label();
             this.minutesNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.secondsNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.clearSettingsButton = new System.Windows.Forms.Button();
-            this.licenseGroupBox = new System.Windows.Forms.GroupBox();
-            this.appInfoLabel = new System.Windows.Forms.Label();
-            this.appLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.appSourceLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.faInfoLabel = new System.Windows.Forms.Label();
-            this.faLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.faSourceLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.preventSleepCheckBox = new System.Windows.Forms.CheckBox();
+            this.gracefulCheckBox = new System.Windows.Forms.CheckBox();
+            this.backgroundCheckBox = new System.Windows.Forms.CheckBox();
+            this.actionLabel = new System.Windows.Forms.Label();
+            this.actionComboBox = new System.Windows.Forms.ComboBox();
+            this.rememberStateCheckBox = new System.Windows.Forms.CheckBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.aboutGroupBox = new System.Windows.Forms.GroupBox();
-            this.aboutRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.githubButton = new System.Windows.Forms.Button();
             this.emailbutton = new System.Windows.Forms.Button();
+            this.githubButton = new System.Windows.Forms.Button();
+            this.aboutRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.licenseGroupBox = new System.Windows.Forms.GroupBox();
+            this.faSourceLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.faLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.faInfoLabel = new System.Windows.Forms.Label();
+            this.appSourceLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.appLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.appInfoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.defaultSettingsGroupBox.SuspendLayout();
             this.customDefaultsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hoursNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minutesNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondsNumericUpDown)).BeginInit();
-            this.licenseGroupBox.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.aboutGroupBox.SuspendLayout();
+            this.licenseGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // titlebarPictureBox
@@ -116,7 +116,7 @@
             this.footerLabel.Size = new System.Drawing.Size(310, 20);
             this.footerLabel.TabIndex = 9;
             this.footerLabel.Text = "Made with love in Germany";
-            this.footerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.footerLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // githubLinkLabel
             // 
@@ -156,17 +156,15 @@
             this.tabPage1.Text = "Application Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // clearSettingsButton
             // 
-            this.tabPage2.Controls.Add(this.aboutGroupBox);
-            this.tabPage2.Controls.Add(this.licenseGroupBox);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(296, 249);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "About";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.clearSettingsButton.Location = new System.Drawing.Point(161, 220);
+            this.clearSettingsButton.Name = "clearSettingsButton";
+            this.clearSettingsButton.Size = new System.Drawing.Size(129, 23);
+            this.clearSettingsButton.TabIndex = 1;
+            this.clearSettingsButton.Text = "Clear Settings";
+            this.clearSettingsButton.UseVisualStyleBackColor = true;
+            this.clearSettingsButton.Click += new System.EventHandler(this.ClearSettingsButton_Click);
             // 
             // defaultSettingsGroupBox
             // 
@@ -177,18 +175,7 @@
             this.defaultSettingsGroupBox.Size = new System.Drawing.Size(284, 196);
             this.defaultSettingsGroupBox.TabIndex = 0;
             this.defaultSettingsGroupBox.TabStop = false;
-            this.defaultSettingsGroupBox.Text = "Default settings";
-            // 
-            // rememberStateCheckBox
-            // 
-            this.rememberStateCheckBox.AutoSize = true;
-            this.rememberStateCheckBox.Location = new System.Drawing.Point(6, 19);
-            this.rememberStateCheckBox.Name = "rememberStateCheckBox";
-            this.rememberStateCheckBox.Size = new System.Drawing.Size(122, 17);
-            this.rememberStateCheckBox.TabIndex = 0;
-            this.rememberStateCheckBox.Text = "Remember last state";
-            this.rememberStateCheckBox.UseVisualStyleBackColor = true;
-            this.rememberStateCheckBox.CheckedChanged += new System.EventHandler(this.RememberStateCheckBox_CheckedChanged);
+            this.defaultSettingsGroupBox.Text = "Timer defaults";
             // 
             // customDefaultsGroupBox
             // 
@@ -209,65 +196,6 @@
             this.customDefaultsGroupBox.TabIndex = 1;
             this.customDefaultsGroupBox.TabStop = false;
             this.customDefaultsGroupBox.Text = "Custom defaults";
-            // 
-            // preventSleepCheckBox
-            // 
-            this.preventSleepCheckBox.AutoSize = true;
-            this.preventSleepCheckBox.Checked = true;
-            this.preventSleepCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.preventSleepCheckBox.Location = new System.Drawing.Point(9, 63);
-            this.preventSleepCheckBox.Name = "preventSleepCheckBox";
-            this.preventSleepCheckBox.Size = new System.Drawing.Size(190, 17);
-            this.preventSleepCheckBox.TabIndex = 18;
-            this.preventSleepCheckBox.Text = "Prevent system from going to sleep";
-            this.preventSleepCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // gracefulCheckBox
-            // 
-            this.gracefulCheckBox.AutoSize = true;
-            this.gracefulCheckBox.Location = new System.Drawing.Point(9, 40);
-            this.gracefulCheckBox.Name = "gracefulCheckBox";
-            this.gracefulCheckBox.Size = new System.Drawing.Size(186, 17);
-            this.gracefulCheckBox.TabIndex = 17;
-            this.gracefulCheckBox.Text = "Graceful (do not force close apps)";
-            this.gracefulCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // backgroundCheckBox
-            // 
-            this.backgroundCheckBox.AutoSize = true;
-            this.backgroundCheckBox.Location = new System.Drawing.Point(9, 86);
-            this.backgroundCheckBox.Name = "backgroundCheckBox";
-            this.backgroundCheckBox.Size = new System.Drawing.Size(117, 17);
-            this.backgroundCheckBox.TabIndex = 16;
-            this.backgroundCheckBox.Text = "Run in background";
-            this.backgroundCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // actionLabel
-            // 
-            this.actionLabel.AutoSize = true;
-            this.actionLabel.Location = new System.Drawing.Point(6, 16);
-            this.actionLabel.Name = "actionLabel";
-            this.actionLabel.Size = new System.Drawing.Size(87, 13);
-            this.actionLabel.TabIndex = 15;
-            this.actionLabel.Text = "Select an action:";
-            // 
-            // actionComboBox
-            // 
-            this.actionComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.actionComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.actionComboBox.FormattingEnabled = true;
-            this.actionComboBox.Items.AddRange(new object[] {
-            "Shutdown",
-            "Restart",
-            "Hibernate",
-            "Sleep",
-            "Logout",
-            "Lock"});
-            this.actionComboBox.Location = new System.Drawing.Point(99, 13);
-            this.actionComboBox.Name = "actionComboBox";
-            this.actionComboBox.Size = new System.Drawing.Size(147, 21);
-            this.actionComboBox.TabIndex = 14;
-            this.actionComboBox.Text = "Shutdown";
             // 
             // hoursNumericUpDown
             // 
@@ -332,15 +260,127 @@
             this.secondsNumericUpDown.Size = new System.Drawing.Size(50, 20);
             this.secondsNumericUpDown.TabIndex = 21;
             // 
-            // clearSettingsButton
+            // preventSleepCheckBox
             // 
-            this.clearSettingsButton.Location = new System.Drawing.Point(161, 220);
-            this.clearSettingsButton.Name = "clearSettingsButton";
-            this.clearSettingsButton.Size = new System.Drawing.Size(129, 23);
-            this.clearSettingsButton.TabIndex = 1;
-            this.clearSettingsButton.Text = "Clear Settings";
-            this.clearSettingsButton.UseVisualStyleBackColor = true;
-            this.clearSettingsButton.Click += new System.EventHandler(this.ClearSettingsButton_Click);
+            this.preventSleepCheckBox.AutoSize = true;
+            this.preventSleepCheckBox.Checked = true;
+            this.preventSleepCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.preventSleepCheckBox.Location = new System.Drawing.Point(9, 63);
+            this.preventSleepCheckBox.Name = "preventSleepCheckBox";
+            this.preventSleepCheckBox.Size = new System.Drawing.Size(190, 17);
+            this.preventSleepCheckBox.TabIndex = 18;
+            this.preventSleepCheckBox.Text = "Prevent system from going to sleep";
+            this.preventSleepCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // gracefulCheckBox
+            // 
+            this.gracefulCheckBox.AutoSize = true;
+            this.gracefulCheckBox.Location = new System.Drawing.Point(9, 40);
+            this.gracefulCheckBox.Name = "gracefulCheckBox";
+            this.gracefulCheckBox.Size = new System.Drawing.Size(186, 17);
+            this.gracefulCheckBox.TabIndex = 17;
+            this.gracefulCheckBox.Text = "Graceful (do not force close apps)";
+            this.gracefulCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // backgroundCheckBox
+            // 
+            this.backgroundCheckBox.AutoSize = true;
+            this.backgroundCheckBox.Location = new System.Drawing.Point(9, 86);
+            this.backgroundCheckBox.Name = "backgroundCheckBox";
+            this.backgroundCheckBox.Size = new System.Drawing.Size(117, 17);
+            this.backgroundCheckBox.TabIndex = 16;
+            this.backgroundCheckBox.Text = "Run in background";
+            this.backgroundCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // actionLabel
+            // 
+            this.actionLabel.AutoSize = true;
+            this.actionLabel.Location = new System.Drawing.Point(6, 16);
+            this.actionLabel.Name = "actionLabel";
+            this.actionLabel.Size = new System.Drawing.Size(87, 13);
+            this.actionLabel.TabIndex = 15;
+            this.actionLabel.Text = "Select an action:";
+            // 
+            // actionComboBox
+            // 
+            this.actionComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.actionComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.actionComboBox.FormattingEnabled = true;
+            this.actionComboBox.Items.AddRange(new object[] {
+            "Shutdown",
+            "Restart",
+            "Hibernate",
+            "Sleep",
+            "Logout",
+            "Lock"});
+            this.actionComboBox.Location = new System.Drawing.Point(99, 13);
+            this.actionComboBox.Name = "actionComboBox";
+            this.actionComboBox.Size = new System.Drawing.Size(147, 21);
+            this.actionComboBox.TabIndex = 14;
+            this.actionComboBox.Text = "Shutdown";
+            // 
+            // rememberStateCheckBox
+            // 
+            this.rememberStateCheckBox.AutoSize = true;
+            this.rememberStateCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.rememberStateCheckBox.Name = "rememberStateCheckBox";
+            this.rememberStateCheckBox.Size = new System.Drawing.Size(122, 17);
+            this.rememberStateCheckBox.TabIndex = 0;
+            this.rememberStateCheckBox.Text = "Remember last state";
+            this.rememberStateCheckBox.UseVisualStyleBackColor = true;
+            this.rememberStateCheckBox.CheckedChanged += new System.EventHandler(this.RememberStateCheckBox_CheckedChanged);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.aboutGroupBox);
+            this.tabPage2.Controls.Add(this.licenseGroupBox);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(296, 249);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "About";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // aboutGroupBox
+            // 
+            this.aboutGroupBox.Controls.Add(this.emailbutton);
+            this.aboutGroupBox.Controls.Add(this.githubButton);
+            this.aboutGroupBox.Controls.Add(this.aboutRichTextBox);
+            this.aboutGroupBox.Location = new System.Drawing.Point(6, 61);
+            this.aboutGroupBox.Name = "aboutGroupBox";
+            this.aboutGroupBox.Size = new System.Drawing.Size(284, 182);
+            this.aboutGroupBox.TabIndex = 1;
+            this.aboutGroupBox.TabStop = false;
+            this.aboutGroupBox.Text = "About this app";
+            // 
+            // emailbutton
+            // 
+            this.emailbutton.Location = new System.Drawing.Point(112, 153);
+            this.emailbutton.Name = "emailbutton";
+            this.emailbutton.Size = new System.Drawing.Size(60, 23);
+            this.emailbutton.TabIndex = 16;
+            this.emailbutton.Text = "Email";
+            this.emailbutton.UseVisualStyleBackColor = true;
+            this.emailbutton.Click += new System.EventHandler(this.Emailbutton_Click);
+            // 
+            // githubButton
+            // 
+            this.githubButton.Location = new System.Drawing.Point(178, 153);
+            this.githubButton.Name = "githubButton";
+            this.githubButton.Size = new System.Drawing.Size(100, 23);
+            this.githubButton.TabIndex = 15;
+            this.githubButton.Text = "GitHub";
+            this.githubButton.UseVisualStyleBackColor = true;
+            this.githubButton.Click += new System.EventHandler(this.GithubButton_Click);
+            // 
+            // aboutRichTextBox
+            // 
+            this.aboutRichTextBox.Location = new System.Drawing.Point(6, 19);
+            this.aboutRichTextBox.Name = "aboutRichTextBox";
+            this.aboutRichTextBox.Size = new System.Drawing.Size(272, 128);
+            this.aboutRichTextBox.TabIndex = 14;
+            this.aboutRichTextBox.Text = resources.GetString("aboutRichTextBox.Text");
             // 
             // licenseGroupBox
             // 
@@ -357,45 +397,16 @@
             this.licenseGroupBox.TabStop = false;
             this.licenseGroupBox.Text = "Licenses && Source";
             // 
-            // appInfoLabel
+            // faSourceLinkLabel
             // 
-            this.appInfoLabel.AutoSize = true;
-            this.appInfoLabel.Location = new System.Drawing.Point(6, 16);
-            this.appInfoLabel.Name = "appInfoLabel";
-            this.appInfoLabel.Size = new System.Drawing.Size(62, 13);
-            this.appInfoLabel.TabIndex = 0;
-            this.appInfoLabel.Text = "Application:";
-            // 
-            // appLicenseLinkLabel
-            // 
-            this.appLicenseLinkLabel.AutoSize = true;
-            this.appLicenseLinkLabel.Location = new System.Drawing.Point(74, 16);
-            this.appLicenseLinkLabel.Name = "appLicenseLinkLabel";
-            this.appLicenseLinkLabel.Size = new System.Drawing.Size(66, 13);
-            this.appLicenseLinkLabel.TabIndex = 1;
-            this.appLicenseLinkLabel.TabStop = true;
-            this.appLicenseLinkLabel.Text = "MIT License";
-            this.appLicenseLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.AppLicenseLinkLabel_LinkClicked);
-            // 
-            // appSourceLinkLabel
-            // 
-            this.appSourceLinkLabel.AutoSize = true;
-            this.appSourceLinkLabel.Location = new System.Drawing.Point(146, 16);
-            this.appSourceLinkLabel.Name = "appSourceLinkLabel";
-            this.appSourceLinkLabel.Size = new System.Drawing.Size(65, 13);
-            this.appSourceLinkLabel.TabIndex = 2;
-            this.appSourceLinkLabel.TabStop = true;
-            this.appSourceLinkLabel.Text = "Sourcecode";
-            this.appSourceLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.AppSourceLinkLabel_LinkClicked);
-            // 
-            // faInfoLabel
-            // 
-            this.faInfoLabel.AutoSize = true;
-            this.faInfoLabel.Location = new System.Drawing.Point(6, 29);
-            this.faInfoLabel.Name = "faInfoLabel";
-            this.faInfoLabel.Size = new System.Drawing.Size(80, 13);
-            this.faInfoLabel.TabIndex = 3;
-            this.faInfoLabel.Text = "Font Awesome:";
+            this.faSourceLinkLabel.AutoSize = true;
+            this.faSourceLinkLabel.Location = new System.Drawing.Point(194, 29);
+            this.faSourceLinkLabel.Name = "faSourceLinkLabel";
+            this.faSourceLinkLabel.Size = new System.Drawing.Size(65, 13);
+            this.faSourceLinkLabel.TabIndex = 5;
+            this.faSourceLinkLabel.TabStop = true;
+            this.faSourceLinkLabel.Text = "Sourcecode";
+            this.faSourceLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FASourceLinkLabel_LinkClicked);
             // 
             // faLicenseLinkLabel
             // 
@@ -408,56 +419,45 @@
             this.faLicenseLinkLabel.Text = "CC BY 4.0 License";
             this.faLicenseLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FALicenseLinkLabel_LinkClicked);
             // 
-            // faSourceLinkLabel
+            // faInfoLabel
             // 
-            this.faSourceLinkLabel.AutoSize = true;
-            this.faSourceLinkLabel.Location = new System.Drawing.Point(194, 29);
-            this.faSourceLinkLabel.Name = "faSourceLinkLabel";
-            this.faSourceLinkLabel.Size = new System.Drawing.Size(65, 13);
-            this.faSourceLinkLabel.TabIndex = 5;
-            this.faSourceLinkLabel.TabStop = true;
-            this.faSourceLinkLabel.Text = "Sourcecode";
-            this.faSourceLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FASourceLinkLabel_LinkClicked);
+            this.faInfoLabel.AutoSize = true;
+            this.faInfoLabel.Location = new System.Drawing.Point(6, 29);
+            this.faInfoLabel.Name = "faInfoLabel";
+            this.faInfoLabel.Size = new System.Drawing.Size(80, 13);
+            this.faInfoLabel.TabIndex = 3;
+            this.faInfoLabel.Text = "Font Awesome:";
             // 
-            // aboutGroupBox
+            // appSourceLinkLabel
             // 
-            this.aboutGroupBox.Controls.Add(this.emailbutton);
-            this.aboutGroupBox.Controls.Add(this.githubButton);
-            this.aboutGroupBox.Controls.Add(this.aboutRichTextBox);
-            this.aboutGroupBox.Location = new System.Drawing.Point(6, 61);
-            this.aboutGroupBox.Name = "aboutGroupBox";
-            this.aboutGroupBox.Size = new System.Drawing.Size(284, 182);
-            this.aboutGroupBox.TabIndex = 1;
-            this.aboutGroupBox.TabStop = false;
-            this.aboutGroupBox.Text = "About this app";
+            this.appSourceLinkLabel.AutoSize = true;
+            this.appSourceLinkLabel.Location = new System.Drawing.Point(146, 16);
+            this.appSourceLinkLabel.Name = "appSourceLinkLabel";
+            this.appSourceLinkLabel.Size = new System.Drawing.Size(65, 13);
+            this.appSourceLinkLabel.TabIndex = 2;
+            this.appSourceLinkLabel.TabStop = true;
+            this.appSourceLinkLabel.Text = "Sourcecode";
+            this.appSourceLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.AppSourceLinkLabel_LinkClicked);
             // 
-            // aboutRichTextBox
+            // appLicenseLinkLabel
             // 
-            this.aboutRichTextBox.Location = new System.Drawing.Point(6, 19);
-            this.aboutRichTextBox.Name = "aboutRichTextBox";
-            this.aboutRichTextBox.Size = new System.Drawing.Size(272, 128);
-            this.aboutRichTextBox.TabIndex = 14;
-            this.aboutRichTextBox.Text = resources.GetString("aboutRichTextBox.Text");
+            this.appLicenseLinkLabel.AutoSize = true;
+            this.appLicenseLinkLabel.Location = new System.Drawing.Point(74, 16);
+            this.appLicenseLinkLabel.Name = "appLicenseLinkLabel";
+            this.appLicenseLinkLabel.Size = new System.Drawing.Size(66, 13);
+            this.appLicenseLinkLabel.TabIndex = 1;
+            this.appLicenseLinkLabel.TabStop = true;
+            this.appLicenseLinkLabel.Text = "MIT License";
+            this.appLicenseLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.AppLicenseLinkLabel_LinkClicked);
             // 
-            // githubButton
+            // appInfoLabel
             // 
-            this.githubButton.Location = new System.Drawing.Point(178, 153);
-            this.githubButton.Name = "githubButton";
-            this.githubButton.Size = new System.Drawing.Size(100, 23);
-            this.githubButton.TabIndex = 15;
-            this.githubButton.Text = "GitHub";
-            this.githubButton.UseVisualStyleBackColor = true;
-            this.githubButton.Click += new System.EventHandler(this.GithubButton_Click);
-            // 
-            // emailbutton
-            // 
-            this.emailbutton.Location = new System.Drawing.Point(112, 153);
-            this.emailbutton.Name = "emailbutton";
-            this.emailbutton.Size = new System.Drawing.Size(60, 23);
-            this.emailbutton.TabIndex = 16;
-            this.emailbutton.Text = "Email";
-            this.emailbutton.UseVisualStyleBackColor = true;
-            this.emailbutton.Click += new System.EventHandler(this.Emailbutton_Click);
+            this.appInfoLabel.AutoSize = true;
+            this.appInfoLabel.Location = new System.Drawing.Point(6, 16);
+            this.appInfoLabel.Name = "appInfoLabel";
+            this.appInfoLabel.Size = new System.Drawing.Size(62, 13);
+            this.appInfoLabel.TabIndex = 0;
+            this.appInfoLabel.Text = "Application:";
             // 
             // Settings
             // 
@@ -482,7 +482,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).EndInit();
             this.settingsTabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
             this.defaultSettingsGroupBox.ResumeLayout(false);
             this.defaultSettingsGroupBox.PerformLayout();
             this.customDefaultsGroupBox.ResumeLayout(false);
@@ -490,9 +489,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.hoursNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minutesNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondsNumericUpDown)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.aboutGroupBox.ResumeLayout(false);
             this.licenseGroupBox.ResumeLayout(false);
             this.licenseGroupBox.PerformLayout();
-            this.aboutGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
