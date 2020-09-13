@@ -60,47 +60,51 @@
             // 
             // hoursNumericUpDown
             // 
-            this.hoursNumericUpDown.Location = new System.Drawing.Point(9, 37);
+            this.hoursNumericUpDown.Location = new System.Drawing.Point(12, 46);
+            this.hoursNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.hoursNumericUpDown.Maximum = new decimal(new int[] {
             2147483647,
             0,
             0,
             0});
             this.hoursNumericUpDown.Name = "hoursNumericUpDown";
-            this.hoursNumericUpDown.Size = new System.Drawing.Size(50, 20);
+            this.hoursNumericUpDown.Size = new System.Drawing.Size(67, 22);
             this.hoursNumericUpDown.TabIndex = 0;
             // 
             // minutesNumericUpDown
             // 
-            this.minutesNumericUpDown.Location = new System.Drawing.Point(65, 37);
+            this.minutesNumericUpDown.Location = new System.Drawing.Point(87, 46);
+            this.minutesNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.minutesNumericUpDown.Maximum = new decimal(new int[] {
             2147483647,
             0,
             0,
             0});
             this.minutesNumericUpDown.Name = "minutesNumericUpDown";
-            this.minutesNumericUpDown.Size = new System.Drawing.Size(50, 20);
+            this.minutesNumericUpDown.Size = new System.Drawing.Size(67, 22);
             this.minutesNumericUpDown.TabIndex = 1;
             // 
             // secondsNumericUpDown
             // 
-            this.secondsNumericUpDown.Location = new System.Drawing.Point(121, 37);
+            this.secondsNumericUpDown.Location = new System.Drawing.Point(161, 46);
+            this.secondsNumericUpDown.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.secondsNumericUpDown.Maximum = new decimal(new int[] {
             2147483647,
             0,
             0,
             0});
             this.secondsNumericUpDown.Name = "secondsNumericUpDown";
-            this.secondsNumericUpDown.Size = new System.Drawing.Size(50, 20);
+            this.secondsNumericUpDown.Size = new System.Drawing.Size(67, 22);
             this.secondsNumericUpDown.TabIndex = 2;
             // 
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(12, 9);
+            this.titleLabel.Location = new System.Drawing.Point(16, 11);
+            this.titleLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(215, 31);
+            this.titleLabel.Size = new System.Drawing.Size(266, 40);
             this.titleLabel.TabIndex = 3;
             this.titleLabel.Text = "Shutdown Timer";
             this.titleLabel.Click += new System.EventHandler(this.TitleLabel_Click);
@@ -108,36 +112,40 @@
             // titlebarPictureBox
             // 
             this.titlebarPictureBox.BackColor = System.Drawing.Color.Black;
-            this.titlebarPictureBox.Location = new System.Drawing.Point(18, 43);
+            this.titlebarPictureBox.Location = new System.Drawing.Point(24, 53);
+            this.titlebarPictureBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.titlebarPictureBox.Name = "titlebarPictureBox";
-            this.titlebarPictureBox.Size = new System.Drawing.Size(252, 5);
+            this.titlebarPictureBox.Size = new System.Drawing.Size(336, 6);
             this.titlebarPictureBox.TabIndex = 4;
             this.titlebarPictureBox.TabStop = false;
             // 
             // hoursLabel
             // 
             this.hoursLabel.AutoSize = true;
-            this.hoursLabel.Location = new System.Drawing.Point(6, 21);
+            this.hoursLabel.Location = new System.Drawing.Point(8, 26);
+            this.hoursLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.hoursLabel.Name = "hoursLabel";
-            this.hoursLabel.Size = new System.Drawing.Size(35, 13);
+            this.hoursLabel.Size = new System.Drawing.Size(46, 17);
             this.hoursLabel.TabIndex = 5;
             this.hoursLabel.Text = "Hours";
             // 
             // minutesLabel
             // 
             this.minutesLabel.AutoSize = true;
-            this.minutesLabel.Location = new System.Drawing.Point(62, 21);
+            this.minutesLabel.Location = new System.Drawing.Point(83, 26);
+            this.minutesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.minutesLabel.Name = "minutesLabel";
-            this.minutesLabel.Size = new System.Drawing.Size(44, 13);
+            this.minutesLabel.Size = new System.Drawing.Size(57, 17);
             this.minutesLabel.TabIndex = 6;
             this.minutesLabel.Text = "Minutes";
             // 
             // secondsLabel
             // 
             this.secondsLabel.AutoSize = true;
-            this.secondsLabel.Location = new System.Drawing.Point(118, 21);
+            this.secondsLabel.Location = new System.Drawing.Point(157, 26);
+            this.secondsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.secondsLabel.Name = "secondsLabel";
-            this.secondsLabel.Size = new System.Drawing.Size(49, 13);
+            this.secondsLabel.Size = new System.Drawing.Size(63, 17);
             this.secondsLabel.TabIndex = 7;
             this.secondsLabel.Text = "Seconds";
             // 
@@ -149,9 +157,11 @@
             this.timeGroupBox.Controls.Add(this.minutesLabel);
             this.timeGroupBox.Controls.Add(this.minutesNumericUpDown);
             this.timeGroupBox.Controls.Add(this.secondsNumericUpDown);
-            this.timeGroupBox.Location = new System.Drawing.Point(18, 192);
+            this.timeGroupBox.Location = new System.Drawing.Point(24, 236);
+            this.timeGroupBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.timeGroupBox.Name = "timeGroupBox";
-            this.timeGroupBox.Size = new System.Drawing.Size(252, 70);
+            this.timeGroupBox.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.timeGroupBox.Size = new System.Drawing.Size(336, 86);
             this.timeGroupBox.TabIndex = 8;
             this.timeGroupBox.TabStop = false;
             this.timeGroupBox.Text = "When to do it?";
@@ -163,9 +173,11 @@
             this.actionGroupBox.Controls.Add(this.backgroundCheckBox);
             this.actionGroupBox.Controls.Add(this.actionLabel);
             this.actionGroupBox.Controls.Add(this.actionComboBox);
-            this.actionGroupBox.Location = new System.Drawing.Point(18, 67);
+            this.actionGroupBox.Location = new System.Drawing.Point(24, 82);
+            this.actionGroupBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.actionGroupBox.Name = "actionGroupBox";
-            this.actionGroupBox.Size = new System.Drawing.Size(252, 119);
+            this.actionGroupBox.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.actionGroupBox.Size = new System.Drawing.Size(336, 146);
             this.actionGroupBox.TabIndex = 9;
             this.actionGroupBox.TabStop = false;
             this.actionGroupBox.Text = "What to do?";
@@ -175,9 +187,10 @@
             this.preventSleepCheckBox.AutoSize = true;
             this.preventSleepCheckBox.Checked = true;
             this.preventSleepCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.preventSleepCheckBox.Location = new System.Drawing.Point(9, 69);
+            this.preventSleepCheckBox.Location = new System.Drawing.Point(12, 85);
+            this.preventSleepCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.preventSleepCheckBox.Name = "preventSleepCheckBox";
-            this.preventSleepCheckBox.Size = new System.Drawing.Size(190, 17);
+            this.preventSleepCheckBox.Size = new System.Drawing.Size(252, 21);
             this.preventSleepCheckBox.TabIndex = 13;
             this.preventSleepCheckBox.Text = "Prevent system from going to sleep";
             this.preventSleepCheckBox.UseVisualStyleBackColor = true;
@@ -185,9 +198,10 @@
             // gracefulCheckBox
             // 
             this.gracefulCheckBox.AutoSize = true;
-            this.gracefulCheckBox.Location = new System.Drawing.Point(9, 46);
+            this.gracefulCheckBox.Location = new System.Drawing.Point(12, 57);
+            this.gracefulCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gracefulCheckBox.Name = "gracefulCheckBox";
-            this.gracefulCheckBox.Size = new System.Drawing.Size(186, 17);
+            this.gracefulCheckBox.Size = new System.Drawing.Size(246, 21);
             this.gracefulCheckBox.TabIndex = 12;
             this.gracefulCheckBox.Text = "Graceful (do not force close apps)";
             this.gracefulCheckBox.UseVisualStyleBackColor = true;
@@ -195,9 +209,10 @@
             // backgroundCheckBox
             // 
             this.backgroundCheckBox.AutoSize = true;
-            this.backgroundCheckBox.Location = new System.Drawing.Point(9, 92);
+            this.backgroundCheckBox.Location = new System.Drawing.Point(12, 113);
+            this.backgroundCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.backgroundCheckBox.Name = "backgroundCheckBox";
-            this.backgroundCheckBox.Size = new System.Drawing.Size(117, 17);
+            this.backgroundCheckBox.Size = new System.Drawing.Size(150, 21);
             this.backgroundCheckBox.TabIndex = 11;
             this.backgroundCheckBox.Text = "Run in background";
             this.backgroundCheckBox.UseVisualStyleBackColor = true;
@@ -205,9 +220,10 @@
             // actionLabel
             // 
             this.actionLabel.AutoSize = true;
-            this.actionLabel.Location = new System.Drawing.Point(6, 22);
+            this.actionLabel.Location = new System.Drawing.Point(8, 27);
+            this.actionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.actionLabel.Name = "actionLabel";
-            this.actionLabel.Size = new System.Drawing.Size(87, 13);
+            this.actionLabel.Size = new System.Drawing.Size(113, 17);
             this.actionLabel.TabIndex = 1;
             this.actionLabel.Text = "Select an action:";
             // 
@@ -223,9 +239,10 @@
             "Sleep",
             "Logout",
             "Lock"});
-            this.actionComboBox.Location = new System.Drawing.Point(99, 19);
+            this.actionComboBox.Location = new System.Drawing.Point(132, 23);
+            this.actionComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.actionComboBox.Name = "actionComboBox";
-            this.actionComboBox.Size = new System.Drawing.Size(147, 21);
+            this.actionComboBox.Size = new System.Drawing.Size(195, 24);
             this.actionComboBox.TabIndex = 0;
             this.actionComboBox.Text = "Shutdown";
             this.actionComboBox.TextChanged += new System.EventHandler(this.ActionComboBox_TextChanged);
@@ -233,9 +250,10 @@
             // startButton
             // 
             this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startButton.Location = new System.Drawing.Point(18, 268);
+            this.startButton.Location = new System.Drawing.Point(24, 330);
+            this.startButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(252, 31);
+            this.startButton.Size = new System.Drawing.Size(336, 38);
             this.startButton.TabIndex = 10;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
@@ -244,9 +262,10 @@
             // versionLabel
             // 
             this.versionLabel.AutoSize = true;
-            this.versionLabel.Location = new System.Drawing.Point(233, 51);
+            this.versionLabel.Location = new System.Drawing.Point(311, 63);
+            this.versionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(37, 13);
+            this.versionLabel.Size = new System.Drawing.Size(47, 17);
             this.versionLabel.TabIndex = 11;
             this.versionLabel.Text = "v0.0.0";
             // 
@@ -262,9 +281,10 @@
             // 
             this.statusLabel.AutoSize = true;
             this.statusLabel.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.statusLabel.Location = new System.Drawing.Point(15, 51);
+            this.statusLabel.Location = new System.Drawing.Point(20, 63);
+            this.statusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(164, 13);
+            this.statusLabel.Size = new System.Drawing.Size(220, 17);
             this.statusLabel.TabIndex = 13;
             this.statusLabel.Text = "Status messages will appear here";
             this.statusLabel.Visible = false;
@@ -273,9 +293,10 @@
             // 
             this.settingsButton.BackgroundImage = global::ShutdownTimer.Properties.Resources.fa_cog_solid;
             this.settingsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.settingsButton.Location = new System.Drawing.Point(239, 9);
+            this.settingsButton.Location = new System.Drawing.Point(319, 11);
+            this.settingsButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(31, 31);
+            this.settingsButton.Size = new System.Drawing.Size(41, 38);
             this.settingsButton.TabIndex = 14;
             this.settingsButton.UseVisualStyleBackColor = true;
             this.settingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
@@ -285,9 +306,9 @@
             this.AcceptButton = this.startButton;
             this.AccessibleDescription = "The main window where you can choose the time and power action.";
             this.AccessibleName = "Shutdown Timer";
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 311);
+            this.ClientSize = new System.Drawing.Size(379, 383);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.versionLabel);
@@ -298,6 +319,7 @@
             this.Controls.Add(this.titleLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Menu";

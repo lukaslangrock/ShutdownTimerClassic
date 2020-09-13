@@ -99,27 +99,44 @@ namespace ShutdownTimer
             bool errTracker = true; // if anything goes wrong the tracker will be set to false
             string errMessage = null; // error messages will append to this
 
+            // Check if choosen action is a valid option
             if (!actionComboBox.Items.Contains(actionComboBox.Text))
             {
                 errTracker = false;
                 errMessage += "Please select a valid action from the dropdown menu!\n\n";
             }
 
+            // Check if all time values are zero
             if (hoursNumericUpDown.Value == 0 && minutesNumericUpDown.Value == 0 && secondsNumericUpDown.Value == 0)
             {
                 errTracker = false;
                 errMessage += "The timer cannot start at 0!\n\n";
             }
 
+            // Try to build and convert a the values to a TimeSpan and export it as a string.
             try
             {
-                Numerics.ConvertTime(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
+                Numerics.ConvertTimeSpanToString(new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value)));
             }
             catch
             {
                 errTracker = false;
-                errMessage += "Time conversion failed! Please check if your time values are within a reasonable range.\n\n";
+                errMessage += "TimeSpan conversion failed! Please check if your time values are within a reasonable range.\n\n";
             }
+
+            // Sanity check
+            try
+            {
+                TimeSpan ts = new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
+                if (ts.TotalDays > 100)
+                {
+                    MessageBox.Show($"Your choosen time equates to {Math.Round(ts.TotalDays)} days ({Math.Round(ts.TotalDays / 365, 2)} years)!\n" +
+                        $"It is highly discouraged to choose such an insane amount of time as either your hardware, operating system, or this is app will fail *way* before you even come close to reaching the target!" +
+                        $"\n\nBut if you are actually going to do this, please tell me how long this app survived.",
+                        "This isn't Stargate and your PC won't stand the test of time!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            catch { }
 
             checkResult = errMessage;
             return errTracker;
@@ -128,7 +145,6 @@ namespace ShutdownTimer
         /// <summary>
         /// Starts the countdown with values from UI
         /// </summary>
-        /// <param name="pStatus"></param>
         private void StartCountdown(string pStatus = null)
         {
             // Calculate TimeSpan
