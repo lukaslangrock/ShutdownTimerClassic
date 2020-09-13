@@ -4,8 +4,7 @@ Shutdown Timer Classic is a small little Windows application that allows you to 
 
 ![Screenshot of the main menu](Screenshots/Menu.png)
 
-I also have a UWP based version of this project in the works, but the development will take some time as the UWP platform brings some unforeseen hurdles with it and is a lot more complicated than I initially thought.
-I will update this document and my website once the project is ready.
+I am also planning on developing a more advanced and sleek version of this app in the future.
 
 **Want to contribute or take a look at my code?** Awesome, I welcome all and any contributions and would love to hear your opinion.
 Take a look at my [file and folder structure](Structure.md) document to read more about how everything ties together.
