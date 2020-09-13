@@ -1,4 +1,7 @@
-﻿namespace ShutdownTimer.Helpers
+﻿using System;
+using System.Threading;
+
+namespace ShutdownTimer.Helpers
 {
     class Numerics
     {
@@ -6,7 +9,7 @@
         /// Checks if seconds or minutes are over 59 and calculates new correct values.
         /// Example: 72 minutes will get converted to 1 hour and 12 minutes.
         /// </summary>
-        /// <returns>New data for hours, minutes and seconds</returns>
+        /// <returns>New integers for hours, minutes and seconds</returns>
         public static (int, int, int) ConvertTime(int hours, int minutes, int seconds)
         {
             while (seconds >= 60)
@@ -22,6 +25,36 @@
             }
 
             return (hours, minutes, seconds);
+        }
+
+        /// <summary>
+        /// Converts a TimeSpan into hours, minutes and seconds.
+        /// </summary>
+        /// <returns>Integers for hours, minutes and seconds</returns>
+        public static (int, int, int) ConvertTimeSpan(TimeSpan ts)
+        {
+            int hours = ts.Hours;
+            int minutes = ts.Minutes;
+            int seconds = ts.Seconds;
+
+            hours += ts.Days * 24;
+
+            return (hours, minutes, seconds);
+        }
+
+        /// <summary>
+        /// Converts a TimeSpan into a string of hours, minutes and seconds.
+        /// </summary>
+        /// <returns>Combined string with hours, minutes and seconds</returns>
+        public static string ConvertTimeSpanToString(TimeSpan ts)
+        {
+            int hours = ts.Hours;
+            int minutes = ts.Minutes;
+            int seconds = ts.Seconds;
+
+            hours += ts.Days * 24;
+
+            return AddZeros(hours) + ":" + AddZeros(minutes) + ":" + AddZeros(seconds);
         }
 
         /// <summary>

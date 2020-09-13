@@ -20,8 +20,8 @@ namespace ShutdownTimer
         public bool UI { get; set; } // disables UI updates when set to false (used for running in background)
 
         //private
-        private FormWindowState UIFormWindowStateMemeory; // used to update UI immediately after WindowState change
-        private TimeSpan UITimeSpanMemory; // used to limit UI events that should only be executed once per second instead of once per update
+        private FormWindowState lastStateUIFormWindowState; // used to update UI immediately after WindowState change
+        private TimeSpan lastStateUITimeSpan; // used to limit UI events that should only be executed once per second instead of once per update
         private Stopwatch stopwatch; // measures exact timespan
         private bool ignoreClose = false; // true: cancel close events without asking | false: default behaviour (if ignoreClose == true, allowClose will be ignored)
         private bool allowClose = false; // true: accept close without asking | false: Ask user to confirm closing
@@ -106,14 +106,14 @@ namespace ShutdownTimer
         /// </summary>
         private void UpdateUI(TimeSpan ts)
         {
-            if (UITimeSpanMemory.Seconds != ts.Seconds || UITimeSpanMemory.Seconds == 0 || UIFormWindowStateMemeory != WindowState) // Only update if the seconds from the TimeSpan actually changed and when it first started
+            if (lastStateUITimeSpan.TotalSeconds != ts.TotalSeconds || lastStateUITimeSpan.TotalSeconds == 0 || lastStateUIFormWindowState != WindowState) // Only update if the seconds from the TimeSpan actually changed and when it first started
             {
-                // Save currents to UI memory
-                UITimeSpanMemory = ts;
-                UIFormWindowStateMemeory = WindowState;
+                // Save current data to last state memory
+                lastStateUITimeSpan = ts;
+                lastStateUIFormWindowState = WindowState;
 
                 // Update time labels
-                string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}", ts.Hours, ts.Minutes, ts.Seconds);
+                string elapsedTime = Numerics.ConvertTimeSpanToString(ts);
                 timeLabel.Text = elapsedTime;
                 timeMenuItem.Text = elapsedTime;
                 this.Text = "Countdown - " + elapsedTime;
@@ -121,7 +121,7 @@ namespace ShutdownTimer
                 if (UI) // UI for countdown window
                 {
                     // Decide which color/animation to use
-                    if (ts.Hours > 0 || ts.Minutes >= 30) { BackColor = Color.ForestGreen; }
+                    if (ts.Days > 0 || ts.Hours > 0 || ts.Minutes >= 30) { BackColor = Color.ForestGreen; }
                     else if (ts.Minutes >= 10) { BackColor = Color.DarkOrange; }
                     else if (ts.Minutes >= 1) { BackColor = Color.OrangeRed; }
                     else { WarningAnimation(); }
@@ -129,11 +129,11 @@ namespace ShutdownTimer
                 else // UI for tray menu
                 {
                     // Decide which tray message to show
-                    if (ts.Hours == 2 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "2 hours remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                    else if (ts.Hours == 1 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "1 hour remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                    else if (ts.Hours == 0 && ts.Minutes == 30 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "30 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                    else if (ts.Hours == 0 && ts.Minutes == 5 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "5 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                    else if (ts.Hours == 0 && ts.Minutes == 0 && ts.Seconds == 30) { notifyIcon.BalloonTipText = "30 seconds remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                    if (ts.Days == 0 && ts.Hours == 2 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "2 hours remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                    else if (ts.Days == 0 && ts.Hours == 1 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "1 hour remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                    else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 30 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "30 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                    else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 5 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "5 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                    else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 0 && ts.Seconds == 30) { notifyIcon.BalloonTipText = "30 seconds remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
                 }
             }
 
@@ -319,10 +319,10 @@ namespace ShutdownTimer
         /// </summary>
         private void RefreshTimer_Tick(object sender, EventArgs e)
         {
-            TimeSpan currentTimeSpan = CountdownTimeSpan - stopwatch.Elapsed + new TimeSpan(0, 0, 1); // Calculate countdown (add 1 second for smooth start)
-            UpdateUI(currentTimeSpan);
+            TimeSpan interval = CountdownTimeSpan - stopwatch.Elapsed + new TimeSpan(0, 0, 1); // Calculate countdown (add 1 second for smooth start)
+            UpdateUI(interval);
 
-            if (currentTimeSpan.Hours <= 0 && currentTimeSpan.Minutes <= 0 && currentTimeSpan.Seconds <= 0)
+            if (interval.TotalSeconds <= 0) //check if interval is negative
             {
                 stopwatch.Stop();
                 refreshTimer.Stop();
