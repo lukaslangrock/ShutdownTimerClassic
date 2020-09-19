@@ -15,6 +15,8 @@ namespace ShutdownTimer
             startupArgs = args;
         }
 
+        #region "form events"
+
         private void Menu_Load(object sender, EventArgs e)
         {
             versionLabel.Text = "v" + Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf(".")); // Display current version
@@ -90,6 +92,8 @@ namespace ShutdownTimer
             }
         }
 
+        #endregion
+
         /// <summary>
         /// Checks user input before further processing
         /// </summary>
@@ -140,31 +144,6 @@ namespace ShutdownTimer
 
             checkResult = errMessage;
             return errTracker;
-        }
-
-        /// <summary>
-        /// Starts the countdown with values from UI
-        /// </summary>
-        private void StartCountdown(string pStatus = null)
-        {
-            // Calculate TimeSpan
-            TimeSpan timeSpan = new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
-
-            // Show countdown window
-            using (Countdown countdown = new Countdown
-            {
-                CountdownTimeSpan = timeSpan,
-                Action = actionComboBox.Text,
-                Graceful = gracefulCheckBox.Checked,
-                PreventSystemSleep = preventSleepCheckBox.Checked,
-                UI = !backgroundCheckBox.Checked,
-                Status = pStatus
-            })
-            {
-                countdown.Owner = this;
-                countdown.ShowDialog();
-                Application.Exit(); // Exit application after countdown is closed
-            }
         }
 
         /// <summary>
@@ -312,6 +291,31 @@ namespace ShutdownTimer
                 }
 
                 SettingsProvider.Save();
+            }
+        }
+
+        /// <summary>
+        /// Starts the countdown with values from UI
+        /// </summary>
+        private void StartCountdown(string pStatus = null)
+        {
+            // Calculate TimeSpan
+            TimeSpan timeSpan = new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
+
+            // Show countdown window
+            using (Countdown countdown = new Countdown
+            {
+                CountdownTimeSpan = timeSpan,
+                Action = actionComboBox.Text,
+                Graceful = gracefulCheckBox.Checked,
+                PreventSystemSleep = preventSleepCheckBox.Checked,
+                UI = !backgroundCheckBox.Checked,
+                Status = pStatus
+            })
+            {
+                countdown.Owner = this;
+                countdown.ShowDialog();
+                Application.Exit(); // Exit application after countdown is closed
             }
         }
     }

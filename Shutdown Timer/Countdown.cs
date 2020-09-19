@@ -1,11 +1,9 @@
-﻿using Microsoft.Win32;
-using ShutdownTimer.Helpers;
+﻿using ShutdownTimer.Helpers;
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using Windows.UI.ViewManagement;
 
 namespace ShutdownTimer
 {
@@ -32,6 +30,9 @@ namespace ShutdownTimer
             InitializeComponent();
         }
 
+        #region "form events"
+
+        // entrypoint
         private void Countdown_Load(object sender, EventArgs e)
         {
             // Setup clock
@@ -44,11 +45,11 @@ namespace ShutdownTimer
             {
                 if (SettingsProvider.Settings.TrayIconTheme == "Light") { lighttheme = true; }
                 else if (SettingsProvider.Settings.TrayIconTheme == "Dark") { lighttheme = false; }
-                else { lighttheme = GetWindowsLightTheme(); }
+                else { lighttheme = WindowsAPIs.GetWindowsLightTheme(); }
             }
             else
             {
-                lighttheme = GetWindowsLightTheme();
+                lighttheme = WindowsAPIs.GetWindowsLightTheme();
             }
 
             // When the dark theme is selected we are using the light icon to generate contrast (and vise versa), you wouldn't want a white icon on a white background.
@@ -78,91 +79,47 @@ namespace ShutdownTimer
             if (PreventSystemSleep) { ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS | ExecutionState.EXECUTION_STATE.ES_SYSTEM_REQUIRED); } // give the system some coffee so it stays awake when tired using some fancy EXECUTION_STATE flags
         }
 
-        private bool GetWindowsLightTheme()
+        /// <summary>
+        /// Checks the stopwatch and updates UI every 100ms
+        /// </summary>
+        private void RefreshTimer_Tick(object sender, EventArgs e)
         {
-            bool lighttheme = false; // default if all checks fail (may happen when not on Windows 10)
+            TimeSpan interval = CountdownTimeSpan - stopwatch.Elapsed + new TimeSpan(0, 0, 1); // Calculate countdown (add 1 second for smooth start)
+            UpdateUI(interval);
 
-            try // Get app theme as fallback
+            if (interval.TotalSeconds <= 0) //check if interval is negative
             {
-                Windows.UI.Color winTheme = new UISettings().GetColorValue(UIColorType.Background);
-                if (winTheme.ToString() == "#FFFFFFFF") { lighttheme = true; }
-                else if (winTheme.ToString() == "#FF000000") { lighttheme = false; }
+                stopwatch.Stop();
+                refreshTimer.Stop();
+                ExecutePowerAction(Action);
+                Application.DoEvents();
+                Application.Exit();
             }
-            catch (Exception) { }
-
-            try // Get actual default Windows theme which (the same as the taskbar)
-            {
-                int key = (int)Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", "SystemUsesLightTheme", null);
-                if (key == 0) { lighttheme = false; }
-                else if (key == 1) { lighttheme = true; }
-            }
-            catch (Exception) { }
-
-            return lighttheme;
         }
 
         /// <summary>
-        /// Updates the time label with current time left and applies the corresponding background color.
+        /// Logic to prevent or ignore unwanted close events and notify the user.
         /// </summary>
-        private void UpdateUI(TimeSpan ts)
+        private void Countdown_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (lastStateUITimeSpan.TotalSeconds != ts.TotalSeconds || lastStateUITimeSpan.TotalSeconds == 0 || lastStateUIFormWindowState != WindowState) // Only update if the seconds from the TimeSpan actually changed and when it first started
+            if (ignoreClose)
             {
-                // Save current data to last state memory
-                lastStateUITimeSpan = ts;
-                lastStateUIFormWindowState = WindowState;
-
-                // Update time labels
-                string elapsedTime = Numerics.ConvertTimeSpanToString(ts);
-                timeLabel.Text = elapsedTime;
-                timeMenuItem.Text = elapsedTime;
-                this.Text = "Countdown - " + elapsedTime;
-
-                if (UI) // UI for countdown window
-                {
-                    // Decide which color/animation to use
-                    if (ts.Days > 0 || ts.Hours > 0 || ts.Minutes >= 30) { BackColor = Color.ForestGreen; }
-                    else if (ts.Minutes >= 10) { BackColor = Color.DarkOrange; }
-                    else if (ts.Minutes >= 1) { BackColor = Color.OrangeRed; }
-                    else { WarningAnimation(); }
-                }
-                else // UI for tray menu
-                {
-                    // Decide which tray message to show
-                    if (ts.Days == 0 && ts.Hours == 2 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "2 hours remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                    else if (ts.Days == 0 && ts.Hours == 1 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "1 hour remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                    else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 30 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "30 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                    else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 5 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "5 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                    else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 0 && ts.Seconds == 30) { notifyIcon.BalloonTipText = "30 seconds remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                }
+                e.Cancel = true; // Ignore closing event one time
             }
-
-            // Correct window states if unexpected changes occur
-            if (!UI && WindowState != FormWindowState.Minimized)
+            else if (!allowClose)
             {
-                // Window is visible when UI is set to background operation
-                ShowUI();
+                e.Cancel = true;
+                string caption = "Are you sure?";
+                string message = "Do you really want to cancel the timer?";
+                DialogResult question = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (question == DialogResult.Yes) { ExitApplication(); }
             }
-            else if (UI && WindowState == FormWindowState.Minimized)
-            {
-                // Window is hidden when UI is set to foreground operation
-                HideUI();
-            }
-
-            // Update UI
-            Application.DoEvents();
+            // allowClose == true is not handled and if ignoreClose == false, the application will exit
         }
 
-        /// <summary>
-        /// Switches from background color from red to black (and vice versa) when called.
-        /// </summary>
-        private void WarningAnimation()
-        {
-            animationSwitch = !animationSwitch; // Switch animation color
+        #endregion
 
-            if (animationSwitch == true) { BackColor = Color.Red; }
-            else if (animationSwitch == false) { BackColor = Color.Black; }
-        }
+        #region "form actions / state changes"
 
         /// <summary>
         /// Stops the countdown, displays an exit message and closes exits the application.
@@ -250,25 +207,7 @@ namespace ShutdownTimer
             UpdateUI(currentTimeSpan);
         }
 
-        /// <summary>
-        /// Logic to prevent or ignore unwanted close events and notify the user.
-        /// </summary>
-        private void Countdown_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (ignoreClose)
-            {
-                e.Cancel = true; // Ignore closing event one time
-            }
-            else if (!allowClose)
-            {
-                e.Cancel = true;
-                string caption = "Are you sure?";
-                string message = "Do you really want to cancel the timer?";
-                DialogResult question = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (question == DialogResult.Yes) { ExitApplication(); }
-            }
-            // allowClose == true is not handled and if ignoreClose == false, the application will exit
-        }
+        #endregion
 
         #region "tray menu events"
 
@@ -314,23 +253,72 @@ namespace ShutdownTimer
 
         #endregion
 
-        /// <summary>
-        /// Checks the stopwatch and updates UI every 100ms
-        /// </summary>
-        private void RefreshTimer_Tick(object sender, EventArgs e)
-        {
-            TimeSpan interval = CountdownTimeSpan - stopwatch.Elapsed + new TimeSpan(0, 0, 1); // Calculate countdown (add 1 second for smooth start)
-            UpdateUI(interval);
+        #region "ui updates"
 
-            if (interval.TotalSeconds <= 0) //check if interval is negative
+        /// <summary>
+        /// Updates the time label with current time left and applies the corresponding background color.
+        /// </summary>
+        private void UpdateUI(TimeSpan ts)
+        {
+            if (lastStateUITimeSpan.TotalSeconds != ts.TotalSeconds || lastStateUITimeSpan.TotalSeconds == 0 || lastStateUIFormWindowState != WindowState) // Only update if the seconds from the TimeSpan actually changed and when it first started
             {
-                stopwatch.Stop();
-                refreshTimer.Stop();
-                ExecutePowerAction(Action);
-                Application.DoEvents();
-                Application.Exit();
+                // Save current data to last state memory
+                lastStateUITimeSpan = ts;
+                lastStateUIFormWindowState = WindowState;
+
+                // Update time labels
+                string elapsedTime = Numerics.ConvertTimeSpanToString(ts);
+                timeLabel.Text = elapsedTime;
+                timeMenuItem.Text = elapsedTime;
+                this.Text = "Countdown - " + elapsedTime;
+
+                if (UI) // UI for countdown window
+                {
+                    // Decide which color/animation to use
+                    if (ts.Days > 0 || ts.Hours > 0 || ts.Minutes >= 30) { BackColor = Color.ForestGreen; }
+                    else if (ts.Minutes >= 10) { BackColor = Color.DarkOrange; }
+                    else if (ts.Minutes >= 1) { BackColor = Color.OrangeRed; }
+                    else { WarningAnimation(); }
+                }
+                else // UI for tray menu
+                {
+                    // Decide which tray message to show
+                    if (ts.Days == 0 && ts.Hours == 2 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "2 hours remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                    else if (ts.Days == 0 && ts.Hours == 1 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "1 hour remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                    else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 30 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "30 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                    else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 5 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "5 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                    else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 0 && ts.Seconds == 30) { notifyIcon.BalloonTipText = "30 seconds remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                }
             }
+
+            // Correct window states if unexpected changes occur
+            if (!UI && WindowState != FormWindowState.Minimized)
+            {
+                // Window is visible when UI is set to background operation
+                ShowUI();
+            }
+            else if (UI && WindowState == FormWindowState.Minimized)
+            {
+                // Window is hidden when UI is set to foreground operation
+                HideUI();
+            }
+
+            // Update UI
+            Application.DoEvents();
         }
+
+        /// <summary>
+        /// Switches from background color from red to black (and vice versa) when called.
+        /// </summary>
+        private void WarningAnimation()
+        {
+            animationSwitch = !animationSwitch; // Switch animation color
+
+            if (animationSwitch == true) { BackColor = Color.Red; }
+            else if (animationSwitch == false) { BackColor = Color.Black; }
+        }
+
+        #endregion
 
         private void ExecutePowerAction(string ChoosenAction)
         {

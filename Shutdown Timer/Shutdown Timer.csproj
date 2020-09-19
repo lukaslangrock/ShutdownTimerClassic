@@ -81,6 +81,7 @@
     <Compile Include="Helpers\ExitWindows.cs" />
     <Compile Include="Helpers\Numerics.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Helpers\WindowsAPIs.cs" />
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
