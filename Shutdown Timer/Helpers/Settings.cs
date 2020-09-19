@@ -37,6 +37,7 @@ namespace ShutdownTimer.Helpers
         private static void CheckSettings()
         {
             Settings.AppVersion = Application.ProductVersion;
+            Settings.SettingsVersion = 1; // increases whenever there are breaking changes to the settings system
             if (Settings.DefaultTimer is null)
             {
                 Settings.DefaultTimer = new TimerData
@@ -73,12 +74,13 @@ namespace ShutdownTimer.Helpers
     public class SettingsData
     {
         public string AppVersion { get; set; }
+        public int SettingsVersion { get; set; }
 
         public bool RememberLastState { get; set; }
+        public string TrayIconTheme { get; set; }
 
         public TimerData DefaultTimer { get; set; }
 
-        public string TrayIconTheme { get; set; }
     }
 
     public class TimerData
