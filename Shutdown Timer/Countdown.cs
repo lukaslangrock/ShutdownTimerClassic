@@ -339,7 +339,6 @@ namespace ShutdownTimer
         private void ExecutePowerAction(string ChoosenAction)
         {
             ExceptionHandler.LogEvent("[Countdown] Execute power action");
-            throw new NotImplementedException();
 
             ignoreClose = false; // do not ignore close event
             allowClose = true; // disable close question
