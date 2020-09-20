@@ -286,10 +286,11 @@ namespace ShutdownTimer
                 string elapsedTime = Numerics.ConvertTimeSpanToString(ts);
                 timeLabel.Text = elapsedTime;
                 timeMenuItem.Text = elapsedTime;
-                this.Text = "Countdown - " + elapsedTime;
 
                 if (UI) // UI for countdown window
                 {
+                    this.Text = "Countdown";
+
                     // Decide which color/animation to use
                     if (ts.Days > 0 || ts.Hours > 0 || ts.Minutes >= 30) { BackColor = Color.ForestGreen; }
                     else if (ts.Minutes >= 10) { BackColor = Color.DarkOrange; }
@@ -298,6 +299,8 @@ namespace ShutdownTimer
                 }
                 else // UI for tray menu
                 {
+                    this.Text = "Countdown - " + elapsedTime;
+
                     // Decide which tray message to show
                     if (ts.Days == 0 && ts.Hours == 2 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "2 hours remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
                     else if (ts.Days == 0 && ts.Hours == 1 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "1 hour remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
