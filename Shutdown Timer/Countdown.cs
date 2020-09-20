@@ -276,7 +276,7 @@ namespace ShutdownTimer
         /// </summary>
         private void UpdateUI(TimeSpan ts)
         {
-            if (lastStateUITimeSpan.TotalSeconds != ts.TotalSeconds || lastStateUITimeSpan.TotalSeconds == 0 || lastStateUIFormWindowState != WindowState) // Only update if the seconds from the TimeSpan actually changed and when it first started
+            if (Math.Round(lastStateUITimeSpan.TotalSeconds) != Math.Round(ts.TotalSeconds) || lastStateUITimeSpan.TotalSeconds <= 0 || lastStateUIFormWindowState != WindowState) // Only update if the seconds from the TimeSpan actually changed and when it first started
             {
                 // Save current data to last state memory
                 lastStateUITimeSpan = ts;
