@@ -35,9 +35,13 @@ namespace ShutdownTimer
         // entrypoint
         private void Countdown_Load(object sender, EventArgs e)
         {
+            ExceptionHandler.LogEvent("[Countdown] Start stopwatch");
+
             // Setup clock
             stopwatch = new Stopwatch();
             stopwatch.Start();
+
+            ExceptionHandler.LogEvent("[Countdown] Prepare UI");
 
             // Set trayIcon icon to the opposite of the selected theme
             bool lighttheme;
@@ -74,9 +78,11 @@ namespace ShutdownTimer
                 Hide();
             }
 
+            ExceptionHandler.LogEvent("[Countdown] Set UI");
+
             UpdateUI(CountdownTimeSpan);
 
-            if (PreventSystemSleep) { ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS | ExecutionState.EXECUTION_STATE.ES_SYSTEM_REQUIRED); } // give the system some coffee so it stays awake when tired using some fancy EXECUTION_STATE flags
+            if (PreventSystemSleep) { ExceptionHandler.LogEvent("[Countdown] Preventing sleep"); ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS | ExecutionState.EXECUTION_STATE.ES_SYSTEM_REQUIRED); } // give the system some coffee so it stays awake when tired using some fancy EXECUTION_STATE flags
         }
 
         /// <summary>
@@ -126,6 +132,8 @@ namespace ShutdownTimer
         /// </summary>
         private void ExitApplication()
         {
+            ExceptionHandler.LogEvent("[Countdown] Exit application");
+
             ignoreClose = false;
             allowClose = true;
             stopwatch.Stop();
@@ -142,6 +150,8 @@ namespace ShutdownTimer
         /// </summary>
         private void RestartApplication()
         {
+            ExceptionHandler.LogEvent("[Countdown] Restart application");
+
             ignoreClose = false;
             allowClose = true;
             stopwatch.Stop();
@@ -156,6 +166,8 @@ namespace ShutdownTimer
         /// </summary>
         private void RestartTimer()
         {
+            ExceptionHandler.LogEvent("[Countdown] Restart timer");
+
             stopwatch.Stop();
             stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -168,6 +180,8 @@ namespace ShutdownTimer
         /// </summary>
         private void HideUI()
         {
+            ExceptionHandler.LogEvent("[Countdown] Hide UI");
+
             timerUIHideMenuItem.Enabled = false;
             timerUIShowMenuItem.Enabled = true;
             TopMost = false;
@@ -187,6 +201,8 @@ namespace ShutdownTimer
         /// </summary>
         private void ShowUI()
         {
+            ExceptionHandler.LogEvent("[Countdown] Show UI");
+
             timerUIHideMenuItem.Enabled = true;
             timerUIShowMenuItem.Enabled = false;
             TopMost = true;
@@ -322,6 +338,9 @@ namespace ShutdownTimer
 
         private void ExecutePowerAction(string ChoosenAction)
         {
+            ExceptionHandler.LogEvent("[Countdown] Execute power action");
+            throw new NotImplementedException();
+
             ignoreClose = false; // do not ignore close event
             allowClose = true; // disable close question
 

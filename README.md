@@ -109,4 +109,4 @@ If you are running it in the background, then you can go to the notification are
 
 ## Logging and Privacy
 
-The application is not connected to the internet and does not log user interactions or usage data. If there is an internal exception it will save a stack trace to the users desktop (since v1.2.0) and notify the user but it will not automatically share any data with anyone. If you are using the Microsoft Store release, then the Store will also monitor basic usage and crashes and (depending on your Windows privacy settings) share this data with Microsoft and me.
+The application is **not connected to the internet** and does **not collect usage data**. If there is an internal exception it will save a stack trace and simple event log to the users desktop (since v1.2.0) and notify the user but it will not automatically share any data with anyone. If you are using the Microsoft Store release, then the Store will also monitor basic usage and crashes and (depending on your Windows privacy settings) share this data with Microsoft and me.

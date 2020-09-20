@@ -12,6 +12,8 @@ namespace ShutdownTimer.Helpers
         /// <returns>true: Light theme; false: Dark theme</returns>
         public static bool GetWindowsLightTheme()
         {
+            ExceptionHandler.LogEvent("[WindowsAPIs] Get windows theme");
+
             bool lighttheme = false; // default if all checks fail (may happen when not on Windows 10)
 
             try // Get app theme as fallback
@@ -20,7 +22,7 @@ namespace ShutdownTimer.Helpers
                 if (winTheme.ToString() == "#FFFFFFFF") { lighttheme = true; }
                 else if (winTheme.ToString() == "#FF000000") { lighttheme = false; }
             }
-            catch (Exception) { }
+            catch (Exception) { ExceptionHandler.LogEvent("[WindowsAPIs] Failed to get winTheme"); }
 
             try // Get actual default Windows theme which (the same as the taskbar)
             {
@@ -28,7 +30,7 @@ namespace ShutdownTimer.Helpers
                 if (key == 0) { lighttheme = false; }
                 else if (key == 1) { lighttheme = true; }
             }
-            catch (Exception) { }
+            catch (Exception) { ExceptionHandler.LogEvent("[WindowsAPIs] Failed to read registry theme value"); }
 
             return lighttheme;
         }

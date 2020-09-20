@@ -19,6 +19,8 @@ namespace ShutdownTimer
 
         private void Menu_Load(object sender, EventArgs e)
         {
+            ExceptionHandler.LogEvent("[Menu] Load menu");
+
             versionLabel.Text = "v" + Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf(".")); // Display current version
             infoToolTip.SetToolTip(gracefulCheckBox, "Applications that do not exit when prompted automatically get terminated by default to ensure a successful shutdown." +
                 "\n\nA graceful shutdown on the other hand will wait for all applications to exit before continuing with the shutdown." +
@@ -74,6 +76,8 @@ namespace ShutdownTimer
 
         private void StartButton_Click(object sender, EventArgs e)
         {
+            ExceptionHandler.LogEvent("[Menu] Prepare start countdown");
+
             if (RunChecks())
             {
                 // Disable controls
@@ -88,6 +92,7 @@ namespace ShutdownTimer
             }
             else
             {
+                ExceptionHandler.LogEvent("[Menu] Invalid countdown");
                 MessageBox.Show("The following error(s) occurred:\n\n" + checkResult + "Please try to resolve the(se) problem(s) and try again.", "There seems to be a problem!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -100,6 +105,8 @@ namespace ShutdownTimer
         /// <returns>Result of checks</returns>
         private bool RunChecks()
         {
+            ExceptionHandler.LogEvent("[Menu] Run checks");
+
             bool errTracker = true; // if anything goes wrong the tracker will be set to false
             string errMessage = null; // error messages will append to this
 
@@ -151,6 +158,8 @@ namespace ShutdownTimer
         /// </summary>
         private void ProcessArgs()
         {
+            ExceptionHandler.LogEvent("[Menu] Process args");
+
             string timeArg = null;
             string controlMode = "Recommend"; // Use recommend control mode by default
             //Control Modes:
@@ -212,6 +221,7 @@ namespace ShutdownTimer
                     switch (count)
                     {
                         case 0:
+                            ExceptionHandler.LogEvent("[Menu] Invalid time args");
                             MessageBox.Show("StartupArgs Error: Please provide a valid argument after /SetTime", "Invalid argument", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
 
@@ -235,10 +245,12 @@ namespace ShutdownTimer
             switch (controlMode)
             {
                 case "Takeover":
+                    ExceptionHandler.LogEvent("[Menu] Takeover mode");
                     StartCountdown("Externally initiated countdown!");
                     break;
 
                 case "Lock":
+                    ExceptionHandler.LogEvent("[Menu] Lock mode");
                     settingsButton.Enabled = false;
                     actionGroupBox.Enabled = false;
                     timeGroupBox.Enabled = false;
@@ -247,6 +259,7 @@ namespace ShutdownTimer
                     break;
 
                 case "Recommend":
+                    ExceptionHandler.LogEvent("[Menu] Recommend mode");
                     settingsButton.Enabled = false;
                     actionGroupBox.Enabled = true;
                     timeGroupBox.Enabled = true;
@@ -261,6 +274,8 @@ namespace ShutdownTimer
         /// </summary>
         private void LoadSettings()
         {
+            ExceptionHandler.LogEvent("[Menu] Load settings");
+
             SettingsProvider.Load();
 
             actionComboBox.Text = SettingsProvider.Settings.DefaultTimer.Action;
@@ -277,6 +292,8 @@ namespace ShutdownTimer
         /// </summary>
         private void SaveSettings()
         {
+            ExceptionHandler.LogEvent("[Menu] Save settings");
+
             if (SettingsProvider.SettingsLoaded)
             {
                 if (SettingsProvider.Settings.RememberLastState)
@@ -299,6 +316,8 @@ namespace ShutdownTimer
         /// </summary>
         private void StartCountdown(string pStatus = null)
         {
+            ExceptionHandler.LogEvent("[Menu] Start countdown");
+
             // Calculate TimeSpan
             TimeSpan timeSpan = new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
 

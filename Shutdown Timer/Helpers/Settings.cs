@@ -14,6 +14,8 @@ namespace ShutdownTimer.Helpers
 
         public static void Load()
         {
+            ExceptionHandler.LogEvent("[Settings] Loading settings.json");
+
             // make sure respective appdata dir exists
             if (!Directory.Exists(settingsDirectory))
             {
@@ -36,6 +38,8 @@ namespace ShutdownTimer.Helpers
 
         private static void CheckSettings()
         {
+            ExceptionHandler.LogEvent("[Settings] Checking settings object");
+
             Settings.AppVersion = Application.ProductVersion;
             Settings.SettingsVersion = 1; // increases whenever there are breaking changes to the settings system
             if (Settings.DefaultTimer is null)
@@ -56,6 +60,8 @@ namespace ShutdownTimer.Helpers
 
         public static void ClearSettings()
         {
+            ExceptionHandler.LogEvent("[Settings] Clearing settings");
+
             Settings = new SettingsData();
             CheckSettings();
             Save();
@@ -63,6 +69,8 @@ namespace ShutdownTimer.Helpers
 
         public static void Save()
         {
+            ExceptionHandler.LogEvent("[Settings] Saving settings.json");
+
             if (SettingsLoaded)
             {
                 string settingsJson = JsonConvert.SerializeObject(Settings, Formatting.Indented);
