@@ -21,8 +21,8 @@ namespace ShutdownTimer
         private FormWindowState lastStateUIFormWindowState; // used to update UI immediately after WindowState change
         private TimeSpan lastStateUITimeSpan; // used to limit UI events that should only be executed once per second instead of once per update
         private Stopwatch stopwatch; // measures exact timespan
-        private bool ignoreClose = false; // true: cancel close events without asking | false: default behaviour (if ignoreClose == true, allowClose will be ignored)
-        private bool allowClose = false; // true: accept close without asking | false: Ask user to confirm closing
+        private bool ignoreClose; // true: cancel close events without asking | false: default behaviour (if ignoreClose == true, allowClose will be ignored)
+        private bool allowClose; // true: accept close without asking | false: Ask user to confirm closing
         private bool animationSwitch = true; // used to switch warning animation colors
 
         public Countdown()
@@ -57,8 +57,7 @@ namespace ShutdownTimer
             }
 
             // When the dark theme is selected we are using the light icon to generate contrast (and vise versa), you wouldn't want a white icon on a white background.
-            if (lighttheme) { notifyIcon.Icon = Properties.Resources.icon_dark; }
-            else { notifyIcon.Icon = Properties.Resources.icon_light; }
+            notifyIcon.Icon = lighttheme ? Properties.Resources.icon_dark : Properties.Resources.icon_light;
 
             if (!string.IsNullOrWhiteSpace(Status)) { statusLabel.Text = Status; statusLabel.Visible = true; }
 
@@ -82,7 +81,11 @@ namespace ShutdownTimer
 
             UpdateUI(CountdownTimeSpan);
 
-            if (PreventSystemSleep) { ExceptionHandler.LogEvent("[Countdown] Preventing sleep"); ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS | ExecutionState.EXECUTION_STATE.ES_SYSTEM_REQUIRED); } // give the system some coffee so it stays awake when tired using some fancy EXECUTION_STATE flags
+            if (PreventSystemSleep)
+            {
+                ExceptionHandler.LogEvent("[Countdown] Preventing sleep");
+                ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS | ExecutionState.EXECUTION_STATE.ES_SYSTEM_REQUIRED);
+            } // give the system some coffee so it stays awake when tired using some fancy EXECUTION_STATE flags
         }
 
         /// <summary>
@@ -333,20 +336,20 @@ namespace ShutdownTimer
         {
             animationSwitch = !animationSwitch; // Switch animation color
 
-            if (animationSwitch == true) { BackColor = Color.Red; }
-            else if (animationSwitch == false) { BackColor = Color.Black; }
+            if (animationSwitch) { BackColor = Color.Red; }
+            else { BackColor = Color.Black; }
         }
 
         #endregion
 
-        private void ExecutePowerAction(string ChoosenAction)
+        private void ExecutePowerAction(string choosenAction)
         {
             ExceptionHandler.LogEvent("[Countdown] Execute power action");
 
             ignoreClose = false; // do not ignore close event
             allowClose = true; // disable close question
 
-            switch (ChoosenAction)
+            switch (choosenAction)
             {
                 case "Shutdown":
                     ExitWindows.Shutdown(!Graceful);

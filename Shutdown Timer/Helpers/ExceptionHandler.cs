@@ -20,8 +20,8 @@ namespace ShutdownTimer.Helpers
             string message = "An unhandled exception occurred and the application needs to be terminated!\n\n" +
                 "A log file containing information about the process and the error has been saved to your desktop.\n" +
                 "Please create an issue on GitHub and include the contents of this log file to help identify and fix the issue.\n\n" +
-                $"GitHub: github.com/lukaslangrock/ShutdownTimerClassic/issues\n" +
-                $"Email: lukas.langrock@outlook.de";
+                "GitHub: github.com/lukaslangrock/ShutdownTimerClassic/issues\n" +
+                "Email: lukas.langrock@outlook.de";
             MessageBox.Show(message, "Shutdown Timer Classic crashed and needs to be terminated!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Process.Start(filepath); // Show log to user
         }
@@ -36,10 +36,10 @@ namespace ShutdownTimer.Helpers
                 "A log file containing information about the process and the error has been saved to your desktop.\n" +
                 "Please create an issue on GitHub and include the contents of this log file to help identify and fix the issue.\n\n" +
                 $"Log file location: {filepath}\n" +
-                $"GitHub: github.com/lukaslangrock/ShutdownTimerClassic/issues\n" +
-                $"Email: lukas.langrock@outlook.de\n\n" +
-                $"The application experienced a critical error and may very well be broken. It is not recommended to keep using this instance of the application!\n" +
-                $"Would you like to terminate the application?";
+                "GitHub: github.com/lukaslangrock/ShutdownTimerClassic/issues\n" +
+                "Email: lukas.langrock@outlook.de\n\n" +
+                "The application experienced a critical error and may very well be broken. It is not recommended to keep using this instance of the application!\n" +
+                "Would you like to terminate the application?";
             DialogResult dialogResult = MessageBox.Show(message, "Shutdown Timer Classic crashed!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
 
             Process.Start(filepath); // Show log to user
@@ -58,7 +58,7 @@ namespace ShutdownTimer.Helpers
             eventLog.Push(data);
         }
 
-        // Logs application, process, exception and environemnt details and returns log filepath
+        // Logs application, process, exception and environment details and returns log filepath
         private static string LogException(Exception e)
         {
             Process process = Process.GetCurrentProcess();
@@ -91,7 +91,7 @@ namespace ShutdownTimer.Helpers
             log.Append($"Product Name: {Application.ProductName}\n");
             log.Append($"Product Version: {Application.ProductVersion}\n");
             log.Append($"Current Culture: {Application.CurrentCulture}\n");
-            log.Append($"Executeable Path: {Application.ExecutablePath}\n");
+            log.Append($"Executable Path: {Application.ExecutablePath}\n");
 
             log.Append("\n\n---- Environment Info ----\n");
             log.Append($"64-bit OS: {Environment.Is64BitOperatingSystem}\n");
@@ -99,7 +99,7 @@ namespace ShutdownTimer.Helpers
             log.Append($"OS Version: {Environment.OSVersion}\n");
             log.Append($"Runtime Version: {Environment.Version}\n");
             log.Append($"System Uptime: {Environment.TickCount}\n");
-            log.Append($"Maschine Name: {Environment.MachineName}\n");
+            log.Append($"Machine Name: {Environment.MachineName}\n");
             log.Append($"Processor Count: {Environment.ProcessorCount}\n");
             log.Append($"Shutdown Started: {Environment.HasShutdownStarted}\n");
 

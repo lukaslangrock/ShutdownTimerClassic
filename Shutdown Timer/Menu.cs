@@ -56,11 +56,6 @@ namespace ShutdownTimer
                     "\n\nBy using this software you agree to the above mentioned terms as this software is licensed under the MIT License. For more information visit: https://opensource.org/licenses/MIT.", "MIT License", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void GithubPictureBox_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/lukaslangrock/ShutdownTimerClassic"); // Show GitHub page
-        }
-
         private void ActionComboBox_TextChanged(object sender, EventArgs e)
         {
             // disables graceful checkbox for all modes which can not be executed gracefully / which always execute gracefully
@@ -110,7 +105,7 @@ namespace ShutdownTimer
             bool errTracker = true; // if anything goes wrong the tracker will be set to false
             string errMessage = null; // error messages will append to this
 
-            // Check if choosen action is a valid option
+            // Check if chosen action is a valid option
             if (!actionComboBox.Items.Contains(actionComboBox.Text))
             {
                 errTracker = false;
@@ -141,9 +136,9 @@ namespace ShutdownTimer
                 TimeSpan ts = new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
                 if (ts.TotalDays > 100)
                 {
-                    MessageBox.Show($"Your choosen time equates to {Math.Round(ts.TotalDays)} days ({Math.Round(ts.TotalDays / 365, 2)} years)!\n" +
-                        $"It is highly discouraged to choose such an insane amount of time as either your hardware, operating system, or this is app will fail *way* before you even come close to reaching the target!" +
-                        $"\n\nBut if you are actually going to do this, please tell me how long this app survived.",
+                    MessageBox.Show($"Your chosen time equates to {Math.Round(ts.TotalDays)} days ({Math.Round(ts.TotalDays / 365, 2)} years)!\n" +
+                        "It is highly discouraged to choose such an insane amount of time as either your hardware, operating system, or this is app will fail *way* before you even come close to reaching the target!" +
+                        "\n\nBut if you are actually going to do this, please tell me how long this app survived.",
                         "This isn't Stargate and your PC won't stand the test of time!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
@@ -164,7 +159,7 @@ namespace ShutdownTimer
             string controlMode = "Recommend"; // Use recommend control mode by default
             //Control Modes:
             //Takeover:     Overrides settings and starts the timer
-            //Lock:         Overrides settings and locks UI controls but lets user control wether or not to start the timer
+            //Lock:         Overrides settings and locks UI controls but lets user control whether or not to start the timer
             //Recommend:    Prepopulates settings but leaves the UI unlocked
 
             // Read args and do some processing

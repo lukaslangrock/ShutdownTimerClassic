@@ -116,7 +116,7 @@ namespace ShutdownTimer
             System.Diagnostics.Process.Start("https://github.com/lukaslangrock/ShutdownTimerClassic/issues");
         }
 
-        private void Emailbutton_Click(object sender, EventArgs e)
+        private void EmailButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("mailto:lukas.langrock@outlook.de");
         }

@@ -1,9 +1,11 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
 namespace ShutdownTimer.Helpers
 {
     public static class ExecutionState
     {
+        [Flags]
         public enum EXECUTION_STATE : uint
         {
             ES_AWAYMODE_REQUIRED = 0x00000040,

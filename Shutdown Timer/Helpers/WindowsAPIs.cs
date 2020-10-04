@@ -20,7 +20,7 @@ namespace ShutdownTimer.Helpers
             {
                 Windows.UI.Color winTheme = new UISettings().GetColorValue(UIColorType.Background);
                 if (winTheme.ToString() == "#FFFFFFFF") { lighttheme = true; }
-                else if (winTheme.ToString() == "#FF000000") { lighttheme = false; }
+                //else if (winTheme.ToString() == "#FF000000") { lighttheme = false; }
             }
             catch (Exception) { ExceptionHandler.LogEvent("[WindowsAPIs] Failed to get winTheme"); }
 

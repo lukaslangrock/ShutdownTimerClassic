@@ -474,7 +474,7 @@
             this.emailbutton.TabIndex = 16;
             this.emailbutton.Text = "Email";
             this.emailbutton.UseVisualStyleBackColor = true;
-            this.emailbutton.Click += new System.EventHandler(this.Emailbutton_Click);
+            this.emailbutton.Click += new System.EventHandler(this.EmailButton_Click);
             // 
             // githubButton
             // 
