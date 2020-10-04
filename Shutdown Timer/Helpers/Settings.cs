@@ -41,7 +41,6 @@ namespace ShutdownTimer.Helpers
             ExceptionHandler.LogEvent("[Settings] Checking settings object");
 
             Settings.AppVersion = Application.ProductVersion;
-            Settings.SettingsVersion = 1; // increases whenever there are breaking changes to the settings system
 
             if (Settings.TrayIconTheme is null) { Settings.TrayIconTheme = "Automatic"; }
 
@@ -85,7 +84,6 @@ namespace ShutdownTimer.Helpers
     {
         // meta
         public string AppVersion { get; set; }
-        public int SettingsVersion { get; set; }
 
         // general settings
         public bool RememberLastState { get; set; }

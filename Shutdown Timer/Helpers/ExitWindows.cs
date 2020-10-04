@@ -107,7 +107,7 @@ namespace ShutdownTimer.Helpers
 
             if (result == false)
             {
-                // An error occured
+                // An error occurred
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
         }
