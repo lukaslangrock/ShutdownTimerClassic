@@ -214,7 +214,7 @@ namespace ShutdownTimer
             UI = true;
             ignoreClose = true; // Prevent closing (and closing dialog) after ShowInTaskbar changed
 
-            // Re-Enable close question after the main thread has moved on and the close event raised from the this.ShowInTaskbar has been ignored
+            // Re-Enable close question after the main thread has moved on and the close event raised from the this. ShowInTaskbar has been ignored
             new Thread(() =>
             {
                 Thread.CurrentThread.IsBackground = true;
