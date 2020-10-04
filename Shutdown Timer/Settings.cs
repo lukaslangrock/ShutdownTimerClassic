@@ -56,6 +56,10 @@ namespace ShutdownTimer
             hoursNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Hours;
             minutesNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Minutes;
             secondsNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Seconds;
+
+            // advanced settings
+            ForceIfHungFlagRadioButton.Checked = !SettingsProvider.Settings.ForceIfHungFlag;
+            ForceFlagRadioButton.Checked = SettingsProvider.Settings.ForceIfHungFlag;
         }
 
         private void SaveSettings()
@@ -75,6 +79,9 @@ namespace ShutdownTimer
                 SettingsProvider.Settings.DefaultTimer.Minutes = Convert.ToInt32(minutesNumericUpDown.Value);
                 SettingsProvider.Settings.DefaultTimer.Seconds = Convert.ToInt32(secondsNumericUpDown.Value);
             }
+
+            // advanced settings
+            SettingsProvider.Settings.ForceIfHungFlag = ForceFlagRadioButton.Checked;
 
             SettingsProvider.Save();
         }
@@ -112,6 +119,11 @@ namespace ShutdownTimer
         private void Emailbutton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("mailto:lukas.langrock@outlook.de");
+        }
+
+        private void ForceFlagDocsLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-exitwindowsex#parameters");
         }
     }
 }

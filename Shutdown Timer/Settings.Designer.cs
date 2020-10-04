@@ -36,6 +36,9 @@
             this.githubLinkLabel = new System.Windows.Forms.LinkLabel();
             this.settingsTabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.trayiconGroupBox = new System.Windows.Forms.GroupBox();
+            this.trayiconThemeComboBox = new System.Windows.Forms.ComboBox();
+            this.trayiconThemeLabel = new System.Windows.Forms.Label();
             this.clearSettingsButton = new System.Windows.Forms.Button();
             this.defaultSettingsGroupBox = new System.Windows.Forms.GroupBox();
             this.customDefaultsGroupBox = new System.Windows.Forms.GroupBox();
@@ -52,6 +55,12 @@
             this.actionComboBox = new System.Windows.Forms.ComboBox();
             this.rememberStateCheckBox = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.forceFlagGroupBox = new System.Windows.Forms.GroupBox();
+            this.forceFlagDocsLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.ForceFlagRadioButton = new System.Windows.Forms.RadioButton();
+            this.ForceIfHungFlagRadioButton = new System.Windows.Forms.RadioButton();
+            this.forceFlagLabel = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.aboutGroupBox = new System.Windows.Forms.GroupBox();
             this.emailbutton = new System.Windows.Forms.Button();
             this.githubButton = new System.Windows.Forms.Button();
@@ -63,21 +72,20 @@
             this.appSourceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appInfoLabel = new System.Windows.Forms.Label();
-            this.trayiconGroupBox = new System.Windows.Forms.GroupBox();
-            this.trayiconThemeLabel = new System.Windows.Forms.Label();
-            this.trayiconThemeComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.trayiconGroupBox.SuspendLayout();
             this.defaultSettingsGroupBox.SuspendLayout();
             this.customDefaultsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hoursNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minutesNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondsNumericUpDown)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.forceFlagGroupBox.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.aboutGroupBox.SuspendLayout();
             this.licenseGroupBox.SuspendLayout();
-            this.trayiconGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // titlebarPictureBox
@@ -142,6 +150,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.settingsTabControl.Controls.Add(this.tabPage1);
             this.settingsTabControl.Controls.Add(this.tabPage2);
+            this.settingsTabControl.Controls.Add(this.tabPage3);
             this.settingsTabControl.Location = new System.Drawing.Point(18, 54);
             this.settingsTabControl.Name = "settingsTabControl";
             this.settingsTabControl.SelectedIndex = 0;
@@ -160,6 +169,39 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Application Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // trayiconGroupBox
+            // 
+            this.trayiconGroupBox.Controls.Add(this.trayiconThemeComboBox);
+            this.trayiconGroupBox.Controls.Add(this.trayiconThemeLabel);
+            this.trayiconGroupBox.Location = new System.Drawing.Point(6, 208);
+            this.trayiconGroupBox.Name = "trayiconGroupBox";
+            this.trayiconGroupBox.Size = new System.Drawing.Size(284, 40);
+            this.trayiconGroupBox.TabIndex = 2;
+            this.trayiconGroupBox.TabStop = false;
+            this.trayiconGroupBox.Text = "Tray Menu";
+            // 
+            // trayiconThemeComboBox
+            // 
+            this.trayiconThemeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.trayiconThemeComboBox.FormattingEnabled = true;
+            this.trayiconThemeComboBox.Items.AddRange(new object[] {
+            "Automatic",
+            "Light",
+            "Dark"});
+            this.trayiconThemeComboBox.Location = new System.Drawing.Point(104, 13);
+            this.trayiconThemeComboBox.Name = "trayiconThemeComboBox";
+            this.trayiconThemeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.trayiconThemeComboBox.TabIndex = 1;
+            // 
+            // trayiconThemeLabel
+            // 
+            this.trayiconThemeLabel.AutoSize = true;
+            this.trayiconThemeLabel.Location = new System.Drawing.Point(6, 16);
+            this.trayiconThemeLabel.Name = "trayiconThemeLabel";
+            this.trayiconThemeLabel.Size = new System.Drawing.Size(92, 13);
+            this.trayiconThemeLabel.TabIndex = 0;
+            this.trayiconThemeLabel.Text = "Tray menu theme:";
             // 
             // clearSettingsButton
             // 
@@ -337,15 +379,80 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.aboutGroupBox);
-            this.tabPage2.Controls.Add(this.licenseGroupBox);
+            this.tabPage2.Controls.Add(this.forceFlagGroupBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(296, 283);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "About";
+            this.tabPage2.TabIndex = 2;
+            this.tabPage2.Text = "Advanced";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // forceFlagGroupBox
+            // 
+            this.forceFlagGroupBox.Controls.Add(this.forceFlagDocsLinkLabel);
+            this.forceFlagGroupBox.Controls.Add(this.ForceFlagRadioButton);
+            this.forceFlagGroupBox.Controls.Add(this.ForceIfHungFlagRadioButton);
+            this.forceFlagGroupBox.Controls.Add(this.forceFlagLabel);
+            this.forceFlagGroupBox.Location = new System.Drawing.Point(3, 3);
+            this.forceFlagGroupBox.Name = "forceFlagGroupBox";
+            this.forceFlagGroupBox.Size = new System.Drawing.Size(290, 78);
+            this.forceFlagGroupBox.TabIndex = 14;
+            this.forceFlagGroupBox.TabStop = false;
+            this.forceFlagGroupBox.Text = "Force Flag";
+            // 
+            // forceFlagDocsLinkLabel
+            // 
+            this.forceFlagDocsLinkLabel.AutoSize = true;
+            this.forceFlagDocsLinkLabel.Location = new System.Drawing.Point(176, 62);
+            this.forceFlagDocsLinkLabel.Name = "forceFlagDocsLinkLabel";
+            this.forceFlagDocsLinkLabel.Size = new System.Drawing.Size(108, 13);
+            this.forceFlagDocsLinkLabel.TabIndex = 17;
+            this.forceFlagDocsLinkLabel.TabStop = true;
+            this.forceFlagDocsLinkLabel.Text = "ExitWindowsEx Docs";
+            this.forceFlagDocsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ForceFlagDocsLinkLabel_LinkClicked);
+            // 
+            // ForceFlagRadioButton
+            // 
+            this.ForceFlagRadioButton.AutoSize = true;
+            this.ForceFlagRadioButton.Location = new System.Drawing.Point(9, 55);
+            this.ForceFlagRadioButton.Name = "ForceFlagRadioButton";
+            this.ForceFlagRadioButton.Size = new System.Drawing.Size(133, 17);
+            this.ForceFlagRadioButton.TabIndex = 16;
+            this.ForceFlagRadioButton.TabStop = true;
+            this.ForceFlagRadioButton.Text = "EWX_FORCEIFHUNG";
+            this.ForceFlagRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // ForceIfHungFlagRadioButton
+            // 
+            this.ForceIfHungFlagRadioButton.AutoSize = true;
+            this.ForceIfHungFlagRadioButton.Location = new System.Drawing.Point(9, 32);
+            this.ForceIfHungFlagRadioButton.Name = "ForceIfHungFlagRadioButton";
+            this.ForceIfHungFlagRadioButton.Size = new System.Drawing.Size(92, 17);
+            this.ForceIfHungFlagRadioButton.TabIndex = 15;
+            this.ForceIfHungFlagRadioButton.TabStop = true;
+            this.ForceIfHungFlagRadioButton.Text = "EWX_FORCE";
+            this.ForceIfHungFlagRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // forceFlagLabel
+            // 
+            this.forceFlagLabel.AutoSize = true;
+            this.forceFlagLabel.Location = new System.Drawing.Point(6, 16);
+            this.forceFlagLabel.Name = "forceFlagLabel";
+            this.forceFlagLabel.Size = new System.Drawing.Size(215, 13);
+            this.forceFlagLabel.TabIndex = 0;
+            this.forceFlagLabel.Text = "Which flag to use when forcing a shutdown:";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.aboutGroupBox);
+            this.tabPage3.Controls.Add(this.licenseGroupBox);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(296, 283);
+            this.tabPage3.TabIndex = 1;
+            this.tabPage3.Text = "About";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // aboutGroupBox
             // 
@@ -464,39 +571,6 @@
             this.appInfoLabel.TabIndex = 0;
             this.appInfoLabel.Text = "Application:";
             // 
-            // trayiconGroupBox
-            // 
-            this.trayiconGroupBox.Controls.Add(this.trayiconThemeComboBox);
-            this.trayiconGroupBox.Controls.Add(this.trayiconThemeLabel);
-            this.trayiconGroupBox.Location = new System.Drawing.Point(6, 208);
-            this.trayiconGroupBox.Name = "trayiconGroupBox";
-            this.trayiconGroupBox.Size = new System.Drawing.Size(284, 40);
-            this.trayiconGroupBox.TabIndex = 2;
-            this.trayiconGroupBox.TabStop = false;
-            this.trayiconGroupBox.Text = "Tray Menu";
-            // 
-            // trayiconThemeLabel
-            // 
-            this.trayiconThemeLabel.AutoSize = true;
-            this.trayiconThemeLabel.Location = new System.Drawing.Point(6, 16);
-            this.trayiconThemeLabel.Name = "trayiconThemeLabel";
-            this.trayiconThemeLabel.Size = new System.Drawing.Size(92, 13);
-            this.trayiconThemeLabel.TabIndex = 0;
-            this.trayiconThemeLabel.Text = "Tray menu theme:";
-            // 
-            // trayiconThemeComboBox
-            // 
-            this.trayiconThemeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.trayiconThemeComboBox.FormattingEnabled = true;
-            this.trayiconThemeComboBox.Items.AddRange(new object[] {
-            "Automatic",
-            "Light",
-            "Dark"});
-            this.trayiconThemeComboBox.Location = new System.Drawing.Point(104, 13);
-            this.trayiconThemeComboBox.Name = "trayiconThemeComboBox";
-            this.trayiconThemeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.trayiconThemeComboBox.TabIndex = 1;
-            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -520,6 +594,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).EndInit();
             this.settingsTabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.trayiconGroupBox.ResumeLayout(false);
+            this.trayiconGroupBox.PerformLayout();
             this.defaultSettingsGroupBox.ResumeLayout(false);
             this.defaultSettingsGroupBox.PerformLayout();
             this.customDefaultsGroupBox.ResumeLayout(false);
@@ -528,11 +604,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.minutesNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondsNumericUpDown)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.forceFlagGroupBox.ResumeLayout(false);
+            this.forceFlagGroupBox.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
             this.aboutGroupBox.ResumeLayout(false);
             this.licenseGroupBox.ResumeLayout(false);
             this.licenseGroupBox.PerformLayout();
-            this.trayiconGroupBox.ResumeLayout(false);
-            this.trayiconGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -547,7 +624,7 @@
         private System.Windows.Forms.LinkLabel githubLinkLabel;
         private System.Windows.Forms.TabControl settingsTabControl;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.GroupBox defaultSettingsGroupBox;
         private System.Windows.Forms.GroupBox customDefaultsGroupBox;
         private System.Windows.Forms.CheckBox rememberStateCheckBox;
@@ -577,5 +654,11 @@
         private System.Windows.Forms.GroupBox trayiconGroupBox;
         private System.Windows.Forms.ComboBox trayiconThemeComboBox;
         private System.Windows.Forms.Label trayiconThemeLabel;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.GroupBox forceFlagGroupBox;
+        private System.Windows.Forms.RadioButton ForceFlagRadioButton;
+        private System.Windows.Forms.RadioButton ForceIfHungFlagRadioButton;
+        private System.Windows.Forms.Label forceFlagLabel;
+        private System.Windows.Forms.LinkLabel forceFlagDocsLinkLabel;
     }
 }

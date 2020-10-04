@@ -42,6 +42,9 @@ namespace ShutdownTimer.Helpers
 
             Settings.AppVersion = Application.ProductVersion;
             Settings.SettingsVersion = 1; // increases whenever there are breaking changes to the settings system
+
+            if (Settings.TrayIconTheme is null) { Settings.TrayIconTheme = "Automatic"; }
+
             if (Settings.DefaultTimer is null)
             {
                 Settings.DefaultTimer = new TimerData
@@ -55,7 +58,6 @@ namespace ShutdownTimer.Helpers
                     Seconds = 0
                 };
             }
-            if (Settings.TrayIconTheme is null) { Settings.TrayIconTheme = "Automatic"; }
         }
 
         public static void ClearSettings()
@@ -81,14 +83,17 @@ namespace ShutdownTimer.Helpers
 
     public class SettingsData
     {
+        // meta
         public string AppVersion { get; set; }
         public int SettingsVersion { get; set; }
 
+        // general settings
         public bool RememberLastState { get; set; }
         public string TrayIconTheme { get; set; }
-
         public TimerData DefaultTimer { get; set; }
 
+        // advanced settings
+        public bool ForceIfHungFlag { get; set; }
     }
 
     public class TimerData

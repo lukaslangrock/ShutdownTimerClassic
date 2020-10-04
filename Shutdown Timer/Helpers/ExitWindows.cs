@@ -56,6 +56,7 @@ namespace ShutdownTimer.Helpers
         const ushort EWX_REBOOT = 0x00000002;
         const ushort EWX_SHUTDOWN = 0x00000001;
         const ushort EWX_FORCE = 0x00000004;
+        const ushort EWX_FORCEIFHUNG = 0x00000010;
 
         const uint SHTDN_REASON_FLAG_PLANNED = 0x80000000;
 
@@ -77,7 +78,7 @@ namespace ShutdownTimer.Helpers
         {
             GetPrivileges();
             ExitWindowsEx(EWX_SHUTDOWN |
-              (uint)(force ? EWX_FORCE : 0) | EWX_POWEROFF, SHTDN_REASON_FLAG_PLANNED);
+              (uint)(force ? (SettingsProvider.Settings.ForceIfHungFlag ? EWX_FORCEIFHUNG : EWX_FORCE) : 0) | EWX_POWEROFF, SHTDN_REASON_FLAG_PLANNED);
         }
 
         public static void Reboot() { Reboot(false); }
@@ -85,7 +86,7 @@ namespace ShutdownTimer.Helpers
         {
             GetPrivileges();
             ExitWindowsEx(EWX_REBOOT |
-              (uint)(force ? EWX_FORCE : 0), SHTDN_REASON_FLAG_PLANNED);
+              (uint)(force ? (SettingsProvider.Settings.ForceIfHungFlag ? EWX_FORCEIFHUNG : EWX_FORCE) : 0), SHTDN_REASON_FLAG_PLANNED);
         }
 
         public static void LogOff() { LogOff(false); }
@@ -93,7 +94,7 @@ namespace ShutdownTimer.Helpers
         {
             GetPrivileges();
             ExitWindowsEx(EWX_LOGOFF |
-              (uint)(force ? EWX_FORCE : 0), SHTDN_REASON_FLAG_PLANNED);
+              (uint)(force ? (SettingsProvider.Settings.ForceIfHungFlag ? EWX_FORCEIFHUNG : EWX_FORCE) : 0), SHTDN_REASON_FLAG_PLANNED);
         }
 
         // Credits: https://codehill.com/2009/01/lock-sleep-or-hibernate-windows-using-c/
