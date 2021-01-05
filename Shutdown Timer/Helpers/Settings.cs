@@ -9,6 +9,7 @@ namespace ShutdownTimer.Helpers
     {
         public static SettingsData Settings { get; set; } // current settings
         public static bool SettingsLoaded = false;
+        public static bool TemporaryMode = false;
         private static readonly string settingsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Shutdown Timer Classic";
         private static readonly string settingsPath = settingsDirectory + "\\settings.json";
 
@@ -16,24 +17,35 @@ namespace ShutdownTimer.Helpers
         {
             ExceptionHandler.LogEvent("[Settings] Loading settings.json");
 
-            // make sure respective appdata dir exists
-            if (!Directory.Exists(settingsDirectory))
+            if(!TemporaryMode)
             {
-                Directory.CreateDirectory(settingsDirectory);
-            }
+                // make sure respective appdata dir exists
+                if (!Directory.Exists(settingsDirectory))
+                {
+                    Directory.CreateDirectory(settingsDirectory);
+                }
 
-            // make sure settings.json exists
-            if (!File.Exists(settingsPath))
-            {
-                SettingsData emptySettingsData = new SettingsData();
-                string emptySettingsDataJson = JsonConvert.SerializeObject(emptySettingsData, Formatting.Indented);
-                File.WriteAllText(settingsPath, emptySettingsDataJson);
+                // make sure settings.json exists
+                if (!File.Exists(settingsPath))
+                {
+                    SettingsData emptySettingsData = new SettingsData();
+                    string emptySettingsDataJson = JsonConvert.SerializeObject(emptySettingsData, Formatting.Indented);
+                    File.WriteAllText(settingsPath, emptySettingsDataJson);
+                }
+
+                string settingsJson = File.ReadAllText(settingsPath);
+                Settings = new SettingsData();
+                try { Settings = JsonConvert.DeserializeObject<SettingsData>(settingsJson); } catch (Exception) { }
+                CheckSettings();
+                SettingsLoaded = true;
             }
-            string settingsJson = File.ReadAllText(settingsPath);
-            Settings = new SettingsData();
-            try { Settings = JsonConvert.DeserializeObject<SettingsData>(settingsJson); } catch (Exception) { }
-            CheckSettings();
-            SettingsLoaded = true;
+            else
+            {
+                ExceptionHandler.LogEvent("[Settings] creating new default settings due to TemporaryMode");
+                Settings = new SettingsData();
+                CheckSettings();
+                SettingsLoaded = true;
+            }
         }
 
         private static void CheckSettings()
@@ -70,12 +82,19 @@ namespace ShutdownTimer.Helpers
 
         public static void Save()
         {
-            ExceptionHandler.LogEvent("[Settings] Saving settings.json");
-
-            if (SettingsLoaded)
+            if (!TemporaryMode)
             {
-                string settingsJson = JsonConvert.SerializeObject(Settings, Formatting.Indented);
-                File.WriteAllText(settingsPath, settingsJson);
+                ExceptionHandler.LogEvent("[Settings] Saving settings.json");
+
+                if (SettingsLoaded)
+                {
+                    string settingsJson = JsonConvert.SerializeObject(Settings, Formatting.Indented);
+                    File.WriteAllText(settingsPath, settingsJson);
+                }
+            }
+            else
+            {
+                ExceptionHandler.LogEvent("[Settings] Ignoring Settings.Save() call due to TemporaryMode");
             }
         }
     }

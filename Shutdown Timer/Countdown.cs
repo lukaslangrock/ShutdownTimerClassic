@@ -15,6 +15,7 @@ namespace ShutdownTimer
         public bool Graceful { get; set; } // uses a graceful shutdown which allows apps to save their work or interrupt the shutdown
         public bool PreventSystemSleep { get; set; } // tells Windows that the system should stay awake during countdown
         public bool UI { get; set; } // disables UI updates when set to false (used for running in background)
+        public bool Forced { get; set; } // disables all UI controls and exit dialogs
 
         //private
         private FormWindowState lastStateUIFormWindowState; // used to update UI immediately after WindowState change
@@ -72,6 +73,12 @@ namespace ShutdownTimer
                 notifyIcon.BalloonTipText = "Timer started. The power action will be executed in " + CountdownTimeSpan.Hours + " hours, " + CountdownTimeSpan.Minutes + " minutes and " + CountdownTimeSpan.Seconds + " seconds.";
                 notifyIcon.ShowBalloonTip(10000);
                 Hide();
+            }
+
+            if (Forced)
+            {
+                ignoreClose = true;
+                contextMenuStrip.Enabled = false;
             }
 
             ExceptionHandler.LogEvent("[Countdown] Set UI");

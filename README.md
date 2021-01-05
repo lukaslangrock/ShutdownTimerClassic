@@ -70,6 +70,12 @@ Argument                 Description
 /SetAction <action>      Sets the power action which will be executed after the countdown reached zero.
                          Type in the exact name as seen in the UI (eg: Shutdown, Restart or Sleep. Do not use shutdown Reboot or SLEEP)
 
+/SetMode <mode>          Sets the control mode. Modes available:
+                         'Prefill':      Prefills settings but let user manually change them too. Timer won't start automatically.
+                         'Lock':         Overrides settings so the user can not change them. Timer won't start automatically.
+                         'Launch':       Overrides settings and starts the timer.
+                         'ForcedLaunch': Overrides settings and starts the timer. Disables all UI controls and exit dialogs.
+
 /Graceful                Will use the graceful mode if available. This means that your computer will do a normal, interruptible, shutdown.
                          Your shutdown might fail when apps resist the close event. Only use this if you know what you are doing.
 

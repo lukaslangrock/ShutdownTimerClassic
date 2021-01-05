@@ -101,7 +101,7 @@
             this.toolStripSeparator2,
             this.timeMenuItem});
             this.contextMenuStrip.Name = "contextMenu";
-            this.contextMenuStrip.Size = new System.Drawing.Size(213, 151);
+            this.contextMenuStrip.Size = new System.Drawing.Size(213, 173);
             // 
             // timerStopMenuItem
             // 

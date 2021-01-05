@@ -156,11 +156,13 @@ namespace ShutdownTimer
             ExceptionHandler.LogEvent("[Menu] Process args");
 
             string timeArg = null;
-            string controlMode = "Recommend"; // Use recommend control mode by default
+            string controlMode = "Prefill"; // Use 'Prefill' control mode by default
+
             //Control Modes:
-            //Takeover:     Overrides settings and starts the timer
-            //Lock:         Overrides settings and locks UI controls but lets user control whether or not to start the timer
-            //Recommend:    Prepopulates settings but leaves the UI unlocked
+            //Prefill:      Prefills settings but let user manually change them too. Timer won't start automatically.
+            //Lock:         Overrides settings so the user can not change them. Timer won't start automatically.
+            //Launch:       Overrides settings and starts the timer.
+            //ForcedLaunch: Overrides settings and starts the timer. Disables all UI controls and exit dialogs.
 
             // Read args and do some processing
             for (var i = 0; i < startupArgs.Length; i++)
@@ -172,7 +174,11 @@ namespace ShutdownTimer
                         break;
 
                     case "/SetAction":
-                        if (!string.IsNullOrWhiteSpace(startupArgs[i + 1])) { actionComboBox.Text = startupArgs[i + 1]; }
+                        actionComboBox.Text = startupArgs[i + 1];
+                        break;
+
+                    case "/SetMode":
+                        controlMode = startupArgs[i + 1];
                         break;
 
                     case "/Graceful":
@@ -185,18 +191,6 @@ namespace ShutdownTimer
 
                     case "/Background":
                         backgroundCheckBox.Checked = true;
-                        break;
-
-                    case "/Takeover":
-                        controlMode = "Takeover";
-                        break;
-
-                    case "/Lock":
-                        controlMode = "Lock";
-                        break;
-
-                    case "/Recommend":
-                        controlMode = "Recommend";
                         break;
                 }
             }
@@ -239,23 +233,34 @@ namespace ShutdownTimer
             // Process control mode
             switch (controlMode)
             {
-                case "Takeover":
-                    ExceptionHandler.LogEvent("[Menu] Takeover mode");
-                    StartCountdown();
+                case "Prefill":
+                    ExceptionHandler.LogEvent("[Menu] Setting 'Prefill' mode");
+                    settingsButton.Enabled = false;
+                    actionGroupBox.Enabled = true;
+                    timeGroupBox.Enabled = true;
                     break;
 
                 case "Lock":
-                    ExceptionHandler.LogEvent("[Menu] Lock mode");
+                    ExceptionHandler.LogEvent("[Menu] Setting 'Lock' mode");
+                    SettingsProvider.TemporaryMode = true;
+                    startButton.Text = "Start (with recommended settings)";
                     settingsButton.Enabled = false;
                     actionGroupBox.Enabled = false;
                     timeGroupBox.Enabled = false;
                     break;
 
-                case "Recommend":
-                    ExceptionHandler.LogEvent("[Menu] Recommend mode");
-                    settingsButton.Enabled = false;
-                    actionGroupBox.Enabled = true;
-                    timeGroupBox.Enabled = true;
+                case "Launch":
+                    ExceptionHandler.LogEvent("[Menu] Settings 'Launch' mode");
+                    SettingsProvider.TemporaryMode = true;
+                    this.Hide();
+                    StartCountdown();
+                    break;
+
+                case "ForcedLaunch":
+                    ExceptionHandler.LogEvent("[Menu] Settings 'Launch' mode");
+                    SettingsProvider.TemporaryMode = true;
+                    this.Hide();
+                    StartCountdown(true);
                     break;
             }
         }
@@ -305,7 +310,7 @@ namespace ShutdownTimer
         /// <summary>
         /// Starts the countdown with values from UI
         /// </summary>
-        private void StartCountdown()
+        private void StartCountdown(bool forced = false)
         {
             ExceptionHandler.LogEvent("[Menu] Start countdown");
 
@@ -319,7 +324,8 @@ namespace ShutdownTimer
                 Action = actionComboBox.Text,
                 Graceful = gracefulCheckBox.Checked,
                 PreventSystemSleep = preventSleepCheckBox.Checked,
-                UI = !backgroundCheckBox.Checked
+                UI = !backgroundCheckBox.Checked,
+                Forced = forced
             })
             {
                 countdown.Owner = this;
