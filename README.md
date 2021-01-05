@@ -87,8 +87,6 @@ Argument                 Description
 Example: `.\ShutdownTimerClassic.exe /SetTime 01:00 /SetAction Hibernate /Takeover`
 This command will launch launch Shutdown Timer in hibernation mode with 1 hours, 0 minutes and 0 seconds and start the countdown.
 
-Please note that the user will see a message explaining that the countdown has been started externally.
-
 If you want to redistribute my executable with your own app/script you are free to do so. Please just keep it updated and mention this project somewhere in the description (ie: follow the license for this project).
 
 # Behavior 📄

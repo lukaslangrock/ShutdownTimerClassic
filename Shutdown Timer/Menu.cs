@@ -241,7 +241,7 @@ namespace ShutdownTimer
             {
                 case "Takeover":
                     ExceptionHandler.LogEvent("[Menu] Takeover mode");
-                    StartCountdown("Externally initiated countdown!");
+                    StartCountdown();
                     break;
 
                 case "Lock":
@@ -249,8 +249,6 @@ namespace ShutdownTimer
                     settingsButton.Enabled = false;
                     actionGroupBox.Enabled = false;
                     timeGroupBox.Enabled = false;
-                    statusLabel.Text = "Interface has been prefilled and locked";
-                    statusLabel.Visible = true;
                     break;
 
                 case "Recommend":
@@ -258,8 +256,6 @@ namespace ShutdownTimer
                     settingsButton.Enabled = false;
                     actionGroupBox.Enabled = true;
                     timeGroupBox.Enabled = true;
-                    statusLabel.Text = "Recommended settings have been prefilled";
-                    statusLabel.Visible = true;
                     break;
             }
         }
@@ -309,7 +305,7 @@ namespace ShutdownTimer
         /// <summary>
         /// Starts the countdown with values from UI
         /// </summary>
-        private void StartCountdown(string pStatus = null)
+        private void StartCountdown()
         {
             ExceptionHandler.LogEvent("[Menu] Start countdown");
 
@@ -323,8 +319,7 @@ namespace ShutdownTimer
                 Action = actionComboBox.Text,
                 Graceful = gracefulCheckBox.Checked,
                 PreventSystemSleep = preventSleepCheckBox.Checked,
-                UI = !backgroundCheckBox.Checked,
-                Status = pStatus
+                UI = !backgroundCheckBox.Checked
             })
             {
                 countdown.Owner = this;

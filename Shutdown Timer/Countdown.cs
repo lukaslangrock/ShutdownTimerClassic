@@ -12,7 +12,6 @@ namespace ShutdownTimer
         //properties
         public TimeSpan CountdownTimeSpan { get; set; } // timespan after which the power action gets executed
         public string Action { get; set; } // defines what power action to execute (fallback to shutdown if not changed)
-        public string Status { get; set; } // shows a status message on the bottom left corner of the countdown
         public bool Graceful { get; set; } // uses a graceful shutdown which allows apps to save their work or interrupt the shutdown
         public bool PreventSystemSleep { get; set; } // tells Windows that the system should stay awake during countdown
         public bool UI { get; set; } // disables UI updates when set to false (used for running in background)
@@ -58,8 +57,6 @@ namespace ShutdownTimer
 
             // When the dark theme is selected we are using the light icon to generate contrast (and vise versa), you wouldn't want a white icon on a white background.
             notifyIcon.Icon = lighttheme ? Properties.Resources.icon_dark : Properties.Resources.icon_light;
-
-            if (!string.IsNullOrWhiteSpace(Status)) { statusLabel.Text = Status; statusLabel.Visible = true; }
 
             // Setup UI
             titleLabel.Text = Action + " Timer";

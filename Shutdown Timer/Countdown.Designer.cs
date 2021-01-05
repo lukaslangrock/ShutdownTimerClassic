@@ -44,7 +44,6 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.timeMenuItem = new System.Windows.Forms.ToolStripTextBox();
             this.titlebarPictureBox = new System.Windows.Forms.PictureBox();
-            this.statusLabel = new System.Windows.Forms.Label();
             this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -169,19 +168,6 @@
             this.titlebarPictureBox.TabIndex = 16;
             this.titlebarPictureBox.TabStop = false;
             // 
-            // statusLabel
-            // 
-            this.statusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.statusLabel.AutoSize = true;
-            this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.statusLabel.Location = new System.Drawing.Point(12, 124);
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(164, 13);
-            this.statusLabel.TabIndex = 17;
-            this.statusLabel.Text = "Status messages will appear here";
-            this.statusLabel.Visible = false;
-            // 
             // Countdown
             // 
             this.AccessibleDescription = "Shows the time left until power action gets executed.";
@@ -192,7 +178,6 @@
             this.BackColor = System.Drawing.Color.RoyalBlue;
             this.ClientSize = new System.Drawing.Size(359, 146);
             this.ContextMenuStrip = this.contextMenuStrip;
-            this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.titlebarPictureBox);
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.timeLabel);
@@ -227,7 +212,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripTextBox timeMenuItem;
         private System.Windows.Forms.ToolStripMenuItem appRestartMenuItem;
-        private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.ToolStripMenuItem timerUIHideMenuItem;
         private System.Windows.Forms.ToolStripMenuItem timerUIShowMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
