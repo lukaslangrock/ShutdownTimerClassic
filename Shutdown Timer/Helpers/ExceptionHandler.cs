@@ -21,7 +21,7 @@ namespace ShutdownTimer.Helpers
                 "A log file containing information about the process and the error has been saved to your desktop.\n" +
                 "Please create an issue on GitHub and include the contents of this log file to help identify and fix the issue.\n\n" +
                 "GitHub: github.com/lukaslangrock/ShutdownTimerClassic/issues\n" +
-                "Email: lukas.langrock@outlook.de";
+                "Email: lukas.langrock@mailbox.org";
             MessageBox.Show(message, "Shutdown Timer Classic crashed and needs to be terminated!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Process.Start(filepath); // Show log to user
         }
@@ -37,7 +37,7 @@ namespace ShutdownTimer.Helpers
                 "Please create an issue on GitHub and include the contents of this log file to help identify and fix the issue.\n\n" +
                 $"Log file location: {filepath}\n" +
                 "GitHub: github.com/lukaslangrock/ShutdownTimerClassic/issues\n" +
-                "Email: lukas.langrock@outlook.de\n\n" +
+                "Email: lukas.langrock@mailbox.org\n\n" +
                 "The application experienced a critical error and may very well be broken. It is not recommended to keep using this instance of the application!\n" +
                 "Would you like to terminate the application?";
             DialogResult dialogResult = MessageBox.Show(message, "Shutdown Timer Classic crashed!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
@@ -65,8 +65,8 @@ namespace ShutdownTimer.Helpers
             StringBuilder log = new StringBuilder();
 
             log.Append($"{Application.ProductName}@{Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf("."))} experienced a critical exception.\n");
-            log.Append("The following data includes information about your system, the exception and the internal state of the application at the time of the exception.\n");
-            log.Append("Please open an issue on https://github.com/LukasLangrock/ShutdownTimerClassic and include the contents this log file to help identify and fix the issue.\n");
+            log.Append("The following data includes information about your system, the exception and the internal state of the application at the time of the exception. You may remove certain information (like your username which may be included in the log) to protect your privacy.\n");
+            log.Append("Please open an issue on https://github.com/lukaslangrock/ShutdownTimerClassic and include the contents of this log file to help identify and fix the issue.\n");
 
             log.Append("\n\n---- Process Info ----\n");
             log.Append($"PID: {process.Id}\n");
@@ -78,16 +78,14 @@ namespace ShutdownTimer.Helpers
             log.Append($"HasExited: {process.HasExited}\n");
             log.Append($"StartTime: {process.StartTime}\n");
             log.Append($"PrivateMemorySize64: {process.PrivateMemorySize64}\n");
-            log.Append($"VirtualMemorySize64 {process.VirtualMemorySize64}\n");
-            log.Append($"PagedMemorySize64 {process.PagedMemorySize64}\n");
+            log.Append($"VirtualMemorySize64: {process.VirtualMemorySize64}\n");
+            log.Append($"PagedMemorySize64: {process.PagedMemorySize64}\n");
             log.Append($"PeakWorkingSet64: {process.PeakWorkingSet64}\n");
             log.Append($"WorkingSet64: {process.WorkingSet64}\n");
             log.Append($"UserProcessorTime: {process.UserProcessorTime}\n");
             log.Append($"TotalProcessorTime: {process.TotalProcessorTime}\n");
-            log.Append($"ProcessorAffinity: {process.ProcessorAffinity}\n");
 
             log.Append("\n\n---- Application Info ----\n");
-            log.Append("You may remove information from here to protect your privacy.\n");
             log.Append($"Product Name: {Application.ProductName}\n");
             log.Append($"Product Version: {Application.ProductVersion}\n");
             log.Append($"Current Culture: {Application.CurrentCulture}\n");
