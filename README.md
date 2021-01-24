@@ -2,7 +2,7 @@
 
 Shutdown Timer Classic is a small little Windows application that allows you to set a timer that will shutdown, restart, hibernate, sleep or lock your PC.
 
-![Screenshot of the main menu](Screenshots/Menu.png)
+![Screenshot of the main menu](screenshots/Menu.png)
 
 I am also planning on developing a more advanced and sleek version of this app in the future.
 
@@ -25,9 +25,9 @@ Thus you should be careful to use this mode as it might result in a failed shutd
 
 By default, the countdown window will be always on top of every other window so you don't forget that you have an active shutdown timer. The countdown can also be hidden by selecting the "Run in background" checkbox under the dropdown menu. If the countdown is already running you can just right click anywhere in the countdown window to bring up a menu with the option to minimize the countdown to the background. It can also be brought back from the background by using the tray menu (described below).
 
-![Screenshot of the main menu with extended combobox](Screenshots/Menu2.png)
+![Screenshot of the main menu with extended combobox](screenshots/Menu2.png)
 
-![Screenshot of the right click menu](Screenshots/RightClickMenu.png)
+![Screenshot of the right click menu](screenshots/RightClickMenu.png)
 
 # Colors 🎨
 
@@ -41,17 +41,17 @@ Here is a quick overview:
 | 10 - 1 min.   | Orange        | No        |
 | < 1min.       | Red / Black   | Yes       |
 
-![Screenshot of countdown window with green background](Screenshots/CountdownGreen.png)
-![Screenshot of countdown window with yellow background](Screenshots/CountdownYellow.png)
-![Screenshot of countdown window with orange background](Screenshots/CountdownOrange.png)
-![Screenshot of countdown window with red background](Screenshots/CountdownRed.png)
-![Screenshot of countdown window with black background](Screenshots/CountdownBlack.png)
+![Screenshot of countdown window with green background](screenshots/CountdownGreen.png)
+![Screenshot of countdown window with yellow background](screenshots/CountdownYellow.png)
+![Screenshot of countdown window with orange background](screenshots/CountdownOrange.png)
+![Screenshot of countdown window with red background](screenshots/CountdownRed.png)
+![Screenshot of countdown window with black background](screenshots/CountdownBlack.png)
 
 # Tray Menu 🔧
 
 Shutdown Timer also includes a tray menu to control the application from you Taskbar tray. Just right click the icon to bring it up (you may need to click on the little arrow on the right of your Taskbar to find the Shutdown Timer icon). You can stop, restart and view the timer from it and also switch the UI mode to hide or show the countdown window.
 
-![Screenshot of the tray menu](Screenshots/TrayMenu.png)
+![Screenshot of the tray menu](screenshots/TrayMenu.png)
 
 The same menu can also be accessed by right clicking in the countdown window.
 

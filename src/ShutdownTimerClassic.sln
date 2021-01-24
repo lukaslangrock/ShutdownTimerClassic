@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29020.237
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shutdown Timer", "Shutdown Timer\Shutdown Timer.csproj", "{CE23BD33-08D8-4895-854C-90D91CBA02C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shutdown Timer", "ShutdownTimer\ShutdownTimer.csproj", "{CE23BD33-08D8-4895-854C-90D91CBA02C6}"
 EndProject
-Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "Windows Application Packaging", "Windows Application Packaging\Windows Application Packaging.wapproj", "{CF85ADA3-7814-4869-BBF2-F19A4DD27F92}"
+Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "Windows Application Packaging", "WindowsApplicationPackaging\WindowsApplicationPackaging.wapproj", "{CF85ADA3-7814-4869-BBF2-F19A4DD27F92}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Windows Installer Packaging", "Windows Installer Packaging\Windows Installer Packaging.vdproj", "{B17CEEE1-36DD-4A24-9BAB-A9BF11A308B2}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Windows Installer Packaging", "WindowsInstallerPackaging\WindowsInstallerPackaging.vdproj", "{B17CEEE1-36DD-4A24-9BAB-A9BF11A308B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

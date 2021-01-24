@@ -163,7 +163,7 @@
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Shutdown Timer\\bin\\Release\\ShutdownTimerClassic.exe"
+            "SourcePath" = "8:..\\ShutdownTimer\\bin\\Release\\ShutdownTimerClassic.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_1E58F7E2C3EA412C83810222F41244FA"
@@ -183,7 +183,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6B415E4521F8467F885E8FB8AF0C1A55"
             {
-            "SourcePath" = "8:..\\Shutdown Timer\\Icons\\icon.display.ico"
+            "SourcePath" = "8:..\\ShutdownTimer\\Icons\\icon.display.ico"
             "TargetName" = "8:icon.ico"
             "Tag" = "8:"
             "Folder" = "8:_1E58F7E2C3EA412C83810222F41244FA"
@@ -203,7 +203,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7C86775F0D0E4B4F84D770BC0BDFD8B7"
             {
-            "SourcePath" = "8:..\\Shutdown Timer\\bin\\Release\\ShutdownTimerClassic.exe.config"
+            "SourcePath" = "8:..\\ShutdownTimer\\bin\\Release\\ShutdownTimerClassic.exe.config"
             "TargetName" = "8:ShutdownTimerClassic.exe.config"
             "Tag" = "8:"
             "Folder" = "8:_1E58F7E2C3EA412C83810222F41244FA"
@@ -223,7 +223,7 @@
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_828A11CEEADA45B687047D7CA515BC8F"
             {
-            "SourcePath" = "8:..\\Shutdown Timer\\bin\\Release\\ShutdownTimerClassic.pdb"
+            "SourcePath" = "8:..\\ShutdownTimer\\bin\\Release\\ShutdownTimerClassic.pdb"
             "TargetName" = "8:ShutdownTimerClassic.pdb"
             "Tag" = "8:"
             "Folder" = "8:_1E58F7E2C3EA412C83810222F41244FA"

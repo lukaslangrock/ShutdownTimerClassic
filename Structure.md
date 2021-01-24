@@ -2,8 +2,8 @@
 
 *Details on how the project is organized and how the different classes interact with each other.*
 
-This project is relatively simple. The actual codebase is within the `Shutdown Timer` folder, so all paths to files I mention will be relative to this folder.
-The `Windows Application Packaging` and `Windows Installer Packaging` folders contain packaging projects for generating an install file and uploading the packaged project to the Microsoft Store. `Icon` and `Screenshots` only contain the project's icon and screenshots for the README.
+This project is relatively simple. The actual codebase is within the `src/ShutdownTimer` folder, so all paths to files I mention will be relative to this folder.
+The `src/WindowsApplicationPackaging` and `src/WindowsInstallerPackaging` folders contain packaging projects for generating an install file and uploading the packaged project to the Microsoft Store. `icon` and `screenshots` only contain the project's icon and screenshots for the README.
 
 ## How to get started ⚡
 
