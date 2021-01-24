@@ -17,7 +17,7 @@ namespace ShutdownTimer.Helpers
         {
             ExceptionHandler.LogEvent("[Settings] Loading settings.json");
 
-            if(!TemporaryMode)
+            if (!TemporaryMode)
             {
                 // make sure respective appdata dir exists
                 if (!Directory.Exists(settingsDirectory))
@@ -111,6 +111,9 @@ namespace ShutdownTimer.Helpers
 
         // advanced settings
         public bool ForceIfHungFlag { get; set; }
+        public bool DisableAlwaysOnTop { get; set; }
+        public bool DisableAnimations { get; set; }
+        public bool DisableNotifications { get; set; }
     }
 
     public class TimerData

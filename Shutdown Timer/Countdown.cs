@@ -62,6 +62,8 @@ namespace ShutdownTimer
             // Setup UI
             titleLabel.Text = Action + " Timer";
 
+            TopMost = !SettingsProvider.Settings.DisableAlwaysOnTop;
+
             if (!UI)
             {
                 ignoreClose = true; // Disable close dialogs and ignore closing from form
@@ -212,7 +214,7 @@ namespace ShutdownTimer
 
             timerUIHideMenuItem.Enabled = true;
             timerUIShowMenuItem.Enabled = false;
-            TopMost = true;
+            if (!SettingsProvider.Settings.DisableAlwaysOnTop) { TopMost = true; }
             ShowInTaskbar = true;
             WindowState = FormWindowState.Normal;
             UI = true;
@@ -299,21 +301,27 @@ namespace ShutdownTimer
                     this.Text = "Countdown";
 
                     // Decide which color/animation to use
-                    if (ts.Days > 0 || ts.Hours > 0 || ts.Minutes >= 30) { BackColor = Color.ForestGreen; }
-                    else if (ts.Minutes >= 10) { BackColor = Color.DarkOrange; }
-                    else if (ts.Minutes >= 1) { BackColor = Color.OrangeRed; }
-                    else { WarningAnimation(); }
+                    if (!SettingsProvider.Settings.DisableAnimations)
+                    {
+                        if (ts.Days > 0 || ts.Hours > 0 || ts.Minutes >= 30) { BackColor = Color.ForestGreen; }
+                        else if (ts.Minutes >= 10) { BackColor = Color.DarkOrange; }
+                        else if (ts.Minutes >= 1) { BackColor = Color.OrangeRed; }
+                        else { WarningAnimation(); }
+                    }
                 }
                 else // UI for tray menu
                 {
                     this.Text = "Countdown - " + elapsedTime;
 
                     // Decide which tray message to show
-                    if (ts.Days == 0 && ts.Hours == 2 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "2 hours remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                    else if (ts.Days == 0 && ts.Hours == 1 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "1 hour remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                    else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 30 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "30 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                    else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 5 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "5 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                    else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 0 && ts.Seconds == 30) { notifyIcon.BalloonTipText = "30 seconds remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                    if (!SettingsProvider.Settings.DisableNotifications)
+                    {
+                        if (ts.Days == 0 && ts.Hours == 2 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "2 hours remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                        else if (ts.Days == 0 && ts.Hours == 1 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "1 hour remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                        else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 30 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "30 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                        else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 5 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "5 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                        else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 0 && ts.Seconds == 30) { notifyIcon.BalloonTipText = "30 seconds remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
+                    }
                 }
             }
 

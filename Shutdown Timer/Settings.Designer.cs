@@ -75,6 +75,10 @@
             this.debugGroupBox = new System.Windows.Forms.GroupBox();
             this.appdataPathLabel = new System.Windows.Forms.Label();
             this.appdataPathTextBox = new System.Windows.Forms.TextBox();
+            this.countdownGroupBox = new System.Windows.Forms.GroupBox();
+            this.disableAlwaysOnTopCheckBox = new System.Windows.Forms.CheckBox();
+            this.disableAnimationsCheckBox = new System.Windows.Forms.CheckBox();
+            this.disableNotificationsGroupBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -90,6 +94,7 @@
             this.aboutGroupBox.SuspendLayout();
             this.licenseGroupBox.SuspendLayout();
             this.debugGroupBox.SuspendLayout();
+            this.countdownGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // titlebarPictureBox
@@ -383,6 +388,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.countdownGroupBox);
             this.tabPage2.Controls.Add(this.debugGroupBox);
             this.tabPage2.Controls.Add(this.forceFlagGroupBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -580,7 +586,7 @@
             // 
             this.debugGroupBox.Controls.Add(this.appdataPathTextBox);
             this.debugGroupBox.Controls.Add(this.appdataPathLabel);
-            this.debugGroupBox.Location = new System.Drawing.Point(3, 87);
+            this.debugGroupBox.Location = new System.Drawing.Point(3, 181);
             this.debugGroupBox.Name = "debugGroupBox";
             this.debugGroupBox.Size = new System.Drawing.Size(290, 45);
             this.debugGroupBox.TabIndex = 15;
@@ -603,6 +609,48 @@
             this.appdataPathTextBox.ReadOnly = true;
             this.appdataPathTextBox.Size = new System.Drawing.Size(195, 20);
             this.appdataPathTextBox.TabIndex = 16;
+            // 
+            // countdownGroupBox
+            // 
+            this.countdownGroupBox.Controls.Add(this.disableNotificationsGroupBox);
+            this.countdownGroupBox.Controls.Add(this.disableAnimationsCheckBox);
+            this.countdownGroupBox.Controls.Add(this.disableAlwaysOnTopCheckBox);
+            this.countdownGroupBox.Location = new System.Drawing.Point(3, 87);
+            this.countdownGroupBox.Name = "countdownGroupBox";
+            this.countdownGroupBox.Size = new System.Drawing.Size(290, 88);
+            this.countdownGroupBox.TabIndex = 17;
+            this.countdownGroupBox.TabStop = false;
+            this.countdownGroupBox.Text = "Countdown Window";
+            // 
+            // disableAlwaysOnTopCheckBox
+            // 
+            this.disableAlwaysOnTopCheckBox.AutoSize = true;
+            this.disableAlwaysOnTopCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.disableAlwaysOnTopCheckBox.Name = "disableAlwaysOnTopCheckBox";
+            this.disableAlwaysOnTopCheckBox.Size = new System.Drawing.Size(179, 17);
+            this.disableAlwaysOnTopCheckBox.TabIndex = 0;
+            this.disableAlwaysOnTopCheckBox.Text = "Disable always on top behaviour";
+            this.disableAlwaysOnTopCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // disableAnimationsCheckBox
+            // 
+            this.disableAnimationsCheckBox.AutoSize = true;
+            this.disableAnimationsCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.disableAnimationsCheckBox.Name = "disableAnimationsCheckBox";
+            this.disableAnimationsCheckBox.Size = new System.Drawing.Size(114, 17);
+            this.disableAnimationsCheckBox.TabIndex = 1;
+            this.disableAnimationsCheckBox.Text = "Disable animations";
+            this.disableAnimationsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // disableNotificationsGroupBox
+            // 
+            this.disableNotificationsGroupBox.AutoSize = true;
+            this.disableNotificationsGroupBox.Location = new System.Drawing.Point(6, 65);
+            this.disableNotificationsGroupBox.Name = "disableNotificationsGroupBox";
+            this.disableNotificationsGroupBox.Size = new System.Drawing.Size(120, 17);
+            this.disableNotificationsGroupBox.TabIndex = 2;
+            this.disableNotificationsGroupBox.Text = "Disable notifications";
+            this.disableNotificationsGroupBox.UseVisualStyleBackColor = true;
             // 
             // Settings
             // 
@@ -646,6 +694,8 @@
             this.licenseGroupBox.PerformLayout();
             this.debugGroupBox.ResumeLayout(false);
             this.debugGroupBox.PerformLayout();
+            this.countdownGroupBox.ResumeLayout(false);
+            this.countdownGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -699,5 +749,9 @@
         private System.Windows.Forms.GroupBox debugGroupBox;
         private System.Windows.Forms.TextBox appdataPathTextBox;
         private System.Windows.Forms.Label appdataPathLabel;
+        private System.Windows.Forms.GroupBox countdownGroupBox;
+        private System.Windows.Forms.CheckBox disableAnimationsCheckBox;
+        private System.Windows.Forms.CheckBox disableAlwaysOnTopCheckBox;
+        private System.Windows.Forms.CheckBox disableNotificationsGroupBox;
     }
 }
