@@ -102,7 +102,6 @@
             this.titleLabel.Size = new System.Drawing.Size(215, 31);
             this.titleLabel.TabIndex = 3;
             this.titleLabel.Text = "Shutdown Timer";
-            this.titleLabel.Click += new System.EventHandler(this.TitleLabel_Click);
             // 
             // titlebarPictureBox
             // 
