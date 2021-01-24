@@ -58,8 +58,8 @@ namespace ShutdownTimer
             secondsNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Seconds;
 
             // advanced settings
-            ForceIfHungFlagRadioButton.Checked = !SettingsProvider.Settings.ForceIfHungFlag;
-            ForceFlagRadioButton.Checked = SettingsProvider.Settings.ForceIfHungFlag;
+            forceIfHungFlagRadioButton.Checked = !SettingsProvider.Settings.ForceIfHungFlag;
+            forceFlagRadioButton.Checked = SettingsProvider.Settings.ForceIfHungFlag;
             appdataPathTextBox.Text = SettingsProvider.settingsDirectory;
         }
 
@@ -82,7 +82,7 @@ namespace ShutdownTimer
             }
 
             // advanced settings
-            SettingsProvider.Settings.ForceIfHungFlag = ForceFlagRadioButton.Checked;
+            SettingsProvider.Settings.ForceIfHungFlag = forceFlagRadioButton.Checked;
 
             SettingsProvider.Save();
         }

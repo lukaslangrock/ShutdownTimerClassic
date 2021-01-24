@@ -57,8 +57,8 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.forceFlagGroupBox = new System.Windows.Forms.GroupBox();
             this.forceFlagDocsLinkLabel = new System.Windows.Forms.LinkLabel();
-            this.ForceFlagRadioButton = new System.Windows.Forms.RadioButton();
-            this.ForceIfHungFlagRadioButton = new System.Windows.Forms.RadioButton();
+            this.forceFlagRadioButton = new System.Windows.Forms.RadioButton();
+            this.forceIfHungFlagRadioButton = new System.Windows.Forms.RadioButton();
             this.forceFlagLabel = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.aboutGroupBox = new System.Windows.Forms.GroupBox();
@@ -395,8 +395,8 @@
             // forceFlagGroupBox
             // 
             this.forceFlagGroupBox.Controls.Add(this.forceFlagDocsLinkLabel);
-            this.forceFlagGroupBox.Controls.Add(this.ForceFlagRadioButton);
-            this.forceFlagGroupBox.Controls.Add(this.ForceIfHungFlagRadioButton);
+            this.forceFlagGroupBox.Controls.Add(this.forceFlagRadioButton);
+            this.forceFlagGroupBox.Controls.Add(this.forceIfHungFlagRadioButton);
             this.forceFlagGroupBox.Controls.Add(this.forceFlagLabel);
             this.forceFlagGroupBox.Location = new System.Drawing.Point(3, 3);
             this.forceFlagGroupBox.Name = "forceFlagGroupBox";
@@ -416,27 +416,27 @@
             this.forceFlagDocsLinkLabel.Text = "ExitWindowsEx Docs";
             this.forceFlagDocsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ForceFlagDocsLinkLabel_LinkClicked);
             // 
-            // ForceFlagRadioButton
+            // forceFlagRadioButton
             // 
-            this.ForceFlagRadioButton.AutoSize = true;
-            this.ForceFlagRadioButton.Location = new System.Drawing.Point(9, 55);
-            this.ForceFlagRadioButton.Name = "ForceFlagRadioButton";
-            this.ForceFlagRadioButton.Size = new System.Drawing.Size(133, 17);
-            this.ForceFlagRadioButton.TabIndex = 16;
-            this.ForceFlagRadioButton.TabStop = true;
-            this.ForceFlagRadioButton.Text = "EWX_FORCEIFHUNG";
-            this.ForceFlagRadioButton.UseVisualStyleBackColor = true;
+            this.forceFlagRadioButton.AutoSize = true;
+            this.forceFlagRadioButton.Location = new System.Drawing.Point(9, 55);
+            this.forceFlagRadioButton.Name = "forceFlagRadioButton";
+            this.forceFlagRadioButton.Size = new System.Drawing.Size(133, 17);
+            this.forceFlagRadioButton.TabIndex = 16;
+            this.forceFlagRadioButton.TabStop = true;
+            this.forceFlagRadioButton.Text = "EWX_FORCEIFHUNG";
+            this.forceFlagRadioButton.UseVisualStyleBackColor = true;
             // 
-            // ForceIfHungFlagRadioButton
+            // forceIfHungFlagRadioButton
             // 
-            this.ForceIfHungFlagRadioButton.AutoSize = true;
-            this.ForceIfHungFlagRadioButton.Location = new System.Drawing.Point(9, 32);
-            this.ForceIfHungFlagRadioButton.Name = "ForceIfHungFlagRadioButton";
-            this.ForceIfHungFlagRadioButton.Size = new System.Drawing.Size(92, 17);
-            this.ForceIfHungFlagRadioButton.TabIndex = 15;
-            this.ForceIfHungFlagRadioButton.TabStop = true;
-            this.ForceIfHungFlagRadioButton.Text = "EWX_FORCE";
-            this.ForceIfHungFlagRadioButton.UseVisualStyleBackColor = true;
+            this.forceIfHungFlagRadioButton.AutoSize = true;
+            this.forceIfHungFlagRadioButton.Location = new System.Drawing.Point(9, 32);
+            this.forceIfHungFlagRadioButton.Name = "forceIfHungFlagRadioButton";
+            this.forceIfHungFlagRadioButton.Size = new System.Drawing.Size(92, 17);
+            this.forceIfHungFlagRadioButton.TabIndex = 15;
+            this.forceIfHungFlagRadioButton.TabStop = true;
+            this.forceIfHungFlagRadioButton.Text = "EWX_FORCE";
+            this.forceIfHungFlagRadioButton.UseVisualStyleBackColor = true;
             // 
             // forceFlagLabel
             // 
@@ -692,8 +692,8 @@
         private System.Windows.Forms.Label trayiconThemeLabel;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox forceFlagGroupBox;
-        private System.Windows.Forms.RadioButton ForceFlagRadioButton;
-        private System.Windows.Forms.RadioButton ForceIfHungFlagRadioButton;
+        private System.Windows.Forms.RadioButton forceFlagRadioButton;
+        private System.Windows.Forms.RadioButton forceIfHungFlagRadioButton;
         private System.Windows.Forms.Label forceFlagLabel;
         private System.Windows.Forms.LinkLabel forceFlagDocsLinkLabel;
         private System.Windows.Forms.GroupBox debugGroupBox;
