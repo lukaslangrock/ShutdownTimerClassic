@@ -60,6 +60,7 @@ namespace ShutdownTimer
             // advanced settings
             ForceIfHungFlagRadioButton.Checked = !SettingsProvider.Settings.ForceIfHungFlag;
             ForceFlagRadioButton.Checked = SettingsProvider.Settings.ForceIfHungFlag;
+            appdataPathTextBox.Text = SettingsProvider.settingsDirectory;
         }
 
         private void SaveSettings()

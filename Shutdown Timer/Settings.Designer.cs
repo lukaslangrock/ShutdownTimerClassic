@@ -72,6 +72,9 @@
             this.appSourceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appInfoLabel = new System.Windows.Forms.Label();
+            this.debugGroupBox = new System.Windows.Forms.GroupBox();
+            this.appdataPathLabel = new System.Windows.Forms.Label();
+            this.appdataPathTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -86,6 +89,7 @@
             this.tabPage3.SuspendLayout();
             this.aboutGroupBox.SuspendLayout();
             this.licenseGroupBox.SuspendLayout();
+            this.debugGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // titlebarPictureBox
@@ -379,6 +383,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.debugGroupBox);
             this.tabPage2.Controls.Add(this.forceFlagGroupBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -571,6 +576,34 @@
             this.appInfoLabel.TabIndex = 0;
             this.appInfoLabel.Text = "Application:";
             // 
+            // debugGroupBox
+            // 
+            this.debugGroupBox.Controls.Add(this.appdataPathTextBox);
+            this.debugGroupBox.Controls.Add(this.appdataPathLabel);
+            this.debugGroupBox.Location = new System.Drawing.Point(3, 87);
+            this.debugGroupBox.Name = "debugGroupBox";
+            this.debugGroupBox.Size = new System.Drawing.Size(290, 45);
+            this.debugGroupBox.TabIndex = 15;
+            this.debugGroupBox.TabStop = false;
+            this.debugGroupBox.Text = "Debugging Information";
+            // 
+            // appdataPathLabel
+            // 
+            this.appdataPathLabel.AutoSize = true;
+            this.appdataPathLabel.Location = new System.Drawing.Point(6, 22);
+            this.appdataPathLabel.Name = "appdataPathLabel";
+            this.appdataPathLabel.Size = new System.Drawing.Size(77, 13);
+            this.appdataPathLabel.TabIndex = 16;
+            this.appdataPathLabel.Text = "AppData Path:";
+            // 
+            // appdataPathTextBox
+            // 
+            this.appdataPathTextBox.Location = new System.Drawing.Point(89, 19);
+            this.appdataPathTextBox.Name = "appdataPathTextBox";
+            this.appdataPathTextBox.ReadOnly = true;
+            this.appdataPathTextBox.Size = new System.Drawing.Size(195, 20);
+            this.appdataPathTextBox.TabIndex = 16;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -611,6 +644,8 @@
             this.aboutGroupBox.ResumeLayout(false);
             this.licenseGroupBox.ResumeLayout(false);
             this.licenseGroupBox.PerformLayout();
+            this.debugGroupBox.ResumeLayout(false);
+            this.debugGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -661,5 +696,8 @@
         private System.Windows.Forms.RadioButton ForceIfHungFlagRadioButton;
         private System.Windows.Forms.Label forceFlagLabel;
         private System.Windows.Forms.LinkLabel forceFlagDocsLinkLabel;
+        private System.Windows.Forms.GroupBox debugGroupBox;
+        private System.Windows.Forms.TextBox appdataPathTextBox;
+        private System.Windows.Forms.Label appdataPathLabel;
     }
 }
