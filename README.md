@@ -71,10 +71,10 @@ Argument                 Description
                          Type in the exact name as seen in the UI (eg: Shutdown, Restart or Sleep. Do not use shutdown Reboot or SLEEP)
 
 /SetMode <mode>          Sets the control mode. Modes available:
-                         'Prefill':      Prefills settings but let user manually change them too. Timer won't start automatically.
-                         'Lock':         Overrides settings so the user can not change them. Timer won't start automatically.
-                         'Launch':       Overrides settings and starts the timer.
-                         'ForcedLaunch': Overrides settings and starts the timer. Disables all UI controls and exit dialogs.
+                         Prefill:       Prefills settings but let user manually change them too. Timer won't start automatically.
+                         Lock:          Overrides settings so the user can not change them. Timer won't start automatically.
+                         Launch:        Overrides settings and starts the timer.
+                         ForcedLaunch:  Overrides settings and starts the timer. Disables all UI controls and exit dialogs.
 
 /Graceful                Will use the graceful mode if available. This means that your computer will do a normal, interruptible, shutdown.
                          Your shutdown might fail when apps resist the close event. Only use this if you know what you are doing.
@@ -83,14 +83,9 @@ Argument                 Description
 
 /Background              Runs the countdown in the background.
                          This is not a silent mode, the user will still get notifications and can use the tray menu.
-
-                         These control modes define how the application will behave once started with arguments. (Default: Recommend)
-/Takeover                Overrides settings and starts the timer.
-/Lock                    Overrides settings and locks UI controls but lets user control wether or not to start the timer.
-/Recommend               Prepopulates settings but leaves the UI unlocked.
 ```
 
-Example: `.\ShutdownTimerClassic.exe /SetTime 01:00 /SetAction Hibernate /Takeover`
+Example: `.\ShutdownTimerClassic.exe /SetTime 01:00 /SetAction Hibernate /SetMode Launch`
 This command will launch launch Shutdown Timer in hibernation mode with 1 hours, 0 minutes and 0 seconds and start the countdown.
 
 If you want to redistribute my executable with your own app/script you are free to do so. Please just keep it updated and mention this project somewhere in the description (ie: follow the license for this project).
