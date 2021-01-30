@@ -39,20 +39,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_AE5A57EA3A1C26F35E77E140B05398DC"
+        "MsmKey" = "8:_D5549E522B6218BA0A71BCF376A9ADFE"
         "OwnerKey" = "8:_69045F398BE84C1985E02946A6FEBC29"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_69045F398BE84C1985E02946A6FEBC29"
+        "OwnerKey" = "8:_D5549E522B6218BA0A71BCF376A9ADFE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AE5A57EA3A1C26F35E77E140B05398DC"
+        "OwnerKey" = "8:_69045F398BE84C1985E02946A6FEBC29"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -99,7 +99,7 @@
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
-        "Compression" = "3:2"
+        "Compression" = "3:3"
         "SignOutput" = "11:FALSE"
         "CertificateFile" = "8:"
         "PrivateKeyFile" = "8:"
@@ -154,7 +154,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ShutdownTimerClassic, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ShutdownTimerClassic, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_69045F398BE84C1985E02946A6FEBC29"
@@ -241,14 +241,14 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AE5A57EA3A1C26F35E77E140B05398DC"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D5549E522B6218BA0A71BCF376A9ADFE"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_AE5A57EA3A1C26F35E77E140B05398DC"
+                    "_D5549E522B6218BA0A71BCF376A9ADFE"
                     {
                     "Name" = "8:Newtonsoft.Json.DLL"
                     "Attributes" = "3:512"
@@ -329,7 +329,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Shutdown Timer Classic"
         "ProductCode" = "8:{FF93658A-BFC5-43EA-9FBD-A9035CE76701}"
-        "PackageCode" = "8:{5681877A-8636-49C5-B458-B8285676D88A}"
+        "PackageCode" = "8:{E0B284A2-1639-4326-B5D3-6F6F2E1DBAA0}"
         "UpgradeCode" = "8:{81E0637B-864A-4FE6-AA0F-5550A751DD9B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
