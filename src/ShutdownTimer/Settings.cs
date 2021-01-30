@@ -62,7 +62,7 @@ namespace ShutdownTimer
             forceFlagRadioButton.Checked = SettingsProvider.Settings.ForceIfHungFlag;
             disableAlwaysOnTopCheckBox.Checked = SettingsProvider.Settings.DisableAlwaysOnTop;
             disableAnimationsCheckBox.Checked = SettingsProvider.Settings.DisableAnimations;
-            disableNotificationsGroupBox.Checked = SettingsProvider.Settings.DisableNotifications;
+            disableNotificationsCheckBox.Checked = SettingsProvider.Settings.DisableNotifications;
             appdataPathTextBox.Text = SettingsProvider.settingsDirectory;
         }
 
@@ -88,7 +88,7 @@ namespace ShutdownTimer
             SettingsProvider.Settings.ForceIfHungFlag = forceFlagRadioButton.Checked;
             SettingsProvider.Settings.DisableAlwaysOnTop = disableAlwaysOnTopCheckBox.Checked;
             SettingsProvider.Settings.DisableAnimations = disableAnimationsCheckBox.Checked;
-            SettingsProvider.Settings.DisableNotifications = disableNotificationsGroupBox.Checked;
+            SettingsProvider.Settings.DisableNotifications = disableNotificationsCheckBox.Checked;
 
             SettingsProvider.Save();
         }
