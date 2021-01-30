@@ -27,6 +27,7 @@ By default, the countdown window will be always on top of every other window so 
 
 ![Screenshot of the main menu with extended combobox](media/screenshots/Menu2.png)
 
+![Screenshot of the settings window](media/screenshots/Settings.png)
 ![Screenshot of the right click menu](media/screenshots/RightClickMenu.png)
 
 # Colors 🎨
