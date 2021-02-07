@@ -63,9 +63,29 @@ namespace ShutdownTimer.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap fa_cog_solid {
+        internal static System.Drawing.Bitmap fa_cog_black {
             get {
-                object obj = ResourceManager.GetObject("fa_cog_solid", resourceCulture);
+                object obj = ResourceManager.GetObject("fa_cog_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fa_lock_white {
+            get {
+                object obj = ResourceManager.GetObject("fa_lock_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap fa_unlock_white {
+            get {
+                object obj = ResourceManager.GetObject("fa_unlock_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

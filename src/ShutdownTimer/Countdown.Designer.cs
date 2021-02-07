@@ -44,8 +44,10 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.timeMenuItem = new System.Windows.Forms.ToolStripTextBox();
             this.titlebarPictureBox = new System.Windows.Forms.PictureBox();
+            this.lockStatePictureBox = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lockStatePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // timeLabel
@@ -101,7 +103,7 @@
             this.toolStripSeparator2,
             this.timeMenuItem});
             this.contextMenuStrip.Name = "contextMenu";
-            this.contextMenuStrip.Size = new System.Drawing.Size(213, 173);
+            this.contextMenuStrip.Size = new System.Drawing.Size(213, 151);
             // 
             // timerStopMenuItem
             // 
@@ -168,6 +170,20 @@
             this.titlebarPictureBox.TabIndex = 16;
             this.titlebarPictureBox.TabStop = false;
             // 
+            // lockStatePictureBox
+            // 
+            this.lockStatePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lockStatePictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.lockStatePictureBox.Enabled = false;
+            this.lockStatePictureBox.Location = new System.Drawing.Point(315, 7);
+            this.lockStatePictureBox.Name = "lockStatePictureBox";
+            this.lockStatePictureBox.Size = new System.Drawing.Size(32, 32);
+            this.lockStatePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.lockStatePictureBox.TabIndex = 17;
+            this.lockStatePictureBox.TabStop = false;
+            this.lockStatePictureBox.Visible = false;
+            this.lockStatePictureBox.Click += new System.EventHandler(this.LockStatePictureBox_Click);
+            // 
             // Countdown
             // 
             this.AccessibleDescription = "Shows the time left until power action gets executed.";
@@ -178,6 +194,7 @@
             this.BackColor = System.Drawing.Color.RoyalBlue;
             this.ClientSize = new System.Drawing.Size(359, 146);
             this.ContextMenuStrip = this.contextMenuStrip;
+            this.Controls.Add(this.lockStatePictureBox);
             this.Controls.Add(this.titlebarPictureBox);
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.timeLabel);
@@ -194,6 +211,7 @@
             this.contextMenuStrip.ResumeLayout(false);
             this.contextMenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lockStatePictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -215,5 +233,6 @@
         private System.Windows.Forms.ToolStripMenuItem timerUIHideMenuItem;
         private System.Windows.Forms.ToolStripMenuItem timerUIShowMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.PictureBox lockStatePictureBox;
     }
 }

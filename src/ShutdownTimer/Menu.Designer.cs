@@ -258,7 +258,7 @@
             // 
             // settingsButton
             // 
-            this.settingsButton.BackgroundImage = global::ShutdownTimer.Properties.Resources.fa_cog_solid;
+            this.settingsButton.BackgroundImage = global::ShutdownTimer.Properties.Resources.fa_cog_black;
             this.settingsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.settingsButton.Location = new System.Drawing.Point(239, 9);
             this.settingsButton.Name = "settingsButton";

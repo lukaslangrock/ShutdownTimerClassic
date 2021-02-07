@@ -63,6 +63,7 @@ namespace ShutdownTimer
             disableAlwaysOnTopCheckBox.Checked = SettingsProvider.Settings.DisableAlwaysOnTop;
             disableAnimationsCheckBox.Checked = SettingsProvider.Settings.DisableAnimations;
             disableNotificationsCheckBox.Checked = SettingsProvider.Settings.DisableNotifications;
+            passwordCheckBox.Checked = SettingsProvider.Settings.PasswordProtection;
         }
 
         private void SaveSettings()
@@ -88,6 +89,7 @@ namespace ShutdownTimer
             SettingsProvider.Settings.DisableAlwaysOnTop = disableAlwaysOnTopCheckBox.Checked;
             SettingsProvider.Settings.DisableAnimations = disableAnimationsCheckBox.Checked;
             SettingsProvider.Settings.DisableNotifications = disableNotificationsCheckBox.Checked;
+            SettingsProvider.Settings.PasswordProtection = passwordCheckBox.Checked;
 
             SettingsProvider.Save();
         }

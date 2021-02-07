@@ -8,6 +8,7 @@ namespace ShutdownTimer
     {
         private readonly string[] startupArgs;
         private string checkResult;
+        private string password; // used for password protection
 
         public Menu(string[] args)
         {
@@ -75,6 +76,21 @@ namespace ShutdownTimer
                 timeGroupBox.Enabled = false;
 
                 SaveSettings();
+
+                if (SettingsProvider.Settings.PasswordProtection)
+                {
+                    ExceptionHandler.LogEvent("[Menu] Enabeling password protection");
+                    using (var form = new InputBox())
+                    {
+                        form.Title = "Password Protection";
+                        form.Message = "Please set a password to enable password protection.\n\n" +
+                            "You can disable this dialog in the settings under Advanced > Password Protection";
+                        form.PasswordMode = true;
+                        var result = form.ShowDialog();
+                        ExceptionHandler.LogEvent("[Menu] Saving password");
+                        password = form.ReturnValue;
+                    }
+                }
 
                 this.Hide();
                 StartCountdown();
@@ -319,7 +335,8 @@ namespace ShutdownTimer
                 Graceful = gracefulCheckBox.Checked,
                 PreventSystemSleep = preventSleepCheckBox.Checked,
                 UI = !backgroundCheckBox.Checked,
-                Forced = forced
+                Forced = forced,
+                Password = password
             })
             {
                 countdown.Owner = this;

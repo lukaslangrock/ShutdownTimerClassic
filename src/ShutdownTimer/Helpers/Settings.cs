@@ -114,6 +114,7 @@ namespace ShutdownTimer.Helpers
         public bool DisableAlwaysOnTop { get; set; }
         public bool DisableAnimations { get; set; }
         public bool DisableNotifications { get; set; }
+        public bool PasswordProtection { get; set; }
     }
 
     public class TimerData

@@ -16,6 +16,7 @@ namespace ShutdownTimer
         public bool PreventSystemSleep { get; set; } // tells Windows that the system should stay awake during countdown
         public bool UI { get; set; } // disables UI updates when set to false (used for running in background)
         public bool Forced { get; set; } // disables all UI controls and exit dialogs
+        public string Password { get; set; } // if value is not empty then a password will be required to change or disable the countdown
 
         //private
         private FormWindowState lastStateUIFormWindowState; // used to update UI immediately after WindowState change
@@ -24,6 +25,7 @@ namespace ShutdownTimer
         private bool ignoreClose; // true: cancel close events without asking | false: default behaviour (if ignoreClose == true, allowClose will be ignored)
         private bool allowClose; // true: accept close without asking | false: Ask user to confirm closing
         private bool animationSwitch = true; // used to switch warning animation colors
+        private int lockState = 0; // used for Password Protection free/locked/unlocked
 
         public Countdown()
         {
@@ -58,6 +60,13 @@ namespace ShutdownTimer
 
             // When the dark theme is selected we are using the light icon to generate contrast (and vise versa), you wouldn't want a white icon on a white background.
             notifyIcon.Icon = lighttheme ? Properties.Resources.icon_dark : Properties.Resources.icon_light;
+
+            // Load password and set the lock state
+            if (!String.IsNullOrEmpty(Password))
+            {
+                ExceptionHandler.LogEvent("[Countdown] A password has been detected");
+                ChangeLockState("locked");
+            }
 
             // Setup UI
             titleLabel.Text = Action + " Timer";
@@ -113,6 +122,30 @@ namespace ShutdownTimer
         }
 
         /// <summary>
+        /// Clicking on the lock-icon will allow the user to change the lock state
+        /// </summary>
+        private void LockStatePictureBox_Click(object sender, EventArgs e)
+        {
+            switch (lockState)
+            {
+                case 0: // lock state 'free': nothing needs to be done
+                    break;
+
+                case 1: // lock state 'locked': ask user for password to unlock
+                    UnlockUIByPassword();
+                    break;
+
+                case 2: // lock state 'unlocked': change lockstate to 'locked'
+                    DialogResult result = MessageBox.Show("Would you like to re-lock the countdown?", "Password Protection", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        ChangeLockState("locked");
+                    }
+                    break;
+            }
+        }
+
+        /// <summary>
         /// Logic to prevent or ignore unwanted close events and notify the user.
         /// </summary>
         private void Countdown_FormClosing(object sender, FormClosingEventArgs e)
@@ -141,17 +174,24 @@ namespace ShutdownTimer
         /// </summary>
         private void ExitApplication()
         {
-            ExceptionHandler.LogEvent("[Countdown] Exit application");
+            if (lockState == 1)
+            {
+                if (UnlockUIByPassword(true)) { ExitApplication(); }
+            }
+            else
+            {
+                ExceptionHandler.LogEvent("[Countdown] Exit application");
 
-            ignoreClose = false;
-            allowClose = true;
-            stopwatch.Stop();
-            refreshTimer.Stop();
-            ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired
-            string caption1 = "Timer canceled";
-            string message1 = "Your timer was canceled successfully!\nThe application will now close.";
-            MessageBox.Show(message1, caption1, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Application.Exit();
+                ignoreClose = false;
+                allowClose = true;
+                stopwatch.Stop();
+                refreshTimer.Stop();
+                ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired
+                string caption1 = "Timer canceled";
+                string message1 = "Your timer was canceled successfully!\nThe application will now close.";
+                MessageBox.Show(message1, caption1, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -159,15 +199,22 @@ namespace ShutdownTimer
         /// </summary>
         private void RestartApplication()
         {
-            ExceptionHandler.LogEvent("[Countdown] Restart application");
+            if (lockState == 1)
+            {
+                if (UnlockUIByPassword(true)) { RestartApplication(); }
+            }
+            else
+            {
+                ExceptionHandler.LogEvent("[Countdown] Restart application");
 
-            ignoreClose = false;
-            allowClose = true;
-            stopwatch.Stop();
-            refreshTimer.Stop();
-            ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired
-            Application.DoEvents();
-            Application.Restart();
+                ignoreClose = false;
+                allowClose = true;
+                stopwatch.Stop();
+                refreshTimer.Stop();
+                ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired
+                Application.DoEvents();
+                Application.Restart();
+            }
         }
 
         /// <summary>
@@ -175,13 +222,20 @@ namespace ShutdownTimer
         /// </summary>
         private void RestartTimer()
         {
-            ExceptionHandler.LogEvent("[Countdown] Restart timer");
+            if (lockState == 1)
+            {
+                if (UnlockUIByPassword(true)) { RestartTimer(); }
+            }
+            else
+            {
+                ExceptionHandler.LogEvent("[Countdown] Restart timer");
 
-            stopwatch.Stop();
-            stopwatch = new Stopwatch();
-            stopwatch.Start();
-            UpdateUI(CountdownTimeSpan);
-            if (this.WindowState == FormWindowState.Minimized) { notifyIcon.BalloonTipText = "Timer restarted. The power action will be executed in " + CountdownTimeSpan.Hours + " hours, " + CountdownTimeSpan.Minutes + " minutes and " + CountdownTimeSpan.Seconds + " seconds."; notifyIcon.ShowBalloonTip(10000); }
+                stopwatch.Stop();
+                stopwatch = new Stopwatch();
+                stopwatch.Start();
+                UpdateUI(CountdownTimeSpan);
+                if (this.WindowState == FormWindowState.Minimized) { notifyIcon.BalloonTipText = "Timer restarted. The power action will be executed in " + CountdownTimeSpan.Hours + " hours, " + CountdownTimeSpan.Minutes + " minutes and " + CountdownTimeSpan.Seconds + " seconds."; notifyIcon.ShowBalloonTip(10000); }
+            }
         }
 
         /// <summary>
@@ -232,6 +286,77 @@ namespace ShutdownTimer
             UpdateUI(currentTimeSpan);
         }
 
+        /// <summary>
+        /// Lock / Unlock the UI and update the picturebox
+        /// </summary>
+        private void ChangeLockState(string newLockState)
+        {
+            ExceptionHandler.LogEvent("[Countdown] Switching to lockState: " + newLockState);
+
+            switch (newLockState)
+            {
+                case "free":
+                    lockState = 0;
+                    lockStatePictureBox.Image = null;
+                    lockStatePictureBox.Visible = false;
+                    lockStatePictureBox.Enabled = false;
+                    break;
+
+                case "locked":
+                    lockState = 1;
+                    lockStatePictureBox.Image = Properties.Resources.fa_lock_white;
+                    lockStatePictureBox.Visible = true;
+                    lockStatePictureBox.Enabled = true;
+                    break;
+
+                case "unlocked":
+                    lockState = 2;
+                    lockStatePictureBox.Image = Properties.Resources.fa_unlock_white;
+                    lockStatePictureBox.Visible = true;
+                    lockStatePictureBox.Enabled = true;
+                    break;
+            }
+        }
+
+        private bool UnlockUIByPassword(bool reasonBecauseOfAction = false)
+        {
+            ExceptionHandler.LogEvent("[Countdown] Unlock has been requested");
+
+            string message;
+            if (reasonBecauseOfAction)
+            {
+                message = "A password is required to unlock this countdown. Please enter your password to execute this action.\n" +
+                    "You can re-lock the countdown by clicking on the lock icon afterwards.";
+            }
+            else
+            {
+                message = "Enter your password to unlock this countdown.\n\n" +
+                    "You can re-lock the countdown by clicking on the lock icon afterwards.";
+            }
+
+            using (var form = new InputBox())
+            {
+                form.Title = "Password Protection";
+                form.Message = message;
+                form.PasswordMode = true;
+                TopMost = false;
+                var result = form.ShowDialog();
+                TopMost = !SettingsProvider.Settings.DisableAlwaysOnTop;
+                if (form.ReturnValue == Password)
+                {
+                    ExceptionHandler.LogEvent("[Countdown] Successfully unlocked");
+                    ChangeLockState("unlocked");
+                    return true;
+                }
+                else
+                {
+                    ExceptionHandler.LogEvent("[Countdown] Unlock has failed");
+                    MessageBox.Show("Incorrect password!\n\nThis countdown will stay locked until the correct password has been entered.", "Password Protection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+        }
+
         #endregion
 
         #region "tray menu events"
@@ -265,7 +390,14 @@ namespace ShutdownTimer
         /// </summary>
         private void TimerUIHideMenuItem_Click(object sender, EventArgs e)
         {
-            HideUI();
+            if (lockState == 1)
+            {
+                if (UnlockUIByPassword(true)) { HideUI(); }
+            }
+            else
+            {
+                HideUI();
+            }
         }
 
         /// <summary>
@@ -273,7 +405,14 @@ namespace ShutdownTimer
         /// </summary>
         private void TimerUIShowMenuItem_Click(object sender, EventArgs e)
         {
-            ShowUI();
+            if (lockState == 1)
+            {
+                if (UnlockUIByPassword(true)) { ShowUI(); }
+            }
+            else
+            {
+                ShowUI();
+            }
         }
 
         #endregion
@@ -390,5 +529,7 @@ namespace ShutdownTimer
 
             ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired.
         }
+
+
     }
 }

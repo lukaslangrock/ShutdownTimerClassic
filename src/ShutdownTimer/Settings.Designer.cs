@@ -55,6 +55,9 @@
             this.actionComboBox = new System.Windows.Forms.ComboBox();
             this.rememberStateCheckBox = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.passwordGroupBox = new System.Windows.Forms.GroupBox();
+            this.passwordLabel = new System.Windows.Forms.Label();
+            this.passwordCheckBox = new System.Windows.Forms.CheckBox();
             this.countdownGroupBox = new System.Windows.Forms.GroupBox();
             this.disableNotificationsCheckBox = new System.Windows.Forms.CheckBox();
             this.disableAnimationsCheckBox = new System.Windows.Forms.CheckBox();
@@ -86,6 +89,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.minutesNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondsNumericUpDown)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.passwordGroupBox.SuspendLayout();
             this.countdownGroupBox.SuspendLayout();
             this.forceFlagGroupBox.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -384,6 +388,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.passwordGroupBox);
             this.tabPage2.Controls.Add(this.countdownGroupBox);
             this.tabPage2.Controls.Add(this.forceFlagGroupBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -392,6 +397,37 @@
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "Advanced";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // passwordGroupBox
+            // 
+            this.passwordGroupBox.Controls.Add(this.passwordLabel);
+            this.passwordGroupBox.Controls.Add(this.passwordCheckBox);
+            this.passwordGroupBox.Location = new System.Drawing.Point(3, 181);
+            this.passwordGroupBox.Name = "passwordGroupBox";
+            this.passwordGroupBox.Size = new System.Drawing.Size(290, 99);
+            this.passwordGroupBox.TabIndex = 14;
+            this.passwordGroupBox.TabStop = false;
+            this.passwordGroupBox.Text = "Password Protection";
+            // 
+            // passwordLabel
+            // 
+            this.passwordLabel.Location = new System.Drawing.Point(6, 39);
+            this.passwordLabel.Name = "passwordLabel";
+            this.passwordLabel.Size = new System.Drawing.Size(278, 57);
+            this.passwordLabel.TabIndex = 15;
+            this.passwordLabel.Text = "A password promt will appear when you first start the countdown. The password you" +
+    " set there will be requested in order to perform operations like stopping the co" +
+    "untdown, closing the window, etc.";
+            // 
+            // passwordCheckBox
+            // 
+            this.passwordCheckBox.AutoSize = true;
+            this.passwordCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.passwordCheckBox.Name = "passwordCheckBox";
+            this.passwordCheckBox.Size = new System.Drawing.Size(157, 17);
+            this.passwordCheckBox.TabIndex = 14;
+            this.passwordCheckBox.Text = "Enable password protection";
+            this.passwordCheckBox.UseVisualStyleBackColor = true;
             // 
             // countdownGroupBox
             // 
@@ -653,6 +689,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.minutesNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondsNumericUpDown)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.passwordGroupBox.ResumeLayout(false);
+            this.passwordGroupBox.PerformLayout();
             this.countdownGroupBox.ResumeLayout(false);
             this.countdownGroupBox.PerformLayout();
             this.forceFlagGroupBox.ResumeLayout(false);
@@ -715,5 +753,8 @@
         private System.Windows.Forms.CheckBox disableAnimationsCheckBox;
         private System.Windows.Forms.CheckBox disableAlwaysOnTopCheckBox;
         private System.Windows.Forms.CheckBox disableNotificationsCheckBox;
+        private System.Windows.Forms.GroupBox passwordGroupBox;
+        private System.Windows.Forms.Label passwordLabel;
+        private System.Windows.Forms.CheckBox passwordCheckBox;
     }
 }
