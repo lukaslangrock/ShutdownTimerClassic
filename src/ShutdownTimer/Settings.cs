@@ -63,7 +63,6 @@ namespace ShutdownTimer
             disableAlwaysOnTopCheckBox.Checked = SettingsProvider.Settings.DisableAlwaysOnTop;
             disableAnimationsCheckBox.Checked = SettingsProvider.Settings.DisableAnimations;
             disableNotificationsCheckBox.Checked = SettingsProvider.Settings.DisableNotifications;
-            appdataPathTextBox.Text = SettingsProvider.settingsDirectory;
         }
 
         private void SaveSettings()

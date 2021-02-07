@@ -10,8 +10,8 @@ namespace ShutdownTimer.Helpers
         public static SettingsData Settings { get; set; } // current settings
         public static bool SettingsLoaded = false;
         public static bool TemporaryMode = false;
-        public static readonly string settingsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Shutdown Timer Classic";
-        public static readonly string settingsPath = settingsDirectory + "\\settings.json";
+        private static readonly string settingsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Shutdown Timer Classic";
+        private static readonly string settingsPath = settingsDirectory + "\\settings.json";
 
         public static void Load()
         {

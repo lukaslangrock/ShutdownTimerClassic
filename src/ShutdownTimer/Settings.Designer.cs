@@ -59,9 +59,6 @@
             this.disableNotificationsCheckBox = new System.Windows.Forms.CheckBox();
             this.disableAnimationsCheckBox = new System.Windows.Forms.CheckBox();
             this.disableAlwaysOnTopCheckBox = new System.Windows.Forms.CheckBox();
-            this.debugGroupBox = new System.Windows.Forms.GroupBox();
-            this.appdataPathTextBox = new System.Windows.Forms.TextBox();
-            this.appdataPathLabel = new System.Windows.Forms.Label();
             this.forceFlagGroupBox = new System.Windows.Forms.GroupBox();
             this.forceFlagDocsLinkLabel = new System.Windows.Forms.LinkLabel();
             this.forceFlagRadioButton = new System.Windows.Forms.RadioButton();
@@ -90,7 +87,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.secondsNumericUpDown)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.countdownGroupBox.SuspendLayout();
-            this.debugGroupBox.SuspendLayout();
             this.forceFlagGroupBox.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.aboutGroupBox.SuspendLayout();
@@ -389,7 +385,6 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.countdownGroupBox);
-            this.tabPage2.Controls.Add(this.debugGroupBox);
             this.tabPage2.Controls.Add(this.forceFlagGroupBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -439,34 +434,6 @@
             this.disableAlwaysOnTopCheckBox.TabIndex = 0;
             this.disableAlwaysOnTopCheckBox.Text = "Disable always on top behaviour";
             this.disableAlwaysOnTopCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // debugGroupBox
-            // 
-            this.debugGroupBox.Controls.Add(this.appdataPathTextBox);
-            this.debugGroupBox.Controls.Add(this.appdataPathLabel);
-            this.debugGroupBox.Location = new System.Drawing.Point(3, 181);
-            this.debugGroupBox.Name = "debugGroupBox";
-            this.debugGroupBox.Size = new System.Drawing.Size(290, 45);
-            this.debugGroupBox.TabIndex = 15;
-            this.debugGroupBox.TabStop = false;
-            this.debugGroupBox.Text = "Debugging Information";
-            // 
-            // appdataPathTextBox
-            // 
-            this.appdataPathTextBox.Location = new System.Drawing.Point(89, 19);
-            this.appdataPathTextBox.Name = "appdataPathTextBox";
-            this.appdataPathTextBox.ReadOnly = true;
-            this.appdataPathTextBox.Size = new System.Drawing.Size(195, 20);
-            this.appdataPathTextBox.TabIndex = 16;
-            // 
-            // appdataPathLabel
-            // 
-            this.appdataPathLabel.AutoSize = true;
-            this.appdataPathLabel.Location = new System.Drawing.Point(6, 22);
-            this.appdataPathLabel.Name = "appdataPathLabel";
-            this.appdataPathLabel.Size = new System.Drawing.Size(77, 13);
-            this.appdataPathLabel.TabIndex = 16;
-            this.appdataPathLabel.Text = "AppData Path:";
             // 
             // forceFlagGroupBox
             // 
@@ -688,8 +655,6 @@
             this.tabPage2.ResumeLayout(false);
             this.countdownGroupBox.ResumeLayout(false);
             this.countdownGroupBox.PerformLayout();
-            this.debugGroupBox.ResumeLayout(false);
-            this.debugGroupBox.PerformLayout();
             this.forceFlagGroupBox.ResumeLayout(false);
             this.forceFlagGroupBox.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -746,9 +711,6 @@
         private System.Windows.Forms.RadioButton forceIfHungFlagRadioButton;
         private System.Windows.Forms.Label forceFlagLabel;
         private System.Windows.Forms.LinkLabel forceFlagDocsLinkLabel;
-        private System.Windows.Forms.GroupBox debugGroupBox;
-        private System.Windows.Forms.TextBox appdataPathTextBox;
-        private System.Windows.Forms.Label appdataPathLabel;
         private System.Windows.Forms.GroupBox countdownGroupBox;
         private System.Windows.Forms.CheckBox disableAnimationsCheckBox;
         private System.Windows.Forms.CheckBox disableAlwaysOnTopCheckBox;
