@@ -15,36 +15,44 @@ namespace ShutdownTimer.Helpers
 
         public static void Load()
         {
-            ExceptionHandler.LogEvent("[Settings] Loading settings.json");
+            ExceptionHandler.LogEvent("[Settings] Loading settings");
 
             if (!TemporaryMode)
             {
                 // make sure respective appdata dir exists
                 if (!Directory.Exists(settingsDirectory))
                 {
+                    ExceptionHandler.LogEvent("[Settings] Creating settings directory");
                     Directory.CreateDirectory(settingsDirectory);
                 }
 
                 // make sure settings.json exists
                 if (!File.Exists(settingsPath))
                 {
+                    ExceptionHandler.LogEvent("[Settings] Settings file does not exist.");
+                    ExceptionHandler.LogEvent("[Settings] Creating new empty settings object");
                     SettingsData emptySettingsData = new SettingsData();
+                    ExceptionHandler.LogEvent("[Settings] Serializing settings");
                     string emptySettingsDataJson = JsonConvert.SerializeObject(emptySettingsData, Formatting.Indented);
+                    ExceptionHandler.LogEvent("[Settings] Writing settings.json");
                     File.WriteAllText(settingsPath, emptySettingsDataJson);
                 }
 
+                ExceptionHandler.LogEvent("[Settings] Loading settings.json");
                 string settingsJson = File.ReadAllText(settingsPath);
                 Settings = new SettingsData();
-                try { Settings = JsonConvert.DeserializeObject<SettingsData>(settingsJson); } catch (Exception) { }
+                try { Settings = JsonConvert.DeserializeObject<SettingsData>(settingsJson); } catch (Exception ex) { ExceptionHandler.LogEvent("[Settings] Error deserializing object: " + ex.Message); }
                 CheckSettings();
                 SettingsLoaded = true;
+                ExceptionHandler.LogEvent("[Settings] Successfully loaded settings to an object in application memory");
             }
             else
             {
-                ExceptionHandler.LogEvent("[Settings] creating new default settings due to TemporaryMode");
+                ExceptionHandler.LogEvent("[Settings] Creating new ephemeral settings due to TemporaryMode");
                 Settings = new SettingsData();
                 CheckSettings();
                 SettingsLoaded = true;
+                ExceptionHandler.LogEvent("[Settings] Successfully created new tempoarary settings object in application memory");
             }
         }
 
@@ -69,27 +77,35 @@ namespace ShutdownTimer.Helpers
                     Seconds = 0
                 };
             }
+
+            ExceptionHandler.LogEvent("[Settings] Checked settings object");
         }
 
         public static void ClearSettings()
         {
-            ExceptionHandler.LogEvent("[Settings] Clearing settings");
+            ExceptionHandler.LogEvent("[Settings] Clearing settings...");
 
             Settings = new SettingsData();
+            ExceptionHandler.LogEvent("[Settings] Created new empty settings object");
             CheckSettings();
             Save();
+
+            ExceptionHandler.LogEvent("[Settings] Cleared settings");
         }
 
         public static void Save()
         {
             if (!TemporaryMode)
             {
-                ExceptionHandler.LogEvent("[Settings] Saving settings.json");
+                ExceptionHandler.LogEvent("[Settings] Saving settings");
 
                 if (SettingsLoaded)
                 {
+                    ExceptionHandler.LogEvent("[Settings] Serializing settings");
                     string settingsJson = JsonConvert.SerializeObject(Settings, Formatting.Indented);
+                    ExceptionHandler.LogEvent("[Settings] Writing settings.json");
                     File.WriteAllText(settingsPath, settingsJson);
+                    ExceptionHandler.LogEvent("[Settings] Saved settings");
                 }
             }
             else

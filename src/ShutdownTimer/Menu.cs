@@ -20,7 +20,7 @@ namespace ShutdownTimer
 
         private void Menu_Load(object sender, EventArgs e)
         {
-            ExceptionHandler.LogEvent("[Menu] Load menu");
+            ExceptionHandler.LogEvent("[Menu] Setting up form...");
 
             versionLabel.Text = "v" + Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf(".")); // Display current version
             infoToolTip.SetToolTip(gracefulCheckBox, "Applications that do not exit when prompted automatically get terminated by default to ensure a successful shutdown." +
@@ -32,15 +32,19 @@ namespace ShutdownTimer
             infoToolTip.SetToolTip(hoursNumericUpDown, "This defines the hours to count down from. Use can use any positive whole number.");
             infoToolTip.SetToolTip(minutesNumericUpDown, "This defines the minutes to count down from. Use can use any positive whole number.\nValues above 59 will get converted into their corresponding seconds, minutes and hours.");
             infoToolTip.SetToolTip(secondsNumericUpDown, "This defines the seconds to count down from. Use can use any positive whole number.\nValues above 59 will get converted into their corresponding seconds, minutes and hours.");
+
+            ExceptionHandler.LogEvent("[Menu] Setup finished");
         }
 
         private void Menu_Shown(object sender, EventArgs e)
         {
+            ExceptionHandler.LogEvent("[Menu] Showing form");
             // Check for startup arguments
             if (startupArgs.Length > 0) { ProcessArgs(); }
             else
             {
                 // Load settings
+                ExceptionHandler.LogEvent("[Menu] Loading settings");
                 Application.DoEvents();
                 LoadSettings();
             }
@@ -48,6 +52,7 @@ namespace ShutdownTimer
 
         private void Menu_FormClosing(object sender, FormClosingEventArgs e)
         {
+            ExceptionHandler.LogEvent("[Menu] Form closing...");
             SettingsProvider.Save();
         }
 
@@ -60,17 +65,19 @@ namespace ShutdownTimer
 
         private void SettingsButton_Click(object sender, EventArgs e)
         {
+            ExceptionHandler.LogEvent("[Menu] Showing settings form");
             Settings settings = new Settings();
             settings.ShowDialog();
         }
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            ExceptionHandler.LogEvent("[Menu] Prepare start countdown");
+            ExceptionHandler.LogEvent("[Menu] Initiaing preparation for countdown start");
 
             if (RunChecks())
             {
                 // Disable controls
+                ExceptionHandler.LogEvent("[Menu] Preparing for countdown start");
                 startButton.Enabled = false;
                 actionGroupBox.Enabled = false;
                 timeGroupBox.Enabled = false;
@@ -86,18 +93,21 @@ namespace ShutdownTimer
                         form.Message = "Please set a password to enable password protection.\n\n" +
                             "You can disable this dialog in the settings under Advanced > Password Protection";
                         form.PasswordMode = true;
+                        ExceptionHandler.LogEvent("[Menu] Requesting password setup from user...");
                         var result = form.ShowDialog();
                         ExceptionHandler.LogEvent("[Menu] Saving password");
                         password = form.ReturnValue;
                     }
                 }
 
+                ExceptionHandler.LogEvent("[Menu] Initiaing countdown start");
                 this.Hide();
                 StartCountdown();
             }
             else
             {
                 ExceptionHandler.LogEvent("[Menu] Invalid countdown");
+                ExceptionHandler.LogEvent("[Menu] " + checkResult);
                 MessageBox.Show("The following error(s) occurred:\n\n" + checkResult + "Please try to resolve the(se) problem(s) and try again.", "There seems to be a problem!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -110,7 +120,7 @@ namespace ShutdownTimer
         /// <returns>Result of checks</returns>
         private bool RunChecks()
         {
-            ExceptionHandler.LogEvent("[Menu] Run checks");
+            ExceptionHandler.LogEvent("[Menu] Running checks...");
 
             bool errTracker = true; // if anything goes wrong the tracker will be set to false
             string errMessage = null; // error messages will append to this
@@ -154,6 +164,7 @@ namespace ShutdownTimer
             }
             catch { }
 
+            ExceptionHandler.LogEvent("[Menu] Ran checks: " + errTracker.ToString());
             checkResult = errMessage;
             return errTracker;
         }
@@ -163,7 +174,7 @@ namespace ShutdownTimer
         /// </summary>
         private void ProcessArgs()
         {
-            ExceptionHandler.LogEvent("[Menu] Process args");
+            ExceptionHandler.LogEvent("[Menu] Processing args...");
 
             string timeArg = null;
             string controlMode = "Prefill"; // Use 'Prefill' control mode by default
@@ -177,6 +188,7 @@ namespace ShutdownTimer
             // Read args and do some processing
             for (var i = 0; i < startupArgs.Length; i++)
             {
+                ExceptionHandler.LogEvent("[Menu] Arg " + i + " = " + startupArgs[i]);
                 switch (startupArgs[i])
                 {
                     case "/SetTime":
@@ -273,6 +285,10 @@ namespace ShutdownTimer
                     StartCountdown(true);
                     break;
             }
+
+            ExceptionHandler.LogEvent("[Menu] Arg timeArg = " + timeArg);
+            ExceptionHandler.LogEvent("[Menu] Arg controlMode = " + controlMode);
+            ExceptionHandler.LogEvent("[Menu] Arg processing done");
         }
 
         /// <summary>
@@ -280,7 +296,7 @@ namespace ShutdownTimer
         /// </summary>
         private void LoadSettings()
         {
-            ExceptionHandler.LogEvent("[Menu] Load settings");
+            ExceptionHandler.LogEvent("[Menu] Loading settings..");
 
             SettingsProvider.Load();
 
@@ -291,6 +307,8 @@ namespace ShutdownTimer
             hoursNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Hours;
             minutesNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Minutes;
             secondsNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Seconds;
+
+            ExceptionHandler.LogEvent("[Menu] Settings loaded");
         }
 
         /// <summary>
@@ -298,7 +316,7 @@ namespace ShutdownTimer
         /// </summary>
         private void SaveSettings()
         {
-            ExceptionHandler.LogEvent("[Menu] Save settings");
+            ExceptionHandler.LogEvent("[Menu] Saving settings...");
 
             if (SettingsProvider.SettingsLoaded)
             {
@@ -315,6 +333,8 @@ namespace ShutdownTimer
 
                 SettingsProvider.Save();
             }
+
+            ExceptionHandler.LogEvent("[Menu] Settings saved");
         }
 
         /// <summary>
@@ -322,12 +342,14 @@ namespace ShutdownTimer
         /// </summary>
         private void StartCountdown(bool forced = false)
         {
-            ExceptionHandler.LogEvent("[Menu] Start countdown");
+            ExceptionHandler.LogEvent("[Menu] Starting countdown...");
 
             // Calculate TimeSpan
+            ExceptionHandler.LogEvent("[Menu] Calculating timespan");
             TimeSpan timeSpan = new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
 
             // Show countdown window
+            ExceptionHandler.LogEvent("[Menu] Preparing countdown window...");
             using (Countdown countdown = new Countdown
             {
                 CountdownTimeSpan = timeSpan,
@@ -340,7 +362,9 @@ namespace ShutdownTimer
             })
             {
                 countdown.Owner = this;
+                ExceptionHandler.LogEvent("[Menu] Opening countdown window...");
                 countdown.ShowDialog();
+                ExceptionHandler.LogEvent("[Menu] Exiting");
                 Application.Exit(); // Exit application after countdown is closed
             }
         }

@@ -15,7 +15,7 @@ namespace ShutdownTimer.Helpers
         {
             Exception e = (Exception)args.ExceptionObject;
 
-            string filepath = LogException(e);
+            string filepath = LogException(e, "UnhandledException");
 
             string message = "An unhandled exception occurred and the application needs to be terminated!\n\n" +
                 "A log file containing information about the process and the error has been saved to your desktop.\n" +
@@ -30,7 +30,7 @@ namespace ShutdownTimer.Helpers
         {
             Exception e = args.Exception;
 
-            string filepath = LogException(e);
+            string filepath = LogException(e, "ThreadException");
 
             string message = "A thread exception occurred!\n\n" +
                 "A log file containing information about the process and the error has been saved to your desktop.\n" +
@@ -59,7 +59,7 @@ namespace ShutdownTimer.Helpers
         }
 
         // Logs application, process, exception and environment details and returns log filepath
-        private static string LogException(Exception e)
+        private static string LogException(Exception e, String type)
         {
             Process process = Process.GetCurrentProcess();
             StringBuilder log = new StringBuilder();
@@ -103,6 +103,7 @@ namespace ShutdownTimer.Helpers
 
 
             log.Append("\n\n---- Exception ----\n");
+            log.Append($"Type: {type}\n");
             log.Append($"Message: {e.Message}\n");
             log.Append($"Stack Trace:\n {e.StackTrace}\n");
 
