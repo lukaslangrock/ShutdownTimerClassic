@@ -79,6 +79,7 @@
             this.appSourceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appInfoLabel = new System.Windows.Forms.Label();
+            this.logButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -540,6 +541,7 @@
             // 
             // aboutGroupBox
             // 
+            this.aboutGroupBox.Controls.Add(this.logButton);
             this.aboutGroupBox.Controls.Add(this.emailbutton);
             this.aboutGroupBox.Controls.Add(this.githubButton);
             this.aboutGroupBox.Controls.Add(this.aboutRichTextBox);
@@ -655,6 +657,16 @@
             this.appInfoLabel.TabIndex = 0;
             this.appInfoLabel.Text = "Application:";
             // 
+            // logButton
+            // 
+            this.logButton.Location = new System.Drawing.Point(6, 187);
+            this.logButton.Name = "logButton";
+            this.logButton.Size = new System.Drawing.Size(80, 23);
+            this.logButton.TabIndex = 17;
+            this.logButton.Text = "Create Log";
+            this.logButton.UseVisualStyleBackColor = true;
+            this.logButton.Click += new System.EventHandler(this.LogButton_Click);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -756,5 +768,6 @@
         private System.Windows.Forms.GroupBox passwordGroupBox;
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.CheckBox passwordCheckBox;
+        private System.Windows.Forms.Button logButton;
     }
 }

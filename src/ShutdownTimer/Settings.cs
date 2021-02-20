@@ -133,5 +133,10 @@ namespace ShutdownTimer
         {
             System.Diagnostics.Process.Start("https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-exitwindowsex#parameters");
         }
+
+        private void LogButton_Click(object sender, EventArgs e)
+        {
+            ExceptionHandler.CreateLog();
+        }
     }
 }
