@@ -26,6 +26,7 @@ namespace ShutdownTimer
         private bool allowClose; // true: accept close without asking | false: Ask user to confirm closing
         private bool animationSwitch = true; // used to switch warning animation colors
         private int lockState = 0; // used for Password Protection free/locked/unlocked
+        private int logTimerCounter = 0; // used to log events every 10,000 timer ticks
 
         public Countdown()
         {
@@ -97,7 +98,7 @@ namespace ShutdownTimer
                 ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS | ExecutionState.EXECUTION_STATE.ES_SYSTEM_REQUIRED);
             } // give the system some coffee so it stays awake when tired using some fancy EXECUTION_STATE flags
 
-            ExceptionHandler.LogEvent("[Countdown] Entering countdown sequence... (events such as clock ticks are not logged)");
+            ExceptionHandler.LogEvent("[Countdown] Entering countdown sequence...");
         }
 
         /// <summary>
@@ -110,6 +111,7 @@ namespace ShutdownTimer
 
             if (interval.TotalSeconds <= 0) //check if interval is negative
             {
+                ExceptionHandler.LogEvent("[Countdown] Countdown reached 0");
                 stopwatch.Stop();
                 refreshTimer.Stop();
                 ExecutePowerAction(Action);
@@ -453,6 +455,16 @@ namespace ShutdownTimer
         /// </summary>
         private void UpdateUI(TimeSpan ts)
         {
+            // log current state every 10,000 ticks (~16 min.)
+            if (logTimerCounter <= 0) {
+                ExceptionHandler.LogEvent("[Countdown] Application still alive and counting down: " + Numerics.ConvertTimeSpanToString(ts));
+                logTimerCounter = 10000;
+            } else
+            {
+                logTimerCounter--;
+            }
+
+            // update UI
             if (Math.Round(lastStateUITimeSpan.TotalSeconds) != Math.Round(ts.TotalSeconds) || lastStateUITimeSpan.TotalSeconds <= 0 || lastStateUIFormWindowState != WindowState) // Only update if the seconds from the TimeSpan actually changed and when it first started
             {
                 // Save current data to last state memory
