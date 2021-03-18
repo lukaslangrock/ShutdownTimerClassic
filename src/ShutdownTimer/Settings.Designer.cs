@@ -69,6 +69,7 @@
             this.forceFlagLabel = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.aboutGroupBox = new System.Windows.Forms.GroupBox();
+            this.logButton = new System.Windows.Forms.Button();
             this.emailbutton = new System.Windows.Forms.Button();
             this.githubButton = new System.Windows.Forms.Button();
             this.aboutRichTextBox = new System.Windows.Forms.RichTextBox();
@@ -79,7 +80,6 @@
             this.appSourceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appInfoLabel = new System.Windows.Forms.Label();
-            this.logButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -488,12 +488,12 @@
             // forceFlagDocsLinkLabel
             // 
             this.forceFlagDocsLinkLabel.AutoSize = true;
-            this.forceFlagDocsLinkLabel.Location = new System.Drawing.Point(176, 62);
+            this.forceFlagDocsLinkLabel.Location = new System.Drawing.Point(205, 59);
             this.forceFlagDocsLinkLabel.Name = "forceFlagDocsLinkLabel";
-            this.forceFlagDocsLinkLabel.Size = new System.Drawing.Size(108, 13);
+            this.forceFlagDocsLinkLabel.Size = new System.Drawing.Size(79, 13);
             this.forceFlagDocsLinkLabel.TabIndex = 17;
             this.forceFlagDocsLinkLabel.TabStop = true;
-            this.forceFlagDocsLinkLabel.Text = "ExitWindowsEx Docs";
+            this.forceFlagDocsLinkLabel.Text = "Documentation";
             this.forceFlagDocsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ForceFlagDocsLinkLabel_LinkClicked);
             // 
             // forceFlagRadioButton
@@ -523,9 +523,9 @@
             this.forceFlagLabel.AutoSize = true;
             this.forceFlagLabel.Location = new System.Drawing.Point(6, 16);
             this.forceFlagLabel.Name = "forceFlagLabel";
-            this.forceFlagLabel.Size = new System.Drawing.Size(215, 13);
+            this.forceFlagLabel.Size = new System.Drawing.Size(270, 13);
             this.forceFlagLabel.TabIndex = 0;
-            this.forceFlagLabel.Text = "Which flag to use when forcing a shutdown:";
+            this.forceFlagLabel.Text = "Changes Windows\' behaviour when forcing a shutdown";
             // 
             // tabPage3
             // 
@@ -551,6 +551,16 @@
             this.aboutGroupBox.TabIndex = 1;
             this.aboutGroupBox.TabStop = false;
             this.aboutGroupBox.Text = "About this app";
+            // 
+            // logButton
+            // 
+            this.logButton.Location = new System.Drawing.Point(6, 187);
+            this.logButton.Name = "logButton";
+            this.logButton.Size = new System.Drawing.Size(80, 23);
+            this.logButton.TabIndex = 17;
+            this.logButton.Text = "Create Log";
+            this.logButton.UseVisualStyleBackColor = true;
+            this.logButton.Click += new System.EventHandler(this.LogButton_Click);
             // 
             // emailbutton
             // 
@@ -656,16 +666,6 @@
             this.appInfoLabel.Size = new System.Drawing.Size(62, 13);
             this.appInfoLabel.TabIndex = 0;
             this.appInfoLabel.Text = "Application:";
-            // 
-            // logButton
-            // 
-            this.logButton.Location = new System.Drawing.Point(6, 187);
-            this.logButton.Name = "logButton";
-            this.logButton.Size = new System.Drawing.Size(80, 23);
-            this.logButton.TabIndex = 17;
-            this.logButton.Text = "Create Log";
-            this.logButton.UseVisualStyleBackColor = true;
-            this.logButton.Click += new System.EventHandler(this.LogButton_Click);
             // 
             // Settings
             // 
