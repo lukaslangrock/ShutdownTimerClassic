@@ -15,7 +15,7 @@ namespace ShutdownTimer.Helpers
 
         public static void Load()
         {
-            ExceptionHandler.LogEvent("[Settings] Loading settings");
+            ExceptionHandler.LogEvent("[Settings] Loading settings...");
 
             if (!TemporaryMode)
             {
@@ -97,7 +97,7 @@ namespace ShutdownTimer.Helpers
         {
             if (!TemporaryMode)
             {
-                ExceptionHandler.LogEvent("[Settings] Saving settings");
+                ExceptionHandler.LogEvent("[Settings] Saving settings...");
 
                 if (SettingsLoaded)
                 {
