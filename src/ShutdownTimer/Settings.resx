@@ -119,12 +119,12 @@
   </resheader>
   <data name="aboutRichTextBox.Text" xml:space="preserve">
     <value>This app is a free open-source project by Lukas Langrock under the MIT license which means there is no warranty provided and I shall not be held liable for any kind of damage!
-This is a shutdown timer after all and you may lose unsaved work or mess up another running application. Use this with caution and common sense!
+After all you may lose unsaved work or mess up another running application. Use this with caution and common sense!
 
-The app uses Windows APIs to execute power actions and System.Diagnostics.Stopwatch to accurately measure elapsed time so you can expect a reliable experience.
-I aim to keep the app rock stable and reliable, tho you may experience exceptions, crashes or malfunctions.
+The application is built to be reliable and should accurately measure and count time. I can't exactly guarantee this but I aim to get the application to be as stable and polished as possible.
+In the case you encounter an error or notice the application not working as it should, an issue on GitHub or an Email would be very appreciated so I can fix the mistake.
 
-If you enjoy using this free app, please consider writing a review on the Microsoft Store and starring the project on GitHub.
+If you enjoy using this free app, please consider writing a review on the Microsoft Store or starring the project on GitHub.
 Any contributions in the form of issues and PR's are very welcome. If you don't have a GitHub account, you can also write me an Email.
 </value>
   </data>
