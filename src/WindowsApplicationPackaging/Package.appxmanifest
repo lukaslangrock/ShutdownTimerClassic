@@ -9,7 +9,7 @@
   <Identity
     Name="19341LukasLangrock.ShutdownTimerClassic"
     Publisher="CN=1590A867-40E3-4A6E-BC9F-DF5415F42DC2"
-    Version="1.2.1.0" />
+    Version="1.2.2.0" />
 
   <Properties>
     <DisplayName>Shutdown Timer Classic</DisplayName>
