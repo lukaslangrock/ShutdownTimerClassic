@@ -6,14 +6,23 @@ namespace ShutdownTimer
 {
     public partial class Menu : Form
     {
+        public bool overrideSettings { get; set; }
+        public int ArgTimeH { get; set; }
+        public int ArgTimeM { get; set; }
+        public int ArgTimeS { get; set; }
+        public string ArgAction { get; set; }
+        public string ArgMode { get; set; }
+        public bool ArgGraceful { get; set; }
+        public bool ArgSleep { get; set; }
+        public bool ArgBackground { get; set; }
+
         private readonly string[] startupArgs;
         private string checkResult;
         private string password; // used for password protection
 
-        public Menu(string[] args)
+        public Menu(bool loadSettings = true)
         {
             InitializeComponent();
-            startupArgs = args;
         }
 
         #region "form events"
@@ -40,7 +49,9 @@ namespace ShutdownTimer
         {
             ExceptionHandler.LogEvent("[Menu] Showing form");
             // Check for startup arguments
-            if (startupArgs.Length > 0) { ProcessArgs(); }
+            if (!overrideSettings) {
+                // Apply given setting
+            }
             else
             {
                 // Load settings
@@ -170,128 +181,6 @@ namespace ShutdownTimer
         }
 
         /// <summary>
-        /// Read application's startup arguments and process events
-        /// </summary>
-        private void ProcessArgs()
-        {
-            ExceptionHandler.LogEvent("[Menu] Processing args...");
-
-            string timeArg = null;
-            string controlMode = "Prefill"; // Use 'Prefill' control mode by default
-
-            //Control Modes:
-            //Prefill:      Prefills settings but let user manually change them too. Timer won't start automatically.
-            //Lock:         Overrides settings so the user can not change them. Timer won't start automatically.
-            //Launch:       Overrides settings and starts the timer.
-            //ForcedLaunch: Overrides settings and starts the timer. Disables all UI controls and exit dialogs.
-
-            // Read args and do some processing
-            for (var i = 0; i < startupArgs.Length; i++)
-            {
-                ExceptionHandler.LogEvent("[Menu] Arg " + i + " = " + startupArgs[i]);
-                switch (startupArgs[i])
-                {
-                    case "/SetTime":
-                        timeArg = startupArgs[i + 1];
-                        break;
-
-                    case "/SetAction":
-                        actionComboBox.Text = startupArgs[i + 1];
-                        break;
-
-                    case "/SetMode":
-                        controlMode = startupArgs[i + 1];
-                        break;
-
-                    case "/Graceful":
-                        gracefulCheckBox.Checked = true;
-                        break;
-
-                    case "/AllowSleep":
-                        preventSleepCheckBox.Checked = false;
-                        break;
-
-                    case "/Background":
-                        backgroundCheckBox.Checked = true;
-                        break;
-                }
-            }
-
-            // Process time arg
-            if (!string.IsNullOrWhiteSpace(timeArg))
-            {
-                if (!timeArg.Contains(":"))
-                {
-                    // time in seconds
-                    secondsNumericUpDown.Value = Convert.ToDecimal(timeArg);
-                }
-                else
-                {
-                    string[] splittedTimeArg = timeArg.Split(':');
-                    int count = splittedTimeArg.Length - 1; // Count number of colons
-                    switch (count)
-                    {
-                        case 0:
-                            ExceptionHandler.LogEvent("[Menu] Invalid time args");
-                            MessageBox.Show("StartupArgs Error: Please provide a valid argument after /SetTime", "Invalid argument", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-
-                        case 1:
-                            // Assuming HH:mm
-                            hoursNumericUpDown.Value = Convert.ToDecimal(splittedTimeArg[0]);
-                            minutesNumericUpDown.Value = Convert.ToDecimal(splittedTimeArg[1]);
-                            break;
-
-                        case 2:
-                            // Assuming HH:mm:ss
-                            hoursNumericUpDown.Value = Convert.ToDecimal(splittedTimeArg[0]);
-                            minutesNumericUpDown.Value = Convert.ToDecimal(splittedTimeArg[1]);
-                            secondsNumericUpDown.Value = Convert.ToDecimal(splittedTimeArg[2]);
-                            break;
-                    }
-                }
-            }
-
-            // Process control mode
-            switch (controlMode)
-            {
-                case "Prefill":
-                    ExceptionHandler.LogEvent("[Menu] Setting 'Prefill' mode");
-                    settingsButton.Enabled = false;
-                    actionGroupBox.Enabled = true;
-                    timeGroupBox.Enabled = true;
-                    break;
-
-                case "Lock":
-                    ExceptionHandler.LogEvent("[Menu] Setting 'Lock' mode");
-                    SettingsProvider.TemporaryMode = true;
-                    startButton.Text = "Start (with recommended settings)";
-                    settingsButton.Enabled = false;
-                    actionGroupBox.Enabled = false;
-                    timeGroupBox.Enabled = false;
-                    break;
-
-                case "Launch":
-                    ExceptionHandler.LogEvent("[Menu] Settings 'Launch' mode");
-                    SettingsProvider.TemporaryMode = true;
-                    this.Hide();
-                    StartCountdown();
-                    break;
-
-                case "ForcedLaunch":
-                    ExceptionHandler.LogEvent("[Menu] Settings 'Launch' mode");
-                    SettingsProvider.TemporaryMode = true;
-                    this.Hide();
-                    StartCountdown(true);
-                    break;
-            }
-
-            ExceptionHandler.LogEvent("[Menu] Arg timeArg = " + timeArg);
-            ExceptionHandler.LogEvent("[Menu] Arg controlMode = " + controlMode);
-            ExceptionHandler.LogEvent("[Menu] Arg processing done");
-        }
-
-        /// <summary>
         /// Load UI element data from settings
         /// </summary>
         private void LoadSettings()
@@ -340,7 +229,7 @@ namespace ShutdownTimer
         /// <summary>
         /// Starts the countdown with values from UI
         /// </summary>
-        private void StartCountdown(bool forced = false)
+        private void StartCountdown()
         {
             ExceptionHandler.LogEvent("[Menu] Starting countdown...");
 
@@ -357,7 +246,6 @@ namespace ShutdownTimer
                 Graceful = gracefulCheckBox.Checked,
                 PreventSystemSleep = preventSleepCheckBox.Checked,
                 UI = !backgroundCheckBox.Checked,
-                Forced = forced,
                 Password = password
             })
             {
