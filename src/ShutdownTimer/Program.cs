@@ -26,6 +26,14 @@ namespace ShutdownTimer
             else
             {
                 ArgProcessor.ProcessArgs(args);
+
+                // Initialize settings
+                ExceptionHandler.LogEvent("[Program] Loading settings..");
+                if (ArgProcessor.argNoSettings)
+                { SettingsProvider.TemporaryMode = true; }
+                SettingsProvider.Load();
+                ExceptionHandler.LogEvent("[Program] Settings loaded");
+
                 switch (ArgProcessor.argMode)
                 {
                     case "Prefill":
@@ -47,9 +55,6 @@ namespace ShutdownTimer
 
                     case "Launch":
                     case "ForcedLaunch":
-                        // Initialize and provide temporary settings for the countdown to work correctly
-                        SettingsProvider.TemporaryMode = true;
-                        SettingsProvider.Load();
                         bool forced = new bool();
                         if (ArgProcessor.argMode.Equals("Launch")) { forced = false; }
                         else { forced = true; }

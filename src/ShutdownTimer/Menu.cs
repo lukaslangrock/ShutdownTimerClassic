@@ -185,10 +185,6 @@ namespace ShutdownTimer
         /// </summary>
         private void LoadSettings()
         {
-            ExceptionHandler.LogEvent("[Menu] Loading settings..");
-
-            SettingsProvider.Load();
-
             actionComboBox.Text = SettingsProvider.Settings.DefaultTimer.Action;
             gracefulCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.Graceful;
             preventSleepCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.PreventSleep;
@@ -196,8 +192,6 @@ namespace ShutdownTimer
             hoursNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Hours;
             minutesNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Minutes;
             secondsNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Seconds;
-
-            ExceptionHandler.LogEvent("[Menu] Settings loaded");
         }
 
         /// <summary>

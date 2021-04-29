@@ -14,6 +14,7 @@ namespace ShutdownTimer.Helpers
         public static bool argGraceful = false;
         public static bool argSleep = false;
         public static bool argBackground = false;
+        public static bool argNoSettings = false;
 
         public static int argTimeH;
         public static int argTimeM;
@@ -67,6 +68,10 @@ namespace ShutdownTimer.Helpers
 
                     case "/Background":
                         argBackground = true;
+                        break;
+
+                    case "/NoSettings":
+                        argNoSettings = true;
                         break;
                 }
             }

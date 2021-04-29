@@ -86,6 +86,8 @@ Argument                 Description
 
 /Background              Runs the countdown in the background.
                          This is not a silent mode, the user will still get notifications and can use the tray menu.
+
+/NoSettings              Uses temporary ephemeral settings and ignores the `settings.json` file.
 ```
 
 Example: `.\ShutdownTimerClassic.exe /SetTime 01:00 /SetAction Hibernate /SetMode Launch`
