@@ -11,7 +11,7 @@ I'd recommend using **Visual Studio 2019 Community** as it's the IDE I use for d
 
 ## Application Structure 🕸
 
-The application's entry point is `Program.cs` which just registers `Helpers/ExceptionHandler.cs` to catch unhandled or thread exceptions and then launches an instance of `Menu.cs`.
+The application's entry point is `Program.cs` which initializes the settings, applys CLI arguments using `ArgProcessor.cs`, and registers `Helpers/ExceptionHandler.cs` to catch unhandled or thread exceptions and then launches an instance of `Menu.cs` (or `Countdown.cs` in case the CLI args request it).
 
 ### Forms 🎨
 
@@ -27,6 +27,8 @@ It will call `Helpers/ExitWindows.cs` when the timer reaches zero and uses `Help
 **`Settings.cs`** manages the settings and shows information about the application. It can be reached by clicking the button with the cog icon in the upper right-hand corner of `Menu.cs`. It gets and sets the settings with `Helpers/Settings.cs`.
 
 ### Helpers 🧱
+
+**`ArgProcessor.cs`** is responsible for reading CLI arguments and is only used by `Program.cs`
 
 **`Helpers/ExceptionHandler.cs`** will gather information about the system and the application and generated a log file which it places on the user's desktop and informs them about the exception. This replaces the default .NET exception handler. It's turned off in debugging mode.
 
