@@ -47,6 +47,9 @@ namespace ShutdownTimer
 
                     case "Launch":
                     case "ForcedLaunch":
+                        // Initialize and provide temporary settings fro the countdown to work correctly
+                        SettingsProvider.TemporaryMode = true;
+                        SettingsProvider.Load();
                         bool forced = new bool();
                         if (ArgProcessor.argMode.Equals("Launch")) { forced = false; }
                         else { forced = true; }
