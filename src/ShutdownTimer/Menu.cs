@@ -49,8 +49,10 @@ namespace ShutdownTimer
         {
             ExceptionHandler.LogEvent("[Menu] Showing form");
             // Check for startup arguments
-            if (!overrideSettings) {
+            if (overrideSettings) {
                 // Apply given setting
+                ExceptionHandler.LogEvent("[Menu] Loading args");
+                LoadArgs();
             }
             else
             {
@@ -178,6 +180,29 @@ namespace ShutdownTimer
             ExceptionHandler.LogEvent("[Menu] Ran checks: " + errTracker.ToString());
             checkResult = errMessage;
             return errTracker;
+        }
+
+        /// <summary>
+        /// Load UI element data from args
+        /// </summary>
+        private void LoadArgs()
+        {
+            actionComboBox.Text = ArgAction;
+            gracefulCheckBox.Checked = ArgGraceful;
+            preventSleepCheckBox.Checked = ArgSleep;
+            backgroundCheckBox.Checked = ArgBackground;
+            hoursNumericUpDown.Value = ArgTimeH;
+            minutesNumericUpDown.Value = ArgTimeM;
+            secondsNumericUpDown.Value = ArgTimeS;
+
+            if (ArgMode.Equals("Lock"))
+            {
+                ExceptionHandler.LogEvent("[Menu] Setting 'Lock' mode");
+                startButton.Text = "Start (with recommended settings)";
+                settingsButton.Enabled = false;
+                actionGroupBox.Enabled = false;
+                timeGroupBox.Enabled = false;
+            }
         }
 
         /// <summary>

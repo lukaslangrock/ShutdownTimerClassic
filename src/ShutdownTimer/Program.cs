@@ -23,6 +23,7 @@ namespace ShutdownTimer
             if (args.Length == 0)
             {
                 ExceptionHandler.LogEvent("[Program] Running Menu");
+                SettingsProvider.Load();
                 Application.Run(new Menu());
             }
             else
