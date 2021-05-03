@@ -123,7 +123,7 @@ namespace ShutdownTimer.Helpers
         {
             ExceptionHandler.LogEvent("[ArgProcessor] Exporting to TimeSpan...");
 
-            argTimeTS = new TimeSpan(argTimeM, argTimeM, argTimeS);
+            argTimeTS = new TimeSpan(argTimeH, argTimeM, argTimeS);
 
             ExceptionHandler.LogEvent("[ArgProcessor] Exported to TimeSpan");
         }
