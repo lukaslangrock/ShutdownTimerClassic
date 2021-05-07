@@ -80,6 +80,7 @@
             this.appSourceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appInfoLabel = new System.Windows.Forms.Label();
+            this.setBackgroundColorLinkLabel = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -432,6 +433,7 @@
             // 
             // countdownGroupBox
             // 
+            this.countdownGroupBox.Controls.Add(this.setBackgroundColorLinkLabel);
             this.countdownGroupBox.Controls.Add(this.disableNotificationsCheckBox);
             this.countdownGroupBox.Controls.Add(this.disableAnimationsCheckBox);
             this.countdownGroupBox.Controls.Add(this.disableAlwaysOnTopCheckBox);
@@ -461,6 +463,7 @@
             this.disableAnimationsCheckBox.TabIndex = 1;
             this.disableAnimationsCheckBox.Text = "Disable animations";
             this.disableAnimationsCheckBox.UseVisualStyleBackColor = true;
+            this.disableAnimationsCheckBox.CheckedChanged += new System.EventHandler(this.DisableAnimationsCheckBox_CheckedChanged);
             // 
             // disableAlwaysOnTopCheckBox
             // 
@@ -667,6 +670,17 @@
             this.appInfoLabel.TabIndex = 0;
             this.appInfoLabel.Text = "Application:";
             // 
+            // setBackgroundColorLinkLabel
+            // 
+            this.setBackgroundColorLinkLabel.AutoSize = true;
+            this.setBackgroundColorLinkLabel.Location = new System.Drawing.Point(116, 43);
+            this.setBackgroundColorLinkLabel.Name = "setBackgroundColorLinkLabel";
+            this.setBackgroundColorLinkLabel.Size = new System.Drawing.Size(113, 13);
+            this.setBackgroundColorLinkLabel.TabIndex = 3;
+            this.setBackgroundColorLinkLabel.TabStop = true;
+            this.setBackgroundColorLinkLabel.Text = "(set background color)";
+            this.setBackgroundColorLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.SetBackgroundColorLinkLabel_LinkClicked);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -769,5 +783,6 @@
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.CheckBox passwordCheckBox;
         private System.Windows.Forms.Button logButton;
+        private System.Windows.Forms.LinkLabel setBackgroundColorLinkLabel;
     }
 }

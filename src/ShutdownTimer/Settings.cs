@@ -64,6 +64,9 @@ namespace ShutdownTimer
             disableAnimationsCheckBox.Checked = SettingsProvider.Settings.DisableAnimations;
             disableNotificationsCheckBox.Checked = SettingsProvider.Settings.DisableNotifications;
             passwordCheckBox.Checked = SettingsProvider.Settings.PasswordProtection;
+
+            // UI processing
+            setBackgroundColorLinkLabel.Enabled = disableAnimationsCheckBox.Checked;
         }
 
         private void SaveSettings()
@@ -137,6 +140,23 @@ namespace ShutdownTimer
         private void LogButton_Click(object sender, EventArgs e)
         {
             ExceptionHandler.CreateLog();
+        }
+
+        private void SetBackgroundColorLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.Color = SettingsProvider.Settings.BackgroundColor;
+            colorDialog.FullOpen = true;
+            DialogResult result = colorDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                SettingsProvider.Settings.BackgroundColor = colorDialog.Color;
+            }
+        }
+
+        private void DisableAnimationsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            setBackgroundColorLinkLabel.Enabled = disableAnimationsCheckBox.Checked;
         }
     }
 }

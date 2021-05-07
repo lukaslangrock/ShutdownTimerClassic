@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
@@ -78,6 +79,8 @@ namespace ShutdownTimer.Helpers
                 };
             }
 
+            if (Settings.BackgroundColor == Color.Empty) { Settings.BackgroundColor = Color.RoyalBlue; }
+
             ExceptionHandler.LogEvent("[Settings] Checked settings object");
         }
 
@@ -131,6 +134,7 @@ namespace ShutdownTimer.Helpers
         public bool DisableAnimations { get; set; }
         public bool DisableNotifications { get; set; }
         public bool PasswordProtection { get; set; }
+        public Color BackgroundColor { get; set; }
     }
 
     public class TimerData

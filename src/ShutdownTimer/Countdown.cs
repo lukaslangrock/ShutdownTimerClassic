@@ -46,6 +46,10 @@ namespace ShutdownTimer
 
             ExceptionHandler.LogEvent("[Countdown] Preparing UI...");
 
+            // Set custom background color
+
+            BackColor = SettingsProvider.Settings.BackgroundColor;
+
             // Set trayIcon icon to the opposite of the selected theme
             bool lighttheme;
 
