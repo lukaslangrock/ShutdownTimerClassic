@@ -135,6 +135,7 @@ namespace ShutdownTimer.Helpers
         public bool DisableNotifications { get; set; }
         public bool PasswordProtection { get; set; }
         public Color BackgroundColor { get; set; }
+        public bool AdaptiveCountdownTextSize { get; set; }
     }
 
     public class TimerData

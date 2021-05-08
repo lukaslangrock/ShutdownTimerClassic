@@ -59,6 +59,7 @@
             this.passwordLabel = new System.Windows.Forms.Label();
             this.passwordCheckBox = new System.Windows.Forms.CheckBox();
             this.countdownGroupBox = new System.Windows.Forms.GroupBox();
+            this.setBackgroundColorLinkLabel = new System.Windows.Forms.LinkLabel();
             this.disableNotificationsCheckBox = new System.Windows.Forms.CheckBox();
             this.disableAnimationsCheckBox = new System.Windows.Forms.CheckBox();
             this.disableAlwaysOnTopCheckBox = new System.Windows.Forms.CheckBox();
@@ -80,7 +81,7 @@
             this.appSourceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appInfoLabel = new System.Windows.Forms.Label();
-            this.setBackgroundColorLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.enableAdaptiveCountdownTextSizeCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -404,27 +405,26 @@
             // 
             this.passwordGroupBox.Controls.Add(this.passwordLabel);
             this.passwordGroupBox.Controls.Add(this.passwordCheckBox);
-            this.passwordGroupBox.Location = new System.Drawing.Point(3, 181);
+            this.passwordGroupBox.Location = new System.Drawing.Point(3, 204);
             this.passwordGroupBox.Name = "passwordGroupBox";
-            this.passwordGroupBox.Size = new System.Drawing.Size(290, 99);
+            this.passwordGroupBox.Size = new System.Drawing.Size(290, 70);
             this.passwordGroupBox.TabIndex = 14;
             this.passwordGroupBox.TabStop = false;
             this.passwordGroupBox.Text = "Password Protection";
             // 
             // passwordLabel
             // 
-            this.passwordLabel.Location = new System.Drawing.Point(6, 39);
+            this.passwordLabel.Location = new System.Drawing.Point(6, 16);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(278, 57);
+            this.passwordLabel.Size = new System.Drawing.Size(278, 28);
             this.passwordLabel.TabIndex = 15;
-            this.passwordLabel.Text = "A password promt will appear when you first start the countdown. The password you" +
-    " set there will be requested in order to perform operations like stopping the co" +
-    "untdown, closing the window, etc.";
+            this.passwordLabel.Text = "Locks the countdown UI with a password you can set when starting a shutdown (afte" +
+    "r clicking start).";
             // 
             // passwordCheckBox
             // 
             this.passwordCheckBox.AutoSize = true;
-            this.passwordCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.passwordCheckBox.Location = new System.Drawing.Point(6, 47);
             this.passwordCheckBox.Name = "passwordCheckBox";
             this.passwordCheckBox.Size = new System.Drawing.Size(157, 17);
             this.passwordCheckBox.TabIndex = 14;
@@ -433,16 +433,28 @@
             // 
             // countdownGroupBox
             // 
+            this.countdownGroupBox.Controls.Add(this.enableAdaptiveCountdownTextSizeCheckBox);
             this.countdownGroupBox.Controls.Add(this.setBackgroundColorLinkLabel);
             this.countdownGroupBox.Controls.Add(this.disableNotificationsCheckBox);
             this.countdownGroupBox.Controls.Add(this.disableAnimationsCheckBox);
             this.countdownGroupBox.Controls.Add(this.disableAlwaysOnTopCheckBox);
             this.countdownGroupBox.Location = new System.Drawing.Point(3, 87);
             this.countdownGroupBox.Name = "countdownGroupBox";
-            this.countdownGroupBox.Size = new System.Drawing.Size(290, 88);
+            this.countdownGroupBox.Size = new System.Drawing.Size(290, 111);
             this.countdownGroupBox.TabIndex = 17;
             this.countdownGroupBox.TabStop = false;
             this.countdownGroupBox.Text = "Countdown Window";
+            // 
+            // setBackgroundColorLinkLabel
+            // 
+            this.setBackgroundColorLinkLabel.AutoSize = true;
+            this.setBackgroundColorLinkLabel.Location = new System.Drawing.Point(116, 43);
+            this.setBackgroundColorLinkLabel.Name = "setBackgroundColorLinkLabel";
+            this.setBackgroundColorLinkLabel.Size = new System.Drawing.Size(113, 13);
+            this.setBackgroundColorLinkLabel.TabIndex = 3;
+            this.setBackgroundColorLinkLabel.TabStop = true;
+            this.setBackgroundColorLinkLabel.Text = "(set background color)";
+            this.setBackgroundColorLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.SetBackgroundColorLinkLabel_LinkClicked);
             // 
             // disableNotificationsCheckBox
             // 
@@ -670,16 +682,15 @@
             this.appInfoLabel.TabIndex = 0;
             this.appInfoLabel.Text = "Application:";
             // 
-            // setBackgroundColorLinkLabel
+            // enableAdaptiveCountdownTextSizeCheckBox
             // 
-            this.setBackgroundColorLinkLabel.AutoSize = true;
-            this.setBackgroundColorLinkLabel.Location = new System.Drawing.Point(116, 43);
-            this.setBackgroundColorLinkLabel.Name = "setBackgroundColorLinkLabel";
-            this.setBackgroundColorLinkLabel.Size = new System.Drawing.Size(113, 13);
-            this.setBackgroundColorLinkLabel.TabIndex = 3;
-            this.setBackgroundColorLinkLabel.TabStop = true;
-            this.setBackgroundColorLinkLabel.Text = "(set background color)";
-            this.setBackgroundColorLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.SetBackgroundColorLinkLabel_LinkClicked);
+            this.enableAdaptiveCountdownTextSizeCheckBox.AutoSize = true;
+            this.enableAdaptiveCountdownTextSizeCheckBox.Location = new System.Drawing.Point(6, 88);
+            this.enableAdaptiveCountdownTextSizeCheckBox.Name = "enableAdaptiveCountdownTextSizeCheckBox";
+            this.enableAdaptiveCountdownTextSizeCheckBox.Size = new System.Drawing.Size(243, 17);
+            this.enableAdaptiveCountdownTextSizeCheckBox.TabIndex = 4;
+            this.enableAdaptiveCountdownTextSizeCheckBox.Text = "Adapt clock text to window size (experimental)";
+            this.enableAdaptiveCountdownTextSizeCheckBox.UseVisualStyleBackColor = true;
             // 
             // Settings
             // 
@@ -784,5 +795,6 @@
         private System.Windows.Forms.CheckBox passwordCheckBox;
         private System.Windows.Forms.Button logButton;
         private System.Windows.Forms.LinkLabel setBackgroundColorLinkLabel;
+        private System.Windows.Forms.CheckBox enableAdaptiveCountdownTextSizeCheckBox;
     }
 }

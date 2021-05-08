@@ -460,10 +460,12 @@ namespace ShutdownTimer
         private void UpdateUI(TimeSpan ts)
         {
             // log current state every 10,000 ticks (~16 min.)
-            if (logTimerCounter <= 0) {
+            if (logTimerCounter <= 0)
+            {
                 ExceptionHandler.LogEvent("[Countdown] Application still alive and counting down: " + Numerics.ConvertTimeSpanToString(ts));
                 logTimerCounter = 10000;
-            } else
+            }
+            else
             {
                 logTimerCounter--;
             }
@@ -576,6 +578,23 @@ namespace ShutdownTimer
             ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired.
         }
 
+        private void Countdown_SizeChanged(object sender, EventArgs e)
+        {
+            // default window size: 375x185
+            // default label font: 24pt
 
+            if (SettingsProvider.Settings.AdaptiveCountdownTextSize)
+            {
+                if (Size.Width > 375 && Size.Height > 185)
+                {
+                    float autosize = ((Size.Width / 375) + (Size.Height / 185)) * 16;
+                    timeLabel.Font = new Font(timeLabel.Font.FontFamily, autosize, FontStyle.Bold);
+                }
+                else
+                {
+                    timeLabel.Font = new Font(timeLabel.Font.FontFamily, 24, FontStyle.Bold);
+                }
+            }
+        }
     }
 }
