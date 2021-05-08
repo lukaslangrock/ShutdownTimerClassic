@@ -59,6 +59,7 @@
             this.passwordLabel = new System.Windows.Forms.Label();
             this.passwordCheckBox = new System.Windows.Forms.CheckBox();
             this.countdownGroupBox = new System.Windows.Forms.GroupBox();
+            this.enableAdaptiveCountdownTextSizeCheckBox = new System.Windows.Forms.CheckBox();
             this.setBackgroundColorLinkLabel = new System.Windows.Forms.LinkLabel();
             this.disableNotificationsCheckBox = new System.Windows.Forms.CheckBox();
             this.disableAnimationsCheckBox = new System.Windows.Forms.CheckBox();
@@ -81,7 +82,6 @@
             this.appSourceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appInfoLabel = new System.Windows.Forms.Label();
-            this.enableAdaptiveCountdownTextSizeCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -405,9 +405,9 @@
             // 
             this.passwordGroupBox.Controls.Add(this.passwordLabel);
             this.passwordGroupBox.Controls.Add(this.passwordCheckBox);
-            this.passwordGroupBox.Location = new System.Drawing.Point(3, 204);
+            this.passwordGroupBox.Location = new System.Drawing.Point(6, 204);
             this.passwordGroupBox.Name = "passwordGroupBox";
-            this.passwordGroupBox.Size = new System.Drawing.Size(290, 70);
+            this.passwordGroupBox.Size = new System.Drawing.Size(284, 70);
             this.passwordGroupBox.TabIndex = 14;
             this.passwordGroupBox.TabStop = false;
             this.passwordGroupBox.Text = "Password Protection";
@@ -416,7 +416,7 @@
             // 
             this.passwordLabel.Location = new System.Drawing.Point(6, 16);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(278, 28);
+            this.passwordLabel.Size = new System.Drawing.Size(272, 28);
             this.passwordLabel.TabIndex = 15;
             this.passwordLabel.Text = "Locks the countdown UI with a password you can set when starting a shutdown (afte" +
     "r clicking start).";
@@ -438,12 +438,22 @@
             this.countdownGroupBox.Controls.Add(this.disableNotificationsCheckBox);
             this.countdownGroupBox.Controls.Add(this.disableAnimationsCheckBox);
             this.countdownGroupBox.Controls.Add(this.disableAlwaysOnTopCheckBox);
-            this.countdownGroupBox.Location = new System.Drawing.Point(3, 87);
+            this.countdownGroupBox.Location = new System.Drawing.Point(6, 87);
             this.countdownGroupBox.Name = "countdownGroupBox";
-            this.countdownGroupBox.Size = new System.Drawing.Size(290, 111);
+            this.countdownGroupBox.Size = new System.Drawing.Size(284, 111);
             this.countdownGroupBox.TabIndex = 17;
             this.countdownGroupBox.TabStop = false;
             this.countdownGroupBox.Text = "Countdown Window";
+            // 
+            // enableAdaptiveCountdownTextSizeCheckBox
+            // 
+            this.enableAdaptiveCountdownTextSizeCheckBox.AutoSize = true;
+            this.enableAdaptiveCountdownTextSizeCheckBox.Location = new System.Drawing.Point(6, 88);
+            this.enableAdaptiveCountdownTextSizeCheckBox.Name = "enableAdaptiveCountdownTextSizeCheckBox";
+            this.enableAdaptiveCountdownTextSizeCheckBox.Size = new System.Drawing.Size(243, 17);
+            this.enableAdaptiveCountdownTextSizeCheckBox.TabIndex = 4;
+            this.enableAdaptiveCountdownTextSizeCheckBox.Text = "Adapt clock text to window size (experimental)";
+            this.enableAdaptiveCountdownTextSizeCheckBox.UseVisualStyleBackColor = true;
             // 
             // setBackgroundColorLinkLabel
             // 
@@ -493,9 +503,9 @@
             this.forceFlagGroupBox.Controls.Add(this.forceFlagRadioButton);
             this.forceFlagGroupBox.Controls.Add(this.forceIfHungFlagRadioButton);
             this.forceFlagGroupBox.Controls.Add(this.forceFlagLabel);
-            this.forceFlagGroupBox.Location = new System.Drawing.Point(3, 3);
+            this.forceFlagGroupBox.Location = new System.Drawing.Point(6, 6);
             this.forceFlagGroupBox.Name = "forceFlagGroupBox";
-            this.forceFlagGroupBox.Size = new System.Drawing.Size(290, 78);
+            this.forceFlagGroupBox.Size = new System.Drawing.Size(284, 81);
             this.forceFlagGroupBox.TabIndex = 14;
             this.forceFlagGroupBox.TabStop = false;
             this.forceFlagGroupBox.Text = "Force Flag";
@@ -503,7 +513,7 @@
             // forceFlagDocsLinkLabel
             // 
             this.forceFlagDocsLinkLabel.AutoSize = true;
-            this.forceFlagDocsLinkLabel.Location = new System.Drawing.Point(205, 59);
+            this.forceFlagDocsLinkLabel.Location = new System.Drawing.Point(199, 59);
             this.forceFlagDocsLinkLabel.Name = "forceFlagDocsLinkLabel";
             this.forceFlagDocsLinkLabel.Size = new System.Drawing.Size(79, 13);
             this.forceFlagDocsLinkLabel.TabIndex = 17;
@@ -681,16 +691,6 @@
             this.appInfoLabel.Size = new System.Drawing.Size(62, 13);
             this.appInfoLabel.TabIndex = 0;
             this.appInfoLabel.Text = "Application:";
-            // 
-            // enableAdaptiveCountdownTextSizeCheckBox
-            // 
-            this.enableAdaptiveCountdownTextSizeCheckBox.AutoSize = true;
-            this.enableAdaptiveCountdownTextSizeCheckBox.Location = new System.Drawing.Point(6, 88);
-            this.enableAdaptiveCountdownTextSizeCheckBox.Name = "enableAdaptiveCountdownTextSizeCheckBox";
-            this.enableAdaptiveCountdownTextSizeCheckBox.Size = new System.Drawing.Size(243, 17);
-            this.enableAdaptiveCountdownTextSizeCheckBox.TabIndex = 4;
-            this.enableAdaptiveCountdownTextSizeCheckBox.Text = "Adapt clock text to window size (experimental)";
-            this.enableAdaptiveCountdownTextSizeCheckBox.UseVisualStyleBackColor = true;
             // 
             // Settings
             // 
