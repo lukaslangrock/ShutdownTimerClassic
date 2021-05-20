@@ -1,7 +1,7 @@
-﻿using System;
+﻿using ShutdownTimer.Helpers;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using ShutdownTimer.Helpers;
 
 namespace ShutdownTimer
 {
@@ -45,7 +45,7 @@ namespace ShutdownTimer
                         ExceptionHandler.LogEvent("[Program] Running Menu with args");
                         Menu menu = new Menu
                         {
-                            overrideSettings = true,
+                            OverrideSettings = true,
                             ArgTimeH = ArgProcessor.argTimeH,
                             ArgTimeM = ArgProcessor.argTimeM,
                             ArgTimeS = ArgProcessor.argTimeS,

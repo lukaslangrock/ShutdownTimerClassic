@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShutdownTimer.Helpers
 {
@@ -15,7 +11,6 @@ namespace ShutdownTimer.Helpers
         public static bool argSleep = false;
         public static bool argBackground = false;
         public static bool argNoSettings = false;
-
         public static int argTimeH;
         public static int argTimeM;
         public static int argTimeS;

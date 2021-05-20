@@ -146,9 +146,11 @@ namespace ShutdownTimer
 
         private void SetBackgroundColorLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ColorDialog colorDialog = new ColorDialog();
-            colorDialog.Color = SettingsProvider.Settings.BackgroundColor;
-            colorDialog.FullOpen = true;
+            ColorDialog colorDialog = new ColorDialog
+            {
+                Color = SettingsProvider.Settings.BackgroundColor,
+                FullOpen = true
+            };
             DialogResult result = colorDialog.ShowDialog();
             if (result == DialogResult.OK)
             {

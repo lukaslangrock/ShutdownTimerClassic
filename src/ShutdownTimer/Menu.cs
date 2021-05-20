@@ -6,7 +6,7 @@ namespace ShutdownTimer
 {
     public partial class Menu : Form
     {
-        public bool overrideSettings { get; set; }
+        public bool OverrideSettings { get; set; }
         public int ArgTimeH { get; set; }
         public int ArgTimeM { get; set; }
         public int ArgTimeS { get; set; }
@@ -16,11 +16,10 @@ namespace ShutdownTimer
         public bool ArgSleep { get; set; }
         public bool ArgBackground { get; set; }
 
-        private readonly string[] startupArgs;
         private string checkResult;
         private string password; // used for password protection
 
-        public Menu(bool loadSettings = true)
+        public Menu()
         {
             InitializeComponent();
         }
@@ -49,7 +48,7 @@ namespace ShutdownTimer
         {
             ExceptionHandler.LogEvent("[Menu] Showing form");
             // Check for startup arguments
-            if (overrideSettings) {
+            if (OverrideSettings) {
                 // Apply given setting
                 ExceptionHandler.LogEvent("[Menu] Loading args");
                 LoadArgs();
