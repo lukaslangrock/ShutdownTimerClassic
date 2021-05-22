@@ -13,7 +13,7 @@ namespace ShutdownTimer
         public string ArgAction { get; set; }
         public string ArgMode { get; set; }
         public bool ArgGraceful { get; set; }
-        public bool ArgSleep { get; set; }
+        public bool ArgPreventSleep { get; set; }
         public bool ArgBackground { get; set; }
 
         private string checkResult;
@@ -188,7 +188,7 @@ namespace ShutdownTimer
         {
             actionComboBox.Text = ArgAction;
             gracefulCheckBox.Checked = ArgGraceful;
-            preventSleepCheckBox.Checked = ArgSleep;
+            preventSleepCheckBox.Checked = ArgPreventSleep;
             backgroundCheckBox.Checked = ArgBackground;
             hoursNumericUpDown.Value = ArgTimeH;
             minutesNumericUpDown.Value = ArgTimeM;

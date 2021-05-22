@@ -52,7 +52,7 @@ namespace ShutdownTimer
                             ArgAction = ArgProcessor.argAction,
                             ArgMode = ArgProcessor.argMode,
                             ArgGraceful = ArgProcessor.argGraceful,
-                            ArgSleep = ArgProcessor.argSleep,
+                            ArgPreventSleep = ArgProcessor.argPreventSleep,
                             ArgBackground = ArgProcessor.argBackground
                         };
                         Application.Run(menu);
@@ -70,7 +70,7 @@ namespace ShutdownTimer
                             CountdownTimeSpan = ArgProcessor.argTimeTS,
                             Action = ArgProcessor.argAction,
                             Graceful = ArgProcessor.argGraceful,
-                            PreventSystemSleep = ArgProcessor.argSleep,
+                            PreventSystemSleep = ArgProcessor.argPreventSleep,
                             UI = !ArgProcessor.argBackground,
                             Forced = forced
                         };

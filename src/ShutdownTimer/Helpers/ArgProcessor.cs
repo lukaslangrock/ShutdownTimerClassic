@@ -8,7 +8,7 @@ namespace ShutdownTimer.Helpers
         public static string argTime;
         public static string argAction = "Shutdown";
         public static bool argGraceful = false;
-        public static bool argSleep = false;
+        public static bool argPreventSleep = true;
         public static bool argBackground = false;
         public static bool argNoSettings = false;
         public static int argTimeH;
@@ -58,7 +58,7 @@ namespace ShutdownTimer.Helpers
                         break;
 
                     case "/AllowSleep":
-                        argSleep = false;
+                        argPreventSleep = false;
                         break;
 
                     case "/Background":
