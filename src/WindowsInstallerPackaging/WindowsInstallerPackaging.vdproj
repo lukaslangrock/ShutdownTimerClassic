@@ -3,7 +3,7 @@
 "VSVersion" = "3:800"
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
-"ProjectName" = "8:Windows Installer Packaging"
+"ProjectName" = "8:WindowsInstallerPackaging"
 "LanguageId" = "3:1033"
 "CodePage" = "3:1252"
 "UILanguageId" = "3:1033"
@@ -39,14 +39,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D5549E522B6218BA0A71BCF376A9ADFE"
+        "MsmKey" = "8:_CC390E47D16E8815304B2CDACF150B61"
         "OwnerKey" = "8:_69045F398BE84C1985E02946A6FEBC29"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D5549E522B6218BA0A71BCF376A9ADFE"
+        "OwnerKey" = "8:_CC390E47D16E8815304B2CDACF150B61"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -241,14 +241,14 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D5549E522B6218BA0A71BCF376A9ADFE"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_CC390E47D16E8815304B2CDACF150B61"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_D5549E522B6218BA0A71BCF376A9ADFE"
+                    "_CC390E47D16E8815304B2CDACF150B61"
                     {
                     "Name" = "8:Newtonsoft.Json.DLL"
                     "Attributes" = "3:512"
@@ -329,7 +329,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Shutdown Timer Classic"
         "ProductCode" = "8:{3C6B38C0-5A57-4A51-B02D-7A1BCD7C3A44}"
-        "PackageCode" = "8:{8205442E-B211-4C82-8E4A-C8C89E89DABB}"
+        "PackageCode" = "8:{A2B7819A-C9BC-4930-8C91-89523358063F}"
         "UpgradeCode" = "8:{81E0637B-864A-4FE6-AA0F-5550A751DD9B}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
