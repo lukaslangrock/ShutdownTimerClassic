@@ -106,6 +106,28 @@ namespace ShutdownTimer
         }
 
         /// <summary>
+        /// Resize countdown text if enabled in settings
+        /// </summary>
+        private void Countdown_SizeChanged(object sender, EventArgs e)
+        {
+            // default window size: 375x185
+            // default label font: 24pt
+
+            if (SettingsProvider.Settings.AdaptiveCountdownTextSize)
+            {
+                if (Size.Width > 375 && Size.Height > 185)
+                {
+                    float autosize = ((Size.Width / 375) + (Size.Height / 185)) * 16;
+                    timeLabel.Font = new Font(timeLabel.Font.FontFamily, autosize, FontStyle.Bold);
+                }
+                else
+                {
+                    timeLabel.Font = new Font(timeLabel.Font.FontFamily, 24, FontStyle.Bold);
+                }
+            }
+        }
+
+        /// <summary>
         /// Checks the stopwatch and updates UI every 100ms
         /// </summary>
         private void RefreshTimer_Tick(object sender, EventArgs e)
@@ -574,27 +596,11 @@ namespace ShutdownTimer
                     break;
             }
 
-            ExceptionHandler.LogEvent("[Countdown] Clearing EXECUTION_STATE flags");
-            ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired.
-        }
-
-        private void Countdown_SizeChanged(object sender, EventArgs e)
-        {
-            // default window size: 375x185
-            // default label font: 24pt
-
-            if (SettingsProvider.Settings.AdaptiveCountdownTextSize)
+            if (PreventSystemSleep)
             {
-                if (Size.Width > 375 && Size.Height > 185)
-                {
-                    float autosize = ((Size.Width / 375) + (Size.Height / 185)) * 16;
-                    timeLabel.Font = new Font(timeLabel.Font.FontFamily, autosize, FontStyle.Bold);
-                }
-                else
-                {
-                    timeLabel.Font = new Font(timeLabel.Font.FontFamily, 24, FontStyle.Bold);
-                }
+                ExceptionHandler.LogEvent("[Countdown] Clearing EXECUTION_STATE flags");
+                ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired.
             }
-        }
+        }    
     }
 }

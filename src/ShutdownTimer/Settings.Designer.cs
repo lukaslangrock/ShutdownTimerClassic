@@ -391,6 +391,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.AutoScroll = true;
             this.tabPage2.Controls.Add(this.passwordGroupBox);
             this.tabPage2.Controls.Add(this.countdownGroupBox);
             this.tabPage2.Controls.Add(this.forceFlagGroupBox);
