@@ -17,6 +17,7 @@ namespace ShutdownTimer
         public bool UI { get; set; } // disables UI updates when set to false (used for running in background)
         public bool Forced { get; set; } // disables all UI controls and exit dialogs
         public string Password { get; set; } // if value is not empty then a password will be required to change or disable the countdown
+        public bool UserLaunch { get; set; } // false if launched from CLI
 
         //private
         private FormWindowState lastStateUIFormWindowState; // used to update UI immediately after WindowState change
@@ -89,6 +90,11 @@ namespace ShutdownTimer
             {
                 ignoreClose = true;
                 contextMenuStrip.Enabled = false;
+            }
+
+            if (!UserLaunch) // disable restart app menu button because it would also keep the CLI args so the countdown would restart so it's basically useless
+            {
+                appRestartMenuItem.Enabled = false;
             }
 
             ExceptionHandler.LogEvent("[Countdown] Prepared UI");
@@ -601,6 +607,6 @@ namespace ShutdownTimer
                 ExceptionHandler.LogEvent("[Countdown] Clearing EXECUTION_STATE flags");
                 ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired.
             }
-        }    
+        }
     }
 }

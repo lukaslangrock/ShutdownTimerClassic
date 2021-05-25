@@ -72,7 +72,8 @@ namespace ShutdownTimer
                             Graceful = ArgProcessor.argGraceful,
                             PreventSystemSleep = ArgProcessor.argPreventSleep,
                             UI = !ArgProcessor.argBackground,
-                            Forced = forced
+                            Forced = forced,
+                            UserLaunch = false
                         };
                         Application.Run(countdown);
                         break;

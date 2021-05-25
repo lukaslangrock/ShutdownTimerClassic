@@ -264,7 +264,8 @@ namespace ShutdownTimer
                 Graceful = gracefulCheckBox.Checked,
                 PreventSystemSleep = preventSleepCheckBox.Checked,
                 UI = !backgroundCheckBox.Checked,
-                Password = password
+                Password = password,
+                UserLaunch = true
             })
             {
                 countdown.Owner = this;
