@@ -28,7 +28,7 @@ It will call `Helpers/ExitWindows.cs` when the timer reaches zero and uses `Help
 
 ### Helpers 🧱
 
-**`ArgProcessor.cs`** is responsible for reading CLI arguments and is only used by `Program.cs`
+**`Helpers/ArgProcessor.cs`** is responsible for reading CLI arguments and is only used by `Program.cs`
 
 **`Helpers/ExceptionHandler.cs`** will gather information about the system and the application and generated a log file which it places on the user's desktop and informs them about the exception. This replaces the default .NET exception handler. It's turned off in debugging mode.
 
@@ -54,6 +54,6 @@ This app depends on `Microsoft.Windows.SDK.Contracts` for interacting with newer
 
 **`Resources/`** contains application resources like icons used inside the application.
 
-**`App.config` and `app.manifest`** contain application metadata, capabilities, features, and configuration stuff needed for compiling and running the app.
+**`App.config`** and **`app.manifest`** contain application metadata, capabilities, features, and configuration stuff needed for compiling and running the app.
 
 **`Shutdown Timer.csproj`** is the C# project file that contains project and app metadata, configuration parameters, and defines the project's entry point as well as forms, classes, and dependencies used in the project.
