@@ -58,8 +58,6 @@ The same menu can also be accessed by right clicking in the countdown window.
 
 # CLI 🐱‍💻
 
-> ⚠️ The CLI seems to be broken upwards from v.1.2.0! Please use the download for [v1.2.0](https://github.com/lukaslangrock/ShutdownTimerClassic/releases/tag/v1.2.0) and the [old commands](https://github.com/lukaslangrock/ShutdownTimerClassic/tree/v1.2.0#cli-) in the meantime while the issue is getting resolved.
-
 You can also use the command line to start the Shutdown Timer with specific arguments and settings.
 In PowerShell or CMD navigate to the folder where the executable is located.
 
