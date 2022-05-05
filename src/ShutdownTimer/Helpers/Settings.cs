@@ -61,12 +61,20 @@ namespace ShutdownTimer.Helpers
         {
             ExceptionHandler.LogEvent("[Settings] Checking settings object");
 
+            ExceptionHandler.LogEvent("[Settings] Setting product version");
             Settings.AppVersion = Application.ProductVersion;
 
-            if (Settings.TrayIconTheme is null) { Settings.TrayIconTheme = "Automatic"; }
+            ExceptionHandler.LogEvent("[Settings] Checking field: TrayIconTheme");
+            if (Settings.TrayIconTheme is null)
+            {
+                ExceptionHandler.LogEvent("[Settings] Restoring TrayIconTheme to defaults");
+                Settings.TrayIconTheme = "Automatic";
+            }
 
+            ExceptionHandler.LogEvent("[Settings] Checking field: DefaultTimer");
             if (Settings.DefaultTimer is null)
             {
+                ExceptionHandler.LogEvent("[Settings] Restoring DefaultTimer to defaults");
                 Settings.DefaultTimer = new TimerData
                 {
                     Action = "Shutdown",
@@ -79,7 +87,12 @@ namespace ShutdownTimer.Helpers
                 };
             }
 
-            if (Settings.BackgroundColor == Color.Empty) { Settings.BackgroundColor = Color.RoyalBlue; }
+            ExceptionHandler.LogEvent("[Settings] Checking field: BackgroundColor");
+            if (Settings.BackgroundColor == Color.Empty)
+            {
+                ExceptionHandler.LogEvent("[Settings] Restoring BackgroundColor to defaults");
+                Settings.BackgroundColor = Color.RoyalBlue;
+            }
 
             ExceptionHandler.LogEvent("[Settings] Checked settings object");
         }
