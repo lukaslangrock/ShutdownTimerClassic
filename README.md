@@ -56,7 +56,7 @@ Shutdown Timer also includes a tray menu to control the application from you Tas
 
 The same menu can also be accessed by right clicking in the countdown window.
 
-# CLI 🐱‍💻
+# CLI 💻
 
 You can also use the command line to start the Shutdown Timer with specific arguments and settings.
 In PowerShell or CMD navigate to the folder where the executable is located.
