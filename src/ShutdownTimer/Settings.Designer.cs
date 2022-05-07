@@ -82,6 +82,8 @@
             this.appSourceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appInfoLabel = new System.Windows.Forms.Label();
+            this.timeOfDayModeRadioButton = new System.Windows.Forms.RadioButton();
+            this.countdownModeRadioButton = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -135,7 +137,7 @@
             this.footerLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.footerLabel.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.footerLabel.Location = new System.Drawing.Point(12, 366);
+            this.footerLabel.Location = new System.Drawing.Point(12, 411);
             this.footerLabel.Name = "footerLabel";
             this.footerLabel.Size = new System.Drawing.Size(310, 18);
             this.footerLabel.TabIndex = 9;
@@ -166,7 +168,7 @@
             this.settingsTabControl.Location = new System.Drawing.Point(18, 54);
             this.settingsTabControl.Name = "settingsTabControl";
             this.settingsTabControl.SelectedIndex = 0;
-            this.settingsTabControl.Size = new System.Drawing.Size(304, 309);
+            this.settingsTabControl.Size = new System.Drawing.Size(304, 354);
             this.settingsTabControl.TabIndex = 13;
             // 
             // tabPage1
@@ -177,7 +179,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(296, 283);
+            this.tabPage1.Size = new System.Drawing.Size(296, 328);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Application Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -186,7 +188,7 @@
             // 
             this.trayiconGroupBox.Controls.Add(this.trayiconThemeComboBox);
             this.trayiconGroupBox.Controls.Add(this.trayiconThemeLabel);
-            this.trayiconGroupBox.Location = new System.Drawing.Point(6, 208);
+            this.trayiconGroupBox.Location = new System.Drawing.Point(6, 253);
             this.trayiconGroupBox.Name = "trayiconGroupBox";
             this.trayiconGroupBox.Size = new System.Drawing.Size(284, 40);
             this.trayiconGroupBox.TabIndex = 2;
@@ -217,7 +219,7 @@
             // 
             // clearSettingsButton
             // 
-            this.clearSettingsButton.Location = new System.Drawing.Point(161, 254);
+            this.clearSettingsButton.Location = new System.Drawing.Point(161, 299);
             this.clearSettingsButton.Name = "clearSettingsButton";
             this.clearSettingsButton.Size = new System.Drawing.Size(129, 23);
             this.clearSettingsButton.TabIndex = 1;
@@ -231,13 +233,15 @@
             this.defaultSettingsGroupBox.Controls.Add(this.rememberStateCheckBox);
             this.defaultSettingsGroupBox.Location = new System.Drawing.Point(6, 6);
             this.defaultSettingsGroupBox.Name = "defaultSettingsGroupBox";
-            this.defaultSettingsGroupBox.Size = new System.Drawing.Size(284, 196);
+            this.defaultSettingsGroupBox.Size = new System.Drawing.Size(284, 241);
             this.defaultSettingsGroupBox.TabIndex = 0;
             this.defaultSettingsGroupBox.TabStop = false;
             this.defaultSettingsGroupBox.Text = "Timer defaults";
             // 
             // customDefaultsGroupBox
             // 
+            this.customDefaultsGroupBox.Controls.Add(this.timeOfDayModeRadioButton);
+            this.customDefaultsGroupBox.Controls.Add(this.countdownModeRadioButton);
             this.customDefaultsGroupBox.Controls.Add(this.hoursNumericUpDown);
             this.customDefaultsGroupBox.Controls.Add(this.secondsLabel);
             this.customDefaultsGroupBox.Controls.Add(this.hoursLabel);
@@ -251,14 +255,14 @@
             this.customDefaultsGroupBox.Controls.Add(this.actionComboBox);
             this.customDefaultsGroupBox.Location = new System.Drawing.Point(6, 42);
             this.customDefaultsGroupBox.Name = "customDefaultsGroupBox";
-            this.customDefaultsGroupBox.Size = new System.Drawing.Size(272, 148);
+            this.customDefaultsGroupBox.Size = new System.Drawing.Size(272, 194);
             this.customDefaultsGroupBox.TabIndex = 1;
             this.customDefaultsGroupBox.TabStop = false;
             this.customDefaultsGroupBox.Text = "Custom defaults";
             // 
             // hoursNumericUpDown
             // 
-            this.hoursNumericUpDown.Location = new System.Drawing.Point(9, 122);
+            this.hoursNumericUpDown.Location = new System.Drawing.Point(9, 168);
             this.hoursNumericUpDown.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -271,7 +275,7 @@
             // secondsLabel
             // 
             this.secondsLabel.AutoSize = true;
-            this.secondsLabel.Location = new System.Drawing.Point(118, 106);
+            this.secondsLabel.Location = new System.Drawing.Point(118, 152);
             this.secondsLabel.Name = "secondsLabel";
             this.secondsLabel.Size = new System.Drawing.Size(49, 13);
             this.secondsLabel.TabIndex = 24;
@@ -280,7 +284,7 @@
             // hoursLabel
             // 
             this.hoursLabel.AutoSize = true;
-            this.hoursLabel.Location = new System.Drawing.Point(6, 106);
+            this.hoursLabel.Location = new System.Drawing.Point(6, 152);
             this.hoursLabel.Name = "hoursLabel";
             this.hoursLabel.Size = new System.Drawing.Size(35, 13);
             this.hoursLabel.TabIndex = 22;
@@ -289,7 +293,7 @@
             // minutesLabel
             // 
             this.minutesLabel.AutoSize = true;
-            this.minutesLabel.Location = new System.Drawing.Point(62, 106);
+            this.minutesLabel.Location = new System.Drawing.Point(62, 152);
             this.minutesLabel.Name = "minutesLabel";
             this.minutesLabel.Size = new System.Drawing.Size(44, 13);
             this.minutesLabel.TabIndex = 23;
@@ -297,7 +301,7 @@
             // 
             // minutesNumericUpDown
             // 
-            this.minutesNumericUpDown.Location = new System.Drawing.Point(65, 122);
+            this.minutesNumericUpDown.Location = new System.Drawing.Point(65, 168);
             this.minutesNumericUpDown.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -309,7 +313,7 @@
             // 
             // secondsNumericUpDown
             // 
-            this.secondsNumericUpDown.Location = new System.Drawing.Point(121, 122);
+            this.secondsNumericUpDown.Location = new System.Drawing.Point(121, 168);
             this.secondsNumericUpDown.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -693,11 +697,31 @@
             this.appInfoLabel.TabIndex = 0;
             this.appInfoLabel.Text = "Application:";
             // 
+            // timeOfDayModeRadioButton
+            // 
+            this.timeOfDayModeRadioButton.AutoSize = true;
+            this.timeOfDayModeRadioButton.Location = new System.Drawing.Point(6, 132);
+            this.timeOfDayModeRadioButton.Name = "timeOfDayModeRadioButton";
+            this.timeOfDayModeRadioButton.Size = new System.Drawing.Size(137, 17);
+            this.timeOfDayModeRadioButton.TabIndex = 26;
+            this.timeOfDayModeRadioButton.Text = "At a specific time of day";
+            this.timeOfDayModeRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // countdownModeRadioButton
+            // 
+            this.countdownModeRadioButton.AutoSize = true;
+            this.countdownModeRadioButton.Location = new System.Drawing.Point(6, 109);
+            this.countdownModeRadioButton.Name = "countdownModeRadioButton";
+            this.countdownModeRadioButton.Size = new System.Drawing.Size(140, 17);
+            this.countdownModeRadioButton.TabIndex = 25;
+            this.countdownModeRadioButton.Text = "After a specific timespan";
+            this.countdownModeRadioButton.UseVisualStyleBackColor = true;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 393);
+            this.ClientSize = new System.Drawing.Size(334, 438);
             this.Controls.Add(this.githubLinkLabel);
             this.Controls.Add(this.footerLabel);
             this.Controls.Add(this.appLabel);
@@ -797,5 +821,7 @@
         private System.Windows.Forms.Button logButton;
         private System.Windows.Forms.LinkLabel setBackgroundColorLinkLabel;
         private System.Windows.Forms.CheckBox enableAdaptiveCountdownTextSizeCheckBox;
+        private System.Windows.Forms.RadioButton timeOfDayModeRadioButton;
+        private System.Windows.Forms.RadioButton countdownModeRadioButton;
     }
 }

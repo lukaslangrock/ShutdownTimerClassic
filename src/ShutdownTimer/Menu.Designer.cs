@@ -39,6 +39,8 @@
             this.minutesLabel = new System.Windows.Forms.Label();
             this.secondsLabel = new System.Windows.Forms.Label();
             this.timeGroupBox = new System.Windows.Forms.GroupBox();
+            this.timeOfDayModeRadioButton = new System.Windows.Forms.RadioButton();
+            this.countdownModeRadioButton = new System.Windows.Forms.RadioButton();
             this.actionGroupBox = new System.Windows.Forms.GroupBox();
             this.preventSleepCheckBox = new System.Windows.Forms.CheckBox();
             this.gracefulCheckBox = new System.Windows.Forms.CheckBox();
@@ -59,7 +61,7 @@
             // 
             // hoursNumericUpDown
             // 
-            this.hoursNumericUpDown.Location = new System.Drawing.Point(9, 37);
+            this.hoursNumericUpDown.Location = new System.Drawing.Point(9, 80);
             this.hoursNumericUpDown.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -71,7 +73,7 @@
             // 
             // minutesNumericUpDown
             // 
-            this.minutesNumericUpDown.Location = new System.Drawing.Point(65, 37);
+            this.minutesNumericUpDown.Location = new System.Drawing.Point(65, 80);
             this.minutesNumericUpDown.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -83,7 +85,7 @@
             // 
             // secondsNumericUpDown
             // 
-            this.secondsNumericUpDown.Location = new System.Drawing.Point(121, 37);
+            this.secondsNumericUpDown.Location = new System.Drawing.Point(121, 80);
             this.secondsNumericUpDown.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -115,7 +117,7 @@
             // hoursLabel
             // 
             this.hoursLabel.AutoSize = true;
-            this.hoursLabel.Location = new System.Drawing.Point(6, 21);
+            this.hoursLabel.Location = new System.Drawing.Point(6, 64);
             this.hoursLabel.Name = "hoursLabel";
             this.hoursLabel.Size = new System.Drawing.Size(35, 13);
             this.hoursLabel.TabIndex = 5;
@@ -124,7 +126,7 @@
             // minutesLabel
             // 
             this.minutesLabel.AutoSize = true;
-            this.minutesLabel.Location = new System.Drawing.Point(62, 21);
+            this.minutesLabel.Location = new System.Drawing.Point(62, 64);
             this.minutesLabel.Name = "minutesLabel";
             this.minutesLabel.Size = new System.Drawing.Size(44, 13);
             this.minutesLabel.TabIndex = 6;
@@ -133,7 +135,7 @@
             // secondsLabel
             // 
             this.secondsLabel.AutoSize = true;
-            this.secondsLabel.Location = new System.Drawing.Point(118, 21);
+            this.secondsLabel.Location = new System.Drawing.Point(118, 64);
             this.secondsLabel.Name = "secondsLabel";
             this.secondsLabel.Size = new System.Drawing.Size(49, 13);
             this.secondsLabel.TabIndex = 7;
@@ -141,6 +143,8 @@
             // 
             // timeGroupBox
             // 
+            this.timeGroupBox.Controls.Add(this.timeOfDayModeRadioButton);
+            this.timeGroupBox.Controls.Add(this.countdownModeRadioButton);
             this.timeGroupBox.Controls.Add(this.hoursNumericUpDown);
             this.timeGroupBox.Controls.Add(this.secondsLabel);
             this.timeGroupBox.Controls.Add(this.hoursLabel);
@@ -149,10 +153,30 @@
             this.timeGroupBox.Controls.Add(this.secondsNumericUpDown);
             this.timeGroupBox.Location = new System.Drawing.Point(18, 192);
             this.timeGroupBox.Name = "timeGroupBox";
-            this.timeGroupBox.Size = new System.Drawing.Size(252, 70);
+            this.timeGroupBox.Size = new System.Drawing.Size(252, 107);
             this.timeGroupBox.TabIndex = 8;
             this.timeGroupBox.TabStop = false;
             this.timeGroupBox.Text = "When to do it?";
+            // 
+            // timeOfDayModeRadioButton
+            // 
+            this.timeOfDayModeRadioButton.AutoSize = true;
+            this.timeOfDayModeRadioButton.Location = new System.Drawing.Point(6, 42);
+            this.timeOfDayModeRadioButton.Name = "timeOfDayModeRadioButton";
+            this.timeOfDayModeRadioButton.Size = new System.Drawing.Size(137, 17);
+            this.timeOfDayModeRadioButton.TabIndex = 16;
+            this.timeOfDayModeRadioButton.Text = "At a specific time of day";
+            this.timeOfDayModeRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // countdownModeRadioButton
+            // 
+            this.countdownModeRadioButton.AutoSize = true;
+            this.countdownModeRadioButton.Location = new System.Drawing.Point(6, 19);
+            this.countdownModeRadioButton.Name = "countdownModeRadioButton";
+            this.countdownModeRadioButton.Size = new System.Drawing.Size(140, 17);
+            this.countdownModeRadioButton.TabIndex = 15;
+            this.countdownModeRadioButton.Text = "After a specific timespan";
+            this.countdownModeRadioButton.UseVisualStyleBackColor = true;
             // 
             // actionGroupBox
             // 
@@ -231,7 +255,7 @@
             // startButton
             // 
             this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.startButton.Location = new System.Drawing.Point(18, 268);
+            this.startButton.Location = new System.Drawing.Point(18, 305);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(252, 31);
             this.startButton.TabIndex = 10;
@@ -274,7 +298,7 @@
             this.AccessibleName = "Shutdown Timer";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 311);
+            this.ClientSize = new System.Drawing.Size(284, 348);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.startButton);
@@ -326,6 +350,8 @@
         private System.Windows.Forms.CheckBox preventSleepCheckBox;
         private System.Windows.Forms.ToolTip infoToolTip;
         private System.Windows.Forms.Button settingsButton;
+        private System.Windows.Forms.RadioButton countdownModeRadioButton;
+        private System.Windows.Forms.RadioButton timeOfDayModeRadioButton;
     }
 }
 

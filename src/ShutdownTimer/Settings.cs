@@ -53,6 +53,8 @@ namespace ShutdownTimer
             gracefulCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.Graceful;
             preventSleepCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.PreventSleep;
             backgroundCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.Background;
+            countdownModeRadioButton.Checked = SettingsProvider.Settings.DefaultTimer.CountdownMode;
+            timeOfDayModeRadioButton.Checked = !SettingsProvider.Settings.DefaultTimer.CountdownMode;
             hoursNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Hours;
             minutesNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Minutes;
             secondsNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Seconds;
@@ -83,6 +85,7 @@ namespace ShutdownTimer
                 SettingsProvider.Settings.DefaultTimer.Graceful = gracefulCheckBox.Checked;
                 SettingsProvider.Settings.DefaultTimer.PreventSleep = preventSleepCheckBox.Checked;
                 SettingsProvider.Settings.DefaultTimer.Background = backgroundCheckBox.Checked;
+                SettingsProvider.Settings.DefaultTimer.CountdownMode = countdownModeRadioButton.Checked;
                 SettingsProvider.Settings.DefaultTimer.Hours = Convert.ToInt32(hoursNumericUpDown.Value);
                 SettingsProvider.Settings.DefaultTimer.Minutes = Convert.ToInt32(minutesNumericUpDown.Value);
                 SettingsProvider.Settings.DefaultTimer.Seconds = Convert.ToInt32(secondsNumericUpDown.Value);

@@ -214,6 +214,8 @@ namespace ShutdownTimer
             gracefulCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.Graceful;
             preventSleepCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.PreventSleep;
             backgroundCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.Background;
+            countdownModeRadioButton.Checked = SettingsProvider.Settings.DefaultTimer.CountdownMode;
+            timeOfDayModeRadioButton.Checked = !SettingsProvider.Settings.DefaultTimer.CountdownMode;
             hoursNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Hours;
             minutesNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Minutes;
             secondsNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Seconds;
@@ -234,6 +236,7 @@ namespace ShutdownTimer
                     SettingsProvider.Settings.DefaultTimer.Graceful = gracefulCheckBox.Checked;
                     SettingsProvider.Settings.DefaultTimer.PreventSleep = preventSleepCheckBox.Checked;
                     SettingsProvider.Settings.DefaultTimer.Background = backgroundCheckBox.Checked;
+                    SettingsProvider.Settings.DefaultTimer.CountdownMode = countdownModeRadioButton.Checked;
                     SettingsProvider.Settings.DefaultTimer.Hours = Convert.ToInt32(hoursNumericUpDown.Value);
                     SettingsProvider.Settings.DefaultTimer.Minutes = Convert.ToInt32(minutesNumericUpDown.Value);
                     SettingsProvider.Settings.DefaultTimer.Seconds = Convert.ToInt32(secondsNumericUpDown.Value);
@@ -254,7 +257,21 @@ namespace ShutdownTimer
 
             // Calculate TimeSpan
             ExceptionHandler.LogEvent("[Menu] Calculating timespan");
-            TimeSpan timeSpan = new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
+            TimeSpan timeSpan;
+            if (countdownModeRadioButton.Checked)
+            {
+                // Calculate TimeSpan for Countdown as it was given in the form
+                timeSpan = new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
+            }
+            else
+            {
+                // Use form data as a point in time and calculate TimeSpan from now to this point
+                bool today = TodayOrTomorrow(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
+                DateTime target = DateTime.Parse(Convert.ToInt32(hoursNumericUpDown.Value) + ":" + Convert.ToInt32(minutesNumericUpDown.Value) + ":" + Convert.ToInt32(secondsNumericUpDown.Value));
+                if (!today) { target = target.AddDays(1); }
+                timeSpan = target.Subtract(DateTime.Now);
+            }
+            
 
             // Show countdown window
             ExceptionHandler.LogEvent("[Menu] Preparing countdown window...");
@@ -275,6 +292,19 @@ namespace ShutdownTimer
                 ExceptionHandler.LogEvent("[Menu] Exiting");
                 Application.Exit(); // Exit application after countdown is closed
             }
+        }
+
+        /// <summary>
+        /// determine if a given set of hours, minutes, and seconds regards a time of the current day or the next day
+        /// </summary>
+        /// <returns>true if today, false if tomorrow</returns>
+        private bool TodayOrTomorrow(int hours, int minutes, int seconds)
+        {
+            DateTime now = DateTime.Now;
+            DateTime target = new DateTime(now.Year, now.Month, now.Day, hours, minutes, seconds);
+
+            if (target < now) { return false;  } // specified time is in the past (for the current day) -> for tomorrow
+            else { return true; } // specified time is in the future -> for today
         }
     }
 }

@@ -81,6 +81,7 @@ namespace ShutdownTimer.Helpers
                     Graceful = false,
                     PreventSleep = true,
                     Background = false,
+                    CountdownMode = true,
                     Hours = 0,
                     Minutes = 0,
                     Seconds = 0
@@ -157,6 +158,7 @@ namespace ShutdownTimer.Helpers
         public bool Graceful { get; set; }
         public bool PreventSleep { get; set; }
         public bool Background { get; set; }
+        public bool CountdownMode { get; set; }
         public int Hours { get; set; }
         public int Minutes { get; set; }
         public int Seconds { get; set; }
