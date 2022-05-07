@@ -65,6 +65,7 @@ namespace ShutdownTimer
         private void Menu_FormClosing(object sender, FormClosingEventArgs e)
         {
             ExceptionHandler.LogEvent("[Menu] Form closing...");
+            SaveSettings();
             SettingsProvider.Save();
         }
 
