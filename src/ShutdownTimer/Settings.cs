@@ -1,6 +1,7 @@
 ﻿using ShutdownTimer.Helpers;
 using System;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace ShutdownTimer
 {
@@ -67,6 +68,7 @@ namespace ShutdownTimer
             disableNotificationsCheckBox.Checked = SettingsProvider.Settings.DisableNotifications;
             passwordCheckBox.Checked = SettingsProvider.Settings.PasswordProtection;
             enableAdaptiveCountdownTextSizeCheckBox.Checked = SettingsProvider.Settings.AdaptiveCountdownTextSize;
+            if (SettingsProvider.Settings.BackgroundColor == Color.Transparent) { transparentWindowCheckBox.Checked = true; }
 
             // UI processing
             setBackgroundColorLinkLabel.Enabled = disableAnimationsCheckBox.Checked;
@@ -98,7 +100,6 @@ namespace ShutdownTimer
             SettingsProvider.Settings.DisableNotifications = disableNotificationsCheckBox.Checked;
             SettingsProvider.Settings.AdaptiveCountdownTextSize = enableAdaptiveCountdownTextSizeCheckBox.Checked;
             SettingsProvider.Settings.PasswordProtection = passwordCheckBox.Checked;
-
             SettingsProvider.Save();
         }
 
@@ -161,9 +162,21 @@ namespace ShutdownTimer
             }
         }
 
+        private void TransparentWindowCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (transparentWindowCheckBox.Checked)
+            {
+                SettingsProvider.Settings.BackgroundColor = Color.Transparent;
+            } else
+            {
+                SettingsProvider.Settings.BackgroundColor = Color.Blue;
+            }
+        }
+
         private void DisableAnimationsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             setBackgroundColorLinkLabel.Enabled = disableAnimationsCheckBox.Checked;
+            transparentWindowCheckBox.Enabled = disableAnimationsCheckBox.Checked;
         }
     }
 }

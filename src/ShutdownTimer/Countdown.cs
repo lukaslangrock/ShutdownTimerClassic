@@ -47,9 +47,20 @@ namespace ShutdownTimer
 
             ExceptionHandler.LogEvent("[Countdown] Preparing UI...");
 
-            // Set custom background color
+            // Set custom background color / transparency
 
-            BackColor = SettingsProvider.Settings.BackgroundColor;
+            if (SettingsProvider.Settings.DisableAnimations)
+            {
+                if (SettingsProvider.Settings.BackgroundColor == Color.Transparent)
+                {
+                    BackColor = Color.Black;
+                    TransparencyKey = Color.Black;
+                    FormBorderStyle = FormBorderStyle.None;
+                } else
+                {
+                    BackColor = SettingsProvider.Settings.BackgroundColor;
+                }
+            }
 
             // Set trayIcon icon to the opposite of the selected theme
             bool lighttheme;

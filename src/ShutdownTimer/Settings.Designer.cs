@@ -42,6 +42,8 @@
             this.clearSettingsButton = new System.Windows.Forms.Button();
             this.defaultSettingsGroupBox = new System.Windows.Forms.GroupBox();
             this.customDefaultsGroupBox = new System.Windows.Forms.GroupBox();
+            this.timeOfDayModeRadioButton = new System.Windows.Forms.RadioButton();
+            this.countdownModeRadioButton = new System.Windows.Forms.RadioButton();
             this.hoursNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.secondsLabel = new System.Windows.Forms.Label();
             this.hoursLabel = new System.Windows.Forms.Label();
@@ -59,6 +61,7 @@
             this.passwordLabel = new System.Windows.Forms.Label();
             this.passwordCheckBox = new System.Windows.Forms.CheckBox();
             this.countdownGroupBox = new System.Windows.Forms.GroupBox();
+            this.transparentWindowCheckBox = new System.Windows.Forms.CheckBox();
             this.enableAdaptiveCountdownTextSizeCheckBox = new System.Windows.Forms.CheckBox();
             this.setBackgroundColorLinkLabel = new System.Windows.Forms.LinkLabel();
             this.disableNotificationsCheckBox = new System.Windows.Forms.CheckBox();
@@ -82,8 +85,6 @@
             this.appSourceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appInfoLabel = new System.Windows.Forms.Label();
-            this.timeOfDayModeRadioButton = new System.Windows.Forms.RadioButton();
-            this.countdownModeRadioButton = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -260,6 +261,26 @@
             this.customDefaultsGroupBox.TabStop = false;
             this.customDefaultsGroupBox.Text = "Custom defaults";
             // 
+            // timeOfDayModeRadioButton
+            // 
+            this.timeOfDayModeRadioButton.AutoSize = true;
+            this.timeOfDayModeRadioButton.Location = new System.Drawing.Point(6, 132);
+            this.timeOfDayModeRadioButton.Name = "timeOfDayModeRadioButton";
+            this.timeOfDayModeRadioButton.Size = new System.Drawing.Size(137, 17);
+            this.timeOfDayModeRadioButton.TabIndex = 26;
+            this.timeOfDayModeRadioButton.Text = "At a specific time of day";
+            this.timeOfDayModeRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // countdownModeRadioButton
+            // 
+            this.countdownModeRadioButton.AutoSize = true;
+            this.countdownModeRadioButton.Location = new System.Drawing.Point(6, 109);
+            this.countdownModeRadioButton.Name = "countdownModeRadioButton";
+            this.countdownModeRadioButton.Size = new System.Drawing.Size(140, 17);
+            this.countdownModeRadioButton.TabIndex = 25;
+            this.countdownModeRadioButton.Text = "After a specific timespan";
+            this.countdownModeRadioButton.UseVisualStyleBackColor = true;
+            // 
             // hoursNumericUpDown
             // 
             this.hoursNumericUpDown.Location = new System.Drawing.Point(9, 168);
@@ -401,7 +422,7 @@
             this.tabPage2.Controls.Add(this.forceFlagGroupBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(296, 283);
+            this.tabPage2.Size = new System.Drawing.Size(296, 328);
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "Advanced";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -410,7 +431,7 @@
             // 
             this.passwordGroupBox.Controls.Add(this.passwordLabel);
             this.passwordGroupBox.Controls.Add(this.passwordCheckBox);
-            this.passwordGroupBox.Location = new System.Drawing.Point(6, 204);
+            this.passwordGroupBox.Location = new System.Drawing.Point(6, 255);
             this.passwordGroupBox.Name = "passwordGroupBox";
             this.passwordGroupBox.Size = new System.Drawing.Size(284, 70);
             this.passwordGroupBox.TabIndex = 14;
@@ -438,6 +459,7 @@
             // 
             // countdownGroupBox
             // 
+            this.countdownGroupBox.Controls.Add(this.transparentWindowCheckBox);
             this.countdownGroupBox.Controls.Add(this.enableAdaptiveCountdownTextSizeCheckBox);
             this.countdownGroupBox.Controls.Add(this.setBackgroundColorLinkLabel);
             this.countdownGroupBox.Controls.Add(this.disableNotificationsCheckBox);
@@ -445,15 +467,27 @@
             this.countdownGroupBox.Controls.Add(this.disableAlwaysOnTopCheckBox);
             this.countdownGroupBox.Location = new System.Drawing.Point(6, 87);
             this.countdownGroupBox.Name = "countdownGroupBox";
-            this.countdownGroupBox.Size = new System.Drawing.Size(284, 111);
+            this.countdownGroupBox.Size = new System.Drawing.Size(284, 135);
             this.countdownGroupBox.TabIndex = 17;
             this.countdownGroupBox.TabStop = false;
             this.countdownGroupBox.Text = "Countdown Window";
             // 
+            // transparentWindowCheckBox
+            // 
+            this.transparentWindowCheckBox.AutoSize = true;
+            this.transparentWindowCheckBox.Enabled = false;
+            this.transparentWindowCheckBox.Location = new System.Drawing.Point(6, 65);
+            this.transparentWindowCheckBox.Name = "transparentWindowCheckBox";
+            this.transparentWindowCheckBox.Size = new System.Drawing.Size(182, 17);
+            this.transparentWindowCheckBox.TabIndex = 5;
+            this.transparentWindowCheckBox.Text = "Transparent Countdown Window";
+            this.transparentWindowCheckBox.UseVisualStyleBackColor = true;
+            this.transparentWindowCheckBox.CheckedChanged += new System.EventHandler(this.TransparentWindowCheckBox_CheckedChanged);
+            // 
             // enableAdaptiveCountdownTextSizeCheckBox
             // 
             this.enableAdaptiveCountdownTextSizeCheckBox.AutoSize = true;
-            this.enableAdaptiveCountdownTextSizeCheckBox.Location = new System.Drawing.Point(6, 88);
+            this.enableAdaptiveCountdownTextSizeCheckBox.Location = new System.Drawing.Point(6, 112);
             this.enableAdaptiveCountdownTextSizeCheckBox.Name = "enableAdaptiveCountdownTextSizeCheckBox";
             this.enableAdaptiveCountdownTextSizeCheckBox.Size = new System.Drawing.Size(243, 17);
             this.enableAdaptiveCountdownTextSizeCheckBox.TabIndex = 4;
@@ -474,7 +508,7 @@
             // disableNotificationsCheckBox
             // 
             this.disableNotificationsCheckBox.AutoSize = true;
-            this.disableNotificationsCheckBox.Location = new System.Drawing.Point(6, 65);
+            this.disableNotificationsCheckBox.Location = new System.Drawing.Point(6, 89);
             this.disableNotificationsCheckBox.Name = "disableNotificationsCheckBox";
             this.disableNotificationsCheckBox.Size = new System.Drawing.Size(242, 17);
             this.disableNotificationsCheckBox.TabIndex = 2;
@@ -564,7 +598,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(296, 283);
+            this.tabPage3.Size = new System.Drawing.Size(296, 328);
             this.tabPage3.TabIndex = 1;
             this.tabPage3.Text = "About";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -697,26 +731,6 @@
             this.appInfoLabel.TabIndex = 0;
             this.appInfoLabel.Text = "Application:";
             // 
-            // timeOfDayModeRadioButton
-            // 
-            this.timeOfDayModeRadioButton.AutoSize = true;
-            this.timeOfDayModeRadioButton.Location = new System.Drawing.Point(6, 132);
-            this.timeOfDayModeRadioButton.Name = "timeOfDayModeRadioButton";
-            this.timeOfDayModeRadioButton.Size = new System.Drawing.Size(137, 17);
-            this.timeOfDayModeRadioButton.TabIndex = 26;
-            this.timeOfDayModeRadioButton.Text = "At a specific time of day";
-            this.timeOfDayModeRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // countdownModeRadioButton
-            // 
-            this.countdownModeRadioButton.AutoSize = true;
-            this.countdownModeRadioButton.Location = new System.Drawing.Point(6, 109);
-            this.countdownModeRadioButton.Name = "countdownModeRadioButton";
-            this.countdownModeRadioButton.Size = new System.Drawing.Size(140, 17);
-            this.countdownModeRadioButton.TabIndex = 25;
-            this.countdownModeRadioButton.Text = "After a specific timespan";
-            this.countdownModeRadioButton.UseVisualStyleBackColor = true;
-            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -823,5 +837,6 @@
         private System.Windows.Forms.CheckBox enableAdaptiveCountdownTextSizeCheckBox;
         private System.Windows.Forms.RadioButton timeOfDayModeRadioButton;
         private System.Windows.Forms.RadioButton countdownModeRadioButton;
+        private System.Windows.Forms.CheckBox transparentWindowCheckBox;
     }
 }
