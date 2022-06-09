@@ -331,6 +331,63 @@ namespace ShutdownTimer
         }
 
         /// <summary>
+        /// Updates the countdown with a new timespan
+        /// </summary>
+        private void UpdateTimer()
+        {
+            ExceptionHandler.LogEvent("[Countdown] Countdown update requested");
+            using (var form = new InputBox())
+            {
+                form.Title = "Countdown Update";
+                form.Message = "Enter new time for the countdown in the format of HH:mm:ss or HH:mm";
+                TopMost = false;
+                var result = form.ShowDialog();
+                TopMost = !SettingsProvider.Settings.DisableAlwaysOnTop;
+                if (form.ReturnValue == "")
+                {
+                    ExceptionHandler.LogEvent("[Countdown] Countdown update aborted due to no input");
+                    MessageBox.Show("Operation aborted: You have not supplied a new time value!", "Countdown Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    ExceptionHandler.LogEvent("[Countdown] Parsing supplied input");
+                    try
+                    {
+                        
+                        String[] values = form.ReturnValue.Split(':');
+                        if (values.Length == 2) // HH:mm
+                        {
+                            int newHours = Convert.ToInt32(values[0]);
+                            int newMinutes = Convert.ToInt32(values[1]);
+                            CountdownTimeSpan = new TimeSpan(newHours, newMinutes, 0);
+                            stopwatch.Restart();
+                            ExceptionHandler.LogEvent("[Countdown] Countdown updated using HH:mm");
+                        }
+                        else if (values.Length == 3) // HH:mm:ss
+                        {
+                            int newHours = Convert.ToInt32(values[0]);
+                            int newMinutes = Convert.ToInt32(values[1]);
+                            int newSeconds = Convert.ToInt32(values[2]);
+                            CountdownTimeSpan = new TimeSpan(newHours, newMinutes, newSeconds);
+                            stopwatch.Restart();
+                            ExceptionHandler.LogEvent("[Countdown] Countdown updated using HH:mm:ss");
+                        }
+                        else
+                        {
+                            ExceptionHandler.LogEvent("[Countdown] Countdown update aborted due to malformed input");
+                            MessageBox.Show("Operation aborted: You have not supplied a valid time value!", "Countdown Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        ExceptionHandler.LogEvent("[Countdown] Countdown update aborted due to error in input processing");
+                        MessageBox.Show("Operation aborted: You have either not supplied a valid time value or there was an internal error outside the scope of your input while processing it.", "Countdown Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Hides countdown window
         /// </summary>
         private void HideUI()
@@ -469,6 +526,24 @@ namespace ShutdownTimer
             else
             {
                 PauseResumeTimer();
+            }
+        }
+
+        /// <summary>
+        /// Update time option in the tray menu
+        /// </summary>
+        private void UpdateTimeMenuItem_Click(object sender, EventArgs e)
+        {
+            ExceptionHandler.LogEvent("[Countdown] Trying to update remaining time");
+
+            if (lockState == 1)
+            {
+                ExceptionHandler.LogEvent("[Countdown] Attempt halted due to password protection");
+                if (UnlockUIByPassword(true)) { ExceptionHandler.LogEvent("[Countdown] Password protection passed"); UpdateTimer(); }
+            }
+            else
+            {
+                UpdateTimer();
             }
         }
 

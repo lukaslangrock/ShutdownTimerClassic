@@ -35,6 +35,7 @@
             this.refreshTimer = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.timerPauseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerStopMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerRestartMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.appRestartMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +46,7 @@
             this.timeMenuItem = new System.Windows.Forms.ToolStripTextBox();
             this.titlebarPictureBox = new System.Windows.Forms.PictureBox();
             this.lockStatePictureBox = new System.Windows.Forms.PictureBox();
-            this.timerPauseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateTimeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lockStatePictureBox)).BeginInit();
@@ -103,9 +104,17 @@
             this.timerUIHideMenuItem,
             this.timerUIShowMenuItem,
             this.toolStripSeparator2,
-            this.timeMenuItem});
+            this.timeMenuItem,
+            this.updateTimeMenuItem});
             this.contextMenuStrip.Name = "contextMenu";
-            this.contextMenuStrip.Size = new System.Drawing.Size(213, 195);
+            this.contextMenuStrip.Size = new System.Drawing.Size(213, 217);
+            // 
+            // timerPauseMenuItem
+            // 
+            this.timerPauseMenuItem.Name = "timerPauseMenuItem";
+            this.timerPauseMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.timerPauseMenuItem.Text = "Pause";
+            this.timerPauseMenuItem.Click += new System.EventHandler(this.TimerPauseMenuItem_Click);
             // 
             // timerStopMenuItem
             // 
@@ -186,12 +195,12 @@
             this.lockStatePictureBox.Visible = false;
             this.lockStatePictureBox.Click += new System.EventHandler(this.LockStatePictureBox_Click);
             // 
-            // timerPauseMenuItem
+            // updateTimeMenuItem
             // 
-            this.timerPauseMenuItem.Name = "timerPauseMenuItem";
-            this.timerPauseMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.timerPauseMenuItem.Text = "Pause";
-            this.timerPauseMenuItem.Click += new System.EventHandler(this.TimerPauseMenuItem_Click);
+            this.updateTimeMenuItem.Name = "updateTimeMenuItem";
+            this.updateTimeMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.updateTimeMenuItem.Text = "Update remaining time";
+            this.updateTimeMenuItem.Click += new System.EventHandler(this.UpdateTimeMenuItem_Click);
             // 
             // Countdown
             // 
@@ -245,5 +254,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.PictureBox lockStatePictureBox;
         private System.Windows.Forms.ToolStripMenuItem timerPauseMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateTimeMenuItem;
     }
 }
