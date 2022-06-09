@@ -45,6 +45,7 @@
             this.timeMenuItem = new System.Windows.Forms.ToolStripTextBox();
             this.titlebarPictureBox = new System.Windows.Forms.PictureBox();
             this.lockStatePictureBox = new System.Windows.Forms.PictureBox();
+            this.timerPauseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lockStatePictureBox)).BeginInit();
@@ -94,6 +95,7 @@
             // 
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.timerPauseMenuItem,
             this.timerStopMenuItem,
             this.timerRestartMenuItem,
             this.appRestartMenuItem,
@@ -103,7 +105,7 @@
             this.toolStripSeparator2,
             this.timeMenuItem});
             this.contextMenuStrip.Name = "contextMenu";
-            this.contextMenuStrip.Size = new System.Drawing.Size(213, 151);
+            this.contextMenuStrip.Size = new System.Drawing.Size(213, 195);
             // 
             // timerStopMenuItem
             // 
@@ -184,6 +186,13 @@
             this.lockStatePictureBox.Visible = false;
             this.lockStatePictureBox.Click += new System.EventHandler(this.LockStatePictureBox_Click);
             // 
+            // timerPauseMenuItem
+            // 
+            this.timerPauseMenuItem.Name = "timerPauseMenuItem";
+            this.timerPauseMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.timerPauseMenuItem.Text = "Pause";
+            this.timerPauseMenuItem.Click += new System.EventHandler(this.TimerPauseMenuItem_Click);
+            // 
             // Countdown
             // 
             this.AccessibleDescription = "Shows the time left until power action gets executed.";
@@ -235,5 +244,6 @@
         private System.Windows.Forms.ToolStripMenuItem timerUIShowMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.PictureBox lockStatePictureBox;
+        private System.Windows.Forms.ToolStripMenuItem timerPauseMenuItem;
     }
 }

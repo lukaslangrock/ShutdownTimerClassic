@@ -26,6 +26,7 @@ namespace ShutdownTimer
         private bool ignoreClose; // true: cancel close events without asking | false: default behaviour (if ignoreClose == true, allowClose will be ignored)
         private bool allowClose; // true: accept close without asking | false: Ask user to confirm closing
         private bool animationSwitch = true; // used to switch warning animation colors
+        private bool paused = false; // used to pause/resume the timer
         private int lockState = 0; // used for Password Protection free/locked/unlocked
         private int logTimerCounter = 0; // used to log events every 10,000 timer ticks
 
@@ -307,6 +308,29 @@ namespace ShutdownTimer
         }
 
         /// <summary>
+        /// Pauses/Resumes the countdown timer
+        /// </summary>
+        private void PauseResumeTimer()
+        {
+            if (!paused)
+            {
+                stopwatch.Stop();
+                paused = true;
+                refreshTimer.Enabled = false;
+                contextMenuStrip.Items[0].Text = "Resume";
+                titleLabel.Text = Action + " Timer (paused)";
+            }
+            else
+            {
+                stopwatch.Start();
+                paused = false;
+                refreshTimer.Enabled = true;
+                contextMenuStrip.Items[0].Text = "Pause";
+                titleLabel.Text = Action + " Timer";
+            }
+        }
+
+        /// <summary>
         /// Hides countdown window
         /// </summary>
         private void HideUI()
@@ -428,6 +452,25 @@ namespace ShutdownTimer
         #endregion
 
         #region "tray menu events"
+
+        /// <summary>
+        /// Pause/Resume timer option in the tray menu
+        /// 
+        /// </summary>
+        private void TimerPauseMenuItem_Click(object sender, EventArgs e)
+        {
+            ExceptionHandler.LogEvent("[Countdown] Trying to pause/resume countdown");
+
+            if (lockState == 1)
+            {
+                ExceptionHandler.LogEvent("[Countdown] Attempt halted due to password protection");
+                if (UnlockUIByPassword(true)) { ExceptionHandler.LogEvent("[Countdown] Password protection passed"); PauseResumeTimer(); }
+            }
+            else
+            {
+                PauseResumeTimer();
+            }
+        }
 
         /// <summary>
         /// Stop timer option in the tray menu
