@@ -18,6 +18,7 @@ namespace ShutdownTimer
 
         private string checkResult;
         private string password; // used for password protection
+        private string command; // used for custom command
 
         public Menu()
         {
@@ -93,6 +94,21 @@ namespace ShutdownTimer
                 timeGroupBox.Enabled = false;
 
                 SaveSettings();
+
+                if (actionComboBox.Text.Equals("Custom Command"))
+                {
+                    ExceptionHandler.LogEvent("[Menu] Entering custom command setup");
+                    using (var form = new InputBox())
+                    {
+                        form.Title = "Custom Command";
+                        form.Message = "Please enter the command you want to have executed. If you wish to launch a file, just enter the full file path.\n\n" +
+                            "Note: Execution will use this user's permissions.";
+                        ExceptionHandler.LogEvent("[Menu] Requesting custom command from user...");
+                        var result = form.ShowDialog();
+                        ExceptionHandler.LogEvent("[Menu] Saving command");
+                        command = form.ReturnValue;
+                    }
+                }
 
                 if (SettingsProvider.Settings.PasswordProtection)
                 {
@@ -280,7 +296,8 @@ namespace ShutdownTimer
                 PreventSystemSleep = preventSleepCheckBox.Checked,
                 UI = !backgroundCheckBox.Checked,
                 Password = password,
-                UserLaunch = true
+                UserLaunch = true,
+                Command = command
             })
             {
                 countdown.Owner = this;

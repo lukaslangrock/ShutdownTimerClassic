@@ -18,6 +18,7 @@ namespace ShutdownTimer
         public bool Forced { get; set; } // disables all UI controls and exit dialogs
         public string Password { get; set; } // if value is not empty then a password will be required to change or disable the countdown
         public bool UserLaunch { get; set; } // false if launched from CLI
+        public string Command { get; set; } // for executing a custom command instead of a power action
 
         //private
         private FormWindowState lastStateUIFormWindowState; // used to update UI immediately after WindowState change
@@ -728,6 +729,10 @@ namespace ShutdownTimer
 
                 case "Lock":
                     ExitWindows.Lock();
+                    break;
+
+                case "Custom Command":
+                    Process.Start(Command);
                     break;
             }
 
