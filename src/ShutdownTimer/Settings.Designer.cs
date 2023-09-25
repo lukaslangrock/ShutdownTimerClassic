@@ -36,6 +36,9 @@
             this.githubLinkLabel = new System.Windows.Forms.LinkLabel();
             this.settingsTabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rememberLastScreenPositionCountdown = new System.Windows.Forms.CheckBox();
+            this.rememberLastScreenPositionUI = new System.Windows.Forms.CheckBox();
             this.trayiconGroupBox = new System.Windows.Forms.GroupBox();
             this.trayiconThemeComboBox = new System.Windows.Forms.ComboBox();
             this.trayiconThemeLabel = new System.Windows.Forms.Label();
@@ -88,6 +91,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.trayiconGroupBox.SuspendLayout();
             this.defaultSettingsGroupBox.SuspendLayout();
             this.customDefaultsGroupBox.SuspendLayout();
@@ -138,7 +142,7 @@
             this.footerLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.footerLabel.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.footerLabel.Location = new System.Drawing.Point(12, 411);
+            this.footerLabel.Location = new System.Drawing.Point(12, 478);
             this.footerLabel.Name = "footerLabel";
             this.footerLabel.Size = new System.Drawing.Size(310, 18);
             this.footerLabel.TabIndex = 9;
@@ -169,27 +173,59 @@
             this.settingsTabControl.Location = new System.Drawing.Point(18, 54);
             this.settingsTabControl.Name = "settingsTabControl";
             this.settingsTabControl.SelectedIndex = 0;
-            this.settingsTabControl.Size = new System.Drawing.Size(304, 354);
+            this.settingsTabControl.Size = new System.Drawing.Size(304, 421);
             this.settingsTabControl.TabIndex = 13;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.trayiconGroupBox);
             this.tabPage1.Controls.Add(this.clearSettingsButton);
             this.tabPage1.Controls.Add(this.defaultSettingsGroupBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(296, 328);
+            this.tabPage1.Size = new System.Drawing.Size(296, 395);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Application Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rememberLastScreenPositionCountdown);
+            this.groupBox1.Controls.Add(this.rememberLastScreenPositionUI);
+            this.groupBox1.Location = new System.Drawing.Point(6, 249);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(284, 57);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "General";
+            // 
+            // rememberLastScreenPositionCountdown
+            // 
+            this.rememberLastScreenPositionCountdown.AutoSize = true;
+            this.rememberLastScreenPositionCountdown.Location = new System.Drawing.Point(15, 35);
+            this.rememberLastScreenPositionCountdown.Name = "rememberLastScreenPositionCountdown";
+            this.rememberLastScreenPositionCountdown.Size = new System.Drawing.Size(240, 17);
+            this.rememberLastScreenPositionCountdown.TabIndex = 21;
+            this.rememberLastScreenPositionCountdown.Text = "Remember Last Screen Position (Countdown)";
+            this.rememberLastScreenPositionCountdown.UseVisualStyleBackColor = true;
+            // 
+            // rememberLastScreenPositionUI
+            // 
+            this.rememberLastScreenPositionUI.AutoSize = true;
+            this.rememberLastScreenPositionUI.Location = new System.Drawing.Point(15, 19);
+            this.rememberLastScreenPositionUI.Name = "rememberLastScreenPositionUI";
+            this.rememberLastScreenPositionUI.Size = new System.Drawing.Size(197, 17);
+            this.rememberLastScreenPositionUI.TabIndex = 20;
+            this.rememberLastScreenPositionUI.Text = "Remember Last Screen Position (UI)";
+            this.rememberLastScreenPositionUI.UseVisualStyleBackColor = true;
             // 
             // trayiconGroupBox
             // 
             this.trayiconGroupBox.Controls.Add(this.trayiconThemeComboBox);
             this.trayiconGroupBox.Controls.Add(this.trayiconThemeLabel);
-            this.trayiconGroupBox.Location = new System.Drawing.Point(6, 253);
+            this.trayiconGroupBox.Location = new System.Drawing.Point(6, 310);
             this.trayiconGroupBox.Name = "trayiconGroupBox";
             this.trayiconGroupBox.Size = new System.Drawing.Size(284, 40);
             this.trayiconGroupBox.TabIndex = 2;
@@ -220,7 +256,7 @@
             // 
             // clearSettingsButton
             // 
-            this.clearSettingsButton.Location = new System.Drawing.Point(161, 299);
+            this.clearSettingsButton.Location = new System.Drawing.Point(161, 367);
             this.clearSettingsButton.Name = "clearSettingsButton";
             this.clearSettingsButton.Size = new System.Drawing.Size(129, 23);
             this.clearSettingsButton.TabIndex = 1;
@@ -422,7 +458,7 @@
             this.tabPage2.Controls.Add(this.forceFlagGroupBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(296, 328);
+            this.tabPage2.Size = new System.Drawing.Size(296, 395);
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "Advanced";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -598,7 +634,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(296, 328);
+            this.tabPage3.Size = new System.Drawing.Size(296, 395);
             this.tabPage3.TabIndex = 1;
             this.tabPage3.Text = "About";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -735,7 +771,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 438);
+            this.ClientSize = new System.Drawing.Size(334, 505);
             this.Controls.Add(this.githubLinkLabel);
             this.Controls.Add(this.footerLabel);
             this.Controls.Add(this.appLabel);
@@ -755,6 +791,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).EndInit();
             this.settingsTabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.trayiconGroupBox.ResumeLayout(false);
             this.trayiconGroupBox.PerformLayout();
             this.defaultSettingsGroupBox.ResumeLayout(false);
@@ -838,5 +876,8 @@
         private System.Windows.Forms.RadioButton timeOfDayModeRadioButton;
         private System.Windows.Forms.RadioButton countdownModeRadioButton;
         private System.Windows.Forms.CheckBox transparentWindowCheckBox;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox rememberLastScreenPositionCountdown;
+        private System.Windows.Forms.CheckBox rememberLastScreenPositionUI;
     }
 }

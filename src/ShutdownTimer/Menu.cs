@@ -1,5 +1,6 @@
 ﻿using ShutdownTimer.Helpers;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace ShutdownTimer
@@ -232,10 +233,19 @@ namespace ShutdownTimer
             hoursNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Hours;
             minutesNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Minutes;
             secondsNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Seconds;
+
+            // Check if the user has opted to remember the last UI screen position,
+            // and if LastScreenPosition is available (not null), apply its X and Y coordinates to position the form.
+
+            if (SettingsProvider.Settings.RememberLastScreenPositionUI && SettingsProvider.Settings.LastScreenPositionUI != null)
+            {
+                this.Location = new Point(SettingsProvider.Settings.LastScreenPositionUI.X, SettingsProvider.Settings.LastScreenPositionUI.Y);
+            }
         }
 
         /// <summary>
         /// Saves current timer settings as default settings if activated in settings
+        /// and the last UI position
         /// </summary>
         private void SaveSettings()
         {
@@ -254,6 +264,12 @@ namespace ShutdownTimer
                     SettingsProvider.Settings.DefaultTimer.Minutes = Convert.ToInt32(minutesNumericUpDown.Value);
                     SettingsProvider.Settings.DefaultTimer.Seconds = Convert.ToInt32(secondsNumericUpDown.Value);
                 }
+
+                SettingsProvider.Settings.LastScreenPositionUI = new LastScreenPosition
+                {
+                    X = this.Location.X,
+                    Y = this.Location.Y
+                };
 
                 SettingsProvider.Save();
             }
