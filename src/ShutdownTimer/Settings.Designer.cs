@@ -433,7 +433,8 @@
             "Hibernate",
             "Sleep",
             "Logout",
-            "Lock"});
+            "Lock",
+            "Custom Command"});
             this.actionComboBox.Location = new System.Drawing.Point(99, 13);
             this.actionComboBox.Name = "actionComboBox";
             this.actionComboBox.Size = new System.Drawing.Size(147, 21);
