@@ -382,7 +382,6 @@ namespace ShutdownTimer
                     ExceptionHandler.LogEvent("[Countdown] Parsing supplied input");
                     try
                     {
-                        
                         String[] values = form.ReturnValue.Split(':');
                         if (values.Length == 2) // HH:mm
                         {
@@ -760,7 +759,17 @@ namespace ShutdownTimer
                     break;
 
                 case "Custom Command":
-                    Process.Start(Command);
+                    try
+                    {
+                        Process.Start(Command);
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionHandler.LogEvent("[Countdown] Error starting a process of the custom command.");
+                        ExceptionHandler.LogEvent("[Countdown] Custom command: " + Command);
+                        ExceptionHandler.LogEvent("[Countdown] Exception: " + ex.ToString());
+                        MessageBox.Show("There was an error executing your custom command.\n\nYour custom command: " + Command + "\nError: " + ex.Message, "Countdown Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                     break;
             }
 
