@@ -141,6 +141,10 @@ namespace ShutdownTimer.Helpers
         public bool RememberLastState { get; set; }
         public string TrayIconTheme { get; set; }
         public TimerData DefaultTimer { get; set; }
+        public bool RememberLastScreenPositionUI { get; set; }
+        public LastScreenPosition LastScreenPositionUI { get; set; }
+        public bool RememberLastScreenPositionCountdown { get; set; }
+        public LastScreenPosition LastScreenPositionCountdown { get; set; }
 
         // advanced settings
         public bool ForceIfHungFlag { get; set; }
@@ -162,5 +166,11 @@ namespace ShutdownTimer.Helpers
         public int Hours { get; set; }
         public int Minutes { get; set; }
         public int Seconds { get; set; }
+    }
+
+    public class LastScreenPosition
+    {
+        public int X { get; set; }
+        public int Y { get; set; }
     }
 }

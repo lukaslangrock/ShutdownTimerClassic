@@ -110,6 +110,14 @@ namespace ShutdownTimer
                 appRestartMenuItem.Enabled = false;
             }
 
+            // Check if the user has opted to remember the last Countdown screen position,
+            // and if LastScreenPosition is available (not null), apply its X and Y coordinates to position the form.
+
+            if (SettingsProvider.Settings.RememberLastScreenPositionCountdown && SettingsProvider.Settings.LastScreenPositionCountdown != null)
+            {
+                this.Location = new Point(SettingsProvider.Settings.LastScreenPositionCountdown.X, SettingsProvider.Settings.LastScreenPositionCountdown.Y);
+            }
+
             ExceptionHandler.LogEvent("[Countdown] Prepared UI");
 
             ExceptionHandler.LogEvent("[Countdown] Updating UI");
@@ -197,6 +205,24 @@ namespace ShutdownTimer
         }
 
         /// <summary>
+        /// Saves the last Countdown position
+        /// </summary>
+        private void SaveSettings()
+        {
+            ExceptionHandler.LogEvent("[Countdown] Saving settings...");
+
+            SettingsProvider.Settings.LastScreenPositionCountdown = new LastScreenPosition
+            {
+                X = this.Location.X,
+                Y = this.Location.Y
+            };
+
+            SettingsProvider.Save();
+
+            ExceptionHandler.LogEvent("[Countdown] Settings saved");
+        }
+
+        /// <summary>
         /// Logic to prevent or ignore unwanted close events and notify the user.
         /// </summary>
         private void Countdown_FormClosing(object sender, FormClosingEventArgs e)
@@ -217,6 +243,8 @@ namespace ShutdownTimer
                 if (question == DialogResult.Yes) { ExceptionHandler.LogEvent("[Countdown] User wanted to exit"); ExitApplication(); }
             }
             // allowClose == true is not handled and if ignoreClose == false, the application will exit
+
+            SaveSettings();
         }
 
         #endregion

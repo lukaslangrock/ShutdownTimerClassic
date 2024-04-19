@@ -48,6 +48,8 @@ namespace ShutdownTimer
             // general controls
             rememberStateCheckBox.Checked = SettingsProvider.Settings.RememberLastState;
             trayiconThemeComboBox.Text = SettingsProvider.Settings.TrayIconTheme;
+            rememberLastScreenPositionUI.Checked = SettingsProvider.Settings.RememberLastScreenPositionUI;
+            rememberLastScreenPositionCountdown.Checked = SettingsProvider.Settings.RememberLastScreenPositionCountdown;
 
             // default timer
             actionComboBox.Text = SettingsProvider.Settings.DefaultTimer.Action;
@@ -100,6 +102,11 @@ namespace ShutdownTimer
             SettingsProvider.Settings.DisableNotifications = disableNotificationsCheckBox.Checked;
             SettingsProvider.Settings.AdaptiveCountdownTextSize = enableAdaptiveCountdownTextSizeCheckBox.Checked;
             SettingsProvider.Settings.PasswordProtection = passwordCheckBox.Checked;
+
+
+            SettingsProvider.Settings.RememberLastScreenPositionUI = rememberLastScreenPositionUI.Checked;
+            SettingsProvider.Settings.RememberLastScreenPositionCountdown = rememberLastScreenPositionCountdown.Checked;
+
             SettingsProvider.Save();
         }
 
