@@ -60,6 +60,11 @@ namespace ShutdownTimer.Helpers
         private static void CheckSettings()
         {
             ExceptionHandler.LogEvent("[Settings] Checking settings object");
+            if (Settings == null)
+            {
+                ExceptionHandler.LogEvent("[Settings] Settings could not be loaded, the file might be corrupted or empty. Initializing new settings object.");
+                ClearSettings();
+            }
 
             ExceptionHandler.LogEvent("[Settings] Setting product version");
             Settings.AppVersion = Application.ProductVersion;
