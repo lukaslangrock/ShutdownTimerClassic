@@ -196,7 +196,7 @@
             this.groupBox1.Controls.Add(this.rememberLastScreenPositionUI);
             this.groupBox1.Location = new System.Drawing.Point(6, 249);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(284, 57);
+            this.groupBox1.Size = new System.Drawing.Size(284, 66);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General";
@@ -204,7 +204,7 @@
             // rememberLastScreenPositionCountdown
             // 
             this.rememberLastScreenPositionCountdown.AutoSize = true;
-            this.rememberLastScreenPositionCountdown.Location = new System.Drawing.Point(15, 35);
+            this.rememberLastScreenPositionCountdown.Location = new System.Drawing.Point(6, 42);
             this.rememberLastScreenPositionCountdown.Name = "rememberLastScreenPositionCountdown";
             this.rememberLastScreenPositionCountdown.Size = new System.Drawing.Size(240, 17);
             this.rememberLastScreenPositionCountdown.TabIndex = 21;
@@ -214,7 +214,7 @@
             // rememberLastScreenPositionUI
             // 
             this.rememberLastScreenPositionUI.AutoSize = true;
-            this.rememberLastScreenPositionUI.Location = new System.Drawing.Point(15, 19);
+            this.rememberLastScreenPositionUI.Location = new System.Drawing.Point(6, 19);
             this.rememberLastScreenPositionUI.Name = "rememberLastScreenPositionUI";
             this.rememberLastScreenPositionUI.Size = new System.Drawing.Size(197, 17);
             this.rememberLastScreenPositionUI.TabIndex = 20;
@@ -225,7 +225,7 @@
             // 
             this.trayiconGroupBox.Controls.Add(this.trayiconThemeComboBox);
             this.trayiconGroupBox.Controls.Add(this.trayiconThemeLabel);
-            this.trayiconGroupBox.Location = new System.Drawing.Point(6, 310);
+            this.trayiconGroupBox.Location = new System.Drawing.Point(6, 321);
             this.trayiconGroupBox.Name = "trayiconGroupBox";
             this.trayiconGroupBox.Size = new System.Drawing.Size(284, 40);
             this.trayiconGroupBox.TabIndex = 2;
@@ -648,24 +648,24 @@
             this.aboutGroupBox.Controls.Add(this.aboutRichTextBox);
             this.aboutGroupBox.Location = new System.Drawing.Point(6, 61);
             this.aboutGroupBox.Name = "aboutGroupBox";
-            this.aboutGroupBox.Size = new System.Drawing.Size(284, 261);
+            this.aboutGroupBox.Size = new System.Drawing.Size(284, 328);
             this.aboutGroupBox.TabIndex = 1;
             this.aboutGroupBox.TabStop = false;
             this.aboutGroupBox.Text = "About this app";
             // 
             // logButton
             // 
-            this.logButton.Location = new System.Drawing.Point(6, 232);
+            this.logButton.Location = new System.Drawing.Point(6, 299);
             this.logButton.Name = "logButton";
             this.logButton.Size = new System.Drawing.Size(80, 23);
             this.logButton.TabIndex = 17;
-            this.logButton.Text = "Create Log";
+            this.logButton.Text = "Create Logfile";
             this.logButton.UseVisualStyleBackColor = true;
             this.logButton.Click += new System.EventHandler(this.LogButton_Click);
             // 
             // emailbutton
             // 
-            this.emailbutton.Location = new System.Drawing.Point(112, 232);
+            this.emailbutton.Location = new System.Drawing.Point(112, 299);
             this.emailbutton.Name = "emailbutton";
             this.emailbutton.Size = new System.Drawing.Size(60, 23);
             this.emailbutton.TabIndex = 16;
@@ -675,7 +675,7 @@
             // 
             // githubButton
             // 
-            this.githubButton.Location = new System.Drawing.Point(178, 232);
+            this.githubButton.Location = new System.Drawing.Point(178, 299);
             this.githubButton.Name = "githubButton";
             this.githubButton.Size = new System.Drawing.Size(100, 23);
             this.githubButton.TabIndex = 15;
@@ -687,7 +687,7 @@
             // 
             this.aboutRichTextBox.Location = new System.Drawing.Point(6, 19);
             this.aboutRichTextBox.Name = "aboutRichTextBox";
-            this.aboutRichTextBox.Size = new System.Drawing.Size(272, 207);
+            this.aboutRichTextBox.Size = new System.Drawing.Size(272, 274);
             this.aboutRichTextBox.TabIndex = 14;
             this.aboutRichTextBox.Text = resources.GetString("aboutRichTextBox.Text");
             // 
