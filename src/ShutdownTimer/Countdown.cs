@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using Gma.System.MouseKeyHook;
 
 namespace ShutdownTimer
 {
@@ -19,6 +20,7 @@ namespace ShutdownTimer
         public string Password { get; set; } // if value is not empty then a password will be required to change or disable the countdown
         public bool UserLaunch { get; set; } // false if launched from CLI
         public string Command { get; set; } // for executing a custom command instead of a power action
+        public bool CountdownOnInactivity { get; set; } // resets the countdown every time the mouse is moved
 
         //private
         private FormWindowState lastStateUIFormWindowState; // used to update UI immediately after WindowState change
@@ -30,6 +32,7 @@ namespace ShutdownTimer
         private bool paused = false; // used to pause/resume the timer
         private int lockState = 0; // used for Password Protection free/locked/unlocked
         private int logTimerCounter = 0; // used to log events every 10,000 timer ticks
+        private IKeyboardMouseEvents mkHook; // hook for tracking mouse and keyboard (not malicious, just used for resetting the timer on mouse movements and hotkeys)
 
         public Countdown()
         {
@@ -46,6 +49,11 @@ namespace ShutdownTimer
             // Setup clock
             stopwatch = new Stopwatch();
             stopwatch.Start();
+
+            // Setup hooks for mouse and keyboard
+            mkHook = Hook.GlobalEvents();
+            if (CountdownOnInactivity) { mkHook.MouseMoveExt += OnMouseMovement; }
+            if (false) { mkHook.KeyDown += OnKeyDown; }
 
             ExceptionHandler.LogEvent("[Countdown] Preparing UI...");
 
@@ -633,6 +641,21 @@ namespace ShutdownTimer
             {
                 ShowUI();
             }
+        }
+
+        #endregion
+
+        #region "mouse keyboard hooks"
+
+        private void OnMouseMovement(object sender, MouseEventExtArgs e)
+        {
+            // not using any other methods or logging because this will be invoked a lot during runtime
+            stopwatch.Restart();
+        }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

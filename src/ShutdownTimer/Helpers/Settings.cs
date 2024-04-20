@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -42,7 +44,7 @@ namespace ShutdownTimer.Helpers
                 ExceptionHandler.LogEvent("[Settings] Loading settings.json");
                 string settingsJson = File.ReadAllText(settingsPath);
                 Settings = new SettingsData();
-                try { Settings = JsonConvert.DeserializeObject<SettingsData>(settingsJson); } catch (Exception ex) { ExceptionHandler.LogEvent("[Settings] Error deserializing object: " + ex.Message); }
+                try { Settings = JsonConvert.DeserializeObject<SettingsData>(settingsJson); } catch (Exception ex) { ExceptionHandler.LogEvent("[Settings] Error deserializing object: " + ex.ToString()); }
                 CheckSettings();
                 SettingsLoaded = true;
                 ExceptionHandler.LogEvent("[Settings] Successfully loaded settings to an object in application memory");
@@ -66,7 +68,8 @@ namespace ShutdownTimer.Helpers
                 ClearSettings();
             }
 
-            ExceptionHandler.LogEvent("[Settings] Setting product version");
+            if (Settings.AppVersion != Application.ProductVersion && Settings.AppVersion != null) { MigrateSettings(); }
+            ExceptionHandler.LogEvent("[Settings] Setting current product version");
             Settings.AppVersion = Application.ProductVersion;
 
             ExceptionHandler.LogEvent("[Settings] Checking field: TrayIconTheme");
@@ -86,7 +89,7 @@ namespace ShutdownTimer.Helpers
                     Graceful = false,
                     PreventSleep = true,
                     Background = false,
-                    CountdownMode = true,
+                    TimeMode = "Countdown",
                     Hours = 0,
                     Minutes = 0,
                     Seconds = 0
@@ -101,6 +104,32 @@ namespace ShutdownTimer.Helpers
             }
 
             ExceptionHandler.LogEvent("[Settings] Checked settings object");
+        }
+
+        public static void MigrateSettings()
+        {
+            ExceptionHandler.LogEvent("[Settings] Trying to migrate settings from older version: " + Settings.AppVersion);
+            try
+            {
+                JObject oldSettings = (JObject)JsonConvert.DeserializeObject(File.ReadAllText(settingsPath));
+                // Example of how to get data that was not imported into the current settings object: string test = oldSettings["DefaultTimer"]["Action"].Value<string>();
+                ExceptionHandler.LogEvent("[Settings] Object deserialized: " + oldSettings.ToString());
+                switch (Settings.AppVersion)
+                {
+                    case "1.2.3.0":
+                        Settings.DefaultTimer.TimeMode = "Countdown"; // this was the only option in <=v1.2.3, so it will be set to this by default
+                        ExceptionHandler.LogEvent("[Settings] Migrated settings from v1.2.3");
+                        goto case "1.3.0.0"; // going to the next version in case we make multi-version jumps and there are multiple migration steps.
+
+                    case "1.3.0.0":
+                        ExceptionHandler.LogEvent("[Settings] Migration procedure has imported all supported older settings");
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.LogEvent("[Settings] Error deserializing object: " + ex.ToString());
+            }
         }
 
         public static void ClearSettings()
@@ -167,7 +196,7 @@ namespace ShutdownTimer.Helpers
         public bool Graceful { get; set; }
         public bool PreventSleep { get; set; }
         public bool Background { get; set; }
-        public bool CountdownMode { get; set; }
+        public string TimeMode { get; set; }
         public int Hours { get; set; }
         public int Minutes { get; set; }
         public int Seconds { get; set; }

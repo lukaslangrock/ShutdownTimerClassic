@@ -208,6 +208,7 @@ namespace ShutdownTimer
             hoursNumericUpDown.Value = ArgTimeH;
             minutesNumericUpDown.Value = ArgTimeM;
             secondsNumericUpDown.Value = ArgTimeS;
+            countdownModeRadioButton.Checked = true; // CLI start always uses countdown mode
 
             if (ArgMode.Equals("Lock"))
             {
@@ -228,8 +229,17 @@ namespace ShutdownTimer
             gracefulCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.Graceful;
             preventSleepCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.PreventSleep;
             backgroundCheckBox.Checked = SettingsProvider.Settings.DefaultTimer.Background;
-            countdownModeRadioButton.Checked = SettingsProvider.Settings.DefaultTimer.CountdownMode;
-            timeOfDayModeRadioButton.Checked = !SettingsProvider.Settings.DefaultTimer.CountdownMode;
+            switch (SettingsProvider.Settings.DefaultTimer.TimeMode) {
+                case "Countdown":
+                    countdownModeRadioButton.Checked = true;
+                    break;
+                case "CountdownOnInactivity":
+                    inactivityModeRadioButton.Checked = true;
+                    break;
+                case "TimeOfDay":
+                    timeOfDayModeRadioButton.Checked = true;
+                    break;
+            }
             hoursNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Hours;
             minutesNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Minutes;
             secondsNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Seconds;
@@ -259,7 +269,9 @@ namespace ShutdownTimer
                     SettingsProvider.Settings.DefaultTimer.Graceful = gracefulCheckBox.Checked;
                     SettingsProvider.Settings.DefaultTimer.PreventSleep = preventSleepCheckBox.Checked;
                     SettingsProvider.Settings.DefaultTimer.Background = backgroundCheckBox.Checked;
-                    SettingsProvider.Settings.DefaultTimer.CountdownMode = countdownModeRadioButton.Checked;
+                    if (countdownModeRadioButton.Checked) { SettingsProvider.Settings.DefaultTimer.TimeMode = "Countdown"; }
+                    if (inactivityModeRadioButton.Checked) { SettingsProvider.Settings.DefaultTimer.TimeMode = "CountdownOnInactivity"; }
+                    if (timeOfDayModeRadioButton.Checked) { SettingsProvider.Settings.DefaultTimer.TimeMode = "TimeOfDay"; }
                     SettingsProvider.Settings.DefaultTimer.Hours = Convert.ToInt32(hoursNumericUpDown.Value);
                     SettingsProvider.Settings.DefaultTimer.Minutes = Convert.ToInt32(minutesNumericUpDown.Value);
                     SettingsProvider.Settings.DefaultTimer.Seconds = Convert.ToInt32(secondsNumericUpDown.Value);
@@ -287,20 +299,21 @@ namespace ShutdownTimer
             // Calculate TimeSpan
             ExceptionHandler.LogEvent("[Menu] Calculating timespan");
             TimeSpan timeSpan;
-            if (countdownModeRadioButton.Checked)
-            {
-                // Calculate TimeSpan for Countdown as it was given in the form
-                timeSpan = new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
-            }
-            else
+            if (timeOfDayModeRadioButton.Checked)
             {
                 // Use form data as a point in time and calculate TimeSpan from now to this point
+                ExceptionHandler.LogEvent("[Menu] Using calculation mode: TimeOfDay");
                 bool today = TodayOrTomorrow(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
                 DateTime target = DateTime.Parse(Convert.ToInt32(hoursNumericUpDown.Value) + ":" + Convert.ToInt32(minutesNumericUpDown.Value) + ":" + Convert.ToInt32(secondsNumericUpDown.Value));
                 if (!today) { target = target.AddDays(1); }
                 timeSpan = target.Subtract(DateTime.Now);
             }
-            
+            else
+            {
+                // Calculate TimeSpan for Countdown as it was given in the form
+                ExceptionHandler.LogEvent("[Menu] Using calculation mode: Countdown");
+                timeSpan = new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
+            }
 
             // Show countdown window
             ExceptionHandler.LogEvent("[Menu] Preparing countdown window...");
@@ -313,7 +326,8 @@ namespace ShutdownTimer
                 UI = !backgroundCheckBox.Checked,
                 Password = password,
                 UserLaunch = true,
-                Command = command
+                Command = command,
+                CountdownOnInactivity = inactivityModeRadioButton.Checked
             })
             {
                 countdown.Owner = this;

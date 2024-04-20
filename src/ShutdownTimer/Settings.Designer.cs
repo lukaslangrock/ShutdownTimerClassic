@@ -39,12 +39,12 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rememberLastScreenPositionCountdown = new System.Windows.Forms.CheckBox();
             this.rememberLastScreenPositionUI = new System.Windows.Forms.CheckBox();
-            this.trayiconGroupBox = new System.Windows.Forms.GroupBox();
             this.trayiconThemeComboBox = new System.Windows.Forms.ComboBox();
             this.trayiconThemeLabel = new System.Windows.Forms.Label();
             this.clearSettingsButton = new System.Windows.Forms.Button();
             this.defaultSettingsGroupBox = new System.Windows.Forms.GroupBox();
             this.customDefaultsGroupBox = new System.Windows.Forms.GroupBox();
+            this.inactivityModeRadioButton = new System.Windows.Forms.RadioButton();
             this.timeOfDayModeRadioButton = new System.Windows.Forms.RadioButton();
             this.countdownModeRadioButton = new System.Windows.Forms.RadioButton();
             this.hoursNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -92,7 +92,6 @@
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.trayiconGroupBox.SuspendLayout();
             this.defaultSettingsGroupBox.SuspendLayout();
             this.customDefaultsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hoursNumericUpDown)).BeginInit();
@@ -142,7 +141,7 @@
             this.footerLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.footerLabel.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.footerLabel.Location = new System.Drawing.Point(12, 478);
+            this.footerLabel.Location = new System.Drawing.Point(12, 506);
             this.footerLabel.Name = "footerLabel";
             this.footerLabel.Size = new System.Drawing.Size(310, 18);
             this.footerLabel.TabIndex = 9;
@@ -173,30 +172,31 @@
             this.settingsTabControl.Location = new System.Drawing.Point(18, 54);
             this.settingsTabControl.Name = "settingsTabControl";
             this.settingsTabControl.SelectedIndex = 0;
-            this.settingsTabControl.Size = new System.Drawing.Size(304, 421);
+            this.settingsTabControl.Size = new System.Drawing.Size(304, 449);
             this.settingsTabControl.TabIndex = 13;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.trayiconGroupBox);
             this.tabPage1.Controls.Add(this.clearSettingsButton);
             this.tabPage1.Controls.Add(this.defaultSettingsGroupBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(296, 395);
+            this.tabPage1.Size = new System.Drawing.Size(296, 423);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Application Settings";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.trayiconThemeComboBox);
             this.groupBox1.Controls.Add(this.rememberLastScreenPositionCountdown);
+            this.groupBox1.Controls.Add(this.trayiconThemeLabel);
             this.groupBox1.Controls.Add(this.rememberLastScreenPositionUI);
-            this.groupBox1.Location = new System.Drawing.Point(6, 249);
+            this.groupBox1.Location = new System.Drawing.Point(6, 276);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(284, 66);
+            this.groupBox1.Size = new System.Drawing.Size(284, 92);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General";
@@ -206,9 +206,9 @@
             this.rememberLastScreenPositionCountdown.AutoSize = true;
             this.rememberLastScreenPositionCountdown.Location = new System.Drawing.Point(6, 42);
             this.rememberLastScreenPositionCountdown.Name = "rememberLastScreenPositionCountdown";
-            this.rememberLastScreenPositionCountdown.Size = new System.Drawing.Size(240, 17);
+            this.rememberLastScreenPositionCountdown.Size = new System.Drawing.Size(233, 17);
             this.rememberLastScreenPositionCountdown.TabIndex = 21;
-            this.rememberLastScreenPositionCountdown.Text = "Remember Last Screen Position (Countdown)";
+            this.rememberLastScreenPositionCountdown.Text = "Remember last screen position (Countdown)";
             this.rememberLastScreenPositionCountdown.UseVisualStyleBackColor = true;
             // 
             // rememberLastScreenPositionUI
@@ -216,21 +216,10 @@
             this.rememberLastScreenPositionUI.AutoSize = true;
             this.rememberLastScreenPositionUI.Location = new System.Drawing.Point(6, 19);
             this.rememberLastScreenPositionUI.Name = "rememberLastScreenPositionUI";
-            this.rememberLastScreenPositionUI.Size = new System.Drawing.Size(197, 17);
+            this.rememberLastScreenPositionUI.Size = new System.Drawing.Size(206, 17);
             this.rememberLastScreenPositionUI.TabIndex = 20;
-            this.rememberLastScreenPositionUI.Text = "Remember Last Screen Position (UI)";
+            this.rememberLastScreenPositionUI.Text = "Remember last screen position (Menu)";
             this.rememberLastScreenPositionUI.UseVisualStyleBackColor = true;
-            // 
-            // trayiconGroupBox
-            // 
-            this.trayiconGroupBox.Controls.Add(this.trayiconThemeComboBox);
-            this.trayiconGroupBox.Controls.Add(this.trayiconThemeLabel);
-            this.trayiconGroupBox.Location = new System.Drawing.Point(6, 321);
-            this.trayiconGroupBox.Name = "trayiconGroupBox";
-            this.trayiconGroupBox.Size = new System.Drawing.Size(284, 40);
-            this.trayiconGroupBox.TabIndex = 2;
-            this.trayiconGroupBox.TabStop = false;
-            this.trayiconGroupBox.Text = "Tray Menu";
             // 
             // trayiconThemeComboBox
             // 
@@ -240,7 +229,7 @@
             "Automatic",
             "Light",
             "Dark"});
-            this.trayiconThemeComboBox.Location = new System.Drawing.Point(104, 13);
+            this.trayiconThemeComboBox.Location = new System.Drawing.Point(131, 66);
             this.trayiconThemeComboBox.Name = "trayiconThemeComboBox";
             this.trayiconThemeComboBox.Size = new System.Drawing.Size(121, 21);
             this.trayiconThemeComboBox.TabIndex = 1;
@@ -248,7 +237,7 @@
             // trayiconThemeLabel
             // 
             this.trayiconThemeLabel.AutoSize = true;
-            this.trayiconThemeLabel.Location = new System.Drawing.Point(6, 16);
+            this.trayiconThemeLabel.Location = new System.Drawing.Point(3, 69);
             this.trayiconThemeLabel.Name = "trayiconThemeLabel";
             this.trayiconThemeLabel.Size = new System.Drawing.Size(92, 13);
             this.trayiconThemeLabel.TabIndex = 0;
@@ -256,7 +245,7 @@
             // 
             // clearSettingsButton
             // 
-            this.clearSettingsButton.Location = new System.Drawing.Point(161, 367);
+            this.clearSettingsButton.Location = new System.Drawing.Point(161, 394);
             this.clearSettingsButton.Name = "clearSettingsButton";
             this.clearSettingsButton.Size = new System.Drawing.Size(129, 23);
             this.clearSettingsButton.TabIndex = 1;
@@ -270,13 +259,14 @@
             this.defaultSettingsGroupBox.Controls.Add(this.rememberStateCheckBox);
             this.defaultSettingsGroupBox.Location = new System.Drawing.Point(6, 6);
             this.defaultSettingsGroupBox.Name = "defaultSettingsGroupBox";
-            this.defaultSettingsGroupBox.Size = new System.Drawing.Size(284, 241);
+            this.defaultSettingsGroupBox.Size = new System.Drawing.Size(284, 264);
             this.defaultSettingsGroupBox.TabIndex = 0;
             this.defaultSettingsGroupBox.TabStop = false;
             this.defaultSettingsGroupBox.Text = "Timer defaults";
             // 
             // customDefaultsGroupBox
             // 
+            this.customDefaultsGroupBox.Controls.Add(this.inactivityModeRadioButton);
             this.customDefaultsGroupBox.Controls.Add(this.timeOfDayModeRadioButton);
             this.customDefaultsGroupBox.Controls.Add(this.countdownModeRadioButton);
             this.customDefaultsGroupBox.Controls.Add(this.hoursNumericUpDown);
@@ -292,15 +282,25 @@
             this.customDefaultsGroupBox.Controls.Add(this.actionComboBox);
             this.customDefaultsGroupBox.Location = new System.Drawing.Point(6, 42);
             this.customDefaultsGroupBox.Name = "customDefaultsGroupBox";
-            this.customDefaultsGroupBox.Size = new System.Drawing.Size(272, 194);
+            this.customDefaultsGroupBox.Size = new System.Drawing.Size(272, 216);
             this.customDefaultsGroupBox.TabIndex = 1;
             this.customDefaultsGroupBox.TabStop = false;
             this.customDefaultsGroupBox.Text = "Custom defaults";
             // 
+            // inactivityModeRadioButton
+            // 
+            this.inactivityModeRadioButton.AutoSize = true;
+            this.inactivityModeRadioButton.Location = new System.Drawing.Point(6, 132);
+            this.inactivityModeRadioButton.Name = "inactivityModeRadioButton";
+            this.inactivityModeRadioButton.Size = new System.Drawing.Size(230, 17);
+            this.inactivityModeRadioButton.TabIndex = 27;
+            this.inactivityModeRadioButton.Text = "After a specific timespan of mouse inactivity";
+            this.inactivityModeRadioButton.UseVisualStyleBackColor = true;
+            // 
             // timeOfDayModeRadioButton
             // 
             this.timeOfDayModeRadioButton.AutoSize = true;
-            this.timeOfDayModeRadioButton.Location = new System.Drawing.Point(6, 132);
+            this.timeOfDayModeRadioButton.Location = new System.Drawing.Point(6, 155);
             this.timeOfDayModeRadioButton.Name = "timeOfDayModeRadioButton";
             this.timeOfDayModeRadioButton.Size = new System.Drawing.Size(137, 17);
             this.timeOfDayModeRadioButton.TabIndex = 26;
@@ -319,7 +319,7 @@
             // 
             // hoursNumericUpDown
             // 
-            this.hoursNumericUpDown.Location = new System.Drawing.Point(9, 168);
+            this.hoursNumericUpDown.Location = new System.Drawing.Point(9, 191);
             this.hoursNumericUpDown.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -332,7 +332,7 @@
             // secondsLabel
             // 
             this.secondsLabel.AutoSize = true;
-            this.secondsLabel.Location = new System.Drawing.Point(118, 152);
+            this.secondsLabel.Location = new System.Drawing.Point(118, 175);
             this.secondsLabel.Name = "secondsLabel";
             this.secondsLabel.Size = new System.Drawing.Size(49, 13);
             this.secondsLabel.TabIndex = 24;
@@ -341,7 +341,7 @@
             // hoursLabel
             // 
             this.hoursLabel.AutoSize = true;
-            this.hoursLabel.Location = new System.Drawing.Point(6, 152);
+            this.hoursLabel.Location = new System.Drawing.Point(6, 175);
             this.hoursLabel.Name = "hoursLabel";
             this.hoursLabel.Size = new System.Drawing.Size(35, 13);
             this.hoursLabel.TabIndex = 22;
@@ -350,7 +350,7 @@
             // minutesLabel
             // 
             this.minutesLabel.AutoSize = true;
-            this.minutesLabel.Location = new System.Drawing.Point(62, 152);
+            this.minutesLabel.Location = new System.Drawing.Point(62, 175);
             this.minutesLabel.Name = "minutesLabel";
             this.minutesLabel.Size = new System.Drawing.Size(44, 13);
             this.minutesLabel.TabIndex = 23;
@@ -358,7 +358,7 @@
             // 
             // minutesNumericUpDown
             // 
-            this.minutesNumericUpDown.Location = new System.Drawing.Point(65, 168);
+            this.minutesNumericUpDown.Location = new System.Drawing.Point(65, 191);
             this.minutesNumericUpDown.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -370,7 +370,7 @@
             // 
             // secondsNumericUpDown
             // 
-            this.secondsNumericUpDown.Location = new System.Drawing.Point(121, 168);
+            this.secondsNumericUpDown.Location = new System.Drawing.Point(121, 191);
             this.secondsNumericUpDown.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -459,7 +459,7 @@
             this.tabPage2.Controls.Add(this.forceFlagGroupBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(296, 395);
+            this.tabPage2.Size = new System.Drawing.Size(296, 423);
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "Advanced";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -507,7 +507,7 @@
             this.countdownGroupBox.Size = new System.Drawing.Size(284, 135);
             this.countdownGroupBox.TabIndex = 17;
             this.countdownGroupBox.TabStop = false;
-            this.countdownGroupBox.Text = "Countdown Window";
+            this.countdownGroupBox.Text = "Countdown";
             // 
             // transparentWindowCheckBox
             // 
@@ -635,7 +635,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(296, 395);
+            this.tabPage3.Size = new System.Drawing.Size(296, 423);
             this.tabPage3.TabIndex = 1;
             this.tabPage3.Text = "About";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -648,14 +648,14 @@
             this.aboutGroupBox.Controls.Add(this.aboutRichTextBox);
             this.aboutGroupBox.Location = new System.Drawing.Point(6, 61);
             this.aboutGroupBox.Name = "aboutGroupBox";
-            this.aboutGroupBox.Size = new System.Drawing.Size(284, 328);
+            this.aboutGroupBox.Size = new System.Drawing.Size(284, 356);
             this.aboutGroupBox.TabIndex = 1;
             this.aboutGroupBox.TabStop = false;
             this.aboutGroupBox.Text = "About this app";
             // 
             // logButton
             // 
-            this.logButton.Location = new System.Drawing.Point(6, 299);
+            this.logButton.Location = new System.Drawing.Point(6, 327);
             this.logButton.Name = "logButton";
             this.logButton.Size = new System.Drawing.Size(80, 23);
             this.logButton.TabIndex = 17;
@@ -665,7 +665,7 @@
             // 
             // emailbutton
             // 
-            this.emailbutton.Location = new System.Drawing.Point(112, 299);
+            this.emailbutton.Location = new System.Drawing.Point(112, 327);
             this.emailbutton.Name = "emailbutton";
             this.emailbutton.Size = new System.Drawing.Size(60, 23);
             this.emailbutton.TabIndex = 16;
@@ -675,7 +675,7 @@
             // 
             // githubButton
             // 
-            this.githubButton.Location = new System.Drawing.Point(178, 299);
+            this.githubButton.Location = new System.Drawing.Point(178, 327);
             this.githubButton.Name = "githubButton";
             this.githubButton.Size = new System.Drawing.Size(100, 23);
             this.githubButton.TabIndex = 15;
@@ -687,7 +687,7 @@
             // 
             this.aboutRichTextBox.Location = new System.Drawing.Point(6, 19);
             this.aboutRichTextBox.Name = "aboutRichTextBox";
-            this.aboutRichTextBox.Size = new System.Drawing.Size(272, 274);
+            this.aboutRichTextBox.Size = new System.Drawing.Size(272, 302);
             this.aboutRichTextBox.TabIndex = 14;
             this.aboutRichTextBox.Text = resources.GetString("aboutRichTextBox.Text");
             // 
@@ -772,7 +772,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 505);
+            this.ClientSize = new System.Drawing.Size(334, 533);
             this.Controls.Add(this.githubLinkLabel);
             this.Controls.Add(this.footerLabel);
             this.Controls.Add(this.appLabel);
@@ -794,8 +794,6 @@
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.trayiconGroupBox.ResumeLayout(false);
-            this.trayiconGroupBox.PerformLayout();
             this.defaultSettingsGroupBox.ResumeLayout(false);
             this.defaultSettingsGroupBox.PerformLayout();
             this.customDefaultsGroupBox.ResumeLayout(false);
@@ -855,7 +853,6 @@
         private System.Windows.Forms.Button emailbutton;
         private System.Windows.Forms.Button githubButton;
         private System.Windows.Forms.RichTextBox aboutRichTextBox;
-        private System.Windows.Forms.GroupBox trayiconGroupBox;
         private System.Windows.Forms.ComboBox trayiconThemeComboBox;
         private System.Windows.Forms.Label trayiconThemeLabel;
         private System.Windows.Forms.TabPage tabPage2;
@@ -880,5 +877,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox rememberLastScreenPositionCountdown;
         private System.Windows.Forms.CheckBox rememberLastScreenPositionUI;
+        private System.Windows.Forms.RadioButton inactivityModeRadioButton;
     }
 }
