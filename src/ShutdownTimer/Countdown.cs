@@ -57,7 +57,7 @@ namespace ShutdownTimer
             }
             else
             {
-                ExceptionHandler.LogEvent("[Menu] Multiple instances are allowed");
+                ExceptionHandler.LogEvent("[Countdown] Multiple instances are allowed");
             }
 
             ExceptionHandler.LogEvent("[Countdown] Starting stopwatch");
