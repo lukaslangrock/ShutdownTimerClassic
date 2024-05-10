@@ -150,7 +150,7 @@ namespace ShutdownTimer.Helpers
         public LastScreenPosition LastScreenPositionUI { get; set; }
         public bool RememberLastScreenPositionCountdown { get; set; }
         public LastScreenPosition LastScreenPositionCountdown { get; set; }
-
+        public bool EnableMultipleInstances { get; set; }
         // advanced settings
         public bool ForceIfHungFlag { get; set; }
         public bool DisableAlwaysOnTop { get; set; }

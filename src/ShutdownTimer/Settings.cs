@@ -50,6 +50,7 @@ namespace ShutdownTimer
             trayiconThemeComboBox.Text = SettingsProvider.Settings.TrayIconTheme;
             rememberLastScreenPositionUI.Checked = SettingsProvider.Settings.RememberLastScreenPositionUI;
             rememberLastScreenPositionCountdown.Checked = SettingsProvider.Settings.RememberLastScreenPositionCountdown;
+            enableMultipleInstances.Checked = SettingsProvider.Settings.EnableMultipleInstances;
 
             // default timer
             actionComboBox.Text = SettingsProvider.Settings.DefaultTimer.Action;
@@ -81,6 +82,9 @@ namespace ShutdownTimer
             // general controls
             SettingsProvider.Settings.RememberLastState = rememberStateCheckBox.Checked;
             SettingsProvider.Settings.TrayIconTheme = trayiconThemeComboBox.Text;
+            SettingsProvider.Settings.RememberLastScreenPositionUI = rememberLastScreenPositionUI.Checked;
+            SettingsProvider.Settings.RememberLastScreenPositionCountdown = rememberLastScreenPositionCountdown.Checked;
+            SettingsProvider.Settings.EnableMultipleInstances = enableMultipleInstances.Checked;
 
             // default timer
             if (!SettingsProvider.Settings.RememberLastState)
@@ -102,10 +106,6 @@ namespace ShutdownTimer
             SettingsProvider.Settings.DisableNotifications = disableNotificationsCheckBox.Checked;
             SettingsProvider.Settings.AdaptiveCountdownTextSize = enableAdaptiveCountdownTextSizeCheckBox.Checked;
             SettingsProvider.Settings.PasswordProtection = passwordCheckBox.Checked;
-
-
-            SettingsProvider.Settings.RememberLastScreenPositionUI = rememberLastScreenPositionUI.Checked;
-            SettingsProvider.Settings.RememberLastScreenPositionCountdown = rememberLastScreenPositionCountdown.Checked;
 
             SettingsProvider.Save();
         }
