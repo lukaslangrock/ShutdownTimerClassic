@@ -113,8 +113,7 @@ namespace ShutdownTimer
                 WindowState = FormWindowState.Minimized;
                 timerUIHideMenuItem.Enabled = false;
                 timerUIShowMenuItem.Enabled = true;
-                notifyIcon.BalloonTipText = "Timer started. The power action will be executed in " + CountdownTimeSpan.Hours + " hours, " + CountdownTimeSpan.Minutes + " minutes and " + CountdownTimeSpan.Seconds + " seconds.";
-                notifyIcon.ShowBalloonTip(10000);
+                SendNotification("Timer started. The power action will be executed in " + CountdownTimeSpan.Hours + " hours, " + CountdownTimeSpan.Minutes + " minutes and " + CountdownTimeSpan.Seconds + " seconds.");
                 Hide();
             }
 
@@ -247,12 +246,12 @@ namespace ShutdownTimer
         private void Countdown_FormClosing(object sender, FormClosingEventArgs e)
         {
             ExceptionHandler.LogEvent("[Countdown] FormClosing event triggered");
-            if (ignoreClose)
+            if (ignoreClose) // Ignore closing event
             {
-                e.Cancel = true; // Ignore closing event
+                e.Cancel = true;
                 ExceptionHandler.LogEvent("[Countdown] Ignoring the close event due to ignoreClose");
             }
-            else if (!allowClose)
+            else if (!allowClose && !SettingsProvider.Settings.DisableNotifications) // Ask user for confirmation
             {
                 e.Cancel = true;
                 ExceptionHandler.LogEvent("[Countdown] Asking user for confirmation to exit and cancel the timer");
@@ -261,9 +260,14 @@ namespace ShutdownTimer
                 DialogResult question = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (question == DialogResult.Yes) { ExceptionHandler.LogEvent("[Countdown] User wanted to exit"); ExitApplication(); }
             }
+            else if (!allowClose) // Just close without asking first, as user has disabled confirmations in settings
+            {
+                e.Cancel = true;
+                ExceptionHandler.LogEvent("[Countdown] Exiting without asking user as defined per DisableNotifications-setting");
+                ExitApplication();
+            }
             // allowClose == true is not handled and if ignoreClose == false, the application will exit
-
-            SaveSettings();
+            ExceptionHandler.LogEvent("[Countdown] Form now closing");
         }
 
         #endregion
@@ -272,6 +276,7 @@ namespace ShutdownTimer
 
         /// <summary>
         /// Stops the countdown, displays an exit message and closes exits the application.
+        /// Notice: This logic allows for a graceful exit and is therefore initially called by Countdown_FormClosing before redirecting there again through Application.Exit();
         /// </summary>
         private void ExitApplication()
         {
@@ -279,7 +284,7 @@ namespace ShutdownTimer
 
             if (lockState == 1)
             {
-                ExceptionHandler.LogEvent("[Countdown] Attempt canceled due to password protection");
+                ExceptionHandler.LogEvent("[Countdown] Attempt halted due to password protection");
                 if (UnlockUIByPassword(true)) { ExceptionHandler.LogEvent("[Countdown] Password protection passed, restarting exit sequence..."); ExitApplication(); }
             }
             else
@@ -294,9 +299,9 @@ namespace ShutdownTimer
                 ExceptionHandler.LogEvent("[Countdown] Clearing EXECUTION_STATE flags");
                 ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired
                 ExceptionHandler.LogEvent("[Countdown] Confirming application halt to user");
-                string caption1 = "Timer canceled";
-                string message1 = "Your timer was canceled successfully!\nThe application will now close.";
-                MessageBox.Show(message1, caption1, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                SendNotification("Your timer was canceled successfully!\nThe application will now close"); // Show windows toast notification as confirmation
+                ExceptionHandler.LogEvent("[Countdown] Saving all settings");
+                SaveSettings();
                 ExceptionHandler.LogEvent("[Countdown] Exiting...");
                 Application.Exit();
             }
@@ -350,7 +355,7 @@ namespace ShutdownTimer
                 stopwatch.Start();
                 ExceptionHandler.LogEvent("[Countdown] Updating UI");
                 UpdateUI(CountdownTimeSpan);
-                if (this.WindowState == FormWindowState.Minimized) { notifyIcon.BalloonTipText = "Timer restarted. The power action will be executed in " + CountdownTimeSpan.Hours + " hours, " + CountdownTimeSpan.Minutes + " minutes and " + CountdownTimeSpan.Seconds + " seconds."; notifyIcon.ShowBalloonTip(10000); }
+                if (this.WindowState == FormWindowState.Minimized) { SendNotification("Timer restarted. The power action will be executed in " + CountdownTimeSpan.Hours + " hours, " + CountdownTimeSpan.Minutes + " minutes and " + CountdownTimeSpan.Seconds + " seconds."); }
                 ExceptionHandler.LogEvent("[Countdown] Timer restarted");
             }
         }
@@ -450,9 +455,7 @@ namespace ShutdownTimer
             ignoreClose = true; // Prevent closing (and closing dialog) after ShowInTaskbar changed
             TimeSpan currentTimeSpan = CountdownTimeSpan - stopwatch.Elapsed + new TimeSpan(0, 0, 1); // Calculate countdown (add 1 second for smooth start)
             UpdateUI(currentTimeSpan);
-
-            notifyIcon.BalloonTipText = "Timer has been moved to the background. Right-click the tray icon for more info.";
-            notifyIcon.ShowBalloonTip(10000);
+            SendNotification("Timer has been moved to the background. Right-click the tray icon for more info.");
         }
 
         /// <summary>
@@ -550,6 +553,20 @@ namespace ShutdownTimer
                     MessageBox.Show("Incorrect password!\n\nThis countdown will stay locked until the correct password has been entered.", "Password Protection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Sends a toast notification (or trymenu balloontip on legacy systems) to the user, unless it was disabled in settings
+        /// </summary>
+        /// <param name="message">Message content to be displayed in notification</param>
+        private void SendNotification(string message)
+        {
+            if (!SettingsProvider.Settings.DisableNotifications)
+            {
+                ExceptionHandler.LogEvent("[Countdown] Sending notification: " + message);
+                notifyIcon.BalloonTipText = message;
+                notifyIcon.ShowBalloonTip(5000);
             }
         }
 
@@ -704,14 +721,11 @@ namespace ShutdownTimer
                     this.Text = "Countdown - " + elapsedTime;
 
                     // Decide which tray message to show
-                    if (!SettingsProvider.Settings.DisableNotifications)
-                    {
-                        if (ts.Days == 0 && ts.Hours == 2 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "2 hours remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                        else if (ts.Days == 0 && ts.Hours == 1 && ts.Minutes == 0 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "1 hour remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                        else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 30 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "30 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                        else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 5 && ts.Seconds == 00) { notifyIcon.BalloonTipText = "5 minutes remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                        else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 0 && ts.Seconds == 30) { notifyIcon.BalloonTipText = "30 seconds remaining until the power action will be executed."; notifyIcon.ShowBalloonTip(5000); }
-                    }
+                    if (ts.Days == 0 && ts.Hours == 2 && ts.Minutes == 0 && ts.Seconds == 00) { SendNotification("2 hours remaining until the power action will be executed"); }
+                    else if (ts.Days == 0 && ts.Hours == 1 && ts.Minutes == 0 && ts.Seconds == 00) { SendNotification("1 hour remaining until the power action will be executed."); }
+                    else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 30 && ts.Seconds == 00) { SendNotification("30 minutes remaining until the power action will be executed."); }
+                    else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 5 && ts.Seconds == 00) { SendNotification("5 minutes remaining until the power action will be executed."); }
+                    else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 0 && ts.Seconds == 30) { SendNotification("30 seconds remaining until the power action will be executed."); }
                 }
             }
 

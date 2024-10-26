@@ -536,7 +536,7 @@
             // enableAdaptiveCountdownTextSizeCheckBox
             // 
             this.enableAdaptiveCountdownTextSizeCheckBox.AutoSize = true;
-            this.enableAdaptiveCountdownTextSizeCheckBox.Location = new System.Drawing.Point(6, 112);
+            this.enableAdaptiveCountdownTextSizeCheckBox.Location = new System.Drawing.Point(6, 111);
             this.enableAdaptiveCountdownTextSizeCheckBox.Name = "enableAdaptiveCountdownTextSizeCheckBox";
             this.enableAdaptiveCountdownTextSizeCheckBox.Size = new System.Drawing.Size(243, 17);
             this.enableAdaptiveCountdownTextSizeCheckBox.TabIndex = 4;
@@ -557,11 +557,11 @@
             // disableNotificationsCheckBox
             // 
             this.disableNotificationsCheckBox.AutoSize = true;
-            this.disableNotificationsCheckBox.Location = new System.Drawing.Point(6, 89);
+            this.disableNotificationsCheckBox.Location = new System.Drawing.Point(6, 88);
             this.disableNotificationsCheckBox.Name = "disableNotificationsCheckBox";
-            this.disableNotificationsCheckBox.Size = new System.Drawing.Size(242, 17);
+            this.disableNotificationsCheckBox.Size = new System.Drawing.Size(206, 17);
             this.disableNotificationsCheckBox.TabIndex = 2;
-            this.disableNotificationsCheckBox.Text = "Disable time notifications when in background";
+            this.disableNotificationsCheckBox.Text = "Disable notifications and confirmations";
             this.disableNotificationsCheckBox.UseVisualStyleBackColor = true;
             // 
             // disableAnimationsCheckBox
