@@ -329,6 +329,8 @@ namespace ShutdownTimer
                 refreshTimer.Stop();
                 ExceptionHandler.LogEvent("[Countdown] Clearing EXECUTION_STATE flags");
                 ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired
+                ExceptionHandler.LogEvent("[Countdown] Saving all settings");
+                SaveSettings();
                 ExceptionHandler.LogEvent("[Countdown] Restarting...");
                 Application.Restart();
             }
