@@ -1,6 +1,7 @@
 ﻿using ShutdownTimer.Helpers;
 using System;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ShutdownTimer
@@ -30,6 +31,25 @@ namespace ShutdownTimer
 
         private void Menu_Load(object sender, EventArgs e)
         {
+            ExceptionHandler.LogEvent("[Menu] Checking multiple instances configuration");
+
+            if (!SettingsProvider.Settings.EnableMultipleInstances)
+            {
+                ExceptionHandler.LogEvent("[Menu] Multiple instances are not allowed");
+
+                ExceptionHandler.LogEvent("[Menu] Checking for another instance already running");
+                if (!ApplicationInstanceManager.IsSingleInstance())
+                {
+                    MessageBox.Show("Only one instance running is allowed. Please, check the 'Enable Multiple Instances' setting.\n\nExiting...", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ExceptionHandler.LogEvent("[Menu] Detected another instance already running. Exiting...");
+                    Application.Exit();
+                }
+            }
+            else
+            {
+                ExceptionHandler.LogEvent("[Menu] Multiple instances are allowed");
+            }
+
             ExceptionHandler.LogEvent("[Menu] Setting up form...");
 
             versionLabel.Text = "v" + Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf(".")); // Display current version

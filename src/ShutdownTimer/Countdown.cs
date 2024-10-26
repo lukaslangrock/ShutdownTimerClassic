@@ -41,6 +41,25 @@ namespace ShutdownTimer
         // entrypoint
         private void Countdown_Load(object sender, EventArgs e)
         {
+            ExceptionHandler.LogEvent("[Countdown] Checking multiple instances configuration");
+
+            if (!SettingsProvider.Settings.EnableMultipleInstances)
+            {
+                ExceptionHandler.LogEvent("[Countdown] Multiple instances are not allowed");
+
+                ExceptionHandler.LogEvent("[Countdown] Checking for another instance already running");
+                if (!ApplicationInstanceManager.IsSingleInstance())
+                {
+                    MessageBox.Show("Only one instance running is allowed. Please, check the 'Enable Multiple Instances' setting.\n\nExiting...", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    ExceptionHandler.LogEvent("[Countdown] Detected another instance already running. Exiting...");
+                    Application.Exit();
+                }
+            }
+            else
+            {
+                ExceptionHandler.LogEvent("[Countdown] Multiple instances are allowed");
+            }
+
             ExceptionHandler.LogEvent("[Countdown] Starting stopwatch");
 
             // Setup clock
