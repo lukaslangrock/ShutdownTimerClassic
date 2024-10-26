@@ -262,9 +262,9 @@
             this.trayiconThemeLabel.AutoSize = true;
             this.trayiconThemeLabel.Location = new System.Drawing.Point(6, 16);
             this.trayiconThemeLabel.Name = "trayiconThemeLabel";
-            this.trayiconThemeLabel.Size = new System.Drawing.Size(92, 13);
+            this.trayiconThemeLabel.Size = new System.Drawing.Size(86, 13);
             this.trayiconThemeLabel.TabIndex = 0;
-            this.trayiconThemeLabel.Text = "Tray menu theme:";
+            this.trayiconThemeLabel.Text = "Tray icon theme:";
             // 
             // clearSettingsButton
             // 
