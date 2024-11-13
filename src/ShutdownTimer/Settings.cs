@@ -142,7 +142,7 @@ namespace ShutdownTimer
 
         private void EmailButton_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("mailto:lukas.langrock@mailbox.org");
+            System.Diagnostics.Process.Start("mailto:lukas.langrock@outlook.de");
         }
 
         private void ForceFlagDocsLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
