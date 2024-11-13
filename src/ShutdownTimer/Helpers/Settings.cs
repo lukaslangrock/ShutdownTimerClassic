@@ -66,6 +66,29 @@ namespace ShutdownTimer.Helpers
                 ClearSettings();
             }
 
+            // If settings were created by an earlier version some migration steps might have to occur before using them
+            ExceptionHandler.LogEvent("[Settings] Checking product version");
+            if (Settings.AppVersion != null && Settings.AppVersion != "")
+            {
+                // 
+                String[] importVerString = Settings.AppVersion.Split('.');
+                int[] importVer = new int[] { 0, 0, 0, 0 }; // defaults in case string is corrupted and does not contain 4 numbers
+                for (int i = 0; i < 4; i++) // read version number into useable integer array
+                {
+                    try { importVer[i] = Convert.ToInt32(importVerString[i]); }
+                    catch { ExceptionHandler.LogEvent("[Settings] Part " + (i + 1).ToString() + " of settings version number unreadable '" + importVerString[i] + "' filling with 0"); }
+                }
+
+                if (importVer[0] < 2) // for < 2.0.0.0
+                {
+                    if (importVer[1] < 3) // < 1.3.0.0
+                    {
+                        // Issue #49: When reading from earlier settings version DefaultTimer.CountdownMode does not exist and is initialized as false but default should be true
+                        Settings.DefaultTimer.CountdownMode = true;
+                    }
+                }
+            }
+
             ExceptionHandler.LogEvent("[Settings] Setting product version");
             Settings.AppVersion = Application.ProductVersion;
 
