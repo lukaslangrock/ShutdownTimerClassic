@@ -79,12 +79,21 @@ namespace ShutdownTimer.Helpers
                     catch { ExceptionHandler.LogEvent("[Settings] Part " + (i + 1).ToString() + " of settings version number unreadable '" + importVerString[i] + "' filling with 0"); }
                 }
 
-                if (importVer[0] < 2) // for < 2.0.0.0
+                if (importVer[0] == 1) // everything v1.X
                 {
-                    if (importVer[1] < 3) // < 1.3.0.0
+                    if (importVer[1] < 3) // for < v1.3
                     {
                         // Issue #49: When reading from earlier settings version DefaultTimer.CountdownMode does not exist and is initialized as false but default should be true
                         Settings.DefaultTimer.CountdownMode = true;
+                        ExceptionHandler.LogEvent("[Settings] Set DefaultTimer.CountdownMode to true as migration step from <v1.3");
+                    }
+
+                    if (importVer[1] == 3 && importVer[2] == 0) // for = v1.3.0
+                    {
+                        // Issue #49: Same as above, except we force change this to lessen the general impact of the issue.
+                        // It's not very nice, especially for people who were not impact and changed this to false manually, but the group impacted is way larger than the one not impacted
+                        Settings.DefaultTimer.CountdownMode = true;
+                        ExceptionHandler.LogEvent("[Settings] Forced DefaultTimer.CountdownMode to true as mitigation for users impacted by Issue #49");
                     }
                 }
             }
