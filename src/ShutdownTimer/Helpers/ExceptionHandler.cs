@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using System.Security.Cryptography;
-using System.IO;
 
 namespace ShutdownTimer.Helpers
 {
@@ -124,7 +124,8 @@ namespace ShutdownTimer.Helpers
                         log.Append($"MD5 Checksum: {hash}\n");
                     }
                 }
-            } catch (Exception ex) { log.Append($"MD5 Checksum: FAIL! {ex.Message}\n"); }
+            }
+            catch (Exception ex) { log.Append($"MD5 Checksum: FAIL! {ex.Message}\n"); }
 
             log.Append("\n\n---- Environment Info ----\n");
             log.Append($"64-bit OS: {Environment.Is64BitOperatingSystem}\n");

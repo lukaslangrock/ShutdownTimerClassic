@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using ShutdownTimer.Helpers;
 
 namespace ShutdownTimer.Helpers
 {

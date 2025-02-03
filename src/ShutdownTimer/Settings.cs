@@ -1,7 +1,7 @@
 ﻿using ShutdownTimer.Helpers;
 using System;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace ShutdownTimer
 {
@@ -174,7 +174,8 @@ namespace ShutdownTimer
             if (transparentWindowCheckBox.Checked)
             {
                 SettingsProvider.Settings.BackgroundColor = Color.Transparent;
-            } else
+            }
+            else
             {
                 SettingsProvider.Settings.BackgroundColor = Color.Blue;
             }

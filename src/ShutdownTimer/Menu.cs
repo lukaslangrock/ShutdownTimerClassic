@@ -1,9 +1,7 @@
 ﻿using ShutdownTimer.Helpers;
 using System;
 using System.Drawing;
-using System.Threading;
 using System.Windows.Forms;
-using Windows.AI.MachineLearning;
 
 namespace ShutdownTimer
 {
@@ -68,7 +66,8 @@ namespace ShutdownTimer
         {
             ExceptionHandler.LogEvent("[Menu] Showing form");
             // Check for startup arguments
-            if (OverrideSettings) {
+            if (OverrideSettings)
+            {
                 // Apply given setting
                 ExceptionHandler.LogEvent("[Menu] Loading args");
                 LoadArgs();
@@ -200,7 +199,8 @@ namespace ShutdownTimer
                     errTracker = false;
                     errMessage += "TimeSpan conversion failed! Please check if your time values are within a reasonable range.\n\n";
                 }
-            } else
+            }
+            else
             {
                 // Try to build a valid DateTime
                 try
@@ -214,7 +214,7 @@ namespace ShutdownTimer
                     errMessage += "DateTime conversion failed! Please check if your time values can represent a valid time of day.\n\n";
                 }
             }
-            
+
 
             // Sanity check
             try
@@ -339,7 +339,7 @@ namespace ShutdownTimer
                 if (!today) { target = target.AddDays(1); }
                 timeSpan = target.Subtract(DateTime.Now);
             }
-            
+
 
             // Show countdown window
             ExceptionHandler.LogEvent("[Menu] Preparing countdown window...");
@@ -372,7 +372,7 @@ namespace ShutdownTimer
             DateTime now = DateTime.Now;
             DateTime target = new DateTime(now.Year, now.Month, now.Day, hours, minutes, seconds);
 
-            if (target < now) { return false;  } // specified time is in the past (for the current day) -> for tomorrow
+            if (target < now) { return false; } // specified time is in the past (for the current day) -> for tomorrow
             else { return true; } // specified time is in the future -> for today
         }
     }
