@@ -5,29 +5,16 @@ namespace ShutdownTimer.Helpers
     class Numerics
     {
         /// <summary>
-        /// Converts a TimeSpan into hours, minutes and seconds.
+        /// Converts a TimeSpan into a string of hours, minutes and seconds.
         /// </summary>
-        /// <returns>Integers for hours, minutes and seconds</returns>
-        public static (int, int, int) ConvertTimeSpan(TimeSpan ts)
+        /// <returns>Combined string with hours, minutes and seconds</returns>
+        public static string ConvertTimeSpanToString(TimeSpan ts)
         {
             int hours = ts.Hours;
             int minutes = ts.Minutes;
             int seconds = ts.Seconds;
 
             hours += ts.Days * 24;
-
-            return (hours, minutes, seconds);
-        }
-
-        /// <summary>
-        /// Converts a TimeSpan into a string of hours, minutes and seconds.
-        /// </summary>
-        /// <returns>Combined string with hours, minutes and seconds</returns>
-        public static string ConvertTimeSpanToString(TimeSpan ts)
-        {
-            int hours, minutes, seconds;
-
-            (hours, minutes, seconds) = ConvertTimeSpan(ts);
 
             return AddZeros(hours) + ":" + AddZeros(minutes) + ":" + AddZeros(seconds);
         }

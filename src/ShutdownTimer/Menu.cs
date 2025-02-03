@@ -3,7 +3,6 @@ using System;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using Windows.AI.MachineLearning;
 
 namespace ShutdownTimer
 {
