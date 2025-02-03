@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using Windows.AI.MachineLearning;
 
 namespace ShutdownTimer
 {
@@ -186,16 +187,34 @@ namespace ShutdownTimer
                 errMessage += "The timer cannot start at 0!\n\n";
             }
 
-            // Try to build and convert a the values to a TimeSpan and export it as a string.
-            try
+            // Respective check for either countdown or timeOfDay mode
+            if (countdownModeRadioButton.Checked)
             {
-                Numerics.ConvertTimeSpanToString(new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value)));
-            }
-            catch
+                // Try to build and convert a the values to a TimeSpan and export it as a string.
+                try
+                {
+                    Numerics.ConvertTimeSpanToString(new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value)));
+                }
+                catch
+                {
+                    errTracker = false;
+                    errMessage += "TimeSpan conversion failed! Please check if your time values are within a reasonable range.\n\n";
+                }
+            } else
             {
-                errTracker = false;
-                errMessage += "TimeSpan conversion failed! Please check if your time values are within a reasonable range.\n\n";
+                // Try to build a valid DateTime
+                try
+                {
+                    DateTime now = DateTime.Now;
+                    DateTime target = new DateTime(now.Year, now.Month, now.Day, Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
+                }
+                catch
+                {
+                    errTracker = false;
+                    errMessage += "DateTime conversion failed! Please check if your time values can represent a valid time of day.\n\n";
+                }
             }
+            
 
             // Sanity check
             try
