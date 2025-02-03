@@ -694,7 +694,7 @@ namespace ShutdownTimer
             }
 
             // update UI
-            if (Math.Round(lastStateUITimeSpan.TotalSeconds) != Math.Round(ts.TotalSeconds) || lastStateUITimeSpan.TotalSeconds <= 0 || lastStateUIFormWindowState != WindowState) // Only update if the seconds from the TimeSpan actually changed and when it first started
+            if (lastStateUIFormWindowState != WindowState || Math.Truncate(lastStateUITimeSpan.TotalSeconds) != Math.Truncate(ts.TotalSeconds)) // only if either form state changed or a second passed between updates
             {
                 // Save current data to last state memory
                 lastStateUITimeSpan = ts;
@@ -722,7 +722,7 @@ namespace ShutdownTimer
                 {
                     this.Text = "Countdown - " + elapsedTime;
 
-                    // Decide which tray message to show
+                    // Decide which tray message to show          
                     if (ts.Days == 0 && ts.Hours == 2 && ts.Minutes == 0 && ts.Seconds == 00) { SendNotification("2 hours remaining until the power action will be executed"); }
                     else if (ts.Days == 0 && ts.Hours == 1 && ts.Minutes == 0 && ts.Seconds == 00) { SendNotification("1 hour remaining until the power action will be executed."); }
                     else if (ts.Days == 0 && ts.Hours == 0 && ts.Minutes == 30 && ts.Seconds == 00) { SendNotification("30 minutes remaining until the power action will be executed."); }
