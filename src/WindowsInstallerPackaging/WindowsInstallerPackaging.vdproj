@@ -327,8 +327,8 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Shutdown Timer Classic"
-        "ProductCode" = "8:{3C884737-1AAB-44C7-9DEE-AECCAA714FBB}"
+        "ProductName" = "8:Shutdown Timer Classic (Legacy)"
+        "ProductCode" = "8:{35538259-27AB-4043-886A-D32479F3F18F}"
         "PackageCode" = "8:{F37DE57D-DF80-47EF-9FB9-58D56B6C1EBC}"
         "UpgradeCode" = "8:{81E0637B-864A-4FE6-AA0F-5550A751DD9B}"
         "AspNetVersion" = "8:4.0.30319.0"

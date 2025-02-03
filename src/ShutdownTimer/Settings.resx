@@ -121,6 +121,8 @@
     <value>This app is a free open-source project by Lukas Langrock under the MIT license which means there is no warranty provided and I shall not be held liable for any kind of damage!
 After all you may lose unsaved work or mess up another running application. Use this with caution and common sense!
 
+THIS IS THE LEGACY EDITION. This edition was reduced in it's complexity to be able to target an earlier framework and is meant to support older operationg systems.
+
 The application is built to be reliable and should accurately measure and count time. I can't exactly guarantee this but I aim to get the application to be as stable and polished as possible.
 In the case you encounter an error or notice the application not working as it should, an issue on GitHub or an Email would be very appreciated so I can fix the mistake.
 

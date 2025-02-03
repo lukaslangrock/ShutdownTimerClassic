@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("Shutdown Timer Classic")]
+[assembly: AssemblyTitle("Shutdown Timer Classic (Legacy)")]
 [assembly: AssemblyDescription("Pick a time and let your pc shutdown itself even when you are not there.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Lukas Langrock")]
-[assembly: AssemblyProduct("ShutdownTimerClassic")]
+[assembly: AssemblyProduct("ShutdownTimerClassicLEGACY")]
 [assembly: AssemblyCopyright("Copyright © 2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
