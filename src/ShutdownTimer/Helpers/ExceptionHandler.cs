@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,7 +11,7 @@ namespace ShutdownTimer.Helpers
 {
     public static class ExceptionHandler
     {
-        private static Queue<string> eventLog = new Queue<string>(); // storage for event logs
+        private static StringBuilder eventLog = new StringBuilder(); // storage for event logs
 
         public static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs args)
         {
@@ -78,7 +76,7 @@ namespace ShutdownTimer.Helpers
         public static void Log(string data)
         {
             MethodBase method = new StackTrace().GetFrame(1).GetMethod();
-            eventLog.Enqueue($"{DateTime.Now.ToString("[HH:mm:ss.ffff]")}[{method.ReflectedType}:{method.Name}] {data}");
+            eventLog.AppendLine($"{DateTime.Now.ToString("[HH:mm:ss.ffff]")}[{method.ReflectedType}:{method.Name}] {data}");
         }
 
 
@@ -156,10 +154,7 @@ namespace ShutdownTimer.Helpers
             }
 
             log.AppendLine("\n\n---- Internal Event Log ----");
-            while (eventLog.Any())
-            {
-                log.AppendLine(eventLog.Dequeue());
-            }
+            log.Append(eventLog);
 
             log.Append("\n\n---- End of Log ----");
 
