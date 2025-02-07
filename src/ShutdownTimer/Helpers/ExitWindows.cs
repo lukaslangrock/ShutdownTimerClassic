@@ -62,7 +62,7 @@ namespace ShutdownTimer.Helpers
 
         private static void GetPrivileges()
         {
-            ExceptionHandler.LogEvent("[ExitWindows] Getting privileges...");
+            ExceptionHandler.Log("Getting privileges...");
             TOKEN_PRIVILEGES tkp;
             OpenProcessToken(Process.GetCurrentProcess().Handle,
               TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out IntPtr hToken);
@@ -78,7 +78,7 @@ namespace ShutdownTimer.Helpers
         public static void Shutdown(bool force)
         {
             GetPrivileges();
-            ExceptionHandler.LogEvent("[ExitWindows] Shutting down...");
+            ExceptionHandler.Log("Shutting down...");
             ExitWindowsEx(EWX_SHUTDOWN |
               (uint)(force ? (SettingsProvider.Settings.ForceIfHungFlag ? EWX_FORCEIFHUNG : EWX_FORCE) : 0) | EWX_POWEROFF, SHTDN_REASON_FLAG_PLANNED);
         }
@@ -87,7 +87,7 @@ namespace ShutdownTimer.Helpers
         public static void Reboot(bool force)
         {
             GetPrivileges();
-            ExceptionHandler.LogEvent("[ExitWindows] Rebooting...");
+            ExceptionHandler.Log("Rebooting...");
             ExitWindowsEx(EWX_REBOOT |
               (uint)(force ? (SettingsProvider.Settings.ForceIfHungFlag ? EWX_FORCEIFHUNG : EWX_FORCE) : 0), SHTDN_REASON_FLAG_PLANNED);
         }
@@ -96,7 +96,7 @@ namespace ShutdownTimer.Helpers
         public static void LogOff(bool force)
         {
             GetPrivileges();
-            ExceptionHandler.LogEvent("[ExitWindows] Logging off...");
+            ExceptionHandler.Log("Logging off...");
             ExitWindowsEx(EWX_LOGOFF |
               (uint)(force ? (SettingsProvider.Settings.ForceIfHungFlag ? EWX_FORCEIFHUNG : EWX_FORCE) : 0), SHTDN_REASON_FLAG_PLANNED);
         }
@@ -107,17 +107,17 @@ namespace ShutdownTimer.Helpers
 
         public static void Lock()
         {
-            ExceptionHandler.LogEvent("[ExitWindows] Trying to lock...");
+            ExceptionHandler.Log("Trying to lock...");
 
             bool result = LockWorkStation();
 
             if (result == false)
             {
                 // An error occurred
-                ExceptionHandler.LogEvent("[ExitWindows] Error locking workstation!");
+                ExceptionHandler.Log("Error locking workstation!");
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
-            else { ExceptionHandler.LogEvent("[ExitWindows] Workstation lock successful"); }
+            else { ExceptionHandler.Log("Workstation lock successful"); }
         }
     }
 }

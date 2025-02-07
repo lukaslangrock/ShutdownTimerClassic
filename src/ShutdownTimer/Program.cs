@@ -12,7 +12,7 @@ namespace ShutdownTimer
         {
             if (!Debugger.IsAttached)
             {
-                ExceptionHandler.LogEvent("[Program] Attaching ExceptionHandler.cs");
+                ExceptionHandler.Log("Attaching ExceptionHandler.cs");
                 AppDomain.CurrentDomain.UnhandledException += ExceptionHandler.UnhandledExceptionHandler;
                 Application.ThreadException += ExceptionHandler.ThreadExceptionHandler;
             }
@@ -22,27 +22,27 @@ namespace ShutdownTimer
 
             if (args.Length == 0)
             {
-                ExceptionHandler.LogEvent("[Program] Running Menu");
+                ExceptionHandler.Log("Running Menu");
                 SettingsProvider.Load();
                 Application.Run(new Menu());
             }
             else
             {
-                ExceptionHandler.LogEvent("[Program] Processing args...");
+                ExceptionHandler.Log("Processing args...");
                 ArgProcessor.ProcessArgs(args);
 
                 // Initialize settings
-                ExceptionHandler.LogEvent("[Program] Loading settings...");
+                ExceptionHandler.Log("Loading settings...");
                 if (ArgProcessor.argNoSettings)
                 { SettingsProvider.TemporaryMode = true; }
                 SettingsProvider.Load();
-                ExceptionHandler.LogEvent("[Program] Settings loaded");
+                ExceptionHandler.Log("Settings loaded");
 
                 switch (ArgProcessor.argMode)
                 {
                     case "Prefill":
                     case "Lock":
-                        ExceptionHandler.LogEvent("[Program] Running Menu with args");
+                        ExceptionHandler.Log("Running Menu with args");
                         Menu menu = new Menu
                         {
                             OverrideSettings = true,
@@ -64,7 +64,7 @@ namespace ShutdownTimer
                         if (ArgProcessor.argMode.Equals("Launch")) { forced = false; }
                         else { forced = true; }
 
-                        ExceptionHandler.LogEvent("[Program] Running Countdown with args");
+                        ExceptionHandler.Log("Running Countdown with args");
                         Countdown countdown = new Countdown
                         {
                             CountdownTimeSpan = ArgProcessor.argTimeTS,

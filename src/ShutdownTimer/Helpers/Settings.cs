@@ -16,58 +16,58 @@ namespace ShutdownTimer.Helpers
 
         public static void Load()
         {
-            ExceptionHandler.LogEvent("[Settings] Loading settings...");
+            ExceptionHandler.Log("Loading settings...");
 
             if (!TemporaryMode)
             {
                 // make sure respective appdata dir exists
                 if (!Directory.Exists(settingsDirectory))
                 {
-                    ExceptionHandler.LogEvent("[Settings] Creating settings directory");
+                    ExceptionHandler.Log("Creating settings directory");
                     Directory.CreateDirectory(settingsDirectory);
                 }
 
                 // make sure settings.json exists
                 if (!File.Exists(settingsPath))
                 {
-                    ExceptionHandler.LogEvent("[Settings] Settings file does not exist.");
-                    ExceptionHandler.LogEvent("[Settings] Creating new empty settings object");
+                    ExceptionHandler.Log("Settings file does not exist.");
+                    ExceptionHandler.Log("Creating new empty settings object");
                     SettingsData emptySettingsData = new SettingsData();
-                    ExceptionHandler.LogEvent("[Settings] Serializing settings");
+                    ExceptionHandler.Log("Serializing settings");
                     string emptySettingsDataJson = JsonConvert.SerializeObject(emptySettingsData, Formatting.Indented);
-                    ExceptionHandler.LogEvent("[Settings] Writing settings.json");
+                    ExceptionHandler.Log("Writing settings.json");
                     File.WriteAllText(settingsPath, emptySettingsDataJson);
                 }
 
-                ExceptionHandler.LogEvent("[Settings] Loading settings.json");
+                ExceptionHandler.Log("Loading settings.json");
                 string settingsJson = File.ReadAllText(settingsPath);
                 Settings = new SettingsData();
-                try { Settings = JsonConvert.DeserializeObject<SettingsData>(settingsJson); } catch (Exception ex) { ExceptionHandler.LogEvent("[Settings] Error deserializing object: " + ex.Message); }
+                try { Settings = JsonConvert.DeserializeObject<SettingsData>(settingsJson); } catch (Exception ex) { ExceptionHandler.Log("Error deserializing object: " + ex.Message); }
                 CheckSettings();
                 SettingsLoaded = true;
-                ExceptionHandler.LogEvent("[Settings] Successfully loaded settings to an object in application memory");
+                ExceptionHandler.Log("Successfully loaded settings to an object in application memory");
             }
             else
             {
-                ExceptionHandler.LogEvent("[Settings] Creating new ephemeral settings due to TemporaryMode");
+                ExceptionHandler.Log("Creating new ephemeral settings due to TemporaryMode");
                 Settings = new SettingsData();
                 CheckSettings();
                 SettingsLoaded = true;
-                ExceptionHandler.LogEvent("[Settings] Successfully created new tempoarary settings object in application memory");
+                ExceptionHandler.Log("Successfully created new tempoarary settings object in application memory");
             }
         }
 
         private static void CheckSettings()
         {
-            ExceptionHandler.LogEvent("[Settings] Checking settings object");
+            ExceptionHandler.Log("Checking settings object");
             if (Settings == null)
             {
-                ExceptionHandler.LogEvent("[Settings] Settings could not be loaded, the file might be corrupted or empty. Initializing new settings object.");
+                ExceptionHandler.Log("Settings could not be loaded, the file might be corrupted or empty. Initializing new settings object.");
                 ClearSettings();
             }
 
             // If settings were created by an earlier version some migration steps might have to occur before using them
-            ExceptionHandler.LogEvent("[Settings] Checking product version");
+            ExceptionHandler.Log("Checking product version");
             if (Settings.AppVersion != null && Settings.AppVersion != "")
             {
                 // 
@@ -76,7 +76,7 @@ namespace ShutdownTimer.Helpers
                 for (int i = 0; i < 4; i++) // read version number into useable integer array
                 {
                     try { importVer[i] = Convert.ToInt32(importVerString[i]); }
-                    catch { ExceptionHandler.LogEvent("[Settings] Part " + (i + 1).ToString() + " of settings version number unreadable '" + importVerString[i] + "' filling with 0"); }
+                    catch { ExceptionHandler.Log("Part " + (i + 1).ToString() + " of settings version number unreadable '" + importVerString[i] + "' filling with 0"); }
                 }
 
                 if (importVer[0] == 1) // everything v1.X
@@ -85,7 +85,7 @@ namespace ShutdownTimer.Helpers
                     {
                         // Issue #49: When reading from earlier settings version DefaultTimer.CountdownMode does not exist and is initialized as false but default should be true
                         Settings.DefaultTimer.CountdownMode = true;
-                        ExceptionHandler.LogEvent("[Settings] Set DefaultTimer.CountdownMode to true as migration step from <v1.3");
+                        ExceptionHandler.Log("Set DefaultTimer.CountdownMode to true as migration step from <v1.3");
                     }
 
                     if (importVer[1] == 3 && importVer[2] == 0) // for = v1.3.0
@@ -93,25 +93,25 @@ namespace ShutdownTimer.Helpers
                         // Issue #49: Same as above, except we force change this to lessen the general impact of the issue.
                         // It's not very nice, especially for people who were not impact and changed this to false manually, but the group impacted is way larger than the one not impacted
                         Settings.DefaultTimer.CountdownMode = true;
-                        ExceptionHandler.LogEvent("[Settings] Forced DefaultTimer.CountdownMode to true as mitigation for users impacted by Issue #49");
+                        ExceptionHandler.Log("Forced DefaultTimer.CountdownMode to true as mitigation for users impacted by Issue #49");
                     }
                 }
             }
 
-            ExceptionHandler.LogEvent("[Settings] Setting product version");
+            ExceptionHandler.Log("Setting product version");
             Settings.AppVersion = Application.ProductVersion;
 
-            ExceptionHandler.LogEvent("[Settings] Checking field: TrayIconTheme");
+            ExceptionHandler.Log("Checking field: TrayIconTheme");
             if (Settings.TrayIconTheme is null)
             {
-                ExceptionHandler.LogEvent("[Settings] Restoring TrayIconTheme to defaults");
+                ExceptionHandler.Log("Restoring TrayIconTheme to defaults");
                 Settings.TrayIconTheme = "Automatic";
             }
 
-            ExceptionHandler.LogEvent("[Settings] Checking field: DefaultTimer");
+            ExceptionHandler.Log("Checking field: DefaultTimer");
             if (Settings.DefaultTimer is null)
             {
-                ExceptionHandler.LogEvent("[Settings] Restoring DefaultTimer to defaults");
+                ExceptionHandler.Log("Restoring DefaultTimer to defaults");
                 Settings.DefaultTimer = new TimerData
                 {
                     Action = "Shutdown",
@@ -125,50 +125,50 @@ namespace ShutdownTimer.Helpers
                 };
             }
 
-            ExceptionHandler.LogEvent("[Settings] Checking field: BackgroundColor");
+            ExceptionHandler.Log("Checking field: BackgroundColor");
             if (Settings.BackgroundColor == Color.Empty)
             {
-                ExceptionHandler.LogEvent("[Settings] Restoring BackgroundColor to defaults");
+                ExceptionHandler.Log("Restoring BackgroundColor to defaults");
                 Settings.BackgroundColor = Color.RoyalBlue;
             }
 
-            ExceptionHandler.LogEvent("[Settings] Checked settings object");
+            ExceptionHandler.Log("Checked settings object");
         }
 
         public static void ClearSettings()
         {
-            ExceptionHandler.LogEvent("[Settings] Clearing settings...");
+            ExceptionHandler.Log("Clearing settings...");
 
             Settings = new SettingsData();
-            ExceptionHandler.LogEvent("[Settings] Created new empty settings object");
+            ExceptionHandler.Log("Created new empty settings object");
             CheckSettings();
             Save();
 
-            ExceptionHandler.LogEvent("[Settings] Cleared settings");
+            ExceptionHandler.Log("Cleared settings");
         }
 
         public static void Save()
         {
             if (!TemporaryMode)
             {
-                ExceptionHandler.LogEvent("[Settings] Saving settings...");
+                ExceptionHandler.Log("Saving settings...");
 
                 if (SettingsLoaded)
                 {
-                    ExceptionHandler.LogEvent("[Settings] Serializing settings");
+                    ExceptionHandler.Log("Serializing settings");
                     string settingsJson = JsonConvert.SerializeObject(Settings, Formatting.Indented);
-                    ExceptionHandler.LogEvent("[Settings] Writing settings.json");
+                    ExceptionHandler.Log("Writing settings.json");
                     File.WriteAllText(settingsPath, settingsJson);
-                    ExceptionHandler.LogEvent("[Settings] Saved settings");
+                    ExceptionHandler.Log("Saved settings");
                 }
                 else
                 {
-                    ExceptionHandler.LogEvent("[Settings] Ignoring Settings.Save() call as no settings are loaded");
+                    ExceptionHandler.Log("Ignoring Settings.Save() call as no settings are loaded");
                 }
             }
             else
             {
-                ExceptionHandler.LogEvent("[Settings] Ignoring Settings.Save() call due to TemporaryMode");
+                ExceptionHandler.Log("Ignoring Settings.Save() call due to TemporaryMode");
             }
         }
     }

@@ -18,16 +18,16 @@ namespace ShutdownTimer.Helpers
 
         public static void ProcessArgs(string[] args)
         {
-            ExceptionHandler.LogEvent("[ArgProcessor] Processing args...");
+            ExceptionHandler.Log("Processing args...");
             ReadArgs(args);
             ExportTimeToInt();
             ExportTimeToTimeSpan();
-            ExceptionHandler.LogEvent("[ArgProcessor] Processed args");
+            ExceptionHandler.Log("Processed args");
         }
 
         private static void ReadArgs(string[] args)
         {
-            ExceptionHandler.LogEvent("[ArgProcessor] Reading args...");
+            ExceptionHandler.Log("Reading args...");
 
             //Control Modes:
             //Prefill:      Prefills settings but let user manually change them too. Timer won't start automatically.
@@ -38,7 +38,7 @@ namespace ShutdownTimer.Helpers
             // Read args and do some processing
             for (var i = 0; i < args.Length; i++)
             {
-                ExceptionHandler.LogEvent("[ArgProcessor] Arg " + i + " = " + args[i]);
+                ExceptionHandler.Log("Arg " + i + " = " + args[i]);
                 switch (args[i])
                 {
                     case "/SetTime":
@@ -71,12 +71,12 @@ namespace ShutdownTimer.Helpers
                 }
             }
 
-            ExceptionHandler.LogEvent("[ArgProcessor] Read args");
+            ExceptionHandler.Log("Read args");
         }
 
         private static void ExportTimeToInt()
         {
-            ExceptionHandler.LogEvent("[ArgProcessor] Exporting to Int...");
+            ExceptionHandler.Log("Exporting to Int...");
 
             if (!string.IsNullOrWhiteSpace(argTime))
             {
@@ -92,7 +92,7 @@ namespace ShutdownTimer.Helpers
                     switch (count)
                     {
                         case 0:
-                            ExceptionHandler.LogEvent("[ArgProcessor] Invalid time args");
+                            ExceptionHandler.Log("Invalid time args");
                             break;
 
                         case 1:
@@ -111,16 +111,16 @@ namespace ShutdownTimer.Helpers
                 }
             }
 
-            ExceptionHandler.LogEvent("[ArgProcessor] Exported to Int");
+            ExceptionHandler.Log("Exported to Int");
         }
 
         private static void ExportTimeToTimeSpan()
         {
-            ExceptionHandler.LogEvent("[ArgProcessor] Exporting to TimeSpan...");
+            ExceptionHandler.Log("Exporting to TimeSpan...");
 
             argTimeTS = new TimeSpan(argTimeH, argTimeM, argTimeS);
 
-            ExceptionHandler.LogEvent("[ArgProcessor] Exported to TimeSpan");
+            ExceptionHandler.Log("Exported to TimeSpan");
         }
     }
 }

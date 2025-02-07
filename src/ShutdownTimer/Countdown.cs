@@ -41,32 +41,32 @@ namespace ShutdownTimer
         // entrypoint
         private void Countdown_Load(object sender, EventArgs e)
         {
-            ExceptionHandler.LogEvent("[Countdown] Checking multiple instances configuration");
+            ExceptionHandler.Log("Checking multiple instances configuration");
 
             if (!SettingsProvider.Settings.EnableMultipleInstances)
             {
-                ExceptionHandler.LogEvent("[Countdown] Multiple instances are not allowed");
+                ExceptionHandler.Log("Multiple instances are not allowed");
 
-                ExceptionHandler.LogEvent("[Countdown] Checking for another instance already running");
+                ExceptionHandler.Log("Checking for another instance already running");
                 if (!ApplicationInstanceManager.IsSingleInstance())
                 {
                     MessageBox.Show("Only one instance running is allowed. Please, check the 'Enable Multiple Instances' setting.\n\nExiting...", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    ExceptionHandler.LogEvent("[Countdown] Detected another instance already running. Exiting...");
+                    ExceptionHandler.Log("Detected another instance already running. Exiting...");
                     Application.Exit();
                 }
             }
             else
             {
-                ExceptionHandler.LogEvent("[Countdown] Multiple instances are allowed");
+                ExceptionHandler.Log("Multiple instances are allowed");
             }
 
-            ExceptionHandler.LogEvent("[Countdown] Starting stopwatch");
+            ExceptionHandler.Log("Starting stopwatch");
 
             // Setup clock
             stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            ExceptionHandler.LogEvent("[Countdown] Preparing UI...");
+            ExceptionHandler.Log("Preparing UI...");
 
             // Set custom background color / transparency
 
@@ -97,7 +97,7 @@ namespace ShutdownTimer
             // Load password and set the lock state
             if (!String.IsNullOrEmpty(Password))
             {
-                ExceptionHandler.LogEvent("[Countdown] A password has been detected");
+                ExceptionHandler.Log("A password has been detected");
                 ChangeLockState("locked");
             }
 
@@ -137,18 +137,18 @@ namespace ShutdownTimer
                 this.Location = new Point(SettingsProvider.Settings.LastScreenPositionCountdown.X, SettingsProvider.Settings.LastScreenPositionCountdown.Y);
             }
 
-            ExceptionHandler.LogEvent("[Countdown] Prepared UI");
+            ExceptionHandler.Log("Prepared UI");
 
-            ExceptionHandler.LogEvent("[Countdown] Updating UI");
+            ExceptionHandler.Log("Updating UI");
             UpdateUI(CountdownTimeSpan);
 
             if (PreventSystemSleep)
             {
-                ExceptionHandler.LogEvent("[Countdown] Executing sleep prevention by setting the EXECUTION_STATE flags");
+                ExceptionHandler.Log("Executing sleep prevention by setting the EXECUTION_STATE flags");
                 ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS | ExecutionState.EXECUTION_STATE.ES_SYSTEM_REQUIRED);
             } // give the system some coffee so it stays awake when tired using some fancy EXECUTION_STATE flags
 
-            ExceptionHandler.LogEvent("[Countdown] Entering countdown sequence...");
+            ExceptionHandler.Log("Entering countdown sequence...");
         }
 
         /// <summary>
@@ -183,8 +183,7 @@ namespace ShutdownTimer
 
             if (interval.TotalSeconds <= 0) //check if interval is negative
             {
-                ExceptionHandler.LogEvent("[Countdown] Countdown reached 0");
-                ExceptionHandler.CreateAutoLogIfApplicable();
+                ExceptionHandler.Log("Countdown reached 0");
                 stopwatch.Stop();
                 refreshTimer.Stop();
                 ExecutePowerAction(Action);
@@ -198,28 +197,28 @@ namespace ShutdownTimer
         /// </summary>
         private void LockStatePictureBox_Click(object sender, EventArgs e)
         {
-            ExceptionHandler.LogEvent("[Countdown] User clicked on the lock icon");
+            ExceptionHandler.Log("User clicked on the lock icon");
 
             switch (lockState)
             {
                 case 0: // lock state 'free': nothing needs to be done
-                    ExceptionHandler.LogEvent("[Countdown] Error: lockState = free, the user should not be able to click the icon as it should be invisible and deactivated");
+                    ExceptionHandler.Log("Error: lockState = free, the user should not be able to click the icon as it should be invisible and deactivated");
                     break;
 
                 case 1: // lock state 'locked': ask user for password to unlock
-                    ExceptionHandler.LogEvent("[Countdown] lockState = locked, requesting password for unlock from user");
+                    ExceptionHandler.Log("lockState = locked, requesting password for unlock from user");
                     UnlockUIByPassword();
                     break;
 
                 case 2: // lock state 'unlocked': change lockstate to 'locked'
-                    ExceptionHandler.LogEvent("[Countdown] lockState = unlocked, asking user for confirmation lock the UI");
+                    ExceptionHandler.Log("lockState = unlocked, asking user for confirmation lock the UI");
                     DialogResult result = MessageBox.Show("Would you like to re-lock the countdown?", "Password Protection", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
-                        ExceptionHandler.LogEvent("[Countdown] User wanted to lock the UI");
+                        ExceptionHandler.Log("User wanted to lock the UI");
                         ChangeLockState("locked");
                     }
-                    else { ExceptionHandler.LogEvent("[Countdown] User wanted to keep the UI unlocked"); }
+                    else { ExceptionHandler.Log("User wanted to keep the UI unlocked"); }
                     break;
             }
         }
@@ -229,7 +228,7 @@ namespace ShutdownTimer
         /// </summary>
         private void SaveSettings()
         {
-            ExceptionHandler.LogEvent("[Countdown] Saving settings...");
+            ExceptionHandler.Log("Saving settings...");
 
             SettingsProvider.Settings.LastScreenPositionCountdown = new LastScreenPosition
             {
@@ -239,7 +238,7 @@ namespace ShutdownTimer
 
             SettingsProvider.Save();
 
-            ExceptionHandler.LogEvent("[Countdown] Settings saved");
+            ExceptionHandler.Log("Settings saved");
         }
 
         /// <summary>
@@ -247,31 +246,31 @@ namespace ShutdownTimer
         /// </summary>
         private void Countdown_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ExceptionHandler.LogEvent("[Countdown] FormClosing event triggered");
+            ExceptionHandler.Log("FormClosing event triggered");
             if (ignoreClose) // Ignore closing event
             {
                 e.Cancel = true;
-                ExceptionHandler.LogEvent("[Countdown] Ignoring the close event due to ignoreClose");
+                ExceptionHandler.Log("Ignoring the close event due to ignoreClose");
                 return;
             }
             else if (!allowClose && !SettingsProvider.Settings.DisableNotifications) // Ask user for confirmation
             {
                 e.Cancel = true;
-                ExceptionHandler.LogEvent("[Countdown] Asking user for confirmation to exit and cancel the timer");
+                ExceptionHandler.Log("Asking user for confirmation to exit and cancel the timer");
                 string caption = "Are you sure?";
                 string message = "Do you really want to cancel the timer?";
                 DialogResult question = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (question == DialogResult.Yes) { ExceptionHandler.LogEvent("[Countdown] User wanted to exit"); ExitApplication(); return; }
+                if (question == DialogResult.Yes) { ExceptionHandler.Log("User wanted to exit"); ExitApplication(); return; }
             }
             else if (!allowClose) // Just close without asking first, as user has disabled confirmations in settings
             {
                 e.Cancel = true;
-                ExceptionHandler.LogEvent("[Countdown] Exiting without asking user as defined per DisableNotifications-setting");
+                ExceptionHandler.Log("Exiting without asking user as defined per DisableNotifications-setting");
                 ExitApplication();
                 return;
             }
             // allowClose == true is not handled and if ignoreClose == false, the application will exit
-            ExceptionHandler.LogEvent("[Countdown] Form now closing");
+            ExceptionHandler.Log("Form now closing");
             //ExceptionHandler.CreateAutoLogIfApplicable();
         }
 
@@ -285,29 +284,29 @@ namespace ShutdownTimer
         /// </summary>
         private void ExitApplication()
         {
-            ExceptionHandler.LogEvent("[Countdown] Trying to exit the application");
+            ExceptionHandler.Log("Trying to exit the application");
 
             if (lockState == 1)
             {
-                ExceptionHandler.LogEvent("[Countdown] Attempt halted due to password protection");
-                if (UnlockUIByPassword(true)) { ExceptionHandler.LogEvent("[Countdown] Password protection passed, restarting exit sequence..."); ExitApplication(); }
+                ExceptionHandler.Log("Attempt halted due to password protection");
+                if (UnlockUIByPassword(true)) { ExceptionHandler.Log("Password protection passed, restarting exit sequence..."); ExitApplication(); }
             }
             else
             {
-                ExceptionHandler.LogEvent("[Countdown] Exiting application...");
+                ExceptionHandler.Log("Exiting application...");
 
                 ignoreClose = false;
                 allowClose = true;
-                ExceptionHandler.LogEvent("[Countdown] Stopping clocks");
+                ExceptionHandler.Log("Stopping clocks");
                 stopwatch.Stop();
                 refreshTimer.Stop();
-                ExceptionHandler.LogEvent("[Countdown] Clearing EXECUTION_STATE flags");
+                ExceptionHandler.Log("Clearing EXECUTION_STATE flags");
                 ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired
-                ExceptionHandler.LogEvent("[Countdown] Confirming application halt to user");
+                ExceptionHandler.Log("Confirming application halt to user");
                 SendNotification("Your timer was canceled successfully!\nThe application will now close"); // Show windows toast notification as confirmation
-                ExceptionHandler.LogEvent("[Countdown] Saving all settings");
+                ExceptionHandler.Log("Saving all settings");
                 SaveSettings();
-                ExceptionHandler.LogEvent("[Countdown] Exiting...");
+                ExceptionHandler.Log("Exiting...");
                 Application.Exit();
             }
         }
@@ -317,26 +316,26 @@ namespace ShutdownTimer
         /// </summary>
         private void RestartApplication()
         {
-            ExceptionHandler.LogEvent("[Countdown] Trying to restart the application");
+            ExceptionHandler.Log("Trying to restart the application");
             if (lockState == 1)
             {
-                ExceptionHandler.LogEvent("[Countdown] Attempt canceled due to password protection");
-                if (UnlockUIByPassword(true)) { ExceptionHandler.LogEvent("[Countdown] Password protection passed, restarting restart sequence..."); RestartApplication(); }
+                ExceptionHandler.Log("Attempt canceled due to password protection");
+                if (UnlockUIByPassword(true)) { ExceptionHandler.Log("Password protection passed, restarting restart sequence..."); RestartApplication(); }
             }
             else
             {
-                ExceptionHandler.LogEvent("[Countdown] Restarting application...");
+                ExceptionHandler.Log("Restarting application...");
 
                 ignoreClose = false;
                 allowClose = true;
-                ExceptionHandler.LogEvent("[Countdown] Stopping clocks");
+                ExceptionHandler.Log("Stopping clocks");
                 stopwatch.Stop();
                 refreshTimer.Stop();
-                ExceptionHandler.LogEvent("[Countdown] Clearing EXECUTION_STATE flags");
+                ExceptionHandler.Log("Clearing EXECUTION_STATE flags");
                 ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired
-                ExceptionHandler.LogEvent("[Countdown] Saving all settings");
+                ExceptionHandler.Log("Saving all settings");
                 SaveSettings();
-                ExceptionHandler.LogEvent("[Countdown] Restarting...");
+                ExceptionHandler.Log("Restarting...");
                 Application.Restart();
             }
         }
@@ -346,24 +345,24 @@ namespace ShutdownTimer
         /// </summary>
         private void RestartTimer()
         {
-            ExceptionHandler.LogEvent("[Countdown] Trying to restart the timer");
+            ExceptionHandler.Log("Trying to restart the timer");
             if (lockState == 1)
             {
-                ExceptionHandler.LogEvent("[Countdown] Attempt canceled due to password protection");
-                if (UnlockUIByPassword(true)) { ExceptionHandler.LogEvent("[Countdown] Password protection disabled, restarting timer restart sequence..."); RestartTimer(); }
+                ExceptionHandler.Log("Attempt canceled due to password protection");
+                if (UnlockUIByPassword(true)) { ExceptionHandler.Log("Password protection disabled, restarting timer restart sequence..."); RestartTimer(); }
             }
             else
             {
-                ExceptionHandler.LogEvent("[Countdown] Restarting timer...");
+                ExceptionHandler.Log("Restarting timer...");
 
-                ExceptionHandler.LogEvent("[Countdown] Restarting clocks");
+                ExceptionHandler.Log("Restarting clocks");
                 stopwatch.Stop();
                 stopwatch = new Stopwatch();
                 stopwatch.Start();
-                ExceptionHandler.LogEvent("[Countdown] Updating UI");
+                ExceptionHandler.Log("Updating UI");
                 UpdateUI(CountdownTimeSpan);
                 if (this.WindowState == FormWindowState.Minimized) { SendNotification("Timer restarted. The power action will be executed in " + CountdownTimeSpan.Hours + " hours, " + CountdownTimeSpan.Minutes + " minutes and " + CountdownTimeSpan.Seconds + " seconds."); }
-                ExceptionHandler.LogEvent("[Countdown] Timer restarted");
+                ExceptionHandler.Log("Timer restarted");
             }
         }
 
@@ -395,7 +394,7 @@ namespace ShutdownTimer
         /// </summary>
         private void UpdateTimer()
         {
-            ExceptionHandler.LogEvent("[Countdown] Countdown update requested");
+            ExceptionHandler.Log("Countdown update requested");
             using (var form = new InputBox())
             {
                 form.Title = "Countdown Update";
@@ -405,12 +404,12 @@ namespace ShutdownTimer
                 TopMost = !SettingsProvider.Settings.DisableAlwaysOnTop;
                 if (form.ReturnValue == "")
                 {
-                    ExceptionHandler.LogEvent("[Countdown] Countdown update aborted due to no input");
+                    ExceptionHandler.Log("Countdown update aborted due to no input");
                     MessageBox.Show("Operation aborted: You have not supplied a new time value!", "Countdown Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    ExceptionHandler.LogEvent("[Countdown] Parsing supplied input");
+                    ExceptionHandler.Log("Parsing supplied input");
                     try
                     {
                         String[] values = form.ReturnValue.Split(':');
@@ -420,7 +419,7 @@ namespace ShutdownTimer
                             int newMinutes = Convert.ToInt32(values[1]);
                             CountdownTimeSpan = new TimeSpan(newHours, newMinutes, 0);
                             stopwatch.Restart();
-                            ExceptionHandler.LogEvent("[Countdown] Countdown updated using HH:mm");
+                            ExceptionHandler.Log("Countdown updated using HH:mm");
                         }
                         else if (values.Length == 3) // HH:mm:ss
                         {
@@ -429,17 +428,17 @@ namespace ShutdownTimer
                             int newSeconds = Convert.ToInt32(values[2]);
                             CountdownTimeSpan = new TimeSpan(newHours, newMinutes, newSeconds);
                             stopwatch.Restart();
-                            ExceptionHandler.LogEvent("[Countdown] Countdown updated using HH:mm:ss");
+                            ExceptionHandler.Log("Countdown updated using HH:mm:ss");
                         }
                         else
                         {
-                            ExceptionHandler.LogEvent("[Countdown] Countdown update aborted due to malformed input");
+                            ExceptionHandler.Log("Countdown update aborted due to malformed input");
                             MessageBox.Show("Operation aborted: You have not supplied a valid time value!", "Countdown Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     catch (Exception)
                     {
-                        ExceptionHandler.LogEvent("[Countdown] Countdown update aborted due to error in input processing");
+                        ExceptionHandler.Log("Countdown update aborted due to error in input processing");
                         MessageBox.Show("Operation aborted: You have either not supplied a valid time value or there was an internal error outside the scope of your input while processing it.", "Countdown Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -451,7 +450,7 @@ namespace ShutdownTimer
         /// </summary>
         private void HideUI()
         {
-            ExceptionHandler.LogEvent("[Countdown] Hiding UI");
+            ExceptionHandler.Log("Hiding UI");
 
             timerUIHideMenuItem.Enabled = false;
             timerUIShowMenuItem.Enabled = true;
@@ -470,7 +469,7 @@ namespace ShutdownTimer
         /// </summary>
         private void ShowUI()
         {
-            ExceptionHandler.LogEvent("[Countdown] Showing UI");
+            ExceptionHandler.Log("Showing UI");
 
             timerUIHideMenuItem.Enabled = true;
             timerUIShowMenuItem.Enabled = false;
@@ -497,7 +496,7 @@ namespace ShutdownTimer
         /// </summary>
         private void ChangeLockState(string newLockState)
         {
-            ExceptionHandler.LogEvent("[Countdown] Switching to lockState: " + newLockState);
+            ExceptionHandler.Log("Switching to lockState: " + newLockState);
 
             switch (newLockState)
             {
@@ -526,7 +525,7 @@ namespace ShutdownTimer
 
         private bool UnlockUIByPassword(bool reasonBecauseOfAction = false)
         {
-            ExceptionHandler.LogEvent("[Countdown] Unlock has been requested");
+            ExceptionHandler.Log("Unlock has been requested");
 
             string message;
             if (reasonBecauseOfAction)
@@ -550,13 +549,13 @@ namespace ShutdownTimer
                 TopMost = !SettingsProvider.Settings.DisableAlwaysOnTop;
                 if (form.ReturnValue == Password)
                 {
-                    ExceptionHandler.LogEvent("[Countdown] Successfully unlocked");
+                    ExceptionHandler.Log("Successfully unlocked");
                     ChangeLockState("unlocked");
                     return true;
                 }
                 else
                 {
-                    ExceptionHandler.LogEvent("[Countdown] Unlock has failed");
+                    ExceptionHandler.Log("Unlock has failed");
                     MessageBox.Show("Incorrect password!\n\nThis countdown will stay locked until the correct password has been entered.", "Password Protection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
@@ -571,7 +570,7 @@ namespace ShutdownTimer
         {
             if (!SettingsProvider.Settings.DisableNotifications)
             {
-                ExceptionHandler.LogEvent("[Countdown] Sending notification: " + message);
+                ExceptionHandler.Log("Sending notification: " + message);
                 notifyIcon.BalloonTipText = message;
                 notifyIcon.ShowBalloonTip(5000);
             }
@@ -587,12 +586,12 @@ namespace ShutdownTimer
         /// </summary>
         private void TimerPauseMenuItem_Click(object sender, EventArgs e)
         {
-            ExceptionHandler.LogEvent("[Countdown] Trying to pause/resume countdown");
+            ExceptionHandler.Log("Trying to pause/resume countdown");
 
             if (lockState == 1)
             {
-                ExceptionHandler.LogEvent("[Countdown] Attempt halted due to password protection");
-                if (UnlockUIByPassword(true)) { ExceptionHandler.LogEvent("[Countdown] Password protection passed"); PauseResumeTimer(); }
+                ExceptionHandler.Log("Attempt halted due to password protection");
+                if (UnlockUIByPassword(true)) { ExceptionHandler.Log("Password protection passed"); PauseResumeTimer(); }
             }
             else
             {
@@ -605,12 +604,12 @@ namespace ShutdownTimer
         /// </summary>
         private void UpdateTimeMenuItem_Click(object sender, EventArgs e)
         {
-            ExceptionHandler.LogEvent("[Countdown] Trying to update remaining time");
+            ExceptionHandler.Log("Trying to update remaining time");
 
             if (lockState == 1)
             {
-                ExceptionHandler.LogEvent("[Countdown] Attempt halted due to password protection");
-                if (UnlockUIByPassword(true)) { ExceptionHandler.LogEvent("[Countdown] Password protection passed"); UpdateTimer(); }
+                ExceptionHandler.Log("Attempt halted due to password protection");
+                if (UnlockUIByPassword(true)) { ExceptionHandler.Log("Password protection passed"); UpdateTimer(); }
             }
             else
             {
@@ -647,12 +646,12 @@ namespace ShutdownTimer
         /// </summary>
         private void TimerUIHideMenuItem_Click(object sender, EventArgs e)
         {
-            ExceptionHandler.LogEvent("[Countdown] Trying to hide the UI");
+            ExceptionHandler.Log("Trying to hide the UI");
 
             if (lockState == 1)
             {
-                ExceptionHandler.LogEvent("[Countdown] Attempt halted due to password protection");
-                if (UnlockUIByPassword(true)) { ExceptionHandler.LogEvent("[Countdown] Password protection passed"); HideUI(); }
+                ExceptionHandler.Log("Attempt halted due to password protection");
+                if (UnlockUIByPassword(true)) { ExceptionHandler.Log("Password protection passed"); HideUI(); }
             }
             else
             {
@@ -665,12 +664,12 @@ namespace ShutdownTimer
         /// </summary>
         private void TimerUIShowMenuItem_Click(object sender, EventArgs e)
         {
-            ExceptionHandler.LogEvent("[Countdown] Trying to show the UI");
+            ExceptionHandler.Log("Trying to show the UI");
 
             if (lockState == 1)
             {
-                ExceptionHandler.LogEvent("[Countdown] Attempt halted due to password protection");
-                if (UnlockUIByPassword(true)) { ExceptionHandler.LogEvent("[Countdown] Password protection passed"); ShowUI(); }
+                ExceptionHandler.Log("Attempt halted due to password protection");
+                if (UnlockUIByPassword(true)) { ExceptionHandler.Log("Password protection passed"); ShowUI(); }
             }
             else
             {
@@ -690,7 +689,7 @@ namespace ShutdownTimer
             // log current state every 10,000 ticks (~16 min.)
             if (logTimerCounter <= 0)
             {
-                ExceptionHandler.LogEvent("[Countdown] Application still alive and counting down: " + Numerics.ConvertTimeSpanToString(ts));
+                ExceptionHandler.Log("Application still alive and counting down: " + Numerics.ConvertTimeSpanToString(ts));
                 logTimerCounter = 10000;
             }
             else
@@ -767,7 +766,7 @@ namespace ShutdownTimer
 
         private void ExecutePowerAction(string choosenAction)
         {
-            ExceptionHandler.LogEvent("[Countdown] Executing power action");
+            ExceptionHandler.Log("Executing power action");
 
             ignoreClose = false; // do not ignore close event
             allowClose = true; // disable close question
@@ -805,9 +804,9 @@ namespace ShutdownTimer
                     }
                     catch (Exception ex)
                     {
-                        ExceptionHandler.LogEvent("[Countdown] Error starting a process of the custom command.");
-                        ExceptionHandler.LogEvent("[Countdown] Custom command: " + Command);
-                        ExceptionHandler.LogEvent("[Countdown] Exception: " + ex.ToString());
+                        ExceptionHandler.Log("Error starting a process of the custom command.");
+                        ExceptionHandler.Log("Custom command: " + Command);
+                        ExceptionHandler.Log("Exception: " + ex.ToString());
                         MessageBox.Show("There was an error executing your custom command.\n\nYour custom command: " + Command + "\nError: " + ex.Message, "Countdown Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     break;
@@ -815,7 +814,7 @@ namespace ShutdownTimer
 
             if (PreventSystemSleep)
             {
-                ExceptionHandler.LogEvent("[Countdown] Clearing EXECUTION_STATE flags");
+                ExceptionHandler.Log("Clearing EXECUTION_STATE flags");
                 ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired.
             }
         }

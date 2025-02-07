@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -11,13 +13,13 @@ namespace ShutdownTimer.Helpers
 {
     public static class ExceptionHandler
     {
-        private static Stack<string> eventLog; // storage for important event logs
+        private static Queue<string> eventLog = new Queue<string>(); // storage for event logs
 
         public static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs args)
         {
             Exception e = (Exception)args.ExceptionObject;
 
-            string filepath = LogException(e, "UnhandledException", true, false);
+            string filepath = ProduceLogfile(e, "UnhandledException", true, false);
 
             string message = "An unhandled exception occurred and the application needs to be terminated!\n\n" +
                 "A log file containing information about the process and the error has been saved to your desktop.\n" +
@@ -32,7 +34,7 @@ namespace ShutdownTimer.Helpers
         {
             Exception e = args.Exception;
 
-            string filepath = LogException(e, "ThreadException", true, false);
+            string filepath = ProduceLogfile(e, "ThreadException", true, false);
 
             string message = "A thread exception occurred!\n\n" +
                 "A log file containing information about the process and the error has been saved to your desktop.\n" +
@@ -54,7 +56,7 @@ namespace ShutdownTimer.Helpers
 
         public static void CreateManualLog()
         {
-            string filepath = LogException(null, "NotAnException", false, false);
+            string filepath = ProduceLogfile(null, "NotAnException", false, false);
             Process.Start(filepath); // Show log to user
         }
 
@@ -64,8 +66,8 @@ namespace ShutdownTimer.Helpers
             {
                 if (SettingsProvider.SettingsLoaded && SettingsProvider.Settings.SaveEventLogOnExit)
                 {
-                    LogEvent("[ExceptionHandler] Autosaving log as defined per developer option. This feature can be turned off in Settings > Advanced > Developer options");
-                    LogException(null, "NotAnException", false, true);
+                    Log("Autosaving log as defined per developer option. This feature can be turned off in Settings > Advanced > Developer options");
+                    ProduceLogfile(null, "NotAnException", false, true);
                 }
             }
             catch
@@ -73,58 +75,57 @@ namespace ShutdownTimer.Helpers
         }
 
         // Add a new log to the event log stack
-        public static void LogEvent(string data)
+        public static void Log(string data)
         {
-            if (eventLog is null) { eventLog = new Stack<string>(); }
-
-            eventLog.Push(data);
+            MethodBase method = new StackTrace().GetFrame(1).GetMethod();
+            eventLog.Enqueue($"{DateTime.Now.ToString("[HH:mm:ss.ffff]")}[{method.ReflectedType}:{method.Name}] {data}");
         }
 
 
-        private static string LogException(Exception e, String type, bool crash, bool appdata)
+        private static string ProduceLogfile(Exception e, String type, bool crash, bool appdata)
         {
             Process process = Process.GetCurrentProcess();
             StringBuilder log = new StringBuilder();
 
             if (crash)
             {
-                log.Append($"{Application.ProductName}@{Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf("."))} experienced a critical exception.\n");
-                log.Append("The following data includes information about your system, the exception and the internal state of the application at the time of the exception. You may remove certain information (like your username which may be included in the log) to protect your privacy.\n");
-                log.Append("Please open an issue on https://github.com/lukaslangrock/ShutdownTimerClassic and include the contents of this log file to help identify and fix the issue.\n");
+                log.AppendLine($"{Application.ProductName}@{Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf("."))} experienced a critical exception.");
+                log.AppendLine("The following data includes information about your system, the exception and the internal state of the application at the time of the exception. You may remove certain information (like your username which may be included in the log) to protect your privacy.");
+                log.AppendLine("Please open an issue on https://github.com/lukaslangrock/ShutdownTimerClassic and include the contents of this log file to help identify and fix the issue.");
             }
             else
             {
-                log.Append($"Log created by {Application.ProductName}@{Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf("."))}\n");
-                log.Append("The following data includes information about your system and the internal state of the application at the time of log creation. You may remove certain information (like your username which may be included in the log) to protect your privacy.\n");
-                log.Append("This is NOT a crash! This log was created upon user request.\n");
+                log.AppendLine($"Log created by {Application.ProductName}@{Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf("."))}");
+                log.AppendLine("The following data includes information about your system and the internal state of the application at the time of log creation. You may remove certain information (like your username which may be included in the log) to protect your privacy.");
+                log.AppendLine("This is NOT a crash! This log was created upon user request.");
             }
 
             // Logs application, process, exception and environment details and returns log filepath
-            log.Append("\n\n---- Process Info ----\n");
-            log.Append($"ProcessName: {process.ProcessName}\n");
-            log.Append($"Arguments: {process.StartInfo.Arguments}\n");
-            log.Append($"Threads: {process.Threads.Count}\n");
-            log.Append($"Responding: {process.Responding}\n");
-            log.Append($"StartTime: {process.StartTime}\n");
-            log.Append($"PeakWorkingSet64: {Format.BytesToString(process.PeakWorkingSet64)}\n");
-            log.Append($"WorkingSet64: {Format.BytesToString(process.WorkingSet64)}\n");
-            log.Append($"PeakWorkingSet64: {Format.BytesToString(process.PeakWorkingSet64)}\n");
-            log.Append($"PrivateMemorySize64: {Format.BytesToString(process.PrivateMemorySize64)}\n"); // The number of bytes that the associated process has allocated that cannot be shared with other processes.
-            log.Append($"VirtualMemorySize64: {Format.BytesToString(process.VirtualMemorySize64)}\n");
-            log.Append($"PeakVirtualMemorySize64: {Format.BytesToString(process.PeakVirtualMemorySize64)}\n"); // The maximum amount of virtual memory that the process has requested.
-            log.Append($"PagedSystemMemorySize64: {Format.BytesToString(process.PagedSystemMemorySize64)}\n");
-            log.Append($"NonpagedSystemMemorySize64: {Format.BytesToString(process.NonpagedSystemMemorySize64)}\n"); // The amount of memory that the system has allocated on behalf of the associated process that cannot be written to the virtual memory paging file.
-            log.Append($"PagedMemorySize64: {Format.BytesToString(process.PagedMemorySize64)}\n"); // The amount of memory that the associated process has allocated that can be written to the virtual memory paging file.
-            log.Append($"PeakPagedMemorySize64: {Format.BytesToString(process.PeakPagedMemorySize64)}\n"); // The amount of memory that the system has allocated on behalf of the associated process that can be written to the virtual memory paging file.
-            log.Append($"UserProcessorTime: {process.UserProcessorTime}\n");
-            log.Append($"TotalProcessorTime: {process.TotalProcessorTime}\n");
-            log.Append($"PrivilegedProcessorTime: {process.PrivilegedProcessorTime}\n");
+            log.AppendLine("\n\n---- Process Info ----");
+            log.AppendLine($"ProcessName: {process.ProcessName}");
+            log.AppendLine($"Arguments: {process.StartInfo.Arguments}");
+            log.AppendLine($"Threads: {process.Threads.Count}");
+            log.AppendLine($"Responding: {process.Responding}");
+            log.AppendLine($"StartTime: {process.StartTime}");
+            log.AppendLine($"PeakWorkingSet64: {Format.BytesToString(process.PeakWorkingSet64)}");
+            log.AppendLine($"WorkingSet64: {Format.BytesToString(process.WorkingSet64)}");
+            log.AppendLine($"PeakWorkingSet64: {Format.BytesToString(process.PeakWorkingSet64)}");
+            log.AppendLine($"PrivateMemorySize64: {Format.BytesToString(process.PrivateMemorySize64)}"); // The number of bytes that the associated process has allocated that cannot be shared with other processes.
+            log.AppendLine($"VirtualMemorySize64: {Format.BytesToString(process.VirtualMemorySize64)}");
+            log.AppendLine($"PeakVirtualMemorySize64: {Format.BytesToString(process.PeakVirtualMemorySize64)}"); // The maximum amount of virtual memory that the process has requested.
+            log.AppendLine($"PagedSystemMemorySize64: {Format.BytesToString(process.PagedSystemMemorySize64)}");
+            log.AppendLine($"NonpagedSystemMemorySize64: {Format.BytesToString(process.NonpagedSystemMemorySize64)}"); // The amount of memory that the system has allocated on behalf of the associated process that cannot be written to the virtual memory paging file.
+            log.AppendLine($"PagedMemorySize64: {Format.BytesToString(process.PagedMemorySize64)}"); // The amount of memory that the associated process has allocated that can be written to the virtual memory paging file.
+            log.AppendLine($"PeakPagedMemorySize64: {Format.BytesToString(process.PeakPagedMemorySize64)}"); // The amount of memory that the system has allocated on behalf of the associated process that can be written to the virtual memory paging file.
+            log.AppendLine($"UserProcessorTime: {process.UserProcessorTime}");
+            log.AppendLine($"TotalProcessorTime: {process.TotalProcessorTime}");
+            log.AppendLine($"PrivilegedProcessorTime: {process.PrivilegedProcessorTime}");
 
-            log.Append("\n\n---- Application Info ----\n");
-            log.Append($"Product Name: {Application.ProductName}\n");
-            log.Append($"Product Version: {Application.ProductVersion}\n");
-            log.Append($"Current Culture: {Application.CurrentCulture}\n");
-            log.Append($"Executable Path: {Application.ExecutablePath}\n");
+            log.AppendLine("\n\n---- Application Info ----");
+            log.AppendLine($"Product Name: {Application.ProductName}");
+            log.AppendLine($"Product Version: {Application.ProductVersion}");
+            log.AppendLine($"Current Culture: {Application.CurrentCulture}");
+            log.AppendLine($"Executable Path: {Application.ExecutablePath}");
             try
             {
                 using (MD5 md5 = MD5.Create())
@@ -132,31 +133,33 @@ namespace ShutdownTimer.Helpers
                     using (FileStream stream = File.OpenRead(Application.ExecutablePath))
                     {
                         string hash = BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", String.Empty).ToLowerInvariant();
-                        log.Append($"MD5 Checksum: {hash}\n");
+                        log.AppendLine($"MD5 Checksum: {hash}");
                     }
                 }
             }
-            catch (Exception ex) { log.Append($"MD5 Checksum: FAIL! {ex.Message}\n"); }
+            catch (Exception ex) { log.AppendLine($"MD5 Checksum: FAIL! {ex.Message}"); }
 
-            log.Append("\n\n---- Environment Info ----\n");
-            log.Append($"64-bit OS: {Environment.Is64BitOperatingSystem}\n");
-            log.Append($"64-bit Process: {Environment.Is64BitProcess}\n");
-            log.Append($"OS Version: {Environment.OSVersion}\n");
-            log.Append($"Runtime Version: {Environment.Version}\n");
-            log.Append($"System Uptime: {Environment.TickCount}\n");
-            log.Append($"Shutdown Started: {Environment.HasShutdownStarted}\n");
+            log.AppendLine("\n\n---- Environment Info ----");
+            log.AppendLine($"64-bit OS: {Environment.Is64BitOperatingSystem}");
+            log.AppendLine($"64-bit Process: {Environment.Is64BitProcess}");
+            log.AppendLine($"OS Version: {Environment.OSVersion}");
+            log.AppendLine($"Runtime Version: {Environment.Version}");
+            log.AppendLine($"System Uptime: {Environment.TickCount}");
+            log.AppendLine($"Shutdown Started: {Environment.HasShutdownStarted}");
 
             if (crash)
             {
-                log.Append("\n\n---- Exception ----\n");
-                log.Append($"Type: {type}\n");
-                log.Append($"Message: {e.Message}\n");
-                log.Append($"Stack Trace:\n {e.StackTrace}\n");
+                log.AppendLine("\n\n---- Exception ----");
+                log.AppendLine($"Type: {type}");
+                log.AppendLine($"Message: {e.Message}");
+                log.AppendLine($"Stack Trace:\n {e.StackTrace}");
             }
 
-            log.Append("\n\n---- Internal Event Log ----\n");
-            foreach (var item in eventLog)
-                log.Append(item + "\n");
+            log.AppendLine("\n\n---- Internal Event Log ----");
+            while (eventLog.Any())
+            {
+                log.AppendLine(eventLog.Dequeue());
+            }
 
             log.Append("\n\n---- End of Log ----");
 
