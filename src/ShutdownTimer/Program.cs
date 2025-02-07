@@ -79,6 +79,7 @@ namespace ShutdownTimer
                         break;
                 }
             }
+            ExceptionHandler.CreateAutoLogIfApplicable();
         }
     }
 }

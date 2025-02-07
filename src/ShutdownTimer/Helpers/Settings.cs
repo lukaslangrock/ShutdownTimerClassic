@@ -161,6 +161,10 @@ namespace ShutdownTimer.Helpers
                     File.WriteAllText(settingsPath, settingsJson);
                     ExceptionHandler.LogEvent("[Settings] Saved settings");
                 }
+                else
+                {
+                    ExceptionHandler.LogEvent("[Settings] Ignoring Settings.Save() call as no settings are loaded");
+                }
             }
             else
             {
@@ -191,6 +195,7 @@ namespace ShutdownTimer.Helpers
         public bool PasswordProtection { get; set; }
         public Color BackgroundColor { get; set; }
         public bool AdaptiveCountdownTextSize { get; set; }
+        public bool SaveEventLogOnExit { get; set; }
     }
 
     public class TimerData

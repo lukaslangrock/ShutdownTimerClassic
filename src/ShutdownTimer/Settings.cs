@@ -72,6 +72,7 @@ namespace ShutdownTimer
             passwordCheckBox.Checked = SettingsProvider.Settings.PasswordProtection;
             enableAdaptiveCountdownTextSizeCheckBox.Checked = SettingsProvider.Settings.AdaptiveCountdownTextSize;
             if (SettingsProvider.Settings.BackgroundColor == Color.Transparent) { transparentWindowCheckBox.Checked = true; }
+            saveLogsCheckBox.Checked = SettingsProvider.Settings.SaveEventLogOnExit;
 
             // UI processing
             setBackgroundColorLinkLabel.Enabled = disableAnimationsCheckBox.Checked;
@@ -106,6 +107,7 @@ namespace ShutdownTimer
             SettingsProvider.Settings.DisableNotifications = disableNotificationsCheckBox.Checked;
             SettingsProvider.Settings.AdaptiveCountdownTextSize = enableAdaptiveCountdownTextSizeCheckBox.Checked;
             SettingsProvider.Settings.PasswordProtection = passwordCheckBox.Checked;
+            SettingsProvider.Settings.SaveEventLogOnExit = saveLogsCheckBox.Checked;
 
             SettingsProvider.Save();
         }
@@ -152,7 +154,7 @@ namespace ShutdownTimer
 
         private void LogButton_Click(object sender, EventArgs e)
         {
-            ExceptionHandler.CreateLog();
+            ExceptionHandler.CreateManualLog();
         }
 
         private void SetBackgroundColorLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -185,6 +187,11 @@ namespace ShutdownTimer
         {
             setBackgroundColorLinkLabel.Enabled = disableAnimationsCheckBox.Checked;
             transparentWindowCheckBox.Enabled = disableAnimationsCheckBox.Checked;
+        }
+
+        private void openAppDataLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Shutdown Timer Classic");
         }
     }
 }

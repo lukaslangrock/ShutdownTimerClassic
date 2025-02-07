@@ -184,6 +184,7 @@ namespace ShutdownTimer
             if (interval.TotalSeconds <= 0) //check if interval is negative
             {
                 ExceptionHandler.LogEvent("[Countdown] Countdown reached 0");
+                ExceptionHandler.CreateAutoLogIfApplicable();
                 stopwatch.Stop();
                 refreshTimer.Stop();
                 ExecutePowerAction(Action);
@@ -251,6 +252,7 @@ namespace ShutdownTimer
             {
                 e.Cancel = true;
                 ExceptionHandler.LogEvent("[Countdown] Ignoring the close event due to ignoreClose");
+                return;
             }
             else if (!allowClose && !SettingsProvider.Settings.DisableNotifications) // Ask user for confirmation
             {
@@ -259,16 +261,18 @@ namespace ShutdownTimer
                 string caption = "Are you sure?";
                 string message = "Do you really want to cancel the timer?";
                 DialogResult question = MessageBox.Show(message, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (question == DialogResult.Yes) { ExceptionHandler.LogEvent("[Countdown] User wanted to exit"); ExitApplication(); }
+                if (question == DialogResult.Yes) { ExceptionHandler.LogEvent("[Countdown] User wanted to exit"); ExitApplication(); return; }
             }
             else if (!allowClose) // Just close without asking first, as user has disabled confirmations in settings
             {
                 e.Cancel = true;
                 ExceptionHandler.LogEvent("[Countdown] Exiting without asking user as defined per DisableNotifications-setting");
                 ExitApplication();
+                return;
             }
             // allowClose == true is not handled and if ignoreClose == false, the application will exit
             ExceptionHandler.LogEvent("[Countdown] Form now closing");
+            //ExceptionHandler.CreateAutoLogIfApplicable();
         }
 
         #endregion

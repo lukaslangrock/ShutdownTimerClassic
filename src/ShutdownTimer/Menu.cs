@@ -85,7 +85,6 @@ namespace ShutdownTimer
         {
             ExceptionHandler.LogEvent("[Menu] Form closing...");
             SaveSettings();
-            SettingsProvider.Save();
         }
 
         private void ActionComboBox_TextChanged(object sender, EventArgs e)
@@ -311,9 +310,12 @@ namespace ShutdownTimer
                 };
 
                 SettingsProvider.Save();
+                ExceptionHandler.LogEvent("[Menu] Settings saved");
             }
-
-            ExceptionHandler.LogEvent("[Menu] Settings saved");
+            else
+            {
+                ExceptionHandler.LogEvent("[Menu] Ignoring SaveSettings() call as no settings are loaded");
+            }
         }
 
         /// <summary>
@@ -358,7 +360,7 @@ namespace ShutdownTimer
                 countdown.Owner = this;
                 ExceptionHandler.LogEvent("[Menu] Opening countdown window...");
                 countdown.ShowDialog();
-                ExceptionHandler.LogEvent("[Menu] Exiting");
+                ExceptionHandler.LogEvent("[Menu] Exiting...");
                 Application.Exit(); // Exit application after countdown is closed
             }
         }

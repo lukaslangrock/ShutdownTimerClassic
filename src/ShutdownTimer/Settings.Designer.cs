@@ -61,6 +61,9 @@
             this.actionComboBox = new System.Windows.Forms.ComboBox();
             this.rememberStateCheckBox = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.developerGroupBox = new System.Windows.Forms.GroupBox();
+            this.openAppDataLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.saveLogsCheckBox = new System.Windows.Forms.CheckBox();
             this.passwordGroupBox = new System.Windows.Forms.GroupBox();
             this.passwordLabel = new System.Windows.Forms.Label();
             this.passwordCheckBox = new System.Windows.Forms.CheckBox();
@@ -100,6 +103,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.minutesNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondsNumericUpDown)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.developerGroupBox.SuspendLayout();
             this.passwordGroupBox.SuspendLayout();
             this.countdownGroupBox.SuspendLayout();
             this.forceFlagGroupBox.SuspendLayout();
@@ -143,7 +147,7 @@
             this.footerLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.footerLabel.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.footerLabel.Location = new System.Drawing.Point(12, 500);
+            this.footerLabel.Location = new System.Drawing.Point(12, 490);
             this.footerLabel.Name = "footerLabel";
             this.footerLabel.Size = new System.Drawing.Size(310, 18);
             this.footerLabel.TabIndex = 9;
@@ -466,6 +470,7 @@
             // tabPage2
             // 
             this.tabPage2.AutoScroll = true;
+            this.tabPage2.Controls.Add(this.developerGroupBox);
             this.tabPage2.Controls.Add(this.passwordGroupBox);
             this.tabPage2.Controls.Add(this.countdownGroupBox);
             this.tabPage2.Controls.Add(this.forceFlagGroupBox);
@@ -475,6 +480,38 @@
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "Advanced";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // developerGroupBox
+            // 
+            this.developerGroupBox.Controls.Add(this.openAppDataLinkLabel);
+            this.developerGroupBox.Controls.Add(this.saveLogsCheckBox);
+            this.developerGroupBox.Location = new System.Drawing.Point(6, 304);
+            this.developerGroupBox.Name = "developerGroupBox";
+            this.developerGroupBox.Size = new System.Drawing.Size(284, 100);
+            this.developerGroupBox.TabIndex = 16;
+            this.developerGroupBox.TabStop = false;
+            this.developerGroupBox.Text = "Developer Options";
+            // 
+            // openAppDataLinkLabel
+            // 
+            this.openAppDataLinkLabel.AutoSize = true;
+            this.openAppDataLinkLabel.Location = new System.Drawing.Point(174, 79);
+            this.openAppDataLinkLabel.Name = "openAppDataLinkLabel";
+            this.openAppDataLinkLabel.Size = new System.Drawing.Size(104, 13);
+            this.openAppDataLinkLabel.TabIndex = 18;
+            this.openAppDataLinkLabel.TabStop = true;
+            this.openAppDataLinkLabel.Text = "Open appdata folder";
+            this.openAppDataLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openAppDataLinkLabel_LinkClicked);
+            // 
+            // saveLogsCheckBox
+            // 
+            this.saveLogsCheckBox.AutoSize = true;
+            this.saveLogsCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.saveLogsCheckBox.Name = "saveLogsCheckBox";
+            this.saveLogsCheckBox.Size = new System.Drawing.Size(191, 17);
+            this.saveLogsCheckBox.TabIndex = 14;
+            this.saveLogsCheckBox.Text = "Save event logs to appdata on exit";
+            this.saveLogsCheckBox.UseVisualStyleBackColor = true;
             // 
             // passwordGroupBox
             // 
@@ -784,7 +821,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 527);
+            this.ClientSize = new System.Drawing.Size(334, 517);
             this.Controls.Add(this.githubLinkLabel);
             this.Controls.Add(this.footerLabel);
             this.Controls.Add(this.appLabel);
@@ -816,6 +853,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.minutesNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondsNumericUpDown)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.developerGroupBox.ResumeLayout(false);
+            this.developerGroupBox.PerformLayout();
             this.passwordGroupBox.ResumeLayout(false);
             this.passwordGroupBox.PerformLayout();
             this.countdownGroupBox.ResumeLayout(false);
@@ -893,5 +932,8 @@
         private System.Windows.Forms.CheckBox rememberLastScreenPositionCountdown;
         private System.Windows.Forms.CheckBox rememberLastScreenPositionUI;
         private System.Windows.Forms.CheckBox enableMultipleInstances;
+        private System.Windows.Forms.GroupBox developerGroupBox;
+        private System.Windows.Forms.CheckBox saveLogsCheckBox;
+        private System.Windows.Forms.LinkLabel openAppDataLinkLabel;
     }
 }

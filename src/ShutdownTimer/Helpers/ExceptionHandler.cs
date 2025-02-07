@@ -17,7 +17,7 @@ namespace ShutdownTimer.Helpers
         {
             Exception e = (Exception)args.ExceptionObject;
 
-            string filepath = LogException(e, "UnhandledException", true);
+            string filepath = LogException(e, "UnhandledException", true, false);
 
             string message = "An unhandled exception occurred and the application needs to be terminated!\n\n" +
                 "A log file containing information about the process and the error has been saved to your desktop.\n" +
@@ -32,7 +32,7 @@ namespace ShutdownTimer.Helpers
         {
             Exception e = args.Exception;
 
-            string filepath = LogException(e, "ThreadException", true);
+            string filepath = LogException(e, "ThreadException", true, false);
 
             string message = "A thread exception occurred!\n\n" +
                 "A log file containing information about the process and the error has been saved to your desktop.\n" +
@@ -52,10 +52,24 @@ namespace ShutdownTimer.Helpers
             }
         }
 
-        public static void CreateLog()
+        public static void CreateManualLog()
         {
-            string filepath = LogException(null, "UnhandledException", false);
+            string filepath = LogException(null, "NotAnException", false, false);
             Process.Start(filepath); // Show log to user
+        }
+
+        public static void CreateAutoLogIfApplicable()
+        {
+            try
+            {
+                if (SettingsProvider.SettingsLoaded && SettingsProvider.Settings.SaveEventLogOnExit)
+                {
+                    LogEvent("[ExceptionHandler] Autosaving log as defined per developer option. This feature can be turned off in Settings > Advanced > Developer options");
+                    LogException(null, "NotAnException", false, true);
+                }
+            }
+            catch
+            { }
         }
 
         // Add a new log to the event log stack
@@ -67,7 +81,7 @@ namespace ShutdownTimer.Helpers
         }
 
 
-        private static string LogException(Exception e, String type, bool crash)
+        private static string LogException(Exception e, String type, bool crash, bool appdata)
         {
             Process process = Process.GetCurrentProcess();
             StringBuilder log = new StringBuilder();
@@ -80,20 +94,17 @@ namespace ShutdownTimer.Helpers
             }
             else
             {
-                log.Append($"Manual log created by {Application.ProductName}@{Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf("."))}\n");
+                log.Append($"Log created by {Application.ProductName}@{Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf("."))}\n");
                 log.Append("The following data includes information about your system and the internal state of the application at the time of log creation. You may remove certain information (like your username which may be included in the log) to protect your privacy.\n");
                 log.Append("This is NOT a crash! This log was created upon user request.\n");
             }
 
             // Logs application, process, exception and environment details and returns log filepath
             log.Append("\n\n---- Process Info ----\n");
-            log.Append($"PID: {process.Id}\n");
             log.Append($"ProcessName: {process.ProcessName}\n");
             log.Append($"Arguments: {process.StartInfo.Arguments}\n");
-            log.Append($"PriorityClass: {process.PriorityClass}\n");
             log.Append($"Threads: {process.Threads.Count}\n");
             log.Append($"Responding: {process.Responding}\n");
-            log.Append($"HasExited: {process.HasExited}\n");
             log.Append($"StartTime: {process.StartTime}\n");
             log.Append($"PeakWorkingSet64: {Format.BytesToString(process.PeakWorkingSet64)}\n");
             log.Append($"WorkingSet64: {Format.BytesToString(process.WorkingSet64)}\n");
@@ -133,8 +144,6 @@ namespace ShutdownTimer.Helpers
             log.Append($"OS Version: {Environment.OSVersion}\n");
             log.Append($"Runtime Version: {Environment.Version}\n");
             log.Append($"System Uptime: {Environment.TickCount}\n");
-            log.Append($"Machine Name: {Environment.MachineName}\n");
-            log.Append($"Processor Count: {Environment.ProcessorCount}\n");
             log.Append($"Shutdown Started: {Environment.HasShutdownStarted}\n");
 
             if (crash)
@@ -156,10 +165,17 @@ namespace ShutdownTimer.Helpers
             {
                 filepath = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\ShutdownTimerClassic Exception-Log [{DateTime.Now.Ticks}].txt";
             }
+            else if (appdata)
+            {
+                string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Shutdown Timer Classic\\logs";
+                filepath = $"{folder}\\{DateTime.Now.ToString("yyyy-MM-dd_HH-mm")} [{DateTime.Now.Ticks}].txt";
+                System.IO.Directory.CreateDirectory(folder);
+            }
             else
             {
                 filepath = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}\\ShutdownTimerClassic Manual-Log [{DateTime.Now.Ticks}].txt";
             }
+
             System.IO.File.WriteAllText(filepath, log.ToString());
 
             return filepath;
