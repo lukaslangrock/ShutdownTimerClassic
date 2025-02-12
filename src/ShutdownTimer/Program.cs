@@ -64,18 +64,13 @@ namespace ShutdownTimer
                         if (ArgProcessor.argMode.Equals("Launch")) { forced = false; }
                         else { forced = true; }
 
-                        ExceptionHandler.Log("Running Countdown with args");
-                        Countdown countdown = new Countdown
-                        {
-                            CountdownTimeSpan = ArgProcessor.argTimeTS,
-                            Action = ArgProcessor.argAction,
-                            Graceful = ArgProcessor.argGraceful,
-                            PreventSystemSleep = ArgProcessor.argPreventSleep,
-                            UI = !ArgProcessor.argBackground,
-                            Forced = forced,
-                            UserLaunch = false
-                        };
-                        Application.Run(countdown);
+                        ExceptionHandler.Log("Running Countdown with args" + forced.ToString());
+                        Timer.CountdownTimeSpan = ArgProcessor.argTimeTS;
+                        Timer.Action = ArgProcessor.argAction;
+                        Timer.Graceful = ArgProcessor.argGraceful;
+                        Timer.PreventSystemSleep = ArgProcessor.argPreventSleep;
+                        Timer.Start(null, !ArgProcessor.argBackground, forced, false);
+                        Application.Run();
                         break;
                 }
             }

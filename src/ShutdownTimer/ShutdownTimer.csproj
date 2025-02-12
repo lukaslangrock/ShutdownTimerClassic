@@ -106,6 +106,7 @@
     <Compile Include="Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Timer.cs" />
     <EmbeddedResource Include="Countdown.resx">
       <DependentUpon>Countdown.cs</DependentUpon>
       <SubType>Designer</SubType>

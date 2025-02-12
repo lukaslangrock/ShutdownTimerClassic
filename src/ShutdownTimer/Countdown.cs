@@ -1,6 +1,5 @@
 ﻿using ShutdownTimer.Helpers;
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
@@ -9,25 +8,16 @@ namespace ShutdownTimer
 {
     public partial class Countdown : Form
     {
-        //properties
-        public TimeSpan CountdownTimeSpan { get; set; } // timespan after which the power action gets executed
-        public string Action { get; set; } // defines what power action to execute (fallback to shutdown if not changed)
-        public bool Graceful { get; set; } // uses a graceful shutdown which allows apps to save their work or interrupt the shutdown
-        public bool PreventSystemSleep { get; set; } // tells Windows that the system should stay awake during countdown
-        public bool UI { get; set; } // disables UI updates when set to false (used for running in background)
-        public bool Forced { get; set; } // disables all UI controls and exit dialogs
         public string Password { get; set; } // if value is not empty then a password will be required to change or disable the countdown
         public bool UserLaunch { get; set; } // false if launched from CLI
-        public string Command { get; set; } // for executing a custom command instead of a power action
+        public bool UI { get; set; } // disables UI updates when set to false (used for running in background)
+        public bool Forced { get; set; } // disables all UI controls and exit dialogs
 
-        //private
         private FormWindowState lastStateUIFormWindowState; // used to update UI immediately after WindowState change
         private TimeSpan lastStateUITimeSpan; // used to limit UI events that should only be executed once per second instead of once per update
-        private Stopwatch stopwatch; // measures exact timespan
         private bool ignoreClose; // true: cancel close events without asking | false: default behaviour (if ignoreClose == true, allowClose will be ignored)
         private bool allowClose; // true: accept close without asking | false: Ask user to confirm closing
         private bool animationSwitch = true; // used to switch warning animation colors
-        private bool paused = false; // used to pause/resume the timer
         private int lockState = 0; // used for Password Protection free/locked/unlocked
         private int logTimerCounter = 0; // used to log events every 10,000 timer ticks
 
@@ -36,11 +26,28 @@ namespace ShutdownTimer
             InitializeComponent();
         }
 
+        public void UpdateExternal(TimeSpan ts)
+        {
+            this.Invoke(new Action(() => UpdateUI(ts)));
+        }
+
+        public void ExitExternal()
+        {
+            this.Invoke(new Action(() =>
+            {
+                ignoreClose = false;
+                allowClose = true;
+                this.Close();
+            }));
+        }
+
         #region "form events"
 
         // entrypoint
         private void Countdown_Load(object sender, EventArgs e)
         {
+            ExceptionHandler.Log("FORRRCEEEEDDD: " + Forced.ToString());
+
             ExceptionHandler.Log("Checking multiple instances configuration");
 
             if (!SettingsProvider.Settings.EnableMultipleInstances)
@@ -61,10 +68,7 @@ namespace ShutdownTimer
             }
 
             ExceptionHandler.Log("Starting stopwatch");
-
-            // Setup clock
-            stopwatch = new Stopwatch();
-            stopwatch.Start();
+            Timer.Start();
 
             ExceptionHandler.Log("Preparing UI...");
 
@@ -101,8 +105,9 @@ namespace ShutdownTimer
                 ChangeLockState("locked");
             }
 
-            // Setup UI
-            titleLabel.Text = Action + " Timer";
+            /// Setup UI
+
+            titleLabel.Text = Timer.Action + " Timer";
 
             TopMost = !SettingsProvider.Settings.DisableAlwaysOnTop;
 
@@ -114,7 +119,7 @@ namespace ShutdownTimer
                 WindowState = FormWindowState.Minimized;
                 timerUIHideMenuItem.Enabled = false;
                 timerUIShowMenuItem.Enabled = true;
-                SendNotification("Timer started. The power action will be executed in " + CountdownTimeSpan.Hours + " hours, " + CountdownTimeSpan.Minutes + " minutes and " + CountdownTimeSpan.Seconds + " seconds.");
+                SendNotification("Timer started. The power action will be executed in " + Timer.CountdownTimeSpan.Hours + " hours, " + Timer.CountdownTimeSpan.Minutes + " minutes and " + Timer.CountdownTimeSpan.Seconds + " seconds.");
                 Hide();
             }
 
@@ -140,13 +145,7 @@ namespace ShutdownTimer
             ExceptionHandler.Log("Prepared UI");
 
             ExceptionHandler.Log("Updating UI");
-            UpdateUI(CountdownTimeSpan);
-
-            if (PreventSystemSleep)
-            {
-                ExceptionHandler.Log("Executing sleep prevention by setting the EXECUTION_STATE flags");
-                ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS | ExecutionState.EXECUTION_STATE.ES_SYSTEM_REQUIRED);
-            } // give the system some coffee so it stays awake when tired using some fancy EXECUTION_STATE flags
+            UpdateUI(Timer.CountdownTimeSpan);
 
             ExceptionHandler.Log("Entering countdown sequence...");
         }
@@ -170,25 +169,6 @@ namespace ShutdownTimer
                 {
                     timeLabel.Font = new Font(timeLabel.Font.FontFamily, 24, FontStyle.Bold);
                 }
-            }
-        }
-
-        /// <summary>
-        /// Checks the stopwatch and updates UI every 100ms
-        /// </summary>
-        private void RefreshTimer_Tick(object sender, EventArgs e)
-        {
-            TimeSpan interval = CountdownTimeSpan - stopwatch.Elapsed + new TimeSpan(0, 0, 1); // Calculate countdown (add 1 second for smooth start)
-            UpdateUI(interval);
-
-            if (interval.TotalSeconds <= 0) //check if interval is negative
-            {
-                ExceptionHandler.Log("Countdown reached 0");
-                stopwatch.Stop();
-                refreshTimer.Stop();
-                ExecutePowerAction(Action);
-                Application.DoEvents();
-                Application.Exit();
             }
         }
 
@@ -297,11 +277,8 @@ namespace ShutdownTimer
 
                 ignoreClose = false;
                 allowClose = true;
-                ExceptionHandler.Log("Stopping clocks");
-                stopwatch.Stop();
-                refreshTimer.Stop();
-                ExceptionHandler.Log("Clearing EXECUTION_STATE flags");
-                ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired
+                ExceptionHandler.Log("Stopping timer");
+                Timer.Pause();
                 ExceptionHandler.Log("Confirming application halt to user");
                 SendNotification("Your timer was canceled successfully!\nThe application will now close"); // Show windows toast notification as confirmation
                 ExceptionHandler.Log("Saving all settings");
@@ -328,9 +305,8 @@ namespace ShutdownTimer
 
                 ignoreClose = false;
                 allowClose = true;
-                ExceptionHandler.Log("Stopping clocks");
-                stopwatch.Stop();
-                refreshTimer.Stop();
+                ExceptionHandler.Log("Stopping timer");
+                Timer.Pause();
                 ExceptionHandler.Log("Clearing EXECUTION_STATE flags");
                 ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired
                 ExceptionHandler.Log("Saving all settings");
@@ -356,12 +332,10 @@ namespace ShutdownTimer
                 ExceptionHandler.Log("Restarting timer...");
 
                 ExceptionHandler.Log("Restarting clocks");
-                stopwatch.Stop();
-                stopwatch = new Stopwatch();
-                stopwatch.Start();
+                Timer.Restart();
                 ExceptionHandler.Log("Updating UI");
-                UpdateUI(CountdownTimeSpan);
-                if (this.WindowState == FormWindowState.Minimized) { SendNotification("Timer restarted. The power action will be executed in " + CountdownTimeSpan.Hours + " hours, " + CountdownTimeSpan.Minutes + " minutes and " + CountdownTimeSpan.Seconds + " seconds."); }
+                UpdateUI(Timer.CountdownTimeSpan);
+                if (this.WindowState == FormWindowState.Minimized) { SendNotification("Timer restarted. The power action will be executed in " + Timer.CountdownTimeSpan.Hours + " hours, " + Timer.CountdownTimeSpan.Minutes + " minutes and " + Timer.CountdownTimeSpan.Seconds + " seconds."); }
                 ExceptionHandler.Log("Timer restarted");
             }
         }
@@ -371,21 +345,17 @@ namespace ShutdownTimer
         /// </summary>
         private void PauseResumeTimer()
         {
-            if (!paused)
+            if (Timer.IsRunning())
             {
-                stopwatch.Stop();
-                paused = true;
-                refreshTimer.Enabled = false;
+                Timer.Pause();
                 contextMenuStrip.Items[0].Text = "Resume";
-                titleLabel.Text = Action + " Timer (paused)";
+                titleLabel.Text = Timer.Action + " Timer (paused)";
             }
             else
             {
-                stopwatch.Start();
-                paused = false;
-                refreshTimer.Enabled = true;
+                Timer.Resume();
                 contextMenuStrip.Items[0].Text = "Pause";
-                titleLabel.Text = Action + " Timer";
+                titleLabel.Text = Timer.Action + " Timer";
             }
         }
 
@@ -412,13 +382,20 @@ namespace ShutdownTimer
                     ExceptionHandler.Log("Parsing supplied input");
                     try
                     {
+                        bool wasRunning = Timer.IsRunning();
+
                         String[] values = form.ReturnValue.Split(':');
                         if (values.Length == 2) // HH:mm
                         {
                             int newHours = Convert.ToInt32(values[0]);
                             int newMinutes = Convert.ToInt32(values[1]);
-                            CountdownTimeSpan = new TimeSpan(newHours, newMinutes, 0);
-                            stopwatch.Restart();
+                            Timer.CountdownTimeSpan = new TimeSpan(newHours, newMinutes, 0);
+                            Timer.Reset();
+                            if (wasRunning)
+                            {
+                                Timer.Resume();
+                            }
+
                             ExceptionHandler.Log("Countdown updated using HH:mm");
                         }
                         else if (values.Length == 3) // HH:mm:ss
@@ -426,8 +403,13 @@ namespace ShutdownTimer
                             int newHours = Convert.ToInt32(values[0]);
                             int newMinutes = Convert.ToInt32(values[1]);
                             int newSeconds = Convert.ToInt32(values[2]);
-                            CountdownTimeSpan = new TimeSpan(newHours, newMinutes, newSeconds);
-                            stopwatch.Restart();
+                            Timer.CountdownTimeSpan = new TimeSpan(newHours, newMinutes, newSeconds);
+                            Timer.Reset();
+                            if (wasRunning)
+                            {
+                                Timer.Resume();
+                            }
+
                             ExceptionHandler.Log("Countdown updated using HH:mm:ss");
                         }
                         else
@@ -459,8 +441,7 @@ namespace ShutdownTimer
             WindowState = FormWindowState.Minimized;
             UI = false;
             ignoreClose = true; // Prevent closing (and closing dialog) after ShowInTaskbar changed
-            TimeSpan currentTimeSpan = CountdownTimeSpan - stopwatch.Elapsed + new TimeSpan(0, 0, 1); // Calculate countdown (add 1 second for smooth start)
-            UpdateUI(currentTimeSpan);
+            UpdateUI(Timer.GetTimeRemaining());
             SendNotification("Timer has been moved to the background. Right-click the tray icon for more info.");
         }
 
@@ -487,8 +468,7 @@ namespace ShutdownTimer
                 ignoreClose = false; // Re-Enable close question
             }).Start();
 
-            TimeSpan currentTimeSpan = CountdownTimeSpan - stopwatch.Elapsed + new TimeSpan(0, 0, 1); // Calculate countdown (add 1 second for smooth start)
-            UpdateUI(currentTimeSpan);
+            UpdateUI(Timer.GetTimeRemaining());
         }
 
         /// <summary>
@@ -746,9 +726,6 @@ namespace ShutdownTimer
                 // Window is hidden when UI is set to foreground operation
                 HideUI();
             }
-
-            // Update UI
-            Application.DoEvents();
         }
 
         /// <summary>
@@ -763,60 +740,5 @@ namespace ShutdownTimer
         }
 
         #endregion
-
-        private void ExecutePowerAction(string choosenAction)
-        {
-            ExceptionHandler.Log("Executing power action");
-
-            ignoreClose = false; // do not ignore close event
-            allowClose = true; // disable close question
-
-            switch (choosenAction)
-            {
-                case "Shutdown":
-                    ExitWindows.Shutdown(!Graceful);
-                    break;
-
-                case "Restart":
-                    ExitWindows.Reboot(!Graceful);
-                    break;
-
-                case "Hibernate":
-                    Application.SetSuspendState(PowerState.Hibernate, false, false);
-                    break;
-
-                case "Sleep":
-                    Application.SetSuspendState(PowerState.Suspend, false, false);
-                    break;
-
-                case "Logout":
-                    ExitWindows.LogOff(!Graceful);
-                    break;
-
-                case "Lock":
-                    ExitWindows.Lock();
-                    break;
-
-                case "Custom Command":
-                    try
-                    {
-                        Process.Start(Command);
-                    }
-                    catch (Exception ex)
-                    {
-                        ExceptionHandler.Log("Error starting a process of the custom command.");
-                        ExceptionHandler.Log("Custom command: " + Command);
-                        ExceptionHandler.Log("Exception: " + ex.ToString());
-                        MessageBox.Show("There was an error executing your custom command.\n\nYour custom command: " + Command + "\nError: " + ex.Message, "Countdown Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    break;
-            }
-
-            if (PreventSystemSleep)
-            {
-                ExceptionHandler.Log("Clearing EXECUTION_STATE flags");
-                ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired.
-            }
-        }
     }
 }

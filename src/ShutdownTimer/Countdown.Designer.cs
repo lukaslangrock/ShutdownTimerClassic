@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Countdown));
             this.timeLabel = new System.Windows.Forms.Label();
             this.titleLabel = new System.Windows.Forms.Label();
-            this.refreshTimer = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.timerPauseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,9 +43,9 @@
             this.timerUIShowMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.timeMenuItem = new System.Windows.Forms.ToolStripTextBox();
+            this.updateTimeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.titlebarPictureBox = new System.Windows.Forms.PictureBox();
             this.lockStatePictureBox = new System.Windows.Forms.PictureBox();
-            this.updateTimeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lockStatePictureBox)).BeginInit();
@@ -79,11 +78,6 @@
             this.titleLabel.TabIndex = 15;
             this.titleLabel.Text = "Shutdown Timer";
             // 
-            // refreshTimer
-            // 
-            this.refreshTimer.Enabled = true;
-            this.refreshTimer.Tick += new System.EventHandler(this.RefreshTimer_Tick);
-            // 
             // notifyIcon
             // 
             this.notifyIcon.BalloonTipTitle = "Shutdown Timer";
@@ -107,7 +101,7 @@
             this.timeMenuItem,
             this.updateTimeMenuItem});
             this.contextMenuStrip.Name = "contextMenu";
-            this.contextMenuStrip.Size = new System.Drawing.Size(213, 217);
+            this.contextMenuStrip.Size = new System.Drawing.Size(213, 195);
             // 
             // timerPauseMenuItem
             // 
@@ -170,6 +164,13 @@
             this.timeMenuItem.ReadOnly = true;
             this.timeMenuItem.Size = new System.Drawing.Size(100, 23);
             // 
+            // updateTimeMenuItem
+            // 
+            this.updateTimeMenuItem.Name = "updateTimeMenuItem";
+            this.updateTimeMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.updateTimeMenuItem.Text = "Update remaining time";
+            this.updateTimeMenuItem.Click += new System.EventHandler(this.UpdateTimeMenuItem_Click);
+            // 
             // titlebarPictureBox
             // 
             this.titlebarPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -194,13 +195,6 @@
             this.lockStatePictureBox.TabStop = false;
             this.lockStatePictureBox.Visible = false;
             this.lockStatePictureBox.Click += new System.EventHandler(this.LockStatePictureBox_Click);
-            // 
-            // updateTimeMenuItem
-            // 
-            this.updateTimeMenuItem.Name = "updateTimeMenuItem";
-            this.updateTimeMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.updateTimeMenuItem.Text = "Update remaining time";
-            this.updateTimeMenuItem.Click += new System.EventHandler(this.UpdateTimeMenuItem_Click);
             // 
             // Countdown
             // 
@@ -241,7 +235,6 @@
         internal System.Windows.Forms.Label timeLabel;
         private System.Windows.Forms.PictureBox titlebarPictureBox;
         private System.Windows.Forms.Label titleLabel;
-        private System.Windows.Forms.Timer refreshTimer;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem timerStopMenuItem;

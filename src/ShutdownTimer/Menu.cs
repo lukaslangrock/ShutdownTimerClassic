@@ -342,27 +342,15 @@ namespace ShutdownTimer
                 timeSpan = target.Subtract(DateTime.Now);
             }
 
+            Timer.CountdownTimeSpan = timeSpan;
+            Timer.Action = actionComboBox.Text;
+            Timer.Graceful = gracefulCheckBox.Checked;
+            Timer.PreventSystemSleep = preventSleepCheckBox.Checked;
+            Timer.Command = command;
 
             // Show countdown window
-            ExceptionHandler.Log("Preparing countdown window...");
-            using (Countdown countdown = new Countdown
-            {
-                CountdownTimeSpan = timeSpan,
-                Action = actionComboBox.Text,
-                Graceful = gracefulCheckBox.Checked,
-                PreventSystemSleep = preventSleepCheckBox.Checked,
-                UI = !backgroundCheckBox.Checked,
-                Password = password,
-                UserLaunch = true,
-                Command = command
-            })
-            {
-                countdown.Owner = this;
-                ExceptionHandler.Log("Opening countdown window...");
-                countdown.ShowDialog();
-                ExceptionHandler.Log("Exiting...");
-                Application.Exit(); // Exit application after countdown is closed
-            }
+            ExceptionHandler.Log("Starting timer...");
+            Timer.Start(password, !backgroundCheckBox.Checked);
         }
 
         /// <summary>
