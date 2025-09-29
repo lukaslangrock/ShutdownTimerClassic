@@ -95,8 +95,13 @@ namespace ShutdownTimer
         {
             if (isActive)
             {
+                bool wasRunning = clock.IsRunning;
                 ExceptionHandler.Log("Resetting clock");
                 clock.Reset();
+                if (wasRunning) {
+                    ExceptionHandler.Log("Starting clock to keep pre-reset state consistent.");
+                    clock.Start();
+                }
             }
         }
 

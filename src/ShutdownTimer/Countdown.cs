@@ -315,26 +315,24 @@ namespace ShutdownTimer
         }
 
         /// <summary>
-        /// Restarts the countdown with initial values.
+        /// Resets the timer to initial values.
         /// </summary>
-        private void RestartTimer()
+        private void ResetTimer()
         {
-            ExceptionHandler.Log("Trying to restart the timer");
+
+            ExceptionHandler.Log("Trying to reset the timer");
             if (lockState == 1)
             {
                 ExceptionHandler.Log("Attempt canceled due to password protection");
-                if (UnlockUIByPassword(true)) { ExceptionHandler.Log("Password protection disabled, restarting timer restart sequence..."); RestartTimer(); }
+                if (UnlockUIByPassword(true)) { ExceptionHandler.Log("Password protection disabled, restarting timer reset sequence..."); ResetTimer(); }
             }
             else
             {
-                ExceptionHandler.Log("Restarting timer...");
-
-                ExceptionHandler.Log("Restarting clocks");
-                Timer.Restart();
+                ExceptionHandler.Log("Resetting clock");
+                Timer.Reset();
                 ExceptionHandler.Log("Updating UI");
                 UpdateUI(Timer.CountdownTimeSpan);
-                if (this.WindowState == FormWindowState.Minimized) { SendNotification("Timer restarted. The power action will be executed in " + Timer.CountdownTimeSpan.Hours + " hours, " + Timer.CountdownTimeSpan.Minutes + " minutes and " + Timer.CountdownTimeSpan.Seconds + " seconds."); }
-                ExceptionHandler.Log("Timer restarted");
+                if (this.WindowState == FormWindowState.Minimized) { SendNotification("Timer has been reset. Remaining time until power action will be executed is " + Timer.CountdownTimeSpan.Hours + " hours, " + Timer.CountdownTimeSpan.Minutes + " minutes and " + Timer.CountdownTimeSpan.Seconds + " seconds."); }
             }
         }
 
@@ -380,8 +378,6 @@ namespace ShutdownTimer
                     ExceptionHandler.Log("Parsing supplied input");
                     try
                     {
-                        bool wasRunning = Timer.IsRunning();
-
                         String[] values = form.ReturnValue.Split(':');
                         if (values.Length == 2) // HH:mm
                         {
@@ -389,10 +385,6 @@ namespace ShutdownTimer
                             int newMinutes = Convert.ToInt32(values[1]);
                             Timer.CountdownTimeSpan = new TimeSpan(newHours, newMinutes, 0);
                             Timer.Reset();
-                            if (wasRunning)
-                            {
-                                Timer.Resume();
-                            }
 
                             ExceptionHandler.Log("Countdown updated using HH:mm");
                         }
@@ -403,10 +395,6 @@ namespace ShutdownTimer
                             int newSeconds = Convert.ToInt32(values[2]);
                             Timer.CountdownTimeSpan = new TimeSpan(newHours, newMinutes, newSeconds);
                             Timer.Reset();
-                            if (wasRunning)
-                            {
-                                Timer.Resume();
-                            }
 
                             ExceptionHandler.Log("Countdown updated using HH:mm:ss");
                         }
@@ -606,9 +594,9 @@ namespace ShutdownTimer
         /// <summary>
         /// Restart timer option in the tray menu
         /// </summary>
-        private void TimerRestartMenuItem_Click(object sender, EventArgs e)
+        private void TimerResetMenuItem_Click(object sender, EventArgs e)
         {
-            RestartTimer();
+            ResetTimer();
         }
 
         /// <summary>

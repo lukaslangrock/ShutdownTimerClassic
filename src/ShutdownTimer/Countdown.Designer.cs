@@ -36,7 +36,7 @@
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.timerPauseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerStopMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.timerRestartMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timerResetMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.appRestartMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.timerUIHideMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,7 +92,7 @@
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.timerPauseMenuItem,
             this.timerStopMenuItem,
-            this.timerRestartMenuItem,
+            this.timerResetMenuItem,
             this.appRestartMenuItem,
             this.toolStripSeparator1,
             this.timerUIHideMenuItem,
@@ -101,7 +101,7 @@
             this.timeMenuItem,
             this.updateTimeMenuItem});
             this.contextMenuStrip.Name = "contextMenu";
-            this.contextMenuStrip.Size = new System.Drawing.Size(213, 195);
+            this.contextMenuStrip.Size = new System.Drawing.Size(213, 217);
             // 
             // timerPauseMenuItem
             // 
@@ -117,18 +117,18 @@
             this.timerStopMenuItem.Text = "Stop and exit";
             this.timerStopMenuItem.Click += new System.EventHandler(this.TimerStopMenuItem_Click);
             // 
-            // timerRestartMenuItem
+            // timerResetMenuItem
             // 
-            this.timerRestartMenuItem.Name = "timerRestartMenuItem";
-            this.timerRestartMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.timerRestartMenuItem.Text = "Restart the timer";
-            this.timerRestartMenuItem.Click += new System.EventHandler(this.TimerRestartMenuItem_Click);
+            this.timerResetMenuItem.Name = "timerResetMenuItem";
+            this.timerResetMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.timerResetMenuItem.Text = "Reset timer";
+            this.timerResetMenuItem.Click += new System.EventHandler(this.TimerResetMenuItem_Click);
             // 
             // appRestartMenuItem
             // 
             this.appRestartMenuItem.Name = "appRestartMenuItem";
             this.appRestartMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.appRestartMenuItem.Text = "Restart the app";
+            this.appRestartMenuItem.Text = "Restart application";
             this.appRestartMenuItem.Click += new System.EventHandler(this.AppRestartMenuItem_Click);
             // 
             // toolStripSeparator1
@@ -168,7 +168,7 @@
             // 
             this.updateTimeMenuItem.Name = "updateTimeMenuItem";
             this.updateTimeMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.updateTimeMenuItem.Text = "Update remaining time";
+            this.updateTimeMenuItem.Text = "Set new countdown time";
             this.updateTimeMenuItem.Click += new System.EventHandler(this.UpdateTimeMenuItem_Click);
             // 
             // titlebarPictureBox
@@ -238,7 +238,7 @@
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem timerStopMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem timerRestartMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem timerResetMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripTextBox timeMenuItem;
         private System.Windows.Forms.ToolStripMenuItem appRestartMenuItem;
