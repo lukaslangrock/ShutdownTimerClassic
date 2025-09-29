@@ -303,11 +303,14 @@ namespace ShutdownTimer
                     SettingsProvider.Settings.DefaultTimer.Seconds = Convert.ToInt32(secondsNumericUpDown.Value);
                 }
 
-                SettingsProvider.Settings.LastScreenPositionUI = new LastScreenPosition
+                if (SettingsProvider.Settings.RememberLastScreenPositionUI)
                 {
-                    X = this.Location.X,
-                    Y = this.Location.Y
-                };
+                    SettingsProvider.Settings.LastScreenPositionUI = new LastScreenPosition
+                    {
+                        X = this.Location.X,
+                        Y = this.Location.Y
+                    };
+                }
 
                 SettingsProvider.Save();
                 ExceptionHandler.Log("Settings saved");

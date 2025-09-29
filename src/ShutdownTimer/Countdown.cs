@@ -208,11 +208,15 @@ namespace ShutdownTimer
         {
             ExceptionHandler.Log("Saving settings...");
 
-            SettingsProvider.Settings.LastScreenPositionCountdown = new LastScreenPosition
+            // Only store last screen position if setting is enabled and countdown is not in background
+            if (SettingsProvider.Settings.RememberLastScreenPositionCountdown && UI)
             {
-                X = this.Location.X,
-                Y = this.Location.Y
-            };
+                SettingsProvider.Settings.LastScreenPositionCountdown = new LastScreenPosition
+                {
+                    X = this.Location.X,
+                    Y = this.Location.Y
+                };
+            }
 
             SettingsProvider.Save();
 
