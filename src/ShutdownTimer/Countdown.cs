@@ -46,8 +46,6 @@ namespace ShutdownTimer
         // entrypoint
         private void Countdown_Load(object sender, EventArgs e)
         {
-            ExceptionHandler.Log("FORRRCEEEEDDD: " + Forced.ToString());
-
             ExceptionHandler.Log("Checking multiple instances configuration");
 
             if (!SettingsProvider.Settings.EnableMultipleInstances)
@@ -57,7 +55,7 @@ namespace ShutdownTimer
                 ExceptionHandler.Log("Checking for another instance already running");
                 if (!ApplicationInstanceManager.IsSingleInstance())
                 {
-                    MessageBox.Show("Only one instance running is allowed. Please, check the 'Enable Multiple Instances' setting.\n\nExiting...", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Another instance of this application is already running. To allow multiple instances, please check the \"Allow multiple instances\" option in the application settings.\n\nExiting...", "Application already running!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     ExceptionHandler.Log("Detected another instance already running. Exiting...");
                     Application.Exit();
                 }

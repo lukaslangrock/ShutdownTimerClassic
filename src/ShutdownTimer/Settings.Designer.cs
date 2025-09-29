@@ -192,7 +192,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(296, 407);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Application Settings";
+            this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // groupBox1
@@ -205,16 +205,16 @@
             this.groupBox1.Size = new System.Drawing.Size(284, 76);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "General";
+            this.groupBox1.Text = "Application behaviour";
             // 
             // enableMultipleInstances
             // 
             this.enableMultipleInstances.AutoSize = true;
             this.enableMultipleInstances.Location = new System.Drawing.Point(6, 56);
             this.enableMultipleInstances.Name = "enableMultipleInstances";
-            this.enableMultipleInstances.Size = new System.Drawing.Size(147, 17);
+            this.enableMultipleInstances.Size = new System.Drawing.Size(137, 17);
             this.enableMultipleInstances.TabIndex = 22;
-            this.enableMultipleInstances.Text = "Enable Multiple Instances";
+            this.enableMultipleInstances.Text = "Allow multiple instances";
             this.enableMultipleInstances.UseVisualStyleBackColor = true;
             // 
             // rememberLastScreenPositionCountdown
@@ -222,9 +222,9 @@
             this.rememberLastScreenPositionCountdown.AutoSize = true;
             this.rememberLastScreenPositionCountdown.Location = new System.Drawing.Point(6, 38);
             this.rememberLastScreenPositionCountdown.Name = "rememberLastScreenPositionCountdown";
-            this.rememberLastScreenPositionCountdown.Size = new System.Drawing.Size(240, 17);
+            this.rememberLastScreenPositionCountdown.Size = new System.Drawing.Size(233, 17);
             this.rememberLastScreenPositionCountdown.TabIndex = 21;
-            this.rememberLastScreenPositionCountdown.Text = "Remember Last Screen Position (Countdown)";
+            this.rememberLastScreenPositionCountdown.Text = "Remember last screen position (Countdown)";
             this.rememberLastScreenPositionCountdown.UseVisualStyleBackColor = true;
             // 
             // rememberLastScreenPositionUI
@@ -232,9 +232,9 @@
             this.rememberLastScreenPositionUI.AutoSize = true;
             this.rememberLastScreenPositionUI.Location = new System.Drawing.Point(6, 19);
             this.rememberLastScreenPositionUI.Name = "rememberLastScreenPositionUI";
-            this.rememberLastScreenPositionUI.Size = new System.Drawing.Size(197, 17);
+            this.rememberLastScreenPositionUI.Size = new System.Drawing.Size(206, 17);
             this.rememberLastScreenPositionUI.TabIndex = 20;
-            this.rememberLastScreenPositionUI.Text = "Remember Last Screen Position (UI)";
+            this.rememberLastScreenPositionUI.Text = "Remember last screen position (Menu)";
             this.rememberLastScreenPositionUI.UseVisualStyleBackColor = true;
             // 
             // trayiconGroupBox
@@ -246,7 +246,7 @@
             this.trayiconGroupBox.Size = new System.Drawing.Size(284, 40);
             this.trayiconGroupBox.TabIndex = 2;
             this.trayiconGroupBox.TabStop = false;
-            this.trayiconGroupBox.Text = "Tray Menu";
+            this.trayiconGroupBox.Text = "System tray menu";
             // 
             // trayiconThemeComboBox
             // 
@@ -256,7 +256,7 @@
             "Automatic",
             "Light",
             "Dark"});
-            this.trayiconThemeComboBox.Location = new System.Drawing.Point(104, 13);
+            this.trayiconThemeComboBox.Location = new System.Drawing.Point(91, 13);
             this.trayiconThemeComboBox.Name = "trayiconThemeComboBox";
             this.trayiconThemeComboBox.Size = new System.Drawing.Size(121, 21);
             this.trayiconThemeComboBox.TabIndex = 1;
@@ -266,9 +266,9 @@
             this.trayiconThemeLabel.AutoSize = true;
             this.trayiconThemeLabel.Location = new System.Drawing.Point(6, 16);
             this.trayiconThemeLabel.Name = "trayiconThemeLabel";
-            this.trayiconThemeLabel.Size = new System.Drawing.Size(86, 13);
+            this.trayiconThemeLabel.Size = new System.Drawing.Size(83, 13);
             this.trayiconThemeLabel.TabIndex = 0;
-            this.trayiconThemeLabel.Text = "Tray icon theme:";
+            this.trayiconThemeLabel.Text = "Trayicon theme:";
             // 
             // clearSettingsButton
             // 
@@ -485,9 +485,9 @@
             // 
             this.developerGroupBox.Controls.Add(this.openAppDataLinkLabel);
             this.developerGroupBox.Controls.Add(this.saveLogsCheckBox);
-            this.developerGroupBox.Location = new System.Drawing.Point(6, 304);
+            this.developerGroupBox.Location = new System.Drawing.Point(6, 321);
             this.developerGroupBox.Name = "developerGroupBox";
-            this.developerGroupBox.Size = new System.Drawing.Size(284, 100);
+            this.developerGroupBox.Size = new System.Drawing.Size(284, 58);
             this.developerGroupBox.TabIndex = 16;
             this.developerGroupBox.TabStop = false;
             this.developerGroupBox.Text = "Developer Options";
@@ -495,7 +495,7 @@
             // openAppDataLinkLabel
             // 
             this.openAppDataLinkLabel.AutoSize = true;
-            this.openAppDataLinkLabel.Location = new System.Drawing.Point(174, 79);
+            this.openAppDataLinkLabel.Location = new System.Drawing.Point(174, 40);
             this.openAppDataLinkLabel.Name = "openAppDataLinkLabel";
             this.openAppDataLinkLabel.Size = new System.Drawing.Size(104, 13);
             this.openAppDataLinkLabel.TabIndex = 18;
@@ -517,12 +517,12 @@
             // 
             this.passwordGroupBox.Controls.Add(this.passwordLabel);
             this.passwordGroupBox.Controls.Add(this.passwordCheckBox);
-            this.passwordGroupBox.Location = new System.Drawing.Point(6, 228);
+            this.passwordGroupBox.Location = new System.Drawing.Point(6, 245);
             this.passwordGroupBox.Name = "passwordGroupBox";
             this.passwordGroupBox.Size = new System.Drawing.Size(284, 70);
             this.passwordGroupBox.TabIndex = 14;
             this.passwordGroupBox.TabStop = false;
-            this.passwordGroupBox.Text = "Password Protection";
+            this.passwordGroupBox.Text = "Password protection";
             // 
             // passwordLabel
             // 
@@ -530,8 +530,8 @@
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(272, 28);
             this.passwordLabel.TabIndex = 15;
-            this.passwordLabel.Text = "Locks the countdown UI with a password you can set when starting a shutdown (afte" +
-    "r clicking start).";
+            this.passwordLabel.Text = "Locks the countdown UI with a password you can set when starting a shutdown after" +
+    " clicking start.";
             // 
             // passwordCheckBox
             // 
@@ -551,12 +551,12 @@
             this.countdownGroupBox.Controls.Add(this.disableNotificationsCheckBox);
             this.countdownGroupBox.Controls.Add(this.disableAnimationsCheckBox);
             this.countdownGroupBox.Controls.Add(this.disableAlwaysOnTopCheckBox);
-            this.countdownGroupBox.Location = new System.Drawing.Point(6, 87);
+            this.countdownGroupBox.Location = new System.Drawing.Point(6, 104);
             this.countdownGroupBox.Name = "countdownGroupBox";
             this.countdownGroupBox.Size = new System.Drawing.Size(284, 135);
             this.countdownGroupBox.TabIndex = 17;
             this.countdownGroupBox.TabStop = false;
-            this.countdownGroupBox.Text = "Countdown Window";
+            this.countdownGroupBox.Text = "Countdown window";
             // 
             // transparentWindowCheckBox
             // 
@@ -564,9 +564,9 @@
             this.transparentWindowCheckBox.Enabled = false;
             this.transparentWindowCheckBox.Location = new System.Drawing.Point(6, 65);
             this.transparentWindowCheckBox.Name = "transparentWindowCheckBox";
-            this.transparentWindowCheckBox.Size = new System.Drawing.Size(182, 17);
+            this.transparentWindowCheckBox.Size = new System.Drawing.Size(178, 17);
             this.transparentWindowCheckBox.TabIndex = 5;
-            this.transparentWindowCheckBox.Text = "Transparent Countdown Window";
+            this.transparentWindowCheckBox.Text = "Transparent countdown window";
             this.transparentWindowCheckBox.UseVisualStyleBackColor = true;
             this.transparentWindowCheckBox.CheckedChanged += new System.EventHandler(this.TransparentWindowCheckBox_CheckedChanged);
             // 
@@ -630,15 +630,15 @@
             this.forceFlagGroupBox.Controls.Add(this.forceFlagLabel);
             this.forceFlagGroupBox.Location = new System.Drawing.Point(6, 6);
             this.forceFlagGroupBox.Name = "forceFlagGroupBox";
-            this.forceFlagGroupBox.Size = new System.Drawing.Size(284, 81);
+            this.forceFlagGroupBox.Size = new System.Drawing.Size(284, 92);
             this.forceFlagGroupBox.TabIndex = 14;
             this.forceFlagGroupBox.TabStop = false;
-            this.forceFlagGroupBox.Text = "Force Flag";
+            this.forceFlagGroupBox.Text = "Force flag";
             // 
             // forceFlagDocsLinkLabel
             // 
             this.forceFlagDocsLinkLabel.AutoSize = true;
-            this.forceFlagDocsLinkLabel.Location = new System.Drawing.Point(199, 59);
+            this.forceFlagDocsLinkLabel.Location = new System.Drawing.Point(204, 74);
             this.forceFlagDocsLinkLabel.Name = "forceFlagDocsLinkLabel";
             this.forceFlagDocsLinkLabel.Size = new System.Drawing.Size(79, 13);
             this.forceFlagDocsLinkLabel.TabIndex = 17;
@@ -649,7 +649,7 @@
             // forceFlagRadioButton
             // 
             this.forceFlagRadioButton.AutoSize = true;
-            this.forceFlagRadioButton.Location = new System.Drawing.Point(9, 55);
+            this.forceFlagRadioButton.Location = new System.Drawing.Point(9, 68);
             this.forceFlagRadioButton.Name = "forceFlagRadioButton";
             this.forceFlagRadioButton.Size = new System.Drawing.Size(133, 17);
             this.forceFlagRadioButton.TabIndex = 16;
@@ -660,7 +660,7 @@
             // forceIfHungFlagRadioButton
             // 
             this.forceIfHungFlagRadioButton.AutoSize = true;
-            this.forceIfHungFlagRadioButton.Location = new System.Drawing.Point(9, 32);
+            this.forceIfHungFlagRadioButton.Location = new System.Drawing.Point(9, 45);
             this.forceIfHungFlagRadioButton.Name = "forceIfHungFlagRadioButton";
             this.forceIfHungFlagRadioButton.Size = new System.Drawing.Size(92, 17);
             this.forceIfHungFlagRadioButton.TabIndex = 15;
@@ -673,9 +673,10 @@
             this.forceFlagLabel.AutoSize = true;
             this.forceFlagLabel.Location = new System.Drawing.Point(6, 16);
             this.forceFlagLabel.Name = "forceFlagLabel";
-            this.forceFlagLabel.Size = new System.Drawing.Size(270, 13);
+            this.forceFlagLabel.Size = new System.Drawing.Size(277, 26);
             this.forceFlagLabel.TabIndex = 0;
-            this.forceFlagLabel.Text = "Changes Windows\' behaviour when forcing a shutdown";
+            this.forceFlagLabel.Text = "Changes how running applications are force-closed when\r\nusing a non-graceful shut" +
+    "down.";
             // 
             // tabPage3
             // 
