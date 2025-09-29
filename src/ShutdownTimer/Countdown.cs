@@ -368,7 +368,11 @@ namespace ShutdownTimer
                 TopMost = false;
                 var result = form.ShowDialog();
                 TopMost = !SettingsProvider.Settings.DisableAlwaysOnTop;
-                if (form.ReturnValue == "")
+                if (form.DialogResult == DialogResult.Cancel)
+                {
+                    return;
+                }
+                else if (form.ReturnValue == "" || form.ReturnValue == null)
                 {
                     ExceptionHandler.Log("Countdown update aborted due to no input");
                     MessageBox.Show("Operation aborted: You have not supplied a new time value!", "Countdown Update", MessageBoxButtons.OK, MessageBoxIcon.Error);
