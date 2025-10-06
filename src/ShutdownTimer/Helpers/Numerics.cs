@@ -46,5 +46,18 @@ namespace ShutdownTimer.Helpers
 
             return output;
         }
+
+        /// <summary>
+        /// determine if a given set of hours, minutes, and seconds regards a time of the current day or the next day
+        /// </summary>
+        /// <returns>true if today, false if tomorrow</returns>
+        public static bool TodayOrTomorrow(int hours, int minutes, int seconds)
+        {
+            DateTime now = DateTime.Now;
+            DateTime target = new DateTime(now.Year, now.Month, now.Day, hours, minutes, seconds);
+
+            if (target < now) { return false; } // specified time is in the past (for the current day) -> for tomorrow
+            else { return true; } // specified time is in the future -> for today
+        }
     }
 }

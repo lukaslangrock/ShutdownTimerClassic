@@ -18,7 +18,7 @@ namespace ShutdownTimer
 
         private void InputBox_Load(object sender, EventArgs e)
         {
-            Text = Title;
+            Text = "Shutdown Timer - " + Title;
             titleLabel.Text = Title;
             messageLabel.Text = Message;
             if (PasswordMode) { inputTextBox.PasswordChar = Convert.ToChar("*"); }
@@ -37,9 +37,9 @@ namespace ShutdownTimer
             this.Close();
         }
 
-        private void InputBox_FormClosing(object sender, FormClosingEventArgs e)
+        private void inputTextBox_TextChanged(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
+            okButton.Enabled = !inputTextBox.Text.Equals("");
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ShutdownTimer.Helpers;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
@@ -9,15 +10,13 @@ namespace ShutdownTimer
     public partial class Countdown : Form
     {
         public string Password { get; set; } // if value is not empty then a password will be required to change or disable the countdown
-        public bool UserLaunch { get; set; } // false if launched from CLI
-        public bool UI { get; set; } // disables UI updates when set to false (used for running in background)
-        public bool Forced { get; set; } // disables all UI controls and exit dialogs
+        public bool IsUserLaunched { get; set; } // false if launched from CLI
+        public bool IsForegroundUI { get; set; } // disables form UI updates when set to false (used for running in background)
+        public bool IsReadOnly { get; set; } // disables all UI controls and exit dialogs when true
 
-        private FormWindowState lastStateUIFormWindowState; // used to update UI immediately after WindowState change
         private TimeSpan lastStateUITimeSpan; // used to limit UI events that should only be executed once per second instead of once per update
         private bool ignoreClose; // true: cancel close events without asking | false: default behaviour (if ignoreClose == true, allowClose will be ignored)
         private bool allowClose; // true: accept close without asking | false: Ask user to confirm closing
-        private bool animationSwitch = true; // used to switch warning animation colors
         private int lockState = 0; // used for Password Protection free/locked/unlocked
         private int logTimerCounter = 0; // used to log events every 10,000 timer ticks
 
@@ -91,7 +90,7 @@ namespace ShutdownTimer
 
             if (SettingsProvider.Settings.TrayIconTheme == "Light") { lighttheme = true; }
             else if (SettingsProvider.Settings.TrayIconTheme == "Dark") { lighttheme = false; }
-            else { lighttheme = WindowsAPIs.GetWindowsLightTheme(); }
+            else { lighttheme = WindowsAPIs.SystemUsesLightTheme(); }
 
             // When the dark theme is selected we are using the light icon to generate contrast (and vise versa), you wouldn't want a white icon on a white background.
             notifyIcon.Icon = lighttheme ? Properties.Resources.icon_dark : Properties.Resources.icon_light;
@@ -109,7 +108,7 @@ namespace ShutdownTimer
 
             TopMost = !SettingsProvider.Settings.DisableAlwaysOnTop;
 
-            if (!UI)
+            if (!IsForegroundUI)
             {
                 ignoreClose = true; // Disable close dialogs and ignore closing from form
                 TopMost = false;
@@ -121,13 +120,13 @@ namespace ShutdownTimer
                 Hide();
             }
 
-            if (Forced)
+            if (IsReadOnly)
             {
                 ignoreClose = true;
                 contextMenuStrip.Enabled = false;
             }
 
-            if (!UserLaunch) // disable restart app menu button because it would also keep the CLI args so the countdown would restart so it's basically useless
+            if (!IsUserLaunched) // disable restart app menu button because it would also keep the CLI args so the countdown would restart so it's basically useless
             {
                 appRestartMenuItem.Enabled = false;
             }
@@ -209,7 +208,7 @@ namespace ShutdownTimer
             ExceptionHandler.Log("Saving settings...");
 
             // Only store last screen position if setting is enabled and countdown is not in background
-            if (SettingsProvider.Settings.RememberLastScreenPositionCountdown && UI)
+            if (SettingsProvider.Settings.RememberLastScreenPositionCountdown && IsForegroundUI)
             {
                 SettingsProvider.Settings.LastScreenPositionCountdown = new LastScreenPosition
                 {
@@ -360,19 +359,19 @@ namespace ShutdownTimer
         }
 
         /// <summary>
-        /// Updates the countdown with a new timespan
+        /// Shows a Dialog for setting a new countdown time
         /// </summary>
-        private void UpdateTimer()
+        private void ShowSetNewCountdownDialog()
         {
-            ExceptionHandler.Log("Countdown update requested");
+            ExceptionHandler.Log("User requested to set a new countdown");
             using (var form = new InputBox())
             {
-                form.Title = "Countdown Update";
-                form.Message = "Enter new time for the countdown in the format of HH:mm:ss or HH:mm";
+                form.Title = "Set a new countdown";
+                form.Message = "Enter new time for the countdown in the format of HH:mm:ss or HH:mm.\n\nThis will replace the current timer in place.";
                 TopMost = false;
-                var result = form.ShowDialog();
+                form.ShowDialog();
                 TopMost = !SettingsProvider.Settings.DisableAlwaysOnTop;
-                if (form.DialogResult == DialogResult.Cancel)
+                if (form.DialogResult == DialogResult.None || form.DialogResult == DialogResult.Cancel)
                 {
                     return;
                 }
@@ -433,7 +432,7 @@ namespace ShutdownTimer
             TopMost = false;
             ShowInTaskbar = false;
             WindowState = FormWindowState.Minimized;
-            UI = false;
+            IsForegroundUI = false;
             ignoreClose = true; // Prevent closing (and closing dialog) after ShowInTaskbar changed
             UpdateUI(Timer.GetTimeRemaining());
             SendNotification("Timer has been moved to the background. Right-click the tray icon for more info.");
@@ -451,7 +450,7 @@ namespace ShutdownTimer
             if (!SettingsProvider.Settings.DisableAlwaysOnTop) { TopMost = true; }
             ShowInTaskbar = true;
             WindowState = FormWindowState.Normal;
-            UI = true;
+            IsForegroundUI = true;
             ignoreClose = true; // Prevent closing (and closing dialog) after ShowInTaskbar changed
 
             // Re-Enable close question after the main thread has moved on and the close event raised from the this. ShowInTaskbar has been ignored
@@ -504,7 +503,7 @@ namespace ShutdownTimer
             string message;
             if (reasonBecauseOfAction)
             {
-                message = "A password is required to unlock this countdown. Please enter your password to execute this action.\n" +
+                message = "This countdown has been protected with a password. Enter your password to release the lock.\n" +
                     "You can re-lock the countdown by clicking on the lock icon afterwards.";
             }
             else
@@ -578,16 +577,16 @@ namespace ShutdownTimer
         /// </summary>
         private void UpdateTimeMenuItem_Click(object sender, EventArgs e)
         {
-            ExceptionHandler.Log("Trying to update remaining time");
+            ExceptionHandler.Log("Trying to set a new countdown");
 
             if (lockState == 1)
             {
                 ExceptionHandler.Log("Attempt halted due to password protection");
-                if (UnlockUIByPassword(true)) { ExceptionHandler.Log("Password protection passed"); UpdateTimer(); }
+                if (UnlockUIByPassword(true)) { ExceptionHandler.Log("Password protection passed"); ShowSetNewCountdownDialog(); }
             }
             else
             {
-                UpdateTimer();
+                ShowSetNewCountdownDialog();
             }
         }
 
@@ -660,30 +659,33 @@ namespace ShutdownTimer
         /// </summary>
         private void UpdateUI(TimeSpan ts)
         {
-            // log current state every 10,000 ticks (~16 min.)
             if (logTimerCounter <= 0)
             {
-                ExceptionHandler.Log("Application still alive and counting down: " + Numerics.ConvertTimeSpanToString(ts));
-                logTimerCounter = 10000;
+                ExceptionHandler.Log("Heartbeat: The countdown reads " + Numerics.ConvertTimeSpanToString(ts) + " with memory usage at " + Format.BytesToString(Process.GetCurrentProcess().PrivateMemorySize64) + ". Next heartbeat in 100,000 ticks.");
+                logTimerCounter = 100000;
             }
             else
             {
                 logTimerCounter--;
             }
 
-            // update UI
-            if (lastStateUIFormWindowState != WindowState || Math.Truncate(lastStateUITimeSpan.TotalSeconds) != Math.Truncate(ts.TotalSeconds)) // only if either form state changed or a second passed between updates
+            if (Math.Truncate(lastStateUITimeSpan.TotalSeconds) != Math.Truncate(ts.TotalSeconds)) // only if a full second passed between updates
             {
-                // Save current data to last state memory
+                // Save current ts to last state memory
                 lastStateUITimeSpan = ts;
-                lastStateUIFormWindowState = WindowState;
+
+                // display every started second for one second instead of switching directly to the next lower second. makes for smoother display of time.
+                if (ts.Milliseconds > 0)
+                {
+                    ts = ts.Add(TimeSpan.FromSeconds(1));
+                }
 
                 // Update time labels
                 string elapsedTime = Numerics.ConvertTimeSpanToString(ts);
                 timeLabel.Text = elapsedTime;
                 timeMenuItem.Text = elapsedTime;
 
-                if (UI) // UI for countdown window
+                if (IsForegroundUI) // UI for countdown window
                 {
                     this.Text = "Countdown";
 
@@ -693,7 +695,11 @@ namespace ShutdownTimer
                         if (ts.Days > 0 || ts.Hours > 0 || ts.Minutes >= 30) { BackColor = Color.ForestGreen; }
                         else if (ts.Minutes >= 10) { BackColor = Color.DarkOrange; }
                         else if (ts.Minutes >= 1) { BackColor = Color.OrangeRed; }
-                        else { WarningAnimation(); }
+                        else
+                        {
+                            if (ts.Seconds % 2 == 0) { BackColor = Color.Red; }
+                            else { BackColor = Color.Black; }
+                        }
                     }
                 }
                 else // UI for tray menu
@@ -710,29 +716,17 @@ namespace ShutdownTimer
             }
 
             // Correct window states if unexpected changes occur
-            if (!UI && WindowState != FormWindowState.Minimized)
+            if (!IsForegroundUI && WindowState != FormWindowState.Minimized)
             {
-                // Window is visible when UI is set to background operation
+                ExceptionHandler.Log("Application was set for background operation but form was visible, switching to foreground operation");
                 ShowUI();
             }
-            else if (UI && WindowState == FormWindowState.Minimized)
+            else if (IsForegroundUI && WindowState == FormWindowState.Minimized)
             {
-                // Window is hidden when UI is set to foreground operation
+                ExceptionHandler.Log("Application was set for foreground operation but form was minimized, switching to background operation");
                 HideUI();
             }
         }
-
-        /// <summary>
-        /// Switches from background color from red to black (and vice versa) when called.
-        /// </summary>
-        private void WarningAnimation()
-        {
-            animationSwitch = !animationSwitch; // Switch animation color
-
-            if (animationSwitch) { BackColor = Color.Red; }
-            else { BackColor = Color.Black; }
-        }
-
         #endregion
     }
 }

@@ -17,7 +17,6 @@ namespace ShutdownTimer
         public bool ArgPreventSleep { get; set; }
         public bool ArgBackground { get; set; }
 
-        private string checkResult;
         private string password; // used for password protection
         private string command; // used for custom command
 
@@ -52,12 +51,18 @@ namespace ShutdownTimer
             ExceptionHandler.Log("Setting up form...");
 
             versionLabel.Text = "v" + Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf(".")); // Display current version
+#if DEBUG
+            versionLabel.Text += "_debug";
+#endif
+
             infoToolTip.SetToolTip(gracefulCheckBox, "Applications that do not exit when prompted automatically get terminated by default to ensure a successful shutdown." +
                 "\n\nA graceful shutdown on the other hand will wait for all applications to exit before continuing with the shutdown." +
                 "\nThis might result in an unsuccessful shutdown if one or more applications are unresponsive or require a user interaction to exit!");
             infoToolTip.SetToolTip(preventSleepCheckBox, "Depending on the power settings of your system, it might go to sleep after certain amount of time due to inactivity." +
                 "\nThis option will keep the system awake to ensure the timer can properly run and execute a shutdown.");
             infoToolTip.SetToolTip(backgroundCheckBox, "This will launch the countdown without a visible window but will show a tray icon in your taskbar.");
+            infoToolTip.SetToolTip(countdownModeRadioButton, "Will count down from the hours, minutes and seconds selected below\nlike a countdown timer and execute the power action when it reaches zero.");
+            infoToolTip.SetToolTip(timeOfDayModeRadioButton, "In this mode you can select the target time of day (24h clock) for the power action.\nIf the time has already passed, it will roll over to tomorrow.\n\nWhen you press start, the appropriate countdown will be calculated.\n");
 
             ExceptionHandler.Log("Setup finished");
         }
@@ -103,59 +108,67 @@ namespace ShutdownTimer
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            ExceptionHandler.Log("Initiaing preparation for countdown start");
+            ExceptionHandler.Log("Initializing preparations for countdown start");
 
-            if (RunChecks())
+            (bool allChecksPassed, string listOfErrorsFound, string listOfWarningsFound) = RunChecks();
+
+            if (!allChecksPassed)
             {
-                // Disable controls
-                ExceptionHandler.Log("Preparing for countdown start");
-                startButton.Enabled = false;
-                actionGroupBox.Enabled = false;
-                timeGroupBox.Enabled = false;
-
-                SaveSettings();
-
-                if (actionComboBox.Text.Equals("Custom Command"))
-                {
-                    ExceptionHandler.Log("Entering custom command setup");
-                    using (var form = new InputBox())
-                    {
-                        form.Title = "Custom Command";
-                        form.Message = "Please enter the command you want to have executed. If you wish to launch a file, just enter the full file path.\n\n" +
-                            "Note: Execution will use this user's permissions.";
-                        ExceptionHandler.Log("Requesting custom command from user...");
-                        var result = form.ShowDialog();
-                        ExceptionHandler.Log("Saving command");
-                        command = form.ReturnValue;
-                    }
-                }
-
-                if (SettingsProvider.Settings.PasswordProtection)
-                {
-                    ExceptionHandler.Log("Enabeling password protection");
-                    using (var form = new InputBox())
-                    {
-                        form.Title = "Password Protection";
-                        form.Message = "Please set a password to enable password protection.\n\n" +
-                            "You can disable this dialog in the settings under Advanced > Password Protection";
-                        form.PasswordMode = true;
-                        ExceptionHandler.Log("Requesting password setup from user...");
-                        var result = form.ShowDialog();
-                        ExceptionHandler.Log("Saving password");
-                        password = form.ReturnValue;
-                    }
-                }
-
-                ExceptionHandler.Log("Initiaing countdown start");
-                this.Hide();
-                StartCountdown();
+                ExceptionHandler.Log("Cannot start countdown due to failing checks.");
+                MessageBox.Show("The following error(s) occurred:\n\n" + listOfErrorsFound + "Please try to resolve the(se) problem(s) and try again.", "There seems to be a problem!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else
+
+            if (!listOfWarningsFound.Equals(""))
             {
-                ExceptionHandler.Log("Invalid countdown");
-                ExceptionHandler.Log(checkResult);
-                MessageBox.Show("The following error(s) occurred:\n\n" + checkResult + "Please try to resolve the(se) problem(s) and try again.", "There seems to be a problem!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (MessageBox.Show(listOfWarningsFound, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation) != DialogResult.OK)
+                {
+                    ExceptionHandler.Log("User cancelled countdown due to warnings.");
+                    return;
+                }
             }
+
+            ExceptionHandler.Log("Preparing for countdown start");
+            startButton.Enabled = false;
+            actionGroupBox.Enabled = false;
+            timeGroupBox.Enabled = false;
+
+            SaveSettings();
+
+            if (actionComboBox.Text.Equals("Custom Command"))
+            {
+                ExceptionHandler.Log("Entering custom command setup");
+                using (var form = new InputBox())
+                {
+                    form.Title = "Custom Command";
+                    form.Message = "Please enter the command you want to have executed. If you wish to launch a file, just enter the full file path.\n\n" +
+                        "Note: Execution will use this user's permissions.";
+                    ExceptionHandler.Log("Requesting custom command from user...");
+                    var result = form.ShowDialog();
+                    ExceptionHandler.Log("Saving command");
+                    command = form.ReturnValue;
+                }
+            }
+
+            if (SettingsProvider.Settings.PasswordProtection)
+            {
+                ExceptionHandler.Log("Enabeling password protection");
+                using (var form = new InputBox())
+                {
+                    form.Title = "Password Protection";
+                    form.Message = "Please set a password to enable password protection.\n\n" +
+                        "You can disable this dialog in the settings under Advanced > Password Protection";
+                    form.PasswordMode = true;
+                    ExceptionHandler.Log("Requesting password setup from user...");
+                    var result = form.ShowDialog();
+                    ExceptionHandler.Log("Saving password");
+                    password = form.ReturnValue;
+                }
+            }
+
+            ExceptionHandler.Log("Initiaing countdown start");
+            this.Hide();
+            StartCountdown();
         }
 
         #endregion
@@ -163,26 +176,24 @@ namespace ShutdownTimer
         /// <summary>
         /// Checks user input before further processing
         /// </summary>
-        /// <returns>Result of checks</returns>
-        private bool RunChecks()
+        /// <returns>Report of all failed checks</returns>
+        private (bool allChecksPassed, string listOfErrorsFound, string ListOfWarningsFound) RunChecks()
         {
             ExceptionHandler.Log("Running checks...");
 
-            bool errTracker = true; // if anything goes wrong the tracker will be set to false
-            string errMessage = null; // error messages will append to this
+            string errMessages = ""; // error messages will append to this
+            string warnMessages = ""; // warning messages will append to this
 
             // Check if chosen action is a valid option
             if (!actionComboBox.Items.Contains(actionComboBox.Text))
             {
-                errTracker = false;
-                errMessage += "Please select a valid action from the dropdown menu!\n\n";
+                errMessages += "Please select a valid action from the dropdown menu!\n\n";
             }
 
             // Check if all time values are zero
             if (hoursNumericUpDown.Value == 0 && minutesNumericUpDown.Value == 0 && secondsNumericUpDown.Value == 0)
             {
-                errTracker = false;
-                errMessage += "The timer cannot start at 0!\n\n";
+                errMessages += "The timer cannot start at 0!\n\n";
             }
 
             // Respective check for either countdown or timeOfDay mode
@@ -195,8 +206,7 @@ namespace ShutdownTimer
                 }
                 catch
                 {
-                    errTracker = false;
-                    errMessage += "TimeSpan conversion failed! Please check if your time values are within a reasonable range.\n\n";
+                    errMessages += "TimeSpan conversion failed! Please check if your time values are within a reasonable range.\n\n";
                 }
             }
             else
@@ -209,11 +219,9 @@ namespace ShutdownTimer
                 }
                 catch
                 {
-                    errTracker = false;
-                    errMessage += "DateTime conversion failed! Please check if your time values can represent a valid time of day.\n\n";
+                    errMessages += "DateTime conversion failed! Please check if your time values can represent a valid time of day.\n\n";
                 }
             }
-
 
             // Sanity check
             try
@@ -221,17 +229,23 @@ namespace ShutdownTimer
                 TimeSpan ts = new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
                 if (ts.TotalDays > 100)
                 {
-                    MessageBox.Show($"Your chosen time equates to {Math.Round(ts.TotalDays)} days ({Math.Round(ts.TotalDays / 365, 2)} years)!\n" +
+                    warnMessages += $"Your chosen time equates to {Math.Round(ts.TotalDays)} days ({Math.Round(ts.TotalDays / 365, 2)} years)!\n" +
                         "It is highly discouraged to choose such an insane amount of time as either your hardware, operating system, or this is app will fail *way* before you even come close to reaching the target!" +
-                        "\n\nBut if you are actually going to do this, please tell me how long this app survived.",
-                        "This isn't Stargate and your PC won't stand the test of time!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        "\n\nBut if you are actually going to do this, please tell me how long this app survived.";
                 }
             }
             catch { }
 
-            ExceptionHandler.Log("Ran checks: " + errTracker.ToString());
-            checkResult = errMessage;
-            return errTracker;
+            if (errMessages.Equals(""))
+            {
+                ExceptionHandler.Log("Ran all checks, no errors found.");
+                return (true, errMessages, warnMessages);
+            }
+            else
+            {
+                ExceptionHandler.Log("Ran all checks, the following errors have been found:\n" + errMessages);
+                return (false, errMessages, warnMessages);
+            }
         }
 
         /// <summary>
@@ -274,7 +288,6 @@ namespace ShutdownTimer
 
             // Check if the user has opted to remember the last UI screen position,
             // and if LastScreenPosition is available (not null), apply its X and Y coordinates to position the form.
-
             if (SettingsProvider.Settings.RememberLastScreenPositionUI && SettingsProvider.Settings.LastScreenPositionUI != null)
             {
                 this.Location = new Point(SettingsProvider.Settings.LastScreenPositionUI.X, SettingsProvider.Settings.LastScreenPositionUI.Y);
@@ -339,7 +352,7 @@ namespace ShutdownTimer
             else
             {
                 // Use form data as a point in time and calculate TimeSpan from now to this point
-                bool today = TodayOrTomorrow(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
+                bool today = Numerics.TodayOrTomorrow(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
                 DateTime target = DateTime.Parse(Convert.ToInt32(hoursNumericUpDown.Value) + ":" + Convert.ToInt32(minutesNumericUpDown.Value) + ":" + Convert.ToInt32(secondsNumericUpDown.Value));
                 if (!today) { target = target.AddDays(1); }
                 timeSpan = target.Subtract(DateTime.Now);
@@ -354,19 +367,6 @@ namespace ShutdownTimer
             // Show countdown window
             ExceptionHandler.Log("Starting timer...");
             Timer.Start(password, !backgroundCheckBox.Checked);
-        }
-
-        /// <summary>
-        /// determine if a given set of hours, minutes, and seconds regards a time of the current day or the next day
-        /// </summary>
-        /// <returns>true if today, false if tomorrow</returns>
-        private bool TodayOrTomorrow(int hours, int minutes, int seconds)
-        {
-            DateTime now = DateTime.Now;
-            DateTime target = new DateTime(now.Year, now.Month, now.Day, hours, minutes, seconds);
-
-            if (target < now) { return false; } // specified time is in the past (for the current day) -> for tomorrow
-            else { return true; } // specified time is in the future -> for today
         }
     }
 }

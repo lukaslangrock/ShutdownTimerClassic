@@ -34,10 +34,10 @@ namespace ShutdownTimer
 
             countdownForm = new Countdown
             {
-                UI = formInForeground,
+                IsForegroundUI = formInForeground,
                 Password = formPassword,
-                Forced = argForced,
-                UserLaunch = userLaunch
+                IsReadOnly = argForced,
+                IsUserLaunched = userLaunch
             };
 
             ExceptionHandler.Log("Starting Countdown form...");
@@ -67,8 +67,8 @@ namespace ShutdownTimer
                         Console.WriteLine(ex.StackTrace.ToString());
                     }
 
-                    // repeat loop each 200ms
-                    await Task.Delay(200);
+                    // repeat loop each 150ms
+                    await Task.Delay(150);
                 }
             });
         }
@@ -98,7 +98,8 @@ namespace ShutdownTimer
                 bool wasRunning = clock.IsRunning;
                 ExceptionHandler.Log("Resetting clock");
                 clock.Reset();
-                if (wasRunning) {
+                if (wasRunning)
+                {
                     ExceptionHandler.Log("Starting clock to keep pre-reset state consistent.");
                     clock.Start();
                 }
@@ -121,18 +122,7 @@ namespace ShutdownTimer
 
         public static TimeSpan GetTimeRemaining()
         {
-            // calculate remaining time (with 1 second added for a smooth start)
-            TimeSpan nicerRemaining = CountdownTimeSpan - clock.Elapsed + new TimeSpan(0, 0, 1);
-
-            if (nicerRemaining > CountdownTimeSpan)
-            {
-                // make sure we are not returning a time larger than our initial time
-                return CountdownTimeSpan;
-            }
-            else
-            {
-                return nicerRemaining;
-            }
+            return CountdownTimeSpan - clock.Elapsed;
         }
 
         // is called by a looping task from Timer.Start()

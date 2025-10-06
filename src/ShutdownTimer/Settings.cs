@@ -15,6 +15,9 @@ namespace ShutdownTimer
         private void Settings_Load(object sender, EventArgs e)
         {
             appLabel.Text = Application.ProductName + "@v" + Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf("."));
+#if DEBUG
+            appLabel.Text += "_debug";
+#endif
             LoadSettings();
         }
 
@@ -68,14 +71,12 @@ namespace ShutdownTimer
             forceFlagRadioButton.Checked = SettingsProvider.Settings.ForceIfHungFlag;
             disableAlwaysOnTopCheckBox.Checked = SettingsProvider.Settings.DisableAlwaysOnTop;
             disableAnimationsCheckBox.Checked = SettingsProvider.Settings.DisableAnimations;
+            setBackgroundColorLinkLabel.Enabled = disableAnimationsCheckBox.Checked;
             disableNotificationsCheckBox.Checked = SettingsProvider.Settings.DisableNotifications;
             passwordCheckBox.Checked = SettingsProvider.Settings.PasswordProtection;
             enableAdaptiveCountdownTextSizeCheckBox.Checked = SettingsProvider.Settings.AdaptiveCountdownTextSize;
             if (SettingsProvider.Settings.BackgroundColor == Color.Transparent) { transparentWindowCheckBox.Checked = true; }
             saveLogsCheckBox.Checked = SettingsProvider.Settings.SaveEventLogOnExit;
-
-            // UI processing
-            setBackgroundColorLinkLabel.Enabled = disableAnimationsCheckBox.Checked;
         }
 
         private void SaveSettings()

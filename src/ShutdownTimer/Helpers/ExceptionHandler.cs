@@ -105,7 +105,6 @@ namespace ShutdownTimer.Helpers
             log.AppendLine($"Threads: {process.Threads.Count}");
             log.AppendLine($"Responding: {process.Responding}");
             log.AppendLine($"StartTime: {process.StartTime}");
-            log.AppendLine($"PeakWorkingSet64: {Format.BytesToString(process.PeakWorkingSet64)}");
             log.AppendLine($"WorkingSet64: {Format.BytesToString(process.WorkingSet64)}");
             log.AppendLine($"PeakWorkingSet64: {Format.BytesToString(process.PeakWorkingSet64)}");
             log.AppendLine($"PrivateMemorySize64: {Format.BytesToString(process.PrivateMemorySize64)}"); // The number of bytes that the associated process has allocated that cannot be shared with other processes.

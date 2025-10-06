@@ -168,7 +168,7 @@
             // 
             this.updateTimeMenuItem.Name = "updateTimeMenuItem";
             this.updateTimeMenuItem.Size = new System.Drawing.Size(212, 22);
-            this.updateTimeMenuItem.Text = "Set new countdown time";
+            this.updateTimeMenuItem.Text = "Set a new countdown";
             this.updateTimeMenuItem.Click += new System.EventHandler(this.UpdateTimeMenuItem_Click);
             // 
             // titlebarPictureBox
