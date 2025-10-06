@@ -575,9 +575,9 @@
             this.enableAdaptiveCountdownTextSizeCheckBox.AutoSize = true;
             this.enableAdaptiveCountdownTextSizeCheckBox.Location = new System.Drawing.Point(6, 111);
             this.enableAdaptiveCountdownTextSizeCheckBox.Name = "enableAdaptiveCountdownTextSizeCheckBox";
-            this.enableAdaptiveCountdownTextSizeCheckBox.Size = new System.Drawing.Size(243, 17);
+            this.enableAdaptiveCountdownTextSizeCheckBox.Size = new System.Drawing.Size(175, 17);
             this.enableAdaptiveCountdownTextSizeCheckBox.TabIndex = 4;
-            this.enableAdaptiveCountdownTextSizeCheckBox.Text = "Adapt clock text to window size (experimental)";
+            this.enableAdaptiveCountdownTextSizeCheckBox.Text = "Adapt clock text to window size";
             this.enableAdaptiveCountdownTextSizeCheckBox.UseVisualStyleBackColor = true;
             // 
             // setBackgroundColorLinkLabel

@@ -152,20 +152,17 @@ namespace ShutdownTimer
         /// </summary>
         private void Countdown_SizeChanged(object sender, EventArgs e)
         {
-            // default window size: 375x185
-            // default label font: 24pt
-
             if (SettingsProvider.Settings.AdaptiveCountdownTextSize)
             {
-                if (Size.Width > 375 && Size.Height > 185)
-                {
-                    float autosize = ((Size.Width / 375) + (Size.Height / 185)) * 16;
-                    timeLabel.Font = new Font(timeLabel.Font.FontFamily, autosize, FontStyle.Bold);
-                }
-                else
-                {
-                    timeLabel.Font = new Font(timeLabel.Font.FontFamily, 24, FontStyle.Bold);
-                }
+                int defaultWidth = 375;
+                int defaultHeight = 185;
+                int defaultFontSize = 24;
+
+                float scaleX = Size.Width / defaultWidth;
+                float scaleY = Size.Height / defaultHeight;
+                float scaledSize = defaultFontSize * Math.Min(scaleX, scaleY);
+
+                timeLabel.Font = new Font(timeLabel.Font.FontFamily, Math.Max(defaultFontSize, scaledSize), timeLabel.Font.Style);
             }
         }
 
