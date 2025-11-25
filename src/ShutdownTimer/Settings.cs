@@ -18,6 +18,10 @@ namespace ShutdownTimer
 #if DEBUG
             appLabel.Text += "_debug";
 #endif
+
+            // Prevent font-fallback and subsequent layout issues. This application is currently only in english and doesn't require display of non-latin chacracters.
+            this.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
+
             LoadSettings();
         }
 
