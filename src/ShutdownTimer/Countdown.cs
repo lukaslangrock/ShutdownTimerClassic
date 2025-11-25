@@ -108,6 +108,9 @@ namespace ShutdownTimer
 
             TopMost = !SettingsProvider.Settings.DisableAlwaysOnTop;
 
+            // Prevent font-fallback and subsequent layout issues. This application is currently only in english and doesn't require display of non-latin chacracters.
+            this.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
+
             if (!IsForegroundUI)
             {
                 ignoreClose = true; // Disable close dialogs and ignore closing from form
