@@ -147,7 +147,7 @@
             this.footerLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.footerLabel.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.footerLabel.Location = new System.Drawing.Point(12, 490);
+            this.footerLabel.Location = new System.Drawing.Point(12, 495);
             this.footerLabel.Name = "footerLabel";
             this.footerLabel.Size = new System.Drawing.Size(310, 18);
             this.footerLabel.TabIndex = 9;
@@ -178,7 +178,7 @@
             this.settingsTabControl.Location = new System.Drawing.Point(18, 54);
             this.settingsTabControl.Name = "settingsTabControl";
             this.settingsTabControl.SelectedIndex = 0;
-            this.settingsTabControl.Size = new System.Drawing.Size(304, 433);
+            this.settingsTabControl.Size = new System.Drawing.Size(304, 438);
             this.settingsTabControl.TabIndex = 13;
             // 
             // tabPage1
@@ -190,13 +190,15 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(296, 407);
+            this.tabPage1.Size = new System.Drawing.Size(296, 412);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.enableMultipleInstances);
             this.groupBox1.Controls.Add(this.rememberLastScreenPositionCountdown);
             this.groupBox1.Controls.Add(this.rememberLastScreenPositionUI);
@@ -239,6 +241,8 @@
             // 
             // trayiconGroupBox
             // 
+            this.trayiconGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.trayiconGroupBox.Controls.Add(this.trayiconThemeComboBox);
             this.trayiconGroupBox.Controls.Add(this.trayiconThemeLabel);
             this.trayiconGroupBox.Location = new System.Drawing.Point(6, 331);
@@ -272,7 +276,8 @@
             // 
             // clearSettingsButton
             // 
-            this.clearSettingsButton.Location = new System.Drawing.Point(161, 378);
+            this.clearSettingsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.clearSettingsButton.Location = new System.Drawing.Point(161, 383);
             this.clearSettingsButton.Name = "clearSettingsButton";
             this.clearSettingsButton.Size = new System.Drawing.Size(129, 23);
             this.clearSettingsButton.TabIndex = 1;
@@ -282,6 +287,8 @@
             // 
             // defaultSettingsGroupBox
             // 
+            this.defaultSettingsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.defaultSettingsGroupBox.Controls.Add(this.customDefaultsGroupBox);
             this.defaultSettingsGroupBox.Controls.Add(this.rememberStateCheckBox);
             this.defaultSettingsGroupBox.Location = new System.Drawing.Point(6, 6);
@@ -293,6 +300,8 @@
             // 
             // customDefaultsGroupBox
             // 
+            this.customDefaultsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.customDefaultsGroupBox.Controls.Add(this.timeOfDayModeRadioButton);
             this.customDefaultsGroupBox.Controls.Add(this.countdownModeRadioButton);
             this.customDefaultsGroupBox.Controls.Add(this.hoursNumericUpDown);
@@ -476,13 +485,15 @@
             this.tabPage2.Controls.Add(this.forceFlagGroupBox);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(296, 407);
+            this.tabPage2.Size = new System.Drawing.Size(296, 412);
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "Advanced";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // developerGroupBox
             // 
+            this.developerGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.developerGroupBox.Controls.Add(this.openAppDataLinkLabel);
             this.developerGroupBox.Controls.Add(this.saveLogsCheckBox);
             this.developerGroupBox.Location = new System.Drawing.Point(6, 321);
@@ -494,6 +505,7 @@
             // 
             // openAppDataLinkLabel
             // 
+            this.openAppDataLinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.openAppDataLinkLabel.AutoSize = true;
             this.openAppDataLinkLabel.Location = new System.Drawing.Point(174, 40);
             this.openAppDataLinkLabel.Name = "openAppDataLinkLabel";
@@ -515,6 +527,8 @@
             // 
             // passwordGroupBox
             // 
+            this.passwordGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.passwordGroupBox.Controls.Add(this.passwordLabel);
             this.passwordGroupBox.Controls.Add(this.passwordCheckBox);
             this.passwordGroupBox.Location = new System.Drawing.Point(6, 245);
@@ -545,6 +559,8 @@
             // 
             // countdownGroupBox
             // 
+            this.countdownGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.countdownGroupBox.Controls.Add(this.transparentWindowCheckBox);
             this.countdownGroupBox.Controls.Add(this.enableAdaptiveCountdownTextSizeCheckBox);
             this.countdownGroupBox.Controls.Add(this.setBackgroundColorLinkLabel);
@@ -624,6 +640,8 @@
             // 
             // forceFlagGroupBox
             // 
+            this.forceFlagGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.forceFlagGroupBox.Controls.Add(this.forceFlagDocsLinkLabel);
             this.forceFlagGroupBox.Controls.Add(this.forceFlagRadioButton);
             this.forceFlagGroupBox.Controls.Add(this.forceIfHungFlagRadioButton);
@@ -637,6 +655,7 @@
             // 
             // forceFlagDocsLinkLabel
             // 
+            this.forceFlagDocsLinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.forceFlagDocsLinkLabel.AutoSize = true;
             this.forceFlagDocsLinkLabel.Location = new System.Drawing.Point(204, 74);
             this.forceFlagDocsLinkLabel.Name = "forceFlagDocsLinkLabel";
@@ -685,27 +704,31 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(296, 407);
+            this.tabPage3.Size = new System.Drawing.Size(296, 412);
             this.tabPage3.TabIndex = 1;
             this.tabPage3.Text = "About";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // aboutGroupBox
             // 
+            this.aboutGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.aboutGroupBox.Controls.Add(this.logButton);
             this.aboutGroupBox.Controls.Add(this.emailbutton);
             this.aboutGroupBox.Controls.Add(this.githubButton);
             this.aboutGroupBox.Controls.Add(this.aboutRichTextBox);
             this.aboutGroupBox.Location = new System.Drawing.Point(6, 61);
             this.aboutGroupBox.Name = "aboutGroupBox";
-            this.aboutGroupBox.Size = new System.Drawing.Size(284, 340);
+            this.aboutGroupBox.Size = new System.Drawing.Size(284, 345);
             this.aboutGroupBox.TabIndex = 1;
             this.aboutGroupBox.TabStop = false;
             this.aboutGroupBox.Text = "About this app";
             // 
             // logButton
             // 
-            this.logButton.Location = new System.Drawing.Point(6, 311);
+            this.logButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.logButton.Location = new System.Drawing.Point(6, 316);
             this.logButton.Name = "logButton";
             this.logButton.Size = new System.Drawing.Size(80, 23);
             this.logButton.TabIndex = 17;
@@ -715,7 +738,8 @@
             // 
             // emailbutton
             // 
-            this.emailbutton.Location = new System.Drawing.Point(112, 311);
+            this.emailbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.emailbutton.Location = new System.Drawing.Point(112, 316);
             this.emailbutton.Name = "emailbutton";
             this.emailbutton.Size = new System.Drawing.Size(60, 23);
             this.emailbutton.TabIndex = 16;
@@ -725,7 +749,8 @@
             // 
             // githubButton
             // 
-            this.githubButton.Location = new System.Drawing.Point(178, 311);
+            this.githubButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.githubButton.Location = new System.Drawing.Point(178, 316);
             this.githubButton.Name = "githubButton";
             this.githubButton.Size = new System.Drawing.Size(100, 23);
             this.githubButton.TabIndex = 15;
@@ -735,14 +760,19 @@
             // 
             // aboutRichTextBox
             // 
+            this.aboutRichTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.aboutRichTextBox.Location = new System.Drawing.Point(6, 19);
             this.aboutRichTextBox.Name = "aboutRichTextBox";
-            this.aboutRichTextBox.Size = new System.Drawing.Size(272, 286);
+            this.aboutRichTextBox.Size = new System.Drawing.Size(272, 291);
             this.aboutRichTextBox.TabIndex = 14;
             this.aboutRichTextBox.Text = resources.GetString("aboutRichTextBox.Text");
             // 
             // licenseGroupBox
             // 
+            this.licenseGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.licenseGroupBox.Controls.Add(this.faSourceLinkLabel);
             this.licenseGroupBox.Controls.Add(this.faLicenseLinkLabel);
             this.licenseGroupBox.Controls.Add(this.faInfoLabel);
@@ -822,7 +852,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 517);
+            this.ClientSize = new System.Drawing.Size(334, 522);
             this.Controls.Add(this.githubLinkLabel);
             this.Controls.Add(this.footerLabel);
             this.Controls.Add(this.appLabel);

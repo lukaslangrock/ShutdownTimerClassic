@@ -107,6 +107,8 @@
             // 
             // titlebarPictureBox
             // 
+            this.titlebarPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.titlebarPictureBox.BackColor = System.Drawing.Color.Black;
             this.titlebarPictureBox.Location = new System.Drawing.Point(18, 43);
             this.titlebarPictureBox.Name = "titlebarPictureBox";
@@ -143,6 +145,8 @@
             // 
             // timeGroupBox
             // 
+            this.timeGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.timeGroupBox.Controls.Add(this.timeOfDayModeRadioButton);
             this.timeGroupBox.Controls.Add(this.countdownModeRadioButton);
             this.timeGroupBox.Controls.Add(this.hoursNumericUpDown);
@@ -180,6 +184,8 @@
             // 
             // actionGroupBox
             // 
+            this.actionGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.actionGroupBox.Controls.Add(this.preventSleepCheckBox);
             this.actionGroupBox.Controls.Add(this.gracefulCheckBox);
             this.actionGroupBox.Controls.Add(this.backgroundCheckBox);
@@ -255,6 +261,9 @@
             // 
             // startButton
             // 
+            this.startButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.startButton.Location = new System.Drawing.Point(18, 305);
             this.startButton.Name = "startButton";
@@ -284,6 +293,7 @@
             // 
             // settingsButton
             // 
+            this.settingsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.settingsButton.BackgroundImage = global::ShutdownTimer.Properties.Resources.fa_cog_black;
             this.settingsButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.settingsButton.Location = new System.Drawing.Point(239, 9);
