@@ -657,7 +657,7 @@
             // 
             this.forceFlagDocsLinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.forceFlagDocsLinkLabel.AutoSize = true;
-            this.forceFlagDocsLinkLabel.Location = new System.Drawing.Point(204, 74);
+            this.forceFlagDocsLinkLabel.Location = new System.Drawing.Point(199, 72);
             this.forceFlagDocsLinkLabel.Name = "forceFlagDocsLinkLabel";
             this.forceFlagDocsLinkLabel.Size = new System.Drawing.Size(79, 13);
             this.forceFlagDocsLinkLabel.TabIndex = 17;
