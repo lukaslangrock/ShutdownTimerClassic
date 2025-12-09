@@ -118,7 +118,7 @@
             this.titlebarPictureBox.Location = new System.Drawing.Point(18, 43);
             this.titlebarPictureBox.Name = "titlebarPictureBox";
             this.titlebarPictureBox.Size = new System.Drawing.Size(113, 5);
-            this.titlebarPictureBox.TabIndex = 6;
+            this.titlebarPictureBox.TabIndex = 0;
             this.titlebarPictureBox.TabStop = false;
             // 
             // titleLabel
@@ -128,7 +128,7 @@
             this.titleLabel.Location = new System.Drawing.Point(12, 9);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(113, 31);
-            this.titleLabel.TabIndex = 5;
+            this.titleLabel.TabIndex = 570;
             this.titleLabel.Text = "Settings";
             // 
             // appLabel
@@ -138,7 +138,7 @@
             this.appLabel.Location = new System.Drawing.Point(167, 9);
             this.appLabel.Name = "appLabel";
             this.appLabel.Size = new System.Drawing.Size(155, 13);
-            this.appLabel.TabIndex = 7;
+            this.appLabel.TabIndex = 580;
             this.appLabel.Text = "ShutdownTimerClassic@v0.0.0";
             this.appLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -150,7 +150,7 @@
             this.footerLabel.Location = new System.Drawing.Point(12, 495);
             this.footerLabel.Name = "footerLabel";
             this.footerLabel.Size = new System.Drawing.Size(310, 18);
-            this.footerLabel.TabIndex = 9;
+            this.footerLabel.TabIndex = 560;
             this.footerLabel.Text = "Made with love in Germany";
             this.footerLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
@@ -161,7 +161,7 @@
             this.githubLinkLabel.Location = new System.Drawing.Point(241, 22);
             this.githubLinkLabel.Name = "githubLinkLabel";
             this.githubLinkLabel.Size = new System.Drawing.Size(81, 13);
-            this.githubLinkLabel.TabIndex = 10;
+            this.githubLinkLabel.TabIndex = 590;
             this.githubLinkLabel.TabStop = true;
             this.githubLinkLabel.Text = "View on GitHub";
             this.githubLinkLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -179,7 +179,7 @@
             this.settingsTabControl.Name = "settingsTabControl";
             this.settingsTabControl.SelectedIndex = 0;
             this.settingsTabControl.Size = new System.Drawing.Size(304, 438);
-            this.settingsTabControl.TabIndex = 13;
+            this.settingsTabControl.TabIndex = 10;
             // 
             // tabPage1
             // 
@@ -205,7 +205,7 @@
             this.groupBox1.Location = new System.Drawing.Point(6, 249);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(284, 76);
-            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabIndex = 180;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Application behaviour";
             // 
@@ -215,7 +215,7 @@
             this.enableMultipleInstances.Location = new System.Drawing.Point(6, 56);
             this.enableMultipleInstances.Name = "enableMultipleInstances";
             this.enableMultipleInstances.Size = new System.Drawing.Size(137, 17);
-            this.enableMultipleInstances.TabIndex = 22;
+            this.enableMultipleInstances.TabIndex = 210;
             this.enableMultipleInstances.Text = "Allow multiple instances";
             this.enableMultipleInstances.UseVisualStyleBackColor = true;
             // 
@@ -225,7 +225,7 @@
             this.rememberLastScreenPositionCountdown.Location = new System.Drawing.Point(6, 38);
             this.rememberLastScreenPositionCountdown.Name = "rememberLastScreenPositionCountdown";
             this.rememberLastScreenPositionCountdown.Size = new System.Drawing.Size(233, 17);
-            this.rememberLastScreenPositionCountdown.TabIndex = 21;
+            this.rememberLastScreenPositionCountdown.TabIndex = 200;
             this.rememberLastScreenPositionCountdown.Text = "Remember last screen position (Countdown)";
             this.rememberLastScreenPositionCountdown.UseVisualStyleBackColor = true;
             // 
@@ -235,7 +235,7 @@
             this.rememberLastScreenPositionUI.Location = new System.Drawing.Point(6, 19);
             this.rememberLastScreenPositionUI.Name = "rememberLastScreenPositionUI";
             this.rememberLastScreenPositionUI.Size = new System.Drawing.Size(206, 17);
-            this.rememberLastScreenPositionUI.TabIndex = 20;
+            this.rememberLastScreenPositionUI.TabIndex = 190;
             this.rememberLastScreenPositionUI.Text = "Remember last screen position (Menu)";
             this.rememberLastScreenPositionUI.UseVisualStyleBackColor = true;
             // 
@@ -248,7 +248,7 @@
             this.trayiconGroupBox.Location = new System.Drawing.Point(6, 331);
             this.trayiconGroupBox.Name = "trayiconGroupBox";
             this.trayiconGroupBox.Size = new System.Drawing.Size(284, 40);
-            this.trayiconGroupBox.TabIndex = 2;
+            this.trayiconGroupBox.TabIndex = 220;
             this.trayiconGroupBox.TabStop = false;
             this.trayiconGroupBox.Text = "System tray menu";
             // 
@@ -263,7 +263,7 @@
             this.trayiconThemeComboBox.Location = new System.Drawing.Point(91, 13);
             this.trayiconThemeComboBox.Name = "trayiconThemeComboBox";
             this.trayiconThemeComboBox.Size = new System.Drawing.Size(121, 21);
-            this.trayiconThemeComboBox.TabIndex = 1;
+            this.trayiconThemeComboBox.TabIndex = 240;
             // 
             // trayiconThemeLabel
             // 
@@ -271,7 +271,7 @@
             this.trayiconThemeLabel.Location = new System.Drawing.Point(6, 16);
             this.trayiconThemeLabel.Name = "trayiconThemeLabel";
             this.trayiconThemeLabel.Size = new System.Drawing.Size(83, 13);
-            this.trayiconThemeLabel.TabIndex = 0;
+            this.trayiconThemeLabel.TabIndex = 230;
             this.trayiconThemeLabel.Text = "Trayicon theme:";
             // 
             // clearSettingsButton
@@ -280,7 +280,7 @@
             this.clearSettingsButton.Location = new System.Drawing.Point(161, 383);
             this.clearSettingsButton.Name = "clearSettingsButton";
             this.clearSettingsButton.Size = new System.Drawing.Size(129, 23);
-            this.clearSettingsButton.TabIndex = 1;
+            this.clearSettingsButton.TabIndex = 250;
             this.clearSettingsButton.Text = "Clear Settings";
             this.clearSettingsButton.UseVisualStyleBackColor = true;
             this.clearSettingsButton.Click += new System.EventHandler(this.ClearSettingsButton_Click);
@@ -294,7 +294,7 @@
             this.defaultSettingsGroupBox.Location = new System.Drawing.Point(6, 6);
             this.defaultSettingsGroupBox.Name = "defaultSettingsGroupBox";
             this.defaultSettingsGroupBox.Size = new System.Drawing.Size(284, 241);
-            this.defaultSettingsGroupBox.TabIndex = 0;
+            this.defaultSettingsGroupBox.TabIndex = 20;
             this.defaultSettingsGroupBox.TabStop = false;
             this.defaultSettingsGroupBox.Text = "Timer defaults";
             // 
@@ -318,7 +318,7 @@
             this.customDefaultsGroupBox.Location = new System.Drawing.Point(6, 42);
             this.customDefaultsGroupBox.Name = "customDefaultsGroupBox";
             this.customDefaultsGroupBox.Size = new System.Drawing.Size(272, 194);
-            this.customDefaultsGroupBox.TabIndex = 1;
+            this.customDefaultsGroupBox.TabIndex = 40;
             this.customDefaultsGroupBox.TabStop = false;
             this.customDefaultsGroupBox.Text = "Custom defaults";
             // 
@@ -328,7 +328,7 @@
             this.timeOfDayModeRadioButton.Location = new System.Drawing.Point(6, 132);
             this.timeOfDayModeRadioButton.Name = "timeOfDayModeRadioButton";
             this.timeOfDayModeRadioButton.Size = new System.Drawing.Size(137, 17);
-            this.timeOfDayModeRadioButton.TabIndex = 26;
+            this.timeOfDayModeRadioButton.TabIndex = 110;
             this.timeOfDayModeRadioButton.Text = "At a specific time of day";
             this.timeOfDayModeRadioButton.UseVisualStyleBackColor = true;
             // 
@@ -338,7 +338,7 @@
             this.countdownModeRadioButton.Location = new System.Drawing.Point(6, 109);
             this.countdownModeRadioButton.Name = "countdownModeRadioButton";
             this.countdownModeRadioButton.Size = new System.Drawing.Size(140, 17);
-            this.countdownModeRadioButton.TabIndex = 25;
+            this.countdownModeRadioButton.TabIndex = 100;
             this.countdownModeRadioButton.Text = "After a specific timespan";
             this.countdownModeRadioButton.UseVisualStyleBackColor = true;
             // 
@@ -352,7 +352,7 @@
             0});
             this.hoursNumericUpDown.Name = "hoursNumericUpDown";
             this.hoursNumericUpDown.Size = new System.Drawing.Size(50, 20);
-            this.hoursNumericUpDown.TabIndex = 19;
+            this.hoursNumericUpDown.TabIndex = 130;
             // 
             // secondsLabel
             // 
@@ -360,7 +360,7 @@
             this.secondsLabel.Location = new System.Drawing.Point(118, 152);
             this.secondsLabel.Name = "secondsLabel";
             this.secondsLabel.Size = new System.Drawing.Size(49, 13);
-            this.secondsLabel.TabIndex = 24;
+            this.secondsLabel.TabIndex = 160;
             this.secondsLabel.Text = "Seconds";
             // 
             // hoursLabel
@@ -369,7 +369,7 @@
             this.hoursLabel.Location = new System.Drawing.Point(6, 152);
             this.hoursLabel.Name = "hoursLabel";
             this.hoursLabel.Size = new System.Drawing.Size(35, 13);
-            this.hoursLabel.TabIndex = 22;
+            this.hoursLabel.TabIndex = 120;
             this.hoursLabel.Text = "Hours";
             // 
             // minutesLabel
@@ -378,7 +378,7 @@
             this.minutesLabel.Location = new System.Drawing.Point(62, 152);
             this.minutesLabel.Name = "minutesLabel";
             this.minutesLabel.Size = new System.Drawing.Size(44, 13);
-            this.minutesLabel.TabIndex = 23;
+            this.minutesLabel.TabIndex = 140;
             this.minutesLabel.Text = "Minutes";
             // 
             // minutesNumericUpDown
@@ -391,7 +391,7 @@
             0});
             this.minutesNumericUpDown.Name = "minutesNumericUpDown";
             this.minutesNumericUpDown.Size = new System.Drawing.Size(50, 20);
-            this.minutesNumericUpDown.TabIndex = 20;
+            this.minutesNumericUpDown.TabIndex = 150;
             // 
             // secondsNumericUpDown
             // 
@@ -403,7 +403,7 @@
             0});
             this.secondsNumericUpDown.Name = "secondsNumericUpDown";
             this.secondsNumericUpDown.Size = new System.Drawing.Size(50, 20);
-            this.secondsNumericUpDown.TabIndex = 21;
+            this.secondsNumericUpDown.TabIndex = 170;
             // 
             // preventSleepCheckBox
             // 
@@ -413,7 +413,7 @@
             this.preventSleepCheckBox.Location = new System.Drawing.Point(9, 63);
             this.preventSleepCheckBox.Name = "preventSleepCheckBox";
             this.preventSleepCheckBox.Size = new System.Drawing.Size(190, 17);
-            this.preventSleepCheckBox.TabIndex = 18;
+            this.preventSleepCheckBox.TabIndex = 80;
             this.preventSleepCheckBox.Text = "Prevent system from going to sleep";
             this.preventSleepCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -423,7 +423,7 @@
             this.gracefulCheckBox.Location = new System.Drawing.Point(9, 40);
             this.gracefulCheckBox.Name = "gracefulCheckBox";
             this.gracefulCheckBox.Size = new System.Drawing.Size(186, 17);
-            this.gracefulCheckBox.TabIndex = 17;
+            this.gracefulCheckBox.TabIndex = 70;
             this.gracefulCheckBox.Text = "Graceful (do not force close apps)";
             this.gracefulCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -433,7 +433,7 @@
             this.backgroundCheckBox.Location = new System.Drawing.Point(9, 86);
             this.backgroundCheckBox.Name = "backgroundCheckBox";
             this.backgroundCheckBox.Size = new System.Drawing.Size(117, 17);
-            this.backgroundCheckBox.TabIndex = 16;
+            this.backgroundCheckBox.TabIndex = 90;
             this.backgroundCheckBox.Text = "Run in background";
             this.backgroundCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -443,7 +443,7 @@
             this.actionLabel.Location = new System.Drawing.Point(6, 16);
             this.actionLabel.Name = "actionLabel";
             this.actionLabel.Size = new System.Drawing.Size(87, 13);
-            this.actionLabel.TabIndex = 15;
+            this.actionLabel.TabIndex = 50;
             this.actionLabel.Text = "Select an action:";
             // 
             // actionComboBox
@@ -463,7 +463,7 @@
             this.actionComboBox.Location = new System.Drawing.Point(99, 13);
             this.actionComboBox.Name = "actionComboBox";
             this.actionComboBox.Size = new System.Drawing.Size(147, 21);
-            this.actionComboBox.TabIndex = 14;
+            this.actionComboBox.TabIndex = 60;
             // 
             // rememberStateCheckBox
             // 
@@ -471,7 +471,7 @@
             this.rememberStateCheckBox.Location = new System.Drawing.Point(6, 19);
             this.rememberStateCheckBox.Name = "rememberStateCheckBox";
             this.rememberStateCheckBox.Size = new System.Drawing.Size(122, 17);
-            this.rememberStateCheckBox.TabIndex = 0;
+            this.rememberStateCheckBox.TabIndex = 30;
             this.rememberStateCheckBox.Text = "Remember last state";
             this.rememberStateCheckBox.UseVisualStyleBackColor = true;
             this.rememberStateCheckBox.CheckedChanged += new System.EventHandler(this.RememberStateCheckBox_CheckedChanged);
@@ -486,7 +486,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Size = new System.Drawing.Size(296, 412);
-            this.tabPage2.TabIndex = 2;
+            this.tabPage2.TabIndex = 0;
             this.tabPage2.Text = "Advanced";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
@@ -499,7 +499,7 @@
             this.developerGroupBox.Location = new System.Drawing.Point(6, 321);
             this.developerGroupBox.Name = "developerGroupBox";
             this.developerGroupBox.Size = new System.Drawing.Size(284, 58);
-            this.developerGroupBox.TabIndex = 16;
+            this.developerGroupBox.TabIndex = 410;
             this.developerGroupBox.TabStop = false;
             this.developerGroupBox.Text = "Developer Options";
             // 
@@ -510,7 +510,7 @@
             this.openAppDataLinkLabel.Location = new System.Drawing.Point(174, 40);
             this.openAppDataLinkLabel.Name = "openAppDataLinkLabel";
             this.openAppDataLinkLabel.Size = new System.Drawing.Size(104, 13);
-            this.openAppDataLinkLabel.TabIndex = 18;
+            this.openAppDataLinkLabel.TabIndex = 430;
             this.openAppDataLinkLabel.TabStop = true;
             this.openAppDataLinkLabel.Text = "Open appdata folder";
             this.openAppDataLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openAppDataLinkLabel_LinkClicked);
@@ -521,7 +521,7 @@
             this.saveLogsCheckBox.Location = new System.Drawing.Point(6, 19);
             this.saveLogsCheckBox.Name = "saveLogsCheckBox";
             this.saveLogsCheckBox.Size = new System.Drawing.Size(191, 17);
-            this.saveLogsCheckBox.TabIndex = 14;
+            this.saveLogsCheckBox.TabIndex = 420;
             this.saveLogsCheckBox.Text = "Save event logs to appdata on exit";
             this.saveLogsCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -534,7 +534,7 @@
             this.passwordGroupBox.Location = new System.Drawing.Point(6, 245);
             this.passwordGroupBox.Name = "passwordGroupBox";
             this.passwordGroupBox.Size = new System.Drawing.Size(284, 70);
-            this.passwordGroupBox.TabIndex = 14;
+            this.passwordGroupBox.TabIndex = 380;
             this.passwordGroupBox.TabStop = false;
             this.passwordGroupBox.Text = "Password protection";
             // 
@@ -543,7 +543,7 @@
             this.passwordLabel.Location = new System.Drawing.Point(6, 16);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(272, 28);
-            this.passwordLabel.TabIndex = 15;
+            this.passwordLabel.TabIndex = 390;
             this.passwordLabel.Text = "Locks the countdown UI with a password you can set when starting a shutdown after" +
     " clicking start.";
             // 
@@ -553,7 +553,7 @@
             this.passwordCheckBox.Location = new System.Drawing.Point(6, 47);
             this.passwordCheckBox.Name = "passwordCheckBox";
             this.passwordCheckBox.Size = new System.Drawing.Size(157, 17);
-            this.passwordCheckBox.TabIndex = 14;
+            this.passwordCheckBox.TabIndex = 400;
             this.passwordCheckBox.Text = "Enable password protection";
             this.passwordCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -570,7 +570,7 @@
             this.countdownGroupBox.Location = new System.Drawing.Point(6, 104);
             this.countdownGroupBox.Name = "countdownGroupBox";
             this.countdownGroupBox.Size = new System.Drawing.Size(284, 135);
-            this.countdownGroupBox.TabIndex = 17;
+            this.countdownGroupBox.TabIndex = 310;
             this.countdownGroupBox.TabStop = false;
             this.countdownGroupBox.Text = "Countdown window";
             // 
@@ -581,7 +581,7 @@
             this.transparentWindowCheckBox.Location = new System.Drawing.Point(6, 65);
             this.transparentWindowCheckBox.Name = "transparentWindowCheckBox";
             this.transparentWindowCheckBox.Size = new System.Drawing.Size(178, 17);
-            this.transparentWindowCheckBox.TabIndex = 5;
+            this.transparentWindowCheckBox.TabIndex = 350;
             this.transparentWindowCheckBox.Text = "Transparent countdown window";
             this.transparentWindowCheckBox.UseVisualStyleBackColor = true;
             this.transparentWindowCheckBox.CheckedChanged += new System.EventHandler(this.TransparentWindowCheckBox_CheckedChanged);
@@ -592,7 +592,7 @@
             this.enableAdaptiveCountdownTextSizeCheckBox.Location = new System.Drawing.Point(6, 111);
             this.enableAdaptiveCountdownTextSizeCheckBox.Name = "enableAdaptiveCountdownTextSizeCheckBox";
             this.enableAdaptiveCountdownTextSizeCheckBox.Size = new System.Drawing.Size(175, 17);
-            this.enableAdaptiveCountdownTextSizeCheckBox.TabIndex = 4;
+            this.enableAdaptiveCountdownTextSizeCheckBox.TabIndex = 370;
             this.enableAdaptiveCountdownTextSizeCheckBox.Text = "Adapt clock text to window size";
             this.enableAdaptiveCountdownTextSizeCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -602,7 +602,7 @@
             this.setBackgroundColorLinkLabel.Location = new System.Drawing.Point(116, 43);
             this.setBackgroundColorLinkLabel.Name = "setBackgroundColorLinkLabel";
             this.setBackgroundColorLinkLabel.Size = new System.Drawing.Size(113, 13);
-            this.setBackgroundColorLinkLabel.TabIndex = 3;
+            this.setBackgroundColorLinkLabel.TabIndex = 340;
             this.setBackgroundColorLinkLabel.TabStop = true;
             this.setBackgroundColorLinkLabel.Text = "(set background color)";
             this.setBackgroundColorLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.SetBackgroundColorLinkLabel_LinkClicked);
@@ -613,7 +613,7 @@
             this.disableNotificationsCheckBox.Location = new System.Drawing.Point(6, 88);
             this.disableNotificationsCheckBox.Name = "disableNotificationsCheckBox";
             this.disableNotificationsCheckBox.Size = new System.Drawing.Size(206, 17);
-            this.disableNotificationsCheckBox.TabIndex = 2;
+            this.disableNotificationsCheckBox.TabIndex = 360;
             this.disableNotificationsCheckBox.Text = "Disable notifications and confirmations";
             this.disableNotificationsCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -623,7 +623,7 @@
             this.disableAnimationsCheckBox.Location = new System.Drawing.Point(6, 42);
             this.disableAnimationsCheckBox.Name = "disableAnimationsCheckBox";
             this.disableAnimationsCheckBox.Size = new System.Drawing.Size(114, 17);
-            this.disableAnimationsCheckBox.TabIndex = 1;
+            this.disableAnimationsCheckBox.TabIndex = 330;
             this.disableAnimationsCheckBox.Text = "Disable animations";
             this.disableAnimationsCheckBox.UseVisualStyleBackColor = true;
             this.disableAnimationsCheckBox.CheckedChanged += new System.EventHandler(this.DisableAnimationsCheckBox_CheckedChanged);
@@ -634,7 +634,7 @@
             this.disableAlwaysOnTopCheckBox.Location = new System.Drawing.Point(6, 19);
             this.disableAlwaysOnTopCheckBox.Name = "disableAlwaysOnTopCheckBox";
             this.disableAlwaysOnTopCheckBox.Size = new System.Drawing.Size(179, 17);
-            this.disableAlwaysOnTopCheckBox.TabIndex = 0;
+            this.disableAlwaysOnTopCheckBox.TabIndex = 320;
             this.disableAlwaysOnTopCheckBox.Text = "Disable always on top behaviour";
             this.disableAlwaysOnTopCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -649,7 +649,7 @@
             this.forceFlagGroupBox.Location = new System.Drawing.Point(6, 6);
             this.forceFlagGroupBox.Name = "forceFlagGroupBox";
             this.forceFlagGroupBox.Size = new System.Drawing.Size(284, 92);
-            this.forceFlagGroupBox.TabIndex = 14;
+            this.forceFlagGroupBox.TabIndex = 260;
             this.forceFlagGroupBox.TabStop = false;
             this.forceFlagGroupBox.Text = "Force flag";
             // 
@@ -660,7 +660,7 @@
             this.forceFlagDocsLinkLabel.Location = new System.Drawing.Point(199, 72);
             this.forceFlagDocsLinkLabel.Name = "forceFlagDocsLinkLabel";
             this.forceFlagDocsLinkLabel.Size = new System.Drawing.Size(79, 13);
-            this.forceFlagDocsLinkLabel.TabIndex = 17;
+            this.forceFlagDocsLinkLabel.TabIndex = 300;
             this.forceFlagDocsLinkLabel.TabStop = true;
             this.forceFlagDocsLinkLabel.Text = "Documentation";
             this.forceFlagDocsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ForceFlagDocsLinkLabel_LinkClicked);
@@ -671,7 +671,7 @@
             this.forceFlagRadioButton.Location = new System.Drawing.Point(9, 68);
             this.forceFlagRadioButton.Name = "forceFlagRadioButton";
             this.forceFlagRadioButton.Size = new System.Drawing.Size(133, 17);
-            this.forceFlagRadioButton.TabIndex = 16;
+            this.forceFlagRadioButton.TabIndex = 290;
             this.forceFlagRadioButton.TabStop = true;
             this.forceFlagRadioButton.Text = "EWX_FORCEIFHUNG";
             this.forceFlagRadioButton.UseVisualStyleBackColor = true;
@@ -682,7 +682,7 @@
             this.forceIfHungFlagRadioButton.Location = new System.Drawing.Point(9, 45);
             this.forceIfHungFlagRadioButton.Name = "forceIfHungFlagRadioButton";
             this.forceIfHungFlagRadioButton.Size = new System.Drawing.Size(92, 17);
-            this.forceIfHungFlagRadioButton.TabIndex = 15;
+            this.forceIfHungFlagRadioButton.TabIndex = 280;
             this.forceIfHungFlagRadioButton.TabStop = true;
             this.forceIfHungFlagRadioButton.Text = "EWX_FORCE";
             this.forceIfHungFlagRadioButton.UseVisualStyleBackColor = true;
@@ -693,7 +693,7 @@
             this.forceFlagLabel.Location = new System.Drawing.Point(6, 16);
             this.forceFlagLabel.Name = "forceFlagLabel";
             this.forceFlagLabel.Size = new System.Drawing.Size(277, 26);
-            this.forceFlagLabel.TabIndex = 0;
+            this.forceFlagLabel.TabIndex = 270;
             this.forceFlagLabel.Text = "Changes how running applications are force-closed when\r\nusing a non-graceful shut" +
     "down.";
             // 
@@ -705,7 +705,7 @@
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(296, 412);
-            this.tabPage3.TabIndex = 1;
+            this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "About";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
@@ -721,7 +721,7 @@
             this.aboutGroupBox.Location = new System.Drawing.Point(6, 61);
             this.aboutGroupBox.Name = "aboutGroupBox";
             this.aboutGroupBox.Size = new System.Drawing.Size(284, 345);
-            this.aboutGroupBox.TabIndex = 1;
+            this.aboutGroupBox.TabIndex = 510;
             this.aboutGroupBox.TabStop = false;
             this.aboutGroupBox.Text = "About this app";
             // 
@@ -731,7 +731,7 @@
             this.logButton.Location = new System.Drawing.Point(6, 316);
             this.logButton.Name = "logButton";
             this.logButton.Size = new System.Drawing.Size(80, 23);
-            this.logButton.TabIndex = 17;
+            this.logButton.TabIndex = 530;
             this.logButton.Text = "Create Logfile";
             this.logButton.UseVisualStyleBackColor = true;
             this.logButton.Click += new System.EventHandler(this.LogButton_Click);
@@ -742,7 +742,7 @@
             this.emailbutton.Location = new System.Drawing.Point(112, 316);
             this.emailbutton.Name = "emailbutton";
             this.emailbutton.Size = new System.Drawing.Size(60, 23);
-            this.emailbutton.TabIndex = 16;
+            this.emailbutton.TabIndex = 540;
             this.emailbutton.Text = "Email";
             this.emailbutton.UseVisualStyleBackColor = true;
             this.emailbutton.Click += new System.EventHandler(this.EmailButton_Click);
@@ -753,7 +753,7 @@
             this.githubButton.Location = new System.Drawing.Point(178, 316);
             this.githubButton.Name = "githubButton";
             this.githubButton.Size = new System.Drawing.Size(100, 23);
-            this.githubButton.TabIndex = 15;
+            this.githubButton.TabIndex = 550;
             this.githubButton.Text = "GitHub Issues";
             this.githubButton.UseVisualStyleBackColor = true;
             this.githubButton.Click += new System.EventHandler(this.GithubButton_Click);
@@ -766,7 +766,7 @@
             this.aboutRichTextBox.Location = new System.Drawing.Point(6, 19);
             this.aboutRichTextBox.Name = "aboutRichTextBox";
             this.aboutRichTextBox.Size = new System.Drawing.Size(272, 291);
-            this.aboutRichTextBox.TabIndex = 14;
+            this.aboutRichTextBox.TabIndex = 520;
             this.aboutRichTextBox.Text = resources.GetString("aboutRichTextBox.Text");
             // 
             // licenseGroupBox
@@ -782,7 +782,7 @@
             this.licenseGroupBox.Location = new System.Drawing.Point(6, 6);
             this.licenseGroupBox.Name = "licenseGroupBox";
             this.licenseGroupBox.Size = new System.Drawing.Size(284, 49);
-            this.licenseGroupBox.TabIndex = 0;
+            this.licenseGroupBox.TabIndex = 440;
             this.licenseGroupBox.TabStop = false;
             this.licenseGroupBox.Text = "Licenses && Source";
             // 
@@ -792,7 +792,7 @@
             this.faSourceLinkLabel.Location = new System.Drawing.Point(194, 29);
             this.faSourceLinkLabel.Name = "faSourceLinkLabel";
             this.faSourceLinkLabel.Size = new System.Drawing.Size(65, 13);
-            this.faSourceLinkLabel.TabIndex = 5;
+            this.faSourceLinkLabel.TabIndex = 500;
             this.faSourceLinkLabel.TabStop = true;
             this.faSourceLinkLabel.Text = "Sourcecode";
             this.faSourceLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FASourceLinkLabel_LinkClicked);
@@ -803,7 +803,7 @@
             this.faLicenseLinkLabel.Location = new System.Drawing.Point(92, 29);
             this.faLicenseLinkLabel.Name = "faLicenseLinkLabel";
             this.faLicenseLinkLabel.Size = new System.Drawing.Size(96, 13);
-            this.faLicenseLinkLabel.TabIndex = 4;
+            this.faLicenseLinkLabel.TabIndex = 490;
             this.faLicenseLinkLabel.TabStop = true;
             this.faLicenseLinkLabel.Text = "CC BY 4.0 License";
             this.faLicenseLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.FALicenseLinkLabel_LinkClicked);
@@ -814,7 +814,7 @@
             this.faInfoLabel.Location = new System.Drawing.Point(6, 29);
             this.faInfoLabel.Name = "faInfoLabel";
             this.faInfoLabel.Size = new System.Drawing.Size(80, 13);
-            this.faInfoLabel.TabIndex = 3;
+            this.faInfoLabel.TabIndex = 480;
             this.faInfoLabel.Text = "Font Awesome:";
             // 
             // appSourceLinkLabel
@@ -823,7 +823,7 @@
             this.appSourceLinkLabel.Location = new System.Drawing.Point(146, 16);
             this.appSourceLinkLabel.Name = "appSourceLinkLabel";
             this.appSourceLinkLabel.Size = new System.Drawing.Size(65, 13);
-            this.appSourceLinkLabel.TabIndex = 2;
+            this.appSourceLinkLabel.TabIndex = 470;
             this.appSourceLinkLabel.TabStop = true;
             this.appSourceLinkLabel.Text = "Sourcecode";
             this.appSourceLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.AppSourceLinkLabel_LinkClicked);
@@ -834,7 +834,7 @@
             this.appLicenseLinkLabel.Location = new System.Drawing.Point(74, 16);
             this.appLicenseLinkLabel.Name = "appLicenseLinkLabel";
             this.appLicenseLinkLabel.Size = new System.Drawing.Size(66, 13);
-            this.appLicenseLinkLabel.TabIndex = 1;
+            this.appLicenseLinkLabel.TabIndex = 460;
             this.appLicenseLinkLabel.TabStop = true;
             this.appLicenseLinkLabel.Text = "MIT License";
             this.appLicenseLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.AppLicenseLinkLabel_LinkClicked);
@@ -845,7 +845,7 @@
             this.appInfoLabel.Location = new System.Drawing.Point(6, 16);
             this.appInfoLabel.Name = "appInfoLabel";
             this.appInfoLabel.Size = new System.Drawing.Size(62, 13);
-            this.appInfoLabel.TabIndex = 0;
+            this.appInfoLabel.TabIndex = 450;
             this.appInfoLabel.Text = "Application:";
             // 
             // Settings

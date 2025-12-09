@@ -69,7 +69,7 @@
             0});
             this.hoursNumericUpDown.Name = "hoursNumericUpDown";
             this.hoursNumericUpDown.Size = new System.Drawing.Size(50, 20);
-            this.hoursNumericUpDown.TabIndex = 0;
+            this.hoursNumericUpDown.TabIndex = 150;
             // 
             // minutesNumericUpDown
             // 
@@ -81,7 +81,7 @@
             0});
             this.minutesNumericUpDown.Name = "minutesNumericUpDown";
             this.minutesNumericUpDown.Size = new System.Drawing.Size(50, 20);
-            this.minutesNumericUpDown.TabIndex = 1;
+            this.minutesNumericUpDown.TabIndex = 170;
             // 
             // secondsNumericUpDown
             // 
@@ -93,7 +93,7 @@
             0});
             this.secondsNumericUpDown.Name = "secondsNumericUpDown";
             this.secondsNumericUpDown.Size = new System.Drawing.Size(50, 20);
-            this.secondsNumericUpDown.TabIndex = 2;
+            this.secondsNumericUpDown.TabIndex = 190;
             // 
             // titleLabel
             // 
@@ -102,7 +102,7 @@
             this.titleLabel.Location = new System.Drawing.Point(12, 9);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(215, 31);
-            this.titleLabel.TabIndex = 3;
+            this.titleLabel.TabIndex = 20;
             this.titleLabel.Text = "Shutdown Timer";
             // 
             // titlebarPictureBox
@@ -113,7 +113,7 @@
             this.titlebarPictureBox.Location = new System.Drawing.Point(18, 43);
             this.titlebarPictureBox.Name = "titlebarPictureBox";
             this.titlebarPictureBox.Size = new System.Drawing.Size(252, 5);
-            this.titlebarPictureBox.TabIndex = 4;
+            this.titlebarPictureBox.TabIndex = 0;
             this.titlebarPictureBox.TabStop = false;
             // 
             // hoursLabel
@@ -122,7 +122,7 @@
             this.hoursLabel.Location = new System.Drawing.Point(6, 64);
             this.hoursLabel.Name = "hoursLabel";
             this.hoursLabel.Size = new System.Drawing.Size(35, 13);
-            this.hoursLabel.TabIndex = 5;
+            this.hoursLabel.TabIndex = 140;
             this.hoursLabel.Text = "Hours";
             // 
             // minutesLabel
@@ -131,7 +131,7 @@
             this.minutesLabel.Location = new System.Drawing.Point(62, 64);
             this.minutesLabel.Name = "minutesLabel";
             this.minutesLabel.Size = new System.Drawing.Size(44, 13);
-            this.minutesLabel.TabIndex = 6;
+            this.minutesLabel.TabIndex = 160;
             this.minutesLabel.Text = "Minutes";
             // 
             // secondsLabel
@@ -140,7 +140,7 @@
             this.secondsLabel.Location = new System.Drawing.Point(118, 64);
             this.secondsLabel.Name = "secondsLabel";
             this.secondsLabel.Size = new System.Drawing.Size(49, 13);
-            this.secondsLabel.TabIndex = 7;
+            this.secondsLabel.TabIndex = 180;
             this.secondsLabel.Text = "Seconds";
             // 
             // timeGroupBox
@@ -158,7 +158,7 @@
             this.timeGroupBox.Location = new System.Drawing.Point(18, 192);
             this.timeGroupBox.Name = "timeGroupBox";
             this.timeGroupBox.Size = new System.Drawing.Size(252, 107);
-            this.timeGroupBox.TabIndex = 8;
+            this.timeGroupBox.TabIndex = 110;
             this.timeGroupBox.TabStop = false;
             this.timeGroupBox.Text = "When to do it?";
             // 
@@ -168,7 +168,7 @@
             this.timeOfDayModeRadioButton.Location = new System.Drawing.Point(6, 42);
             this.timeOfDayModeRadioButton.Name = "timeOfDayModeRadioButton";
             this.timeOfDayModeRadioButton.Size = new System.Drawing.Size(137, 17);
-            this.timeOfDayModeRadioButton.TabIndex = 16;
+            this.timeOfDayModeRadioButton.TabIndex = 130;
             this.timeOfDayModeRadioButton.Text = "At a specific time of day";
             this.timeOfDayModeRadioButton.UseVisualStyleBackColor = true;
             // 
@@ -178,7 +178,7 @@
             this.countdownModeRadioButton.Location = new System.Drawing.Point(6, 19);
             this.countdownModeRadioButton.Name = "countdownModeRadioButton";
             this.countdownModeRadioButton.Size = new System.Drawing.Size(140, 17);
-            this.countdownModeRadioButton.TabIndex = 15;
+            this.countdownModeRadioButton.TabIndex = 120;
             this.countdownModeRadioButton.Text = "After a specific timespan";
             this.countdownModeRadioButton.UseVisualStyleBackColor = true;
             // 
@@ -194,7 +194,7 @@
             this.actionGroupBox.Location = new System.Drawing.Point(18, 67);
             this.actionGroupBox.Name = "actionGroupBox";
             this.actionGroupBox.Size = new System.Drawing.Size(252, 119);
-            this.actionGroupBox.TabIndex = 9;
+            this.actionGroupBox.TabIndex = 50;
             this.actionGroupBox.TabStop = false;
             this.actionGroupBox.Text = "What to do?";
             // 
@@ -206,7 +206,7 @@
             this.preventSleepCheckBox.Location = new System.Drawing.Point(9, 69);
             this.preventSleepCheckBox.Name = "preventSleepCheckBox";
             this.preventSleepCheckBox.Size = new System.Drawing.Size(190, 17);
-            this.preventSleepCheckBox.TabIndex = 13;
+            this.preventSleepCheckBox.TabIndex = 90;
             this.preventSleepCheckBox.Text = "Prevent system from going to sleep";
             this.preventSleepCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -216,7 +216,7 @@
             this.gracefulCheckBox.Location = new System.Drawing.Point(9, 46);
             this.gracefulCheckBox.Name = "gracefulCheckBox";
             this.gracefulCheckBox.Size = new System.Drawing.Size(186, 17);
-            this.gracefulCheckBox.TabIndex = 12;
+            this.gracefulCheckBox.TabIndex = 80;
             this.gracefulCheckBox.Text = "Graceful (do not force close apps)";
             this.gracefulCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -226,7 +226,7 @@
             this.backgroundCheckBox.Location = new System.Drawing.Point(9, 92);
             this.backgroundCheckBox.Name = "backgroundCheckBox";
             this.backgroundCheckBox.Size = new System.Drawing.Size(117, 17);
-            this.backgroundCheckBox.TabIndex = 11;
+            this.backgroundCheckBox.TabIndex = 100;
             this.backgroundCheckBox.Text = "Run in background";
             this.backgroundCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -236,7 +236,7 @@
             this.actionLabel.Location = new System.Drawing.Point(6, 22);
             this.actionLabel.Name = "actionLabel";
             this.actionLabel.Size = new System.Drawing.Size(87, 13);
-            this.actionLabel.TabIndex = 1;
+            this.actionLabel.TabIndex = 60;
             this.actionLabel.Text = "Select an action:";
             // 
             // actionComboBox
@@ -255,7 +255,7 @@
             this.actionComboBox.Location = new System.Drawing.Point(99, 19);
             this.actionComboBox.Name = "actionComboBox";
             this.actionComboBox.Size = new System.Drawing.Size(147, 21);
-            this.actionComboBox.TabIndex = 0;
+            this.actionComboBox.TabIndex = 70;
             this.actionComboBox.Text = "Shutdown";
             this.actionComboBox.TextChanged += new System.EventHandler(this.ActionComboBox_TextChanged);
             // 
@@ -280,7 +280,7 @@
             this.versionLabel.Location = new System.Drawing.Point(233, 51);
             this.versionLabel.Name = "versionLabel";
             this.versionLabel.Size = new System.Drawing.Size(37, 13);
-            this.versionLabel.TabIndex = 11;
+            this.versionLabel.TabIndex = 40;
             this.versionLabel.Text = "v0.0.0";
             // 
             // infoToolTip
@@ -299,7 +299,7 @@
             this.settingsButton.Location = new System.Drawing.Point(239, 9);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(31, 31);
-            this.settingsButton.TabIndex = 14;
+            this.settingsButton.TabIndex = 30;
             this.settingsButton.UseVisualStyleBackColor = true;
             this.settingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 

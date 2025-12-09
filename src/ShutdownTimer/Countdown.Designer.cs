@@ -62,7 +62,7 @@
             this.timeLabel.Location = new System.Drawing.Point(12, 51);
             this.timeLabel.Name = "timeLabel";
             this.timeLabel.Size = new System.Drawing.Size(335, 86);
-            this.timeLabel.TabIndex = 14;
+            this.timeLabel.TabIndex = 20;
             this.timeLabel.Text = "00:00:00";
             this.timeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -75,7 +75,7 @@
             this.titleLabel.Location = new System.Drawing.Point(12, 9);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(215, 31);
-            this.titleLabel.TabIndex = 15;
+            this.titleLabel.TabIndex = 10;
             this.titleLabel.Text = "Shutdown Timer";
             // 
             // notifyIcon
@@ -179,7 +179,7 @@
             this.titlebarPictureBox.Location = new System.Drawing.Point(12, 43);
             this.titlebarPictureBox.Name = "titlebarPictureBox";
             this.titlebarPictureBox.Size = new System.Drawing.Size(335, 5);
-            this.titlebarPictureBox.TabIndex = 16;
+            this.titlebarPictureBox.TabIndex = 0;
             this.titlebarPictureBox.TabStop = false;
             // 
             // lockStatePictureBox
@@ -191,7 +191,7 @@
             this.lockStatePictureBox.Name = "lockStatePictureBox";
             this.lockStatePictureBox.Size = new System.Drawing.Size(32, 32);
             this.lockStatePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.lockStatePictureBox.TabIndex = 17;
+            this.lockStatePictureBox.TabIndex = 0;
             this.lockStatePictureBox.TabStop = false;
             this.lockStatePictureBox.Visible = false;
             this.lockStatePictureBox.Click += new System.EventHandler(this.LockStatePictureBox_Click);
