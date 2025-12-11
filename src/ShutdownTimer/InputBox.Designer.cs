@@ -46,7 +46,7 @@ namespace ShutdownTimer
             this.titleLabel.Location = new System.Drawing.Point(12, 9);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(62, 31);
-            this.titleLabel.TabIndex = 0;
+            this.titleLabel.TabIndex = 10;
             this.titleLabel.Text = "title";
             // 
             // titlebarPictureBox
@@ -57,7 +57,7 @@ namespace ShutdownTimer
             this.titlebarPictureBox.Location = new System.Drawing.Point(18, 43);
             this.titlebarPictureBox.Name = "titlebarPictureBox";
             this.titlebarPictureBox.Size = new System.Drawing.Size(268, 5);
-            this.titlebarPictureBox.TabIndex = 5;
+            this.titlebarPictureBox.TabIndex = 0;
             this.titlebarPictureBox.TabStop = false;
             // 
             // messageLabel
@@ -68,7 +68,7 @@ namespace ShutdownTimer
             this.messageLabel.Location = new System.Drawing.Point(18, 51);
             this.messageLabel.Name = "messageLabel";
             this.messageLabel.Size = new System.Drawing.Size(268, 56);
-            this.messageLabel.TabIndex = 6;
+            this.messageLabel.TabIndex = 20;
             this.messageLabel.Text = "description";
             // 
             // inputTextBox
@@ -78,7 +78,7 @@ namespace ShutdownTimer
             this.inputTextBox.Location = new System.Drawing.Point(18, 110);
             this.inputTextBox.Name = "inputTextBox";
             this.inputTextBox.Size = new System.Drawing.Size(268, 20);
-            this.inputTextBox.TabIndex = 7;
+            this.inputTextBox.TabIndex = 30;
             this.inputTextBox.TextChanged += new System.EventHandler(this.inputTextBox_TextChanged);
             // 
             // okButton
@@ -89,7 +89,7 @@ namespace ShutdownTimer
             this.okButton.Location = new System.Drawing.Point(119, 136);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(86, 23);
-            this.okButton.TabIndex = 8;
+            this.okButton.TabIndex = 40;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.OkButton_Click);
@@ -101,7 +101,7 @@ namespace ShutdownTimer
             this.cancelButton.Location = new System.Drawing.Point(211, 136);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 9;
+            this.cancelButton.TabIndex = 50;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
