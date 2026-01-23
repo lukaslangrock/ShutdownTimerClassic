@@ -198,36 +198,11 @@ namespace ShutdownTimer
             }
 
             // Respective check for either countdown or timeOfDay mode
-            if (countdownModeRadioButton.Checked)
-            {
-                // Validate that that a TimeSpan can be created (and a conversion to string works, required for later operations)
-                try
-                {
-                    Numerics.ConvertTimeSpanToString(new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value)));
-                }
-                catch
-                {
-                    errMessages += "TimeSpan conversion failed! Please check if your time values are within a reasonable range.\n\n";
-                }
-            }
-            else
-            {
-                // Validate that a DateTime can be created
-                try
-                {
-                    DateTime now = DateTime.Now;
-                    DateTime target = new DateTime(now.Year, now.Month, now.Day, Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
-                }
-                catch
-                {
-                    errMessages += "DateTime conversion failed! Please check if your time values can represent a valid time of day.\n\n";
-                }
-            }
-
-            // Sanity check
             try
             {
-                TimeSpan ts = new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
+                TimeSpan ts = Numerics.CalculateCountdownTimeSpan(hoursNumericUpDown.Value, minutesNumericUpDown.Value, secondsNumericUpDown.Value, timeOfDayModeRadioButton.Checked);
+
+                // Sanity check
                 if (ts.TotalDays > 100)
                 {
                     warnMessages += $"Your chosen time equates to {Math.Round(ts.TotalDays)} days ({Math.Round(ts.TotalDays / 365, 2)} years)!\n" +
@@ -235,7 +210,10 @@ namespace ShutdownTimer
                         "\n\nBut if you are actually going to do this, please tell me how long this app survived.";
                 }
             }
-            catch { }
+            catch
+            {
+                errMessages += "TimeSpan conversion failed! Please check if your time values are within a reasonable range or represent a valid time of day, if you used the time of day mode.\n\n";
+            }
 
             if (errMessages.Equals(""))
             {
