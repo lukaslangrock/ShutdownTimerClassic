@@ -53,7 +53,8 @@ namespace ShutdownTimer
                             ArgMode = ArgProcessor.argMode,
                             ArgGraceful = ArgProcessor.argGraceful,
                             ArgPreventSleep = ArgProcessor.argPreventSleep,
-                            ArgBackground = ArgProcessor.argBackground
+                            ArgBackground = ArgProcessor.argBackground,
+                            ArgUseTimeOfDay = ArgProcessor.argUseTimeOfDay
                         };
                         Application.Run(menu);
                         break;

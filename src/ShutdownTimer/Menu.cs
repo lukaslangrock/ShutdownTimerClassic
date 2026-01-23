@@ -16,6 +16,7 @@ namespace ShutdownTimer
         public bool ArgGraceful { get; set; }
         public bool ArgPreventSleep { get; set; }
         public bool ArgBackground { get; set; }
+        public bool ArgUseTimeOfDay { get; set; }
 
         private string password; // used for password protection
         private string command; // used for custom command
@@ -199,7 +200,7 @@ namespace ShutdownTimer
             // Respective check for either countdown or timeOfDay mode
             if (countdownModeRadioButton.Checked)
             {
-                // Try to build and convert a the values to a TimeSpan and export it as a string.
+                // Validate that that a TimeSpan can be created (and a conversion to string works, required for later operations)
                 try
                 {
                     Numerics.ConvertTimeSpanToString(new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value)));
@@ -211,7 +212,7 @@ namespace ShutdownTimer
             }
             else
             {
-                // Try to build a valid DateTime
+                // Validate that a DateTime can be created
                 try
                 {
                     DateTime now = DateTime.Now;
@@ -260,6 +261,8 @@ namespace ShutdownTimer
             hoursNumericUpDown.Value = ArgTimeH;
             minutesNumericUpDown.Value = ArgTimeM;
             secondsNumericUpDown.Value = ArgTimeS;
+            countdownModeRadioButton.Checked = !ArgUseTimeOfDay;
+            timeOfDayModeRadioButton.Checked = ArgUseTimeOfDay;
 
             if (ArgMode.Equals("Lock"))
             {
@@ -343,20 +346,7 @@ namespace ShutdownTimer
 
             // Calculate TimeSpan
             ExceptionHandler.Log("Calculating timespan");
-            TimeSpan timeSpan;
-            if (countdownModeRadioButton.Checked)
-            {
-                // Calculate TimeSpan for Countdown as it was given in the form
-                timeSpan = new TimeSpan(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
-            }
-            else
-            {
-                // Use form data as a point in time and calculate TimeSpan from now to this point
-                bool today = Numerics.TodayOrTomorrow(Convert.ToInt32(hoursNumericUpDown.Value), Convert.ToInt32(minutesNumericUpDown.Value), Convert.ToInt32(secondsNumericUpDown.Value));
-                DateTime target = DateTime.Parse(Convert.ToInt32(hoursNumericUpDown.Value) + ":" + Convert.ToInt32(minutesNumericUpDown.Value) + ":" + Convert.ToInt32(secondsNumericUpDown.Value));
-                if (!today) { target = target.AddDays(1); }
-                timeSpan = target.Subtract(DateTime.Now);
-            }
+            TimeSpan timeSpan = Numerics.CalculateCountdownTimeSpan(hoursNumericUpDown.Value, minutesNumericUpDown.Value, secondsNumericUpDown.Value, timeOfDayModeRadioButton.Checked);
 
             Timer.CountdownTimeSpan = timeSpan;
             Timer.Action = actionComboBox.Text;

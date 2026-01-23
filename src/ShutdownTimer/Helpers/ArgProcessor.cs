@@ -11,6 +11,7 @@ namespace ShutdownTimer.Helpers
         public static bool argPreventSleep = true;
         public static bool argBackground = false;
         public static bool argNoSettings = false;
+        public static bool argUseTimeOfDay = false;
         public static int argTimeH;
         public static int argTimeM;
         public static int argTimeS;
@@ -21,7 +22,7 @@ namespace ShutdownTimer.Helpers
             ExceptionHandler.Log("Processing args...");
             ReadArgs(args);
             ExportTimeToInt();
-            ExportTimeToTimeSpan();
+            CalculateTimeSpan();
             ExceptionHandler.Log("Processed args");
         }
 
@@ -67,6 +68,10 @@ namespace ShutdownTimer.Helpers
 
                     case "/NoSettings":
                         argNoSettings = true;
+                        break;
+
+                    case "/TargetTimeOfDay":
+                        argUseTimeOfDay = true;
                         break;
                 }
             }
@@ -114,13 +119,11 @@ namespace ShutdownTimer.Helpers
             ExceptionHandler.Log("Exported to Int");
         }
 
-        private static void ExportTimeToTimeSpan()
+        private static void CalculateTimeSpan()
         {
-            ExceptionHandler.Log("Exporting to TimeSpan...");
+            ExceptionHandler.Log("Calculating TimeSpan...");
 
-            argTimeTS = new TimeSpan(argTimeH, argTimeM, argTimeS);
-
-            ExceptionHandler.Log("Exported to TimeSpan");
+            argTimeTS = Numerics.CalculateCountdownTimeSpan(argTimeH, argTimeM, argTimeS, argUseTimeOfDay);
         }
     }
 }

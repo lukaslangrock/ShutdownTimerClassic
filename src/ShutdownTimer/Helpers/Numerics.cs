@@ -33,6 +33,37 @@ namespace ShutdownTimer.Helpers
         }
 
         /// <summary>
+        /// Calculates a TimeSpan to count down towards based on given input.
+        /// </summary>
+        /// <param name="pHours">target hour value</param>
+        /// <param name="pMinutes">target minute value</param>
+        /// <param name="pSeconds">target second value</param>
+        /// <param name="interpretAsTimeOfDay">Treats the time values as a target time of day and calculates a timespan from now to the target time instead.</param>
+        /// <returns></returns>
+        public static TimeSpan CalculateCountdownTimeSpan (Object pHours, Object pMinutes, Object pSeconds, bool interpretAsTimeOfDay)
+        {
+            int hours = Convert.ToInt32(pHours);
+            int minutes = Convert.ToInt32(pMinutes);
+            int seconds = Convert.ToInt32(pSeconds);
+            TimeSpan ts;
+
+            if (interpretAsTimeOfDay)
+            {
+                // calculate timespan till a time of day target
+                bool today = Numerics.TodayOrTomorrow(hours, minutes, seconds);
+                DateTime target = DateTime.Parse(hours + ":" + minutes + ":" + seconds);
+                if (!today) { target = target.AddDays(1); }
+                ts = target.Subtract(DateTime.Now);
+            } else
+            {
+                // normal timespan parsing
+                ts = new TimeSpan(hours, minutes, seconds);
+            }
+
+            return ts;
+        }
+
+        /// <summary>
         /// Adds a zero before values lower than ten.
         /// </summary>
         /// <param name="input">Input number</param>
