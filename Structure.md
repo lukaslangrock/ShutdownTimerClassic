@@ -7,7 +7,7 @@ The `src/WindowsApplicationPackaging` and `src/WindowsInstallerPackaging` folder
 
 ## How to get started ⚡
 
-I'd recommend using **Visual Studio 2019 Community** as it's the IDE I use for developing the project. You can simply open the `ShutdownTimerClassic.sln` solution file in the root folder and it will load the entire project including packaging projects and get everything set up.
+I'd recommend using **Visual Studio Community 2022** as it's the IDE I use for developing the project. You can simply open the `ShutdownTimerClassic.sln` solution file in the root folder and it will load the entire project including packaging projects and get everything set up.
 
 ## Application Structure 🕸
 
