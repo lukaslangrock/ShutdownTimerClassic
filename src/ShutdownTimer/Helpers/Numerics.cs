@@ -40,7 +40,7 @@ namespace ShutdownTimer.Helpers
         /// <param name="pSeconds">target second value</param>
         /// <param name="interpretAsTimeOfDay">Treats the time values as a target time of day and calculates a timespan from now to the target time instead.</param>
         /// <returns></returns>
-        public static TimeSpan CalculateCountdownTimeSpan (Object pHours, Object pMinutes, Object pSeconds, bool interpretAsTimeOfDay)
+        public static TimeSpan CalculateCountdownTimeSpan(Object pHours, Object pMinutes, Object pSeconds, bool interpretAsTimeOfDay)
         {
             int hours = Convert.ToInt32(pHours);
             int minutes = Convert.ToInt32(pMinutes);
@@ -54,7 +54,8 @@ namespace ShutdownTimer.Helpers
                 DateTime target = DateTime.Parse(hours + ":" + minutes + ":" + seconds);
                 if (!today) { target = target.AddDays(1); }
                 ts = target.Subtract(DateTime.Now);
-            } else
+            }
+            else
             {
                 // normal timespan parsing
                 ts = new TimeSpan(hours, minutes, seconds);
