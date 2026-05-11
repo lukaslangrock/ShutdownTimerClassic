@@ -25,3 +25,9 @@ jobs:
         working-directory: src
         run: |
           msbuild.exe ShutdownTimerClassic.sln /p:platform="Any CPU" /p:configuration="Debug"
+
+      - uses: actions/upload-artifact@v7
+        with:
+          path: src
+          compression-level: 9
+          include-hidden-files: true
