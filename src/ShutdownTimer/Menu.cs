@@ -140,16 +140,24 @@ namespace ShutdownTimer
                     form.Title = "Custom Command";
                     form.Message = "Please enter the command you want to have executed. If you wish to launch a file, just enter the full file path.\n\n" +
                         "Note: Execution will use this user's permissions.";
-                    ExceptionHandler.Log("Requesting custom command from user...");
 
+                    ExceptionHandler.Log("Requesting custom command from user...");
                     var result = form.ShowDialog();
+
                     if (result != DialogResult.OK)
                     {
                         ExceptionHandler.Log("User declined to enter custom command, aborting start.");
                         return;
                     }
 
-                    ExceptionHandler.Log("Accepted command: \"" + result.ToString() + "\"");
+                    if (String.IsNullOrWhiteSpace(form.ReturnValue))
+                    {
+                        ExceptionHandler.Log("Custom command was null or whitepace, aborting start.");
+                        MessageBox.Show("Custom command field was empty. Please enter a valid command or use a different action!", "Invalid command!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    ExceptionHandler.Log("Accepted command: \"" + form.ReturnValue + "\"");
                     command = form.ReturnValue;
                 }
             }
@@ -174,7 +182,6 @@ namespace ShutdownTimer
             startButton.Enabled = false;
             actionGroupBox.Enabled = false;
             timeGroupBox.Enabled = false;
-
             SaveSettings();
 
             ExceptionHandler.Log("Initiaing countdown start");
