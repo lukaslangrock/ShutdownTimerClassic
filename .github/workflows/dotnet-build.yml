@@ -2,20 +2,19 @@ on: [ push, pull_request ]
 
 jobs:
   build:
-    runs-on: windows-2025
+    runs-on: windows-2025-vs2026
     steps:      
-      - uses: actions/checkout@v6
+      - name: Setup project
+        uses: actions/checkout@v6
       
-      - uses: microsoft/setup-msbuild@v3
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v3
         with:
           vs-version: # optional
           msbuild-architecture: # optional, default is x86
       
-      - uses: NuGet/setup-nuget@v4.0
-      
-      - name: debug step
-        working-directory: src
-        run: dir
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v4.0
 
       - name: Restore Packages
         working-directory: src
@@ -26,8 +25,9 @@ jobs:
         run: |
           msbuild.exe ShutdownTimerClassic.sln /p:platform="Any CPU" /p:configuration="Debug"
 
-      - uses: actions/upload-artifact@v7
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v7
         with:
-          path: src
+          path: src/bin/Debug
           compression-level: 9
           include-hidden-files: true
