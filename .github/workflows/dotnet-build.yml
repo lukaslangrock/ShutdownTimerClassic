@@ -1,3 +1,4 @@
+name: Development build
 on: [ push, pull_request ]
 
 jobs:
@@ -11,7 +12,7 @@ jobs:
         uses: microsoft/setup-msbuild@v3
         with:
           vs-version: # optional
-          msbuild-architecture: # optional, default is x86
+          msbuild-architecture: x64
       
       - name: Set up NuGet
         uses: NuGet/setup-nuget@v4.0
