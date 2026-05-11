@@ -1,0 +1,31 @@
+name: .NET
+on: [ push, pull_request ]
+
+jobs:
+  build:
+    runs-on: windows-2025-vs2026
+    steps:      
+      - name: Set up project
+        uses: actions/checkout@v6
+      
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v3
+      
+      - name: Set up NuGet
+        uses: NuGet/setup-nuget@v4.0
+
+      - name: Restore NuGet packages
+        working-directory: src
+        run: nuget restore ShutdownTimerClassic.sln
+
+      - name: Build Solution
+        working-directory: src
+        run: |
+          msbuild.exe ShutdownTimerClassic.sln /p:platform="Any CPU" /p:configuration="Debug"
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v7
+        with:
+          path: src\ShutdownTimer\bin\Debug
+          compression-level: 9
+          include-hidden-files: true
