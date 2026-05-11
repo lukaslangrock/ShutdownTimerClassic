@@ -80,7 +80,7 @@ namespace ShutdownTimer.Helpers
         }
 
         /// <summary>
-        /// determine if a given set of hours, minutes, and seconds regards a time of the current day or the next day
+        /// Determine if a given set of hours, minutes, and seconds regards a time of the current day or the next day
         /// </summary>
         /// <returns>true if today, false if tomorrow</returns>
         public static bool TodayOrTomorrow(int hours, int minutes, int seconds)

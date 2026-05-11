@@ -92,7 +92,7 @@ namespace ShutdownTimer
             else if (SettingsProvider.Settings.TrayIconTheme == "Dark") { lighttheme = false; }
             else { lighttheme = WindowsAPIs.SystemUsesLightTheme(); }
 
-            // When the dark theme is selected we are using the light icon to generate contrast (and vise versa), you wouldn't want a white icon on a white background.
+            // When the dark theme is selected we are using the light icon to generate contrast (and vice versa), you wouldn't want a white icon on a white background.
             notifyIcon.Icon = lighttheme ? Properties.Resources.icon_dark : Properties.Resources.icon_light;
 
             // Load password and set the lock state
@@ -108,7 +108,7 @@ namespace ShutdownTimer
 
             TopMost = !SettingsProvider.Settings.DisableAlwaysOnTop;
 
-            // Prevent font-fallback and subsequent layout issues. This application is currently only in english and doesn't require display of non-latin chacracters.
+            // Prevent font-fallback and subsequent layout issues. This application is currently only in English and doesn't require display of non-Latin characters.
             this.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
 
             if (!IsForegroundUI)
@@ -188,7 +188,7 @@ namespace ShutdownTimer
                     break;
 
                 case 2: // lock state 'unlocked': change lockstate to 'locked'
-                    ExceptionHandler.Log("lockState = unlocked, asking user for confirmation lock the UI");
+                    ExceptionHandler.Log("lockState = unlocked, asking user for confirmation to lock the UI");
                     DialogResult result = MessageBox.Show("Would you like to re-lock the countdown?", "Password Protection", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == DialogResult.Yes)
                     {
@@ -281,7 +281,7 @@ namespace ShutdownTimer
                 ExceptionHandler.Log("Stopping timer");
                 Timer.Pause();
                 ExceptionHandler.Log("Confirming application halt to user");
-                SendNotification("Your timer was canceled successfully!\nThe application will now close"); // Show windows toast notification as confirmation
+                SendNotification("Your timer was canceled successfully!\nThe application will now close."); // Show windows toast notification as confirmation
                 ExceptionHandler.Log("Saving all settings");
                 SaveSettings();
                 ExceptionHandler.Log("Exiting...");
@@ -536,7 +536,7 @@ namespace ShutdownTimer
         }
 
         /// <summary>
-        /// Sends a toast notification (or trymenu balloontip on legacy systems) to the user, unless it was disabled in settings
+        /// Sends a toast notification (or tray menu balloon tip on legacy systems) to the user, unless it was disabled in settings
         /// </summary>
         /// <param name="message">Message content to be displayed in notification</param>
         private void SendNotification(string message)

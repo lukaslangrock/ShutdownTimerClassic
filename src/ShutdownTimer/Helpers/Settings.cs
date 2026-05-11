@@ -53,7 +53,7 @@ namespace ShutdownTimer.Helpers
                 Settings = new SettingsData();
                 CheckSettings();
                 SettingsLoaded = true;
-                ExceptionHandler.Log("Successfully created new tempoarary settings object in application memory");
+                ExceptionHandler.Log("Successfully created new temporary settings object in application memory");
             }
         }
 
@@ -73,7 +73,7 @@ namespace ShutdownTimer.Helpers
                 // 
                 String[] importVerString = Settings.AppVersion.Split('.');
                 int[] importVer = new int[] { 0, 0, 0, 0 }; // defaults in case string is corrupted and does not contain 4 numbers
-                for (int i = 0; i < 4; i++) // read version number into useable integer array
+                for (int i = 0; i < 4; i++) // read version number into usable integer array
                 {
                     try { importVer[i] = Convert.ToInt32(importVerString[i]); }
                     catch { ExceptionHandler.Log("Part " + (i + 1).ToString() + " of settings version number unreadable '" + importVerString[i] + "' filling with 0"); }

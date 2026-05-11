@@ -1,6 +1,6 @@
 # Shutdown Timer Classic 🕒
 
-Shutdown Timer Classic is a small little Windows application that allows you to set a timer that will shutdown, restart, hibernate, sleep or lock your PC.
+Shutdown Timer Classic is a small Windows application that allows you to set a timer that will shut down, restart, hibernate, sleep, or lock your PC.
 
 ![Screenshot of the main menu](media/screenshots/Menu.png)
 
@@ -17,14 +17,14 @@ The Microsoft Store is the only official download that will receive automatic up
 
 **Alternative**: [GitHub Releases](https://github.com/lukaslangrock/ShutdownTimerClassic/releases) or [my mirror](https://files.langrock.info/apps/ShutdownTimerClassic/).
 
-These builds are provided with each stable release and include both the binaries itself for portable use and an installer. If you want to use the raw binaries themself, please extract the entire archive and keep all the files in the same folder.
+These builds are provided with each stable release and include both the binaries themselves for portable use and an installer. If you want to use the raw binaries themselves, please extract the entire archive and keep all the files in the same folder.
 
-**Development builds**: As this is a low priority side-project of mine, releases are rare. However, the CI for this projects is set-up to produce and publish build artifacts for each new commit. These are very much development builds, they might not work correctly and they may represent features in an unfinished state, so use them at your own disgrecion (this is also why there is no link here, they are not meant for people not at all familar with software development).
+**Development builds**: As this is a low priority side project of mine, releases are rare. However, the CI for this project is set up to produce and publish build artifacts for each new commit. These are development builds; they might not work correctly and they may represent features in an unfinished state, so use them at your own discretion (this is also why there is no link here; they are not meant for people unfamiliar with software development).
 
 # Usage ✨
 
-Shutdown Timer is a very simple application hence it is easy to use.
-Just choose a power action from the drop-down menu and then dial in the time span you want. If the counter reaches zero the chosen power action will be executed.
+Shutdown Timer is a simple application, so it is easy to use.
+Just choose a power action from the drop-down menu and then dial in the time span you want. If the counter reaches zero, the chosen power action will be executed.
 
 Upon reaching zero, the Shutdown Timer will (actually Windows will do this, Shutdown Timer just gives the command to) force close any still running applications to ensure the shutdown does not get interrupted.
 Therefore you may experience data loss if any application is in the process of saving or processing data when the shutdown begins.
@@ -78,7 +78,7 @@ To launch the application with additional arguments, navigate to folder where th
 For installations with the Installer, you should find the folder at `C:\Program Files (x86)\Lukas Langrock\Shutdown Timer Classic`.
 If you opted for the ZIP without an isntaller, copy **all** the files in the ZIP to any folder of your choosing and do not rename any files itself.
 
-Now, right click in the explorer, select "Open in Terminal" and type `.\ShutdownTimerClassic.exe`, adding the respective arguments using their exact name and seperated by a space:
+Now, right click in the explorer, select "Open in Terminal" and type `.\ShutdownTimerClassic.exe`, adding the respective arguments using their exact name and separated by a space:
 
 ```
 Argument                 Description
@@ -86,11 +86,11 @@ Argument                 Description
 /SetTime <time>          Sets the time for the countdown. Either type in the seconds, use HH:mm:ss or HH:mm.
 
 /SetAction <action>      Sets the power action which will be executed after the countdown reached zero.
-                         Type in the exact name as seen in the UI (eg: Shutdown, Restart or Sleep. Do not use shutdown Reboot or SLEEP)
+                         Type in the exact name as seen in the UI (eg: Shutdown, Restart or Sleep. Do not use other variations like shutdown, Reboot, SLEEP, ...).
 
 /SetMode <mode>          Sets the control mode. Modes available:
-                         Prefill:       Prefills settings but let user manually change them too. Timer won't start automatically.
-                         Lock:          Overrides settings so the user can not change them. Timer won't start automatically.
+                         Prefill:       Prefills settings but lets the user manually change them too. Timer won't start automatically.
+                         Lock:          Overrides settings so the user cannot change them. Timer won't start automatically.
                          Launch:        Overrides settings and starts the timer.
                          ForcedLaunch:  Overrides settings and starts the timer. Disables all UI controls and exit dialogs.
 
@@ -108,7 +108,7 @@ Argument                 Description
 ```
 
 Example: `.\ShutdownTimerClassic.exe /SetTime 01:00 /SetAction Hibernate /SetMode Launch`
-This command will launch launch Shutdown Timer in hibernation mode with 1 hours, 0 minutes and 0 seconds and start the countdown.
+This command will launch Shutdown Timer in hibernation mode with 1 hour, 0 minutes, and 0 seconds and start the countdown.
 
 If you want to redistribute my executable with your own app/script you are free to do so. Please just keep it updated and mention this project somewhere in the description (ie: follow the license for this project).
 

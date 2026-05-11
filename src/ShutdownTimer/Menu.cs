@@ -20,7 +20,7 @@ namespace ShutdownTimer
 
         private string password; // used for password protection
         private string command; // used for custom command
-        private bool isConcluded = false; // true after form has concluded it's function
+        private bool isConcluded = false; // true after form has concluded its function
 
         public Menu()
         {
@@ -58,15 +58,15 @@ namespace ShutdownTimer
 #endif
 
             infoToolTip.SetToolTip(gracefulCheckBox, "Applications that do not exit when prompted automatically get terminated by default to ensure a successful shutdown." +
-                "\n\nA graceful shutdown on the other hand will wait for all applications to exit before continuing with the shutdown." +
-                "\nThis might result in an unsuccessful shutdown if one or more applications are unresponsive or require a user interaction to exit!");
-            infoToolTip.SetToolTip(preventSleepCheckBox, "Depending on the power settings of your system, it might go to sleep after certain amount of time due to inactivity." +
+                "\n\nA graceful shutdown, on the other hand, will wait for all applications to exit before continuing with the shutdown." +
+                "\nThis might result in an unsuccessful shutdown if one or more applications are unresponsive or require a user interaction to exit.");
+            infoToolTip.SetToolTip(preventSleepCheckBox, "Depending on the power settings of your system, it might go to sleep after a certain amount of time due to inactivity." +
                 "\nThis option will keep the system awake to ensure the timer can properly run and execute a shutdown.");
             infoToolTip.SetToolTip(backgroundCheckBox, "This will launch the countdown without a visible window but will show a tray icon in your taskbar.");
-            infoToolTip.SetToolTip(countdownModeRadioButton, "Will count down from the hours, minutes and seconds selected below\nlike a countdown timer and execute the power action when it reaches zero.");
+            infoToolTip.SetToolTip(countdownModeRadioButton, "Will count down from the hours, minutes and seconds selected below,\nlike a countdown timer, and execute the power action when it reaches zero.");
             infoToolTip.SetToolTip(timeOfDayModeRadioButton, "In this mode you can select the target time of day (24h clock) for the power action.\nIf the time has already passed, it will roll over to tomorrow.\n\nWhen you press start, the appropriate countdown will be calculated.\n");
 
-            // Prevent font-fallback and subsequent layout issues. This application is currently only in english and doesn't require display of non-latin chacracters.
+            // Prevent font-fallback and subsequent layout issues. This application is currently only in English and doesn't require display of non-Latin characters.
             this.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
 
             ExceptionHandler.Log("Setup finished");
@@ -125,7 +125,7 @@ namespace ShutdownTimer
             if (!allChecksPassed)
             {
                 ExceptionHandler.Log("Cannot start countdown due to failing checks.");
-                MessageBox.Show("The following error(s) occurred:\n\n" + listOfErrorsFound + "Please try to resolve the(se) problem(s) and try again.", "There seems to be a problem!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The following error(s) occurred:\n\n" + listOfErrorsFound + "Please resolve the problem(s) and try again.", "There seems to be a problem!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -158,7 +158,7 @@ namespace ShutdownTimer
 
                     if (String.IsNullOrWhiteSpace(form.ReturnValue))
                     {
-                        ExceptionHandler.Log("Custom command was null or whitepace, aborting start.");
+                        ExceptionHandler.Log("Custom command was null or whitespace, aborting start.");
                         MessageBox.Show("Custom command field was empty. Please enter a valid command or use a different action!", "Invalid command!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
@@ -170,12 +170,12 @@ namespace ShutdownTimer
 
             if (SettingsProvider.Settings.PasswordProtection)
             {
-                ExceptionHandler.Log("Enabeling password protection");
+                ExceptionHandler.Log("Enabling password protection");
                 using (var form = new InputBox())
                 {
                     form.Title = "Password Protection";
                     form.Message = "Please set a password to enable password protection.\n\n" +
-                        "You can disable this dialog in the settings under Advanced > Password Protection";
+                        "You can disable this dialog in the settings under Advanced > Password Protection.";
                     form.PasswordMode = true;
                     ExceptionHandler.Log("Requesting password setup from user...");
                     var result = form.ShowDialog();
@@ -342,7 +342,7 @@ namespace ShutdownTimer
             isConcluded = true; // mark form as concluded to prevent further logic on form closing events
             SaveSettings();
 
-            ExceptionHandler.Log("Initiaing countdown start");
+            ExceptionHandler.Log("Initiating countdown start");
             this.Hide();
 
             ExceptionHandler.Log("Starting countdown...");

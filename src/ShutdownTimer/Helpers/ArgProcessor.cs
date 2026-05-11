@@ -30,11 +30,11 @@ namespace ShutdownTimer.Helpers
         {
             ExceptionHandler.Log("Reading args...");
 
-            //Control Modes:
-            //Prefill:      Prefills settings but let user manually change them too. Timer won't start automatically.
-            //Lock:         Overrides settings so the user can not change them. Timer won't start automatically.
-            //Launch:       Overrides settings and starts the timer.
-            //ForcedLaunch: Overrides settings and starts the timer. Disables all UI controls and exit dialogs.
+            // Control Modes:
+            // Prefill:      Prefills settings but lets the user manually change them too. Timer won't start automatically.
+            // Lock:         Overrides settings so the user cannot change them. Timer won't start automatically.
+            // Launch:       Overrides settings and starts the timer.
+            // ForcedLaunch: Overrides settings and starts the timer. Disables all UI controls and exit dialogs.
 
             // Read args and do some processing
             for (var i = 0; i < args.Length; i++)
@@ -97,7 +97,7 @@ namespace ShutdownTimer.Helpers
                     switch (count)
                     {
                         case 0:
-                            ExceptionHandler.Log("Invalid time args");
+                            ExceptionHandler.Log("Invalid time args.");
                             break;
 
                         case 1:

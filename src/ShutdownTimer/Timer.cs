@@ -143,7 +143,7 @@ namespace ShutdownTimer
                     ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS);
                 }
 
-                // check if app was started with a form and use it's exit behaviour
+                // check if app was started with a form and use its exit behaviour
                 if (Application.OpenForms.Count > 0)
                 {
                     ExceptionHandler.Log("Trying to exit application via main form");
@@ -161,11 +161,11 @@ namespace ShutdownTimer
             }
         }
 
-        private static void ExecutePowerAction(string choosenAction)
+        private static void ExecutePowerAction(string chosenAction)
         {
             ExceptionHandler.Log($"Processing action: {Action}");
 
-            switch (choosenAction)
+            switch (chosenAction)
             {
                 case "Shutdown":
                     ExitWindows.Shutdown(!Graceful);

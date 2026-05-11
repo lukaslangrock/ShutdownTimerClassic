@@ -11,7 +11,7 @@ I'd recommend using **Visual Studio Community 2022** as it's the IDE I use for d
 
 ## Application Structure 🕸
 
-The application's entry point is `Program.cs` which initializes the settings, applys CLI arguments using `ArgProcessor.cs`, and registers `Helpers/ExceptionHandler.cs` to catch unhandled or thread exceptions and then launches an instance of `Menu.cs` (or `Countdown.cs` in case the CLI args request it).
+The application's entry point is `Program.cs` which initializes the settings, applies CLI arguments using `ArgProcessor.cs`, and registers `Helpers/ExceptionHandler.cs` to catch unhandled or thread exceptions and then launches an instance of `Menu.cs` (or `Countdown.cs` in case the CLI args request it).
 
 ### Forms 🎨
 
@@ -30,7 +30,7 @@ It will call `Helpers/ExitWindows.cs` when the timer reaches zero and uses `Help
 
 **`Helpers/ArgProcessor.cs`** is responsible for reading CLI arguments and is only used by `Program.cs`
 
-**`Helpers/ExceptionHandler.cs`** will gather information about the system and the application and generated a log file which it places on the user's desktop and informs them about the exception. This replaces the default .NET exception handler. It's turned off in debugging mode.
+**`Helpers/ExceptionHandler.cs`** will gather information about the system and the application and generates a log file that it places on the user's desktop and informs them about the exception. This replaces the default .NET exception handler. It's turned off in debugging mode.
 
 **`Helpers/ExecutionState.cs`** keeps the system awake during the countdown.
 
@@ -44,7 +44,7 @@ The settings do need to be saved to the `settings.json` file before exiting the 
 
 ### Dependencies 📚
 
-This app depends on `Microsoft.Windows.SDK.Contracts` for interacting with newer Windows API's which are otherwise only available to UWP apps and `Newtonsoft.Json` for serializing/deserializing the settings to and from the `settings.json` file.
+This app depends on `Microsoft.Windows.SDK.Contracts` for interacting with newer Windows APIs which are otherwise only available to UWP apps and `Newtonsoft.Json` for serializing/deserializing the settings to and from the `settings.json` file.
 
 ### Other files and folders 👾
 

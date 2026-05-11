@@ -24,7 +24,7 @@ namespace ShutdownTimer
             messageLabel.Text = Message;
             if (PasswordMode) { inputTextBox.PasswordChar = Convert.ToChar("*"); }
 
-            // Prevent font-fallback and subsequent layout issues. This application is currently only in english and doesn't require display of non-latin chacracters.
+            // Prevent font-fallback and subsequent layout issues. This application is currently only in English and doesn't require display of non-Latin characters.
             this.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
         }
 
