@@ -20,6 +20,7 @@ namespace ShutdownTimer
 
         private string password; // used for password protection
         private string command; // used for custom command
+        private bool isConcluded = false; // true after form has concluded it's function
 
         public Menu()
         {
@@ -93,7 +94,12 @@ namespace ShutdownTimer
         private void Menu_FormClosing(object sender, FormClosingEventArgs e)
         {
             ExceptionHandler.Log("Form closing...");
-            SaveSettings();
+
+            // Only save settings when form hasn't concluded it's function.
+            if (!isConcluded)
+            {
+                SaveSettings();
+            }
         }
 
         private void ActionComboBox_TextChanged(object sender, EventArgs e)
@@ -178,14 +184,6 @@ namespace ShutdownTimer
                 }
             }
 
-            ExceptionHandler.Log("Preparing for countdown start");
-            startButton.Enabled = false;
-            actionGroupBox.Enabled = false;
-            timeGroupBox.Enabled = false;
-            SaveSettings();
-
-            ExceptionHandler.Log("Initiaing countdown start");
-            this.Hide();
             StartCountdown();
         }
 
@@ -298,10 +296,10 @@ namespace ShutdownTimer
         /// </summary>
         private void SaveSettings()
         {
-            ExceptionHandler.Log("Saving settings...");
-
             if (SettingsProvider.SettingsLoaded)
             {
+                ExceptionHandler.Log("Saving settings...");
+
                 if (SettingsProvider.Settings.RememberLastState)
                 {
                     SettingsProvider.Settings.DefaultTimer.Action = actionComboBox.Text;
@@ -337,6 +335,16 @@ namespace ShutdownTimer
         /// </summary>
         private void StartCountdown()
         {
+            ExceptionHandler.Log("Preparing for countdown start");
+            startButton.Enabled = false;
+            actionGroupBox.Enabled = false;
+            timeGroupBox.Enabled = false;
+            isConcluded = true; // mark form as concluded to prevent further logic on form closing events
+            SaveSettings();
+
+            ExceptionHandler.Log("Initiaing countdown start");
+            this.Hide();
+
             ExceptionHandler.Log("Starting countdown...");
 
             // Calculate TimeSpan
