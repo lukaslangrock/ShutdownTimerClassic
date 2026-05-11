@@ -14,11 +14,14 @@ jobs:
       - uses: NuGet/setup-nuget@v4.0
       
       - name: debug step
+        working-directory: src
         run: dir
 
       - name: Restore Packages
+        working-directory: src
         run: nuget restore ShutdownTimerClassic.sln
 
       - name: Build Solution
+        working-directory: src
         run: |
           msbuild.exerestore ShutdownTimerClassic.sln /p:platform="Any CPU" /p:configuration="Release"
