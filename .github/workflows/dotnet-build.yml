@@ -28,6 +28,6 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v7
         with:
-          path: src/bin/Debug
+          path: src\ShutdownTimer\bin\Debug
           compression-level: 9
           include-hidden-files: true
