@@ -1,0 +1,24 @@
+on: [ push, pull_request ]
+
+jobs:
+  build:
+    runs-on: windows-2025
+    steps:      
+      - uses: actions/checkout@v2
+      
+      - uses: microsoft/setup-msbuild@v3
+        with:
+          vs-version: # optional
+          msbuild-architecture: # optional, default is x86
+      
+      - uses: NuGet/setup-nuget@v4.0
+      
+      - name: Navigate to Workspace
+        run: cd src
+
+      - name: Restore Packages
+        run: nuget restore ShutdownTimerClassic.sln
+
+      - name: Build Solution
+        run: |
+          msbuild.exerestore ShutdownTimerClassic.sln /p:platform="Any CPU" /p:configuration="Release"
