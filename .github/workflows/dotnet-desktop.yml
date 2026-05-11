@@ -4,7 +4,7 @@ jobs:
   build:
     runs-on: windows-2025
     steps:      
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v6
       
       - uses: microsoft/setup-msbuild@v3
         with:
@@ -13,8 +13,8 @@ jobs:
       
       - uses: NuGet/setup-nuget@v4.0
       
-      - name: Navigate to Workspace
-        run: cd src
+      - name: debug step
+        run: dir
 
       - name: Restore Packages
         run: nuget restore ShutdownTimerClassic.sln
