@@ -4,7 +4,7 @@ jobs:
   build:
     runs-on: windows-2025-vs2026
     steps:      
-      - name: Set up Project
+      - name: Set up project
         uses: actions/checkout@v6
       
       - name: Set up MSBuild
@@ -16,7 +16,7 @@ jobs:
       - name: Set up NuGet
         uses: NuGet/setup-nuget@v4.0
 
-      - name: Restore NuGet Packages
+      - name: Restore NuGet packages
         working-directory: src
         run: nuget restore ShutdownTimerClassic.sln
 
@@ -25,7 +25,7 @@ jobs:
         run: |
           msbuild.exe ShutdownTimerClassic.sln /p:platform="Any CPU" /p:configuration="Debug"
 
-      - name: Upload Build Artifacts
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v7
         with:
           path: src/bin/Debug
