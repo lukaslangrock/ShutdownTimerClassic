@@ -24,4 +24,4 @@ jobs:
       - name: Build Solution
         working-directory: src
         run: |
-          msbuild.exerestore ShutdownTimerClassic.sln /p:platform="Any CPU" /p:configuration="Release"
+          msbuild.exe ShutdownTimerClassic.sln /p:platform="Any CPU" /p:configuration="Debug"
