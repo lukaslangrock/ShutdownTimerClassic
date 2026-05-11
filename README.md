@@ -9,6 +9,18 @@ I am also planning on developing a more advanced and sleek version of this app i
 **Want to contribute or take a look at my code?** Awesome, I welcome all and any contributions and would love to hear your opinion.
 Take a look at my [file and folder structure](Structure.md) document to read more about how everything ties together.
 
+# Installation 💿
+
+**Recommended**: [Microsoft Store](https://www.microsoft.com/store/apps/9NTDG6C9BTTW?cid=github.com)
+
+The Microsoft Store is the only official download that will receive automatic updates (as they are managed by Microsoft as opposed to the application itself, which isn't connected to the internet and cannot check for updates).
+
+**Alternative**: [GitHub Releases](https://github.com/lukaslangrock/ShutdownTimerClassic/releases) or [my mirror](https://files.langrock.info/apps/ShutdownTimerClassic/).
+
+These builds are provided with each stable release and include both the binaries itself for portable use and an installer. If you want to use the raw binaries themself, please extract the entire archive and keep all the files in the same folder.
+
+**Development builds**: As this is a low priority side-project of mine, releases are rare. However, the CI for this projects is set-up to produce and publish build artifacts for each new commit. These are very much development builds, they might not work correctly and they may represent features in an unfinished state, so use them at your own disgrecion (this is also why there is no link here, they are not meant for people not at all familar with software development).
+
 # Usage ✨
 
 Shutdown Timer is a very simple application hence it is easy to use.
