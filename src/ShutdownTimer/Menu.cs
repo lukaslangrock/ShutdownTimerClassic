@@ -132,13 +132,6 @@ namespace ShutdownTimer
                 }
             }
 
-            ExceptionHandler.Log("Preparing for countdown start");
-            startButton.Enabled = false;
-            actionGroupBox.Enabled = false;
-            timeGroupBox.Enabled = false;
-
-            SaveSettings();
-
             if (actionComboBox.Text.Equals("Custom Command"))
             {
                 ExceptionHandler.Log("Entering custom command setup");
@@ -148,8 +141,15 @@ namespace ShutdownTimer
                     form.Message = "Please enter the command you want to have executed. If you wish to launch a file, just enter the full file path.\n\n" +
                         "Note: Execution will use this user's permissions.";
                     ExceptionHandler.Log("Requesting custom command from user...");
+
                     var result = form.ShowDialog();
-                    ExceptionHandler.Log("Saving command");
+                    if (result != DialogResult.OK)
+                    {
+                        ExceptionHandler.Log("User declined to enter custom command, aborting start.");
+                        return;
+                    }
+
+                    ExceptionHandler.Log("Accepted command: \"" + result.ToString() + "\"");
                     command = form.ReturnValue;
                 }
             }
@@ -169,6 +169,13 @@ namespace ShutdownTimer
                     password = form.ReturnValue;
                 }
             }
+
+            ExceptionHandler.Log("Preparing for countdown start");
+            startButton.Enabled = false;
+            actionGroupBox.Enabled = false;
+            timeGroupBox.Enabled = false;
+
+            SaveSettings();
 
             ExceptionHandler.Log("Initiaing countdown start");
             this.Hide();
