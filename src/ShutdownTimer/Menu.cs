@@ -194,10 +194,10 @@ namespace ShutdownTimer
                 errMessages += "Please select a valid action from the dropdown menu!\n\n";
             }
 
-            // Check if all time values are zero
-            if (hoursNumericUpDown.Value == 0 && minutesNumericUpDown.Value == 0 && secondsNumericUpDown.Value == 0)
+            // Check if all time values are zero when in countdown mode
+            if (hoursNumericUpDown.Value == 0 && minutesNumericUpDown.Value == 0 && secondsNumericUpDown.Value == 0 && countdownModeRadioButton.Checked)
             {
-                errMessages += "The timer cannot start at 0!\n\n";
+                errMessages += "The timer cannot start at 0 when in countdown mode!\n\n";
             }
 
             // Respective check for either countdown or timeOfDay mode
