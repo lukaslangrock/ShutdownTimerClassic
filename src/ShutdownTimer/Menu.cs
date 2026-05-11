@@ -31,26 +31,26 @@ namespace ShutdownTimer
 
         private void Menu_Load(object sender, EventArgs e)
         {
-            ExceptionHandler.Log("Checking multiple instances configuration");
+            ExceptionHandler.Log("Check multiple instances setting");
 
             if (!SettingsProvider.Settings.EnableMultipleInstances)
             {
-                ExceptionHandler.Log("Multiple instances are not allowed");
+                ExceptionHandler.Log("Multiple instances disabled");
 
-                ExceptionHandler.Log("Checking for another instance already running");
+                ExceptionHandler.Log("Checking for running instance");
                 if (!ApplicationInstanceManager.IsSingleInstance())
                 {
                     MessageBox.Show("Another instance of this application is already running. To allow multiple instances, please check the \"Allow multiple instances\" option in the application settings.\n\nExiting...", "Application already running!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    ExceptionHandler.Log("Detected another instance already running. Exiting...");
+                    ExceptionHandler.Log("Another instance detected; exiting");
                     Application.Exit();
                 }
             }
             else
             {
-                ExceptionHandler.Log("Multiple instances are allowed");
+                ExceptionHandler.Log("Multiple instances allowed");
             }
 
-            ExceptionHandler.Log("Setting up form...");
+            ExceptionHandler.Log("Initializing form");
 
             versionLabel.Text = "v" + Application.ProductVersion.Remove(Application.ProductVersion.LastIndexOf(".")); // Display current version
 #if DEBUG
@@ -69,17 +69,17 @@ namespace ShutdownTimer
             // Prevent font-fallback and subsequent layout issues. This application is currently only in English and doesn't require display of non-Latin characters.
             this.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
 
-            ExceptionHandler.Log("Setup finished");
+            ExceptionHandler.Log("Form initialized");
         }
 
         private void Menu_Shown(object sender, EventArgs e)
         {
-            ExceptionHandler.Log("Showing form");
+            ExceptionHandler.Log("Form shown");
             // Check for startup arguments
             if (OverrideSettings)
             {
                 // Apply given setting
-                ExceptionHandler.Log("Loading args");
+                ExceptionHandler.Log("Applying CLI arguments");
                 LoadArgs();
             }
             else
@@ -93,7 +93,7 @@ namespace ShutdownTimer
 
         private void Menu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ExceptionHandler.Log("Form closing...");
+            ExceptionHandler.Log("Form closing");
 
             // Only save settings when form hasn't concluded it's function.
             if (!isConcluded)
@@ -118,13 +118,13 @@ namespace ShutdownTimer
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            ExceptionHandler.Log("Initializing preparations for countdown start");
+            ExceptionHandler.Log("Start requested");
 
             (bool allChecksPassed, string listOfErrorsFound, string listOfWarningsFound) = RunChecks();
 
             if (!allChecksPassed)
             {
-                ExceptionHandler.Log("Cannot start countdown due to failing checks.");
+                ExceptionHandler.Log("Start aborted: failing checks");
                 MessageBox.Show("The following error(s) occurred:\n\n" + listOfErrorsFound + "Please resolve the problem(s) and try again.", "There seems to be a problem!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -133,53 +133,53 @@ namespace ShutdownTimer
             {
                 if (MessageBox.Show(listOfWarningsFound, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation) != DialogResult.OK)
                 {
-                    ExceptionHandler.Log("User cancelled countdown due to warnings.");
+                    ExceptionHandler.Log("User cancelled due to warnings");
                     return;
                 }
             }
 
             if (actionComboBox.Text.Equals("Custom Command"))
             {
-                ExceptionHandler.Log("Entering custom command setup");
+                ExceptionHandler.Log("Custom command requested");
                 using (var form = new InputBox())
                 {
                     form.Title = "Custom Command";
                     form.Message = "Please enter the command you want to have executed. If you wish to launch a file, just enter the full file path.\n\n" +
                         "Note: Execution will use this user's permissions.";
 
-                    ExceptionHandler.Log("Requesting custom command from user...");
+                    ExceptionHandler.Log("Prompting for custom command");
                     var result = form.ShowDialog();
 
                     if (result != DialogResult.OK)
                     {
-                        ExceptionHandler.Log("User declined to enter custom command, aborting start.");
+                        ExceptionHandler.Log("User cancelled custom command input; aborting");
                         return;
                     }
 
                     if (String.IsNullOrWhiteSpace(form.ReturnValue))
                     {
-                        ExceptionHandler.Log("Custom command was null or whitespace, aborting start.");
+                        ExceptionHandler.Log("Invalid custom command input; aborting");
                         MessageBox.Show("Custom command field was empty. Please enter a valid command or use a different action!", "Invalid command!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
-                    ExceptionHandler.Log("Accepted command: \"" + form.ReturnValue + "\"");
+                    ExceptionHandler.Log("Accepted command: \"" + form.ReturnValue + "\".");
                     command = form.ReturnValue;
                 }
             }
 
             if (SettingsProvider.Settings.PasswordProtection)
             {
-                ExceptionHandler.Log("Enabling password protection");
+                ExceptionHandler.Log("Password protection enabled");
                 using (var form = new InputBox())
                 {
                     form.Title = "Password Protection";
                     form.Message = "Please set a password to enable password protection.\n\n" +
                         "You can disable this dialog in the settings under Advanced > Password Protection.";
                     form.PasswordMode = true;
-                    ExceptionHandler.Log("Requesting password setup from user...");
+                    ExceptionHandler.Log("Prompting for password");
                     var result = form.ShowDialog();
-                    ExceptionHandler.Log("Saving password");
+                    ExceptionHandler.Log("Password set");
                     password = form.ReturnValue;
                 }
             }
@@ -335,14 +335,14 @@ namespace ShutdownTimer
         /// </summary>
         private void StartCountdown()
         {
-            ExceptionHandler.Log("Preparing for countdown start");
+            ExceptionHandler.Log("Preparing countdown");
             startButton.Enabled = false;
             actionGroupBox.Enabled = false;
             timeGroupBox.Enabled = false;
             isConcluded = true; // mark form as concluded to prevent further logic on form closing events
             SaveSettings();
 
-            ExceptionHandler.Log("Initiating countdown start");
+            ExceptionHandler.Log("Countdown initiated");
             this.Hide();
 
             ExceptionHandler.Log("Starting countdown...");
@@ -358,7 +358,7 @@ namespace ShutdownTimer
             Timer.Command = command;
 
             // Show countdown window
-            ExceptionHandler.Log("Starting timer...");
+            ExceptionHandler.Log("Starting timer");
             Timer.Start(password, !backgroundCheckBox.Checked);
         }
     }

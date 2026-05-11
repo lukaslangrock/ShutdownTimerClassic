@@ -24,11 +24,11 @@ namespace ShutdownTimer
             // make sure Start() can only be called once
             if (isActive)
             {
-                ExceptionHandler.Log("ERROR: Timer has already been started!");
+                ExceptionHandler.Log("Timer already started; aborting");
                 return;
             }
 
-            ExceptionHandler.Log("Starting timer clock");
+            ExceptionHandler.Log("Start timer");
             isActive = true;
             clock.Start();
 
@@ -40,7 +40,7 @@ namespace ShutdownTimer
                 IsUserLaunched = userLaunch
             };
 
-            ExceptionHandler.Log("Starting Countdown form...");
+            ExceptionHandler.Log("Show countdown form");
             countdownForm.Show();
 
             if (PreventSystemSleep)
@@ -53,7 +53,7 @@ namespace ShutdownTimer
             // setup automatic evaluation of passed time
             Task.Run(async () =>
             {
-                ExceptionHandler.Log("Starting looping timer evaluation task");
+                ExceptionHandler.Log("Start looping timer evaluation task");
                 while (isActive)
                 {
                     try
@@ -130,7 +130,7 @@ namespace ShutdownTimer
         {
             if (GetTimeRemaining().TotalSeconds <= 0)
             {
-                ExceptionHandler.Log("Countdown reached 0, getting ready for action");
+                ExceptionHandler.Log("Countdown reached zero");
                 isActive = false; // end looped thread
                 clock.Stop();
                 countdownForm.ExitExternal(); // close countdown window
@@ -139,14 +139,14 @@ namespace ShutdownTimer
                 // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired.
                 if (PreventSystemSleep)
                 {
-                    ExceptionHandler.Log("Clearing EXECUTION_STATE flags");
+                    ExceptionHandler.Log("Clear execution state");
                     ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS);
                 }
 
                 // check if app was started with a form and use its exit behaviour
                 if (Application.OpenForms.Count > 0)
                 {
-                    ExceptionHandler.Log("Trying to exit application via main form");
+                    ExceptionHandler.Log("Exit via main form");
                     Application.OpenForms[0].Invoke((MethodInvoker)(() =>
                     {
                         Application.Exit();
@@ -155,7 +155,7 @@ namespace ShutdownTimer
 
                 // exit the application if nothing happens // no main form exists
                 System.Threading.Thread.Sleep(1000);
-                ExceptionHandler.Log("Exit via main form apparently failed, using Environment.Exit()");
+                ExceptionHandler.Log("Fallback to Environment.Exit");
                 ExceptionHandler.CreateAutoLogIfApplicable();
                 Environment.Exit(0);
             }
@@ -163,7 +163,7 @@ namespace ShutdownTimer
 
         private static void ExecutePowerAction(string chosenAction)
         {
-            ExceptionHandler.Log($"Processing action: {Action}");
+            ExceptionHandler.Log($"Executing action: {Action}");
 
             switch (chosenAction)
             {
@@ -198,7 +198,7 @@ namespace ShutdownTimer
                     }
                     catch (Exception ex)
                     {
-                        ExceptionHandler.Log("Error starting a process of the custom command.");
+                        ExceptionHandler.Log("Failed to start custom command process");
                         ExceptionHandler.Log("Custom command: " + Command);
                         ExceptionHandler.Log("Exception: " + ex.ToString());
                         MessageBox.Show("There was an error executing your custom command.\n\nYour custom command: " + Command + "\nError: " + ex.Message, "Countdown Update", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -19,16 +19,16 @@ namespace ShutdownTimer.Helpers
 
         public static void ProcessArgs(string[] args)
         {
-            ExceptionHandler.Log("Processing args...");
+            ExceptionHandler.Log("Processing CLI args");
             ReadArgs(args);
             ExportTimeToInt();
             CalculateTimeSpan();
-            ExceptionHandler.Log("Processed args");
+            ExceptionHandler.Log("CLI args processed");
         }
 
         private static void ReadArgs(string[] args)
         {
-            ExceptionHandler.Log("Reading args...");
+            ExceptionHandler.Log("Reading CLI args");
 
             // Control Modes:
             // Prefill:      Prefills settings but lets the user manually change them too. Timer won't start automatically.
@@ -76,12 +76,12 @@ namespace ShutdownTimer.Helpers
                 }
             }
 
-            ExceptionHandler.Log("Read args");
+            ExceptionHandler.Log("Args read");
         }
 
         private static void ExportTimeToInt()
         {
-            ExceptionHandler.Log("Exporting to Int...");
+            ExceptionHandler.Log("Parsing time argument");
 
             if (!string.IsNullOrWhiteSpace(argTime))
             {
@@ -97,7 +97,7 @@ namespace ShutdownTimer.Helpers
                     switch (count)
                     {
                         case 0:
-                            ExceptionHandler.Log("Invalid time args.");
+                            ExceptionHandler.Log("Invalid time argument");
                             break;
 
                         case 1:
@@ -116,12 +116,12 @@ namespace ShutdownTimer.Helpers
                 }
             }
 
-            ExceptionHandler.Log("Exported to Int");
+            ExceptionHandler.Log("Time argument parsed");
         }
 
         private static void CalculateTimeSpan()
         {
-            ExceptionHandler.Log("Calculating TimeSpan...");
+            ExceptionHandler.Log("Calculating TimeSpan");
 
             argTimeTS = Numerics.CalculateCountdownTimeSpan(argTimeH, argTimeM, argTimeS, argUseTimeOfDay);
         }

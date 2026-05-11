@@ -12,7 +12,7 @@ namespace ShutdownTimer
         {
             if (!Debugger.IsAttached)
             {
-                ExceptionHandler.Log("Attaching ExceptionHandler.cs");
+                ExceptionHandler.Log("Register exception handler");
                 AppDomain.CurrentDomain.UnhandledException += ExceptionHandler.UnhandledExceptionHandler;
                 Application.ThreadException += ExceptionHandler.ThreadExceptionHandler;
             }
@@ -22,17 +22,17 @@ namespace ShutdownTimer
 
             if (args.Length == 0)
             {
-                ExceptionHandler.Log("Running Menu");
+                ExceptionHandler.Log("Start menu");
                 SettingsProvider.Load();
                 Application.Run(new Menu());
             }
             else
             {
-                ExceptionHandler.Log("Processing args...");
+                ExceptionHandler.Log("Processing CLI args");
                 ArgProcessor.ProcessArgs(args);
 
                 // Initialize settings
-                ExceptionHandler.Log("Loading settings...");
+                ExceptionHandler.Log("Load settings");
                 if (ArgProcessor.argNoSettings)
                 { SettingsProvider.TemporaryMode = true; }
                 SettingsProvider.Load();
@@ -42,7 +42,7 @@ namespace ShutdownTimer
                 {
                     case "Prefill":
                     case "Lock":
-                        ExceptionHandler.Log("Running Menu with args");
+                        ExceptionHandler.Log("Run menu with args");
                         Menu menu = new Menu
                         {
                             OverrideSettings = true,
@@ -65,7 +65,7 @@ namespace ShutdownTimer
                         if (ArgProcessor.argMode.Equals("Launch")) { forced = false; }
                         else { forced = true; }
 
-                        ExceptionHandler.Log("Running Countdown with args" + forced.ToString());
+                        ExceptionHandler.Log("Run Countdown with args");
                         Timer.CountdownTimeSpan = ArgProcessor.argTimeTS;
                         Timer.Action = ArgProcessor.argAction;
                         Timer.Graceful = ArgProcessor.argGraceful;

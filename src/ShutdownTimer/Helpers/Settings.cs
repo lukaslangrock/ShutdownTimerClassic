@@ -16,7 +16,7 @@ namespace ShutdownTimer.Helpers
 
         public static void Load()
         {
-            ExceptionHandler.Log("Loading settings...");
+            ExceptionHandler.Log("Loading settings");
 
             if (!TemporaryMode)
             {
@@ -30,8 +30,7 @@ namespace ShutdownTimer.Helpers
                 // make sure settings.json exists
                 if (!File.Exists(settingsPath))
                 {
-                    ExceptionHandler.Log("Settings file does not exist.");
-                    ExceptionHandler.Log("Creating new empty settings object");
+                    ExceptionHandler.Log("Settings file not found; creating new settings object");
                     SettingsData emptySettingsData = new SettingsData();
                     ExceptionHandler.Log("Serializing settings");
                     string emptySettingsDataJson = JsonConvert.SerializeObject(emptySettingsData, Formatting.Indented);
@@ -49,25 +48,25 @@ namespace ShutdownTimer.Helpers
             }
             else
             {
-                ExceptionHandler.Log("Creating new ephemeral settings due to TemporaryMode");
+                ExceptionHandler.Log("Initializing temporary settings (TemporaryMode)");
                 Settings = new SettingsData();
                 CheckSettings();
                 SettingsLoaded = true;
-                ExceptionHandler.Log("Successfully created new temporary settings object in application memory");
+                ExceptionHandler.Log("Temporary settings initialized");
             }
         }
 
         private static void CheckSettings()
         {
-            ExceptionHandler.Log("Checking settings object");
+            ExceptionHandler.Log("Validating settings object");
             if (Settings == null)
             {
-                ExceptionHandler.Log("Settings could not be loaded, the file might be corrupted or empty. Initializing new settings object.");
+                ExceptionHandler.Log("Settings null or corrupted; initializing defaults");
                 ClearSettings();
             }
 
             // If settings were created by an earlier version some migration steps might have to occur before using them
-            ExceptionHandler.Log("Checking product version");
+            ExceptionHandler.Log("Check settings version");
             if (Settings.AppVersion != null && Settings.AppVersion != "")
             {
                 // 
@@ -98,20 +97,20 @@ namespace ShutdownTimer.Helpers
                 }
             }
 
-            ExceptionHandler.Log("Setting product version");
+            ExceptionHandler.Log("Set product version in settings");
             Settings.AppVersion = Application.ProductVersion;
 
-            ExceptionHandler.Log("Checking field: TrayIconTheme");
+            ExceptionHandler.Log("Check TrayIconTheme field");
             if (Settings.TrayIconTheme is null)
             {
-                ExceptionHandler.Log("Restoring TrayIconTheme to defaults");
+                ExceptionHandler.Log("Restore TrayIconTheme default");
                 Settings.TrayIconTheme = "Automatic";
             }
 
-            ExceptionHandler.Log("Checking field: DefaultTimer");
+            ExceptionHandler.Log("Check DefaultTimer field");
             if (Settings.DefaultTimer is null)
             {
-                ExceptionHandler.Log("Restoring DefaultTimer to defaults");
+                ExceptionHandler.Log("Restore DefaultTimer defaults");
                 Settings.DefaultTimer = new TimerData
                 {
                     Action = "Shutdown",
@@ -125,33 +124,33 @@ namespace ShutdownTimer.Helpers
                 };
             }
 
-            ExceptionHandler.Log("Checking field: BackgroundColor");
+            ExceptionHandler.Log("Check BackgroundColor field");
             if (Settings.BackgroundColor == Color.Empty)
             {
-                ExceptionHandler.Log("Restoring BackgroundColor to defaults");
+                ExceptionHandler.Log("Restore BackgroundColor defaults");
                 Settings.BackgroundColor = Color.RoyalBlue;
             }
 
-            ExceptionHandler.Log("Checked settings object");
+            ExceptionHandler.Log("Settings validated");
         }
 
         public static void ClearSettings()
         {
-            ExceptionHandler.Log("Clearing settings...");
+            ExceptionHandler.Log("Clearing settings");
 
             Settings = new SettingsData();
-            ExceptionHandler.Log("Created new empty settings object");
+            ExceptionHandler.Log("Created default settings object");
             CheckSettings();
             Save();
 
-            ExceptionHandler.Log("Cleared settings");
+            ExceptionHandler.Log("Settings cleared");
         }
 
         public static void Save()
         {
             if (!TemporaryMode)
             {
-                ExceptionHandler.Log("Saving settings...");
+                ExceptionHandler.Log("Saving settings");
 
                 if (SettingsLoaded)
                 {
@@ -159,16 +158,16 @@ namespace ShutdownTimer.Helpers
                     string settingsJson = JsonConvert.SerializeObject(Settings, Formatting.Indented);
                     ExceptionHandler.Log("Writing settings.json");
                     File.WriteAllText(settingsPath, settingsJson);
-                    ExceptionHandler.Log("Saved settings");
+                    ExceptionHandler.Log("Settings saved");
                 }
                 else
                 {
-                    ExceptionHandler.Log("Ignoring Settings.Save() call as no settings are loaded");
+                    ExceptionHandler.Log("Ignore save: settings not loaded");
                 }
             }
             else
             {
-                ExceptionHandler.Log("Ignoring Settings.Save() call due to TemporaryMode");
+                ExceptionHandler.Log("Ignore save: TemporaryMode enabled");
             }
         }
     }
