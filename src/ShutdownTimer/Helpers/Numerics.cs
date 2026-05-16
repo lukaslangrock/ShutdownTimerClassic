@@ -45,15 +45,16 @@ namespace ShutdownTimer.Helpers
             int hours = Convert.ToInt32(pHours);
             int minutes = Convert.ToInt32(pMinutes);
             int seconds = Convert.ToInt32(pSeconds);
+            DateTime nowReference = DateTime.Now;
             TimeSpan ts;
 
             if (interpretAsTimeOfDay)
             {
                 // calculate timespan till a time of day target
-                bool today = Numerics.TodayOrTomorrow(hours, minutes, seconds);
-                DateTime target = DateTime.Parse(hours + ":" + minutes + ":" + seconds);
+                bool today = Numerics.TodayOrTomorrow(hours, minutes, seconds, nowReference);
+                DateTime target = new DateTime(nowReference.Year, nowReference.Month, nowReference.Day, hours, minutes, seconds);
                 if (!today) { target = target.AddDays(1); }
-                ts = target.Subtract(DateTime.Now);
+                ts = target.Subtract(nowReference);
             }
             else
             {
@@ -83,12 +84,11 @@ namespace ShutdownTimer.Helpers
         /// Determine if a given set of hours, minutes, and seconds regards a time of the current day or the next day
         /// </summary>
         /// <returns>true if today, false if tomorrow</returns>
-        public static bool TodayOrTomorrow(int hours, int minutes, int seconds)
+        public static bool TodayOrTomorrow(int hours, int minutes, int seconds, DateTime nowReference)
         {
-            DateTime now = DateTime.Now;
-            DateTime target = new DateTime(now.Year, now.Month, now.Day, hours, minutes, seconds);
+            DateTime target = new DateTime(nowReference.Year, nowReference.Month, nowReference.Day, hours, minutes, seconds);
 
-            if (target < now) { return false; } // specified time is in the past (for the current day) -> for tomorrow
+            if (target < nowReference) { return false; } // specified time is in the past (for the current day) -> for tomorrow
             else { return true; } // specified time is in the future -> for today
         }
     }
