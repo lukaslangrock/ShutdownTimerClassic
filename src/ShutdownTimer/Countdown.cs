@@ -116,14 +116,7 @@ namespace ShutdownTimer
 
             if (!IsForegroundUI)
             {
-                ignoreClose = true; // Disable close dialogs and ignore closing from form
-                TopMost = false;
-                ShowInTaskbar = false;
-                WindowState = FormWindowState.Minimized;
-                timerUIHideMenuItem.Enabled = false;
-                timerUIShowMenuItem.Enabled = true;
-                SendNotification("Timer started. The power action will be executed in " + Timer.CountdownTimeSpan.Hours + " hours, " + Timer.CountdownTimeSpan.Minutes + " minutes and " + Timer.CountdownTimeSpan.Seconds + " seconds.");
-                Hide();
+                HideUI();
             }
 
             if (IsReadOnly)
@@ -437,7 +430,8 @@ namespace ShutdownTimer
             WindowState = FormWindowState.Minimized;
             IsForegroundUI = false;
             ignoreClose = true; // Prevent closing (and closing dialog) after ShowInTaskbar changed
-            UpdateUI(Timer.GetTimeRemaining());
+            Hide();
+
             SendNotification("Timer has been moved to the background. Right-click the tray icon for more info.");
         }
 
@@ -448,13 +442,16 @@ namespace ShutdownTimer
         {
             ExceptionHandler.Log("Showing UI");
 
+            Show();
             timerUIHideMenuItem.Enabled = true;
             timerUIShowMenuItem.Enabled = false;
-            if (!SettingsProvider.Settings.DisableAlwaysOnTop) { TopMost = true; }
+            TopMost = !SettingsProvider.Settings.DisableAlwaysOnTop;
             ShowInTaskbar = true;
             WindowState = FormWindowState.Normal;
             IsForegroundUI = true;
             ignoreClose = true; // Prevent closing (and closing dialog) after ShowInTaskbar changed
+
+            UpdateUI(Timer.GetTimeRemaining());
 
             // Re-Enable close question after the main thread has moved on and the close event raised from the this. ShowInTaskbar has been ignored
             new Thread(() =>
@@ -463,8 +460,6 @@ namespace ShutdownTimer
                 Thread.Sleep(100); // Waiting to make sure the main thread has moved on and successfully
                 ignoreClose = false; // Re-Enable close question
             }).Start();
-
-            UpdateUI(Timer.GetTimeRemaining());
         }
 
         /// <summary>
