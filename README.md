@@ -88,7 +88,7 @@ Argument                 Description
 /SetAction <action>      Sets the power action which will be executed after the countdown reached zero.
                          Type in the exact name as seen in the UI (eg: Shutdown, Restart or Sleep. Do not use other variations like shutdown, Reboot, SLEEP, ...).
 
-/SetMode <mode>          Sets the control mode. Modes available:
+/SetMode <mode>          Sets the control mode. This is required for any CLI arguments to take effect. Modes available:
                          Prefill:       Prefills settings but lets the user manually change them too. Timer won't start automatically.
                          Lock:          Overrides settings so the user cannot change them. Timer won't start automatically.
                          Launch:        Overrides settings and starts the timer.

@@ -4,7 +4,7 @@ namespace ShutdownTimer.Helpers
 {
     public static class ArgProcessor
     {
-        public static string argMode = "Prefill";
+        public static string argMode;
         public static string argTime;
         public static string argAction = "Shutdown";
         public static string argPassword;

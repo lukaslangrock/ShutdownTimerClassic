@@ -7,7 +7,7 @@ namespace ShutdownTimer
 {
     public partial class Menu : Form
     {
-        public bool OverrideSettings { get; set; }
+        public bool ApplyArgumentValues { get; set; }
         public int ArgTimeH { get; set; }
         public int ArgTimeM { get; set; }
         public int ArgTimeS { get; set; }
@@ -77,7 +77,7 @@ namespace ShutdownTimer
         {
             ExceptionHandler.Log("Form shown");
             // Check for startup arguments
-            if (OverrideSettings)
+            if (ApplyArgumentValues)
             {
                 // Apply given setting
                 ExceptionHandler.Log("Applying CLI arguments");

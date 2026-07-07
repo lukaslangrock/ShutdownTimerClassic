@@ -20,13 +20,7 @@ namespace ShutdownTimer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            if (args.Length == 0)
-            {
-                ExceptionHandler.Log("Start menu");
-                SettingsProvider.Load();
-                Application.Run(new Menu());
-            }
-            else
+            if (args.Length != 0)
             {
                 ExceptionHandler.Log("Processing CLI args");
                 ArgProcessor.ProcessArgs(args);
@@ -43,9 +37,10 @@ namespace ShutdownTimer
                     case "Prefill":
                     case "Lock":
                         ExceptionHandler.Log("Run menu with args");
+
                         Menu menu = new Menu
                         {
-                            OverrideSettings = true,
+                            ApplyArgumentValues = true,
                             ArgTimeH = ArgProcessor.argTimeH,
                             ArgTimeM = ArgProcessor.argTimeM,
                             ArgTimeS = ArgProcessor.argTimeS,
@@ -58,7 +53,8 @@ namespace ShutdownTimer
                             ArgUseTimeOfDay = ArgProcessor.argUseTimeOfDay
                         };
                         Application.Run(menu);
-                        break;
+                        ExceptionHandler.CreateAutoLogIfApplicable();
+                        return;
 
                     case "Launch":
                     case "ForcedLaunch":
@@ -73,9 +69,14 @@ namespace ShutdownTimer
                         Timer.PreventSystemSleep = ArgProcessor.argPreventSleep;
                         Timer.Start(ArgProcessor.argPassword, !ArgProcessor.argBackground, forced, false);
                         Application.Run();
-                        break;
+                        ExceptionHandler.CreateAutoLogIfApplicable();
+                        return;
                 }
             }
+
+            ExceptionHandler.Log("Start menu");
+            SettingsProvider.Load();
+            Application.Run(new Menu());
             ExceptionHandler.CreateAutoLogIfApplicable();
         }
     }
