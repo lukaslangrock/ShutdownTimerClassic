@@ -7,7 +7,7 @@ The `src/WindowsApplicationPackaging` and `src/WindowsInstallerPackaging` folder
 
 ## How to get started ⚡
 
-I'd recommend using **Visual Studio Community 2022** as it's the IDE I use for developing the project. You can simply open the `ShutdownTimerClassic.sln` solution file in the root folder and it will load the entire project including packaging projects and get everything set up.
+I'd recommend using **Visual Studio Community 2022** as it's the IDE I use for developing the project. You can simply open the `ShutdownTimerClassic.sln` solution file in the `src/` directory and it will load the entire project including packaging projects and get everything set up. If you get an error about the WindowsInstallerPackaging being incompatible, you are missing the [VS Installer Projects Extension](https://marketplace.visualstudio.com/items?itemName=VisualStudioClient.MicrosoftVisualStudio2022InstallerProjects).
 
 ## Application Structure 🕸
 
@@ -26,7 +26,11 @@ It will call `Helpers/ExitWindows.cs` when the timer reaches zero and uses `Help
 
 **`Settings.cs`** manages the settings and shows information about the application. It can be reached by clicking the button with the cog icon in the upper right-hand corner of `Menu.cs`. It gets and sets the settings with `Helpers/Settings.cs`.
 
+**`InputBox.cs`** is a dialog intended to ask the user for a text-based input. It's invoked by other forms only.
+
 ### Helpers 🧱
+
+**`Helpers/ApplicationInstanceManager.cs`** contains the logic for detecting multiple instances of the application.
 
 **`Helpers/ArgProcessor.cs`** is responsible for reading CLI arguments and is only used by `Program.cs`
 
@@ -36,15 +40,19 @@ It will call `Helpers/ExitWindows.cs` when the timer reaches zero and uses `Help
 
 **`Helpers/ExitWindows.cs`** calls the respective Windows APIs for the chosen power action.
 
+**`Helpers/Format.cs`** contains string formatting functions.
+
 **`Helpers/Numerics.cs`** includes a few numerical functions which validate and process the time data.
 
 **`Helpers/Settings.cs`** loads and saves the settings to a `settings.json` file in the user's application data folder.
 It exposes a `Settings` property to the entire application which is used to get and set the desired settings. Pretty much every form uses this.
 The settings do need to be saved to the `settings.json` file before exiting the application otherwise all changes would be lost. `Menu.cs` and `Settings.cs` do this before exiting.
 
+**`Helpers/WindowsAPIs.cs`** contains logic regarding APIs provided by Windows (excluding the ones required for executing power actions, which are handled by `ExitWindows.cs`).
+
 ### Dependencies 📚
 
-This app depends on `Microsoft.Windows.SDK.Contracts` for interacting with newer Windows APIs which are otherwise only available to UWP apps and `Newtonsoft.Json` for serializing/deserializing the settings to and from the `settings.json` file.
+This app depends on `Newtonsoft.Json` for serializing/deserializing the settings to and from the `settings.json` file.
 
 ### Other files and folders 👾
 
