@@ -7,6 +7,7 @@ namespace ShutdownTimer.Helpers
         public static string argMode = "Prefill";
         public static string argTime;
         public static string argAction = "Shutdown";
+        public static string argPassword;
         public static bool argGraceful = false;
         public static bool argPreventSleep = true;
         public static bool argBackground = false;
@@ -29,12 +30,6 @@ namespace ShutdownTimer.Helpers
         private static void ReadArgs(string[] args)
         {
             ExceptionHandler.Log("Reading CLI args");
-
-            // Control Modes:
-            // Prefill:      Prefills settings but lets the user manually change them too. Timer won't start automatically.
-            // Lock:         Overrides settings so the user cannot change them. Timer won't start automatically.
-            // Launch:       Overrides settings and starts the timer.
-            // ForcedLaunch: Overrides settings and starts the timer. Disables all UI controls and exit dialogs.
 
             // Read args and do some processing
             for (var i = 0; i < args.Length; i++)
@@ -72,6 +67,10 @@ namespace ShutdownTimer.Helpers
 
                     case "/TargetTimeOfDay":
                         argUseTimeOfDay = true;
+                        break;
+
+                    case "/SetPassword":
+                        argPassword = args[i + 1];
                         break;
                 }
             }

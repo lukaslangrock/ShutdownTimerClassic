@@ -51,6 +51,7 @@ namespace ShutdownTimer
                             ArgTimeS = ArgProcessor.argTimeS,
                             ArgAction = ArgProcessor.argAction,
                             ArgMode = ArgProcessor.argMode,
+                            ArgPassword = ArgProcessor.argPassword,
                             ArgGraceful = ArgProcessor.argGraceful,
                             ArgPreventSleep = ArgProcessor.argPreventSleep,
                             ArgBackground = ArgProcessor.argBackground,
@@ -70,7 +71,7 @@ namespace ShutdownTimer
                         Timer.Action = ArgProcessor.argAction;
                         Timer.Graceful = ArgProcessor.argGraceful;
                         Timer.PreventSystemSleep = ArgProcessor.argPreventSleep;
-                        Timer.Start(null, !ArgProcessor.argBackground, forced, false);
+                        Timer.Start(ArgProcessor.argPassword, !ArgProcessor.argBackground, forced, false);
                         Application.Run();
                         break;
                 }
