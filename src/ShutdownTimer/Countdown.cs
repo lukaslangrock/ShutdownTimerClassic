@@ -95,6 +95,9 @@ namespace ShutdownTimer
             // When the dark theme is selected we are using the light icon to generate contrast (and vice versa), you wouldn't want a white icon on a white background.
             notifyIcon.Icon = lighttheme ? Properties.Resources.icon_dark : Properties.Resources.icon_light;
 
+            // Hide tray icon if enabled in settings
+            notifyIcon.Visible = !SettingsProvider.Settings.HideTrayIcon;
+
             // Load password and set the lock state
             if (!String.IsNullOrEmpty(Password))
             {

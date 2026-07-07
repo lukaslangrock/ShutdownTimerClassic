@@ -194,6 +194,7 @@ namespace ShutdownTimer.Helpers
         public bool PasswordProtection { get; set; }
         public Color BackgroundColor { get; set; }
         public bool AdaptiveCountdownTextSize { get; set; }
+        public bool HideTrayIcon { get; set; }
         public bool SaveEventLogOnExit { get; set; }
     }
 

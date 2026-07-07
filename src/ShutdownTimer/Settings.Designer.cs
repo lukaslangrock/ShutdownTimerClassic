@@ -92,6 +92,7 @@
             this.appSourceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appInfoLabel = new System.Windows.Forms.Label();
+            this.hideTrayIconCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -496,7 +497,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.developerGroupBox.Controls.Add(this.openAppDataLinkLabel);
             this.developerGroupBox.Controls.Add(this.saveLogsCheckBox);
-            this.developerGroupBox.Location = new System.Drawing.Point(6, 321);
+            this.developerGroupBox.Location = new System.Drawing.Point(6, 343);
             this.developerGroupBox.Name = "developerGroupBox";
             this.developerGroupBox.Size = new System.Drawing.Size(284, 58);
             this.developerGroupBox.TabIndex = 410;
@@ -531,7 +532,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.passwordGroupBox.Controls.Add(this.passwordLabel);
             this.passwordGroupBox.Controls.Add(this.passwordCheckBox);
-            this.passwordGroupBox.Location = new System.Drawing.Point(6, 245);
+            this.passwordGroupBox.Location = new System.Drawing.Point(6, 267);
             this.passwordGroupBox.Name = "passwordGroupBox";
             this.passwordGroupBox.Size = new System.Drawing.Size(284, 70);
             this.passwordGroupBox.TabIndex = 380;
@@ -561,6 +562,7 @@
             // 
             this.countdownGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.countdownGroupBox.Controls.Add(this.hideTrayIconCheckBox);
             this.countdownGroupBox.Controls.Add(this.transparentWindowCheckBox);
             this.countdownGroupBox.Controls.Add(this.enableAdaptiveCountdownTextSizeCheckBox);
             this.countdownGroupBox.Controls.Add(this.setBackgroundColorLinkLabel);
@@ -569,7 +571,7 @@
             this.countdownGroupBox.Controls.Add(this.disableAlwaysOnTopCheckBox);
             this.countdownGroupBox.Location = new System.Drawing.Point(6, 104);
             this.countdownGroupBox.Name = "countdownGroupBox";
-            this.countdownGroupBox.Size = new System.Drawing.Size(284, 135);
+            this.countdownGroupBox.Size = new System.Drawing.Size(284, 157);
             this.countdownGroupBox.TabIndex = 310;
             this.countdownGroupBox.TabStop = false;
             this.countdownGroupBox.Text = "Countdown window";
@@ -848,6 +850,17 @@
             this.appInfoLabel.TabIndex = 450;
             this.appInfoLabel.Text = "Application:";
             // 
+            // hideTrayIconCheckBox
+            // 
+            this.hideTrayIconCheckBox.AutoSize = true;
+            this.hideTrayIconCheckBox.Location = new System.Drawing.Point(6, 134);
+            this.hideTrayIconCheckBox.Name = "hideTrayIconCheckBox";
+            this.hideTrayIconCheckBox.Size = new System.Drawing.Size(185, 17);
+            this.hideTrayIconCheckBox.TabIndex = 371;
+            this.hideTrayIconCheckBox.Text = "Hide tray icon (not recommended)";
+            this.hideTrayIconCheckBox.UseVisualStyleBackColor = true;
+            this.hideTrayIconCheckBox.CheckedChanged += new System.EventHandler(this.hideTrayIconCheckBox_CheckedChanged);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -966,5 +979,6 @@
         private System.Windows.Forms.GroupBox developerGroupBox;
         private System.Windows.Forms.CheckBox saveLogsCheckBox;
         private System.Windows.Forms.LinkLabel openAppDataLinkLabel;
+        private System.Windows.Forms.CheckBox hideTrayIconCheckBox;
     }
 }

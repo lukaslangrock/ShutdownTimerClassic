@@ -79,6 +79,7 @@ namespace ShutdownTimer
             disableNotificationsCheckBox.Checked = SettingsProvider.Settings.DisableNotifications;
             passwordCheckBox.Checked = SettingsProvider.Settings.PasswordProtection;
             enableAdaptiveCountdownTextSizeCheckBox.Checked = SettingsProvider.Settings.AdaptiveCountdownTextSize;
+            hideTrayIconCheckBox.Checked = SettingsProvider.Settings.HideTrayIcon;
             if (SettingsProvider.Settings.BackgroundColor == Color.Transparent) { transparentWindowCheckBox.Checked = true; }
             saveLogsCheckBox.Checked = SettingsProvider.Settings.SaveEventLogOnExit;
         }
@@ -111,6 +112,7 @@ namespace ShutdownTimer
             SettingsProvider.Settings.DisableAnimations = disableAnimationsCheckBox.Checked;
             SettingsProvider.Settings.DisableNotifications = disableNotificationsCheckBox.Checked;
             SettingsProvider.Settings.AdaptiveCountdownTextSize = enableAdaptiveCountdownTextSizeCheckBox.Checked;
+            SettingsProvider.Settings.HideTrayIcon = hideTrayIconCheckBox.Checked;
             SettingsProvider.Settings.PasswordProtection = passwordCheckBox.Checked;
             SettingsProvider.Settings.SaveEventLogOnExit = saveLogsCheckBox.Checked;
 
@@ -197,6 +199,29 @@ namespace ShutdownTimer
         private void openAppDataLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Shutdown Timer Classic");
+        }
+
+        private void hideTrayIconCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (hideTrayIconCheckBox.Checked)
+            {
+                // hiding the trayicon prevents notifications
+                disableNotificationsCheckBox.Enabled = false;
+
+                // ensure user understands implications from this action
+                if (hideTrayIconCheckBox.Focused)
+                {
+                    DialogResult result = MessageBox.Show("Disabling the tray icon will prevent you from interacting with the application when it's running in the background.\nYour only choice in such a case is to kill the application with Task Manager.\n\nNotifications will also stop working!\n\nAre you sure you want to enable this option?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result != DialogResult.Yes)
+                    {
+                        hideTrayIconCheckBox.Checked = false;
+                    }
+                }
+            } else
+            {
+                // hiding the trayicon prevents notifications
+                disableNotificationsCheckBox.Enabled = true;
+            }
         }
     }
 }
