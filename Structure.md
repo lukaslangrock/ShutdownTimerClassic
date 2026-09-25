@@ -44,6 +44,8 @@ It will call `Helpers/ExitWindows.cs` when the timer reaches zero and uses `Help
 
 **`Helpers/Numerics.cs`** includes a few numerical functions which validate and process the time data.
 
+**`Helpers/UIFont.cs`** selects a font which can render the current UI culture. The forms assign "Microsoft Sans Serif" by design, and that family carries no glyphs for Chinese, Japanese or Korean, so the fallback breaks the layout the Designer measured. Call `UIFont.Apply(this)` after assigning the font in `Load`; cultures which do not need those scripts are left untouched.
+
 **`Helpers/Settings.cs`** loads and saves the settings to a `settings.json` file in the user's application data folder.
 It exposes a `Settings` property to the entire application which is used to get and set the desired settings. Pretty much every form uses this.
 The settings do need to be saved to the `settings.json` file before exiting the application otherwise all changes would be lost. `Menu.cs` and `Settings.cs` do this before exiting.

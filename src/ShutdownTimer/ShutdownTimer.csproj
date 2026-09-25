@@ -81,6 +81,7 @@
     <Compile Include="Helpers\Numerics.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\WindowsAPIs.cs" />
+    <Compile Include="Helpers\UIFont.cs" />
     <Compile Include="InputBox.cs">
       <SubType>Form</SubType>
     </Compile>
