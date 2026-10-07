@@ -136,13 +136,6 @@ namespace ShutdownTimer
                 countdownForm.ExitExternal(); // close countdown window
                 ExecutePowerAction(Action);
 
-                // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired.
-                if (PreventSystemSleep)
-                {
-                    ExceptionHandler.Log("Clear execution state");
-                    ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS);
-                }
-
                 // check if app was started with a form and use its exit behaviour
                 if (Application.OpenForms.Count > 0)
                 {

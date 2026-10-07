@@ -15,6 +15,10 @@ namespace ShutdownTimer.Helpers
             ES_USER_PRESENT = 0x00000004
         }
 
+        /// <summary>
+        /// Sets the execution state flag for the **current thread**.
+        /// The execution state of a UI thread cannot be cleared from a worker thread!
+        /// </summary>
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern EXECUTION_STATE SetThreadExecutionState(EXECUTION_STATE esFlags);
     }

@@ -36,6 +36,7 @@ namespace ShutdownTimer
             {
                 ignoreClose = false;
                 allowClose = true;
+                ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // clear ES before form closes
                 this.Close();
             }));
         }
@@ -280,6 +281,8 @@ namespace ShutdownTimer
                 SendNotification("Your timer was canceled successfully!\nThe application will now close."); // Show windows toast notification as confirmation
                 ExceptionHandler.Log("Saving settings");
                 SaveSettings();
+                ExceptionHandler.Log("Clearing EXECUTION_STATE flags");
+                ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS);
                 ExceptionHandler.Log("Exit");
                 Application.Exit();
             }
@@ -304,10 +307,10 @@ namespace ShutdownTimer
                 allowClose = true;
                 ExceptionHandler.Log("Pausing timer");
                 Timer.Pause();
-                ExceptionHandler.Log("Clearing EXECUTION_STATE flags");
-                ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS); // Clear EXECUTION_STATE flags to allow the system to go to sleep if it's tired
                 ExceptionHandler.Log("Saving settings");
                 SaveSettings();
+                ExceptionHandler.Log("Clearing EXECUTION_STATE flags");
+                ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS);
                 ExceptionHandler.Log("Restart");
                 Application.Restart();
             }
