@@ -59,19 +59,26 @@ namespace ShutdownTimer
                     try
                     {
                         countdownForm.UpdateExternal(GetTimeRemaining());
-                        EvaluateTimerLoop();
                     }
                     catch (Exception ex)
                     {
-                        ExceptionHandler.Log("Exception encountered in the looping timer evaluation task:");
+                        ExceptionHandler.Log("Exception encountered while updating the UI:");
                         ExceptionHandler.Log(ex.ToString());
                         ExceptionHandler.Log(ex.StackTrace.ToString());
                     }
 
+                    EvaluateTimerLoop();
+
                     // repeat loop each 150ms
                     await Task.Delay(150);
                 }
-            });
+            }).ContinueWith(t =>
+            {
+                // a fault in the timer evaluation or power action execution is critical and must not be swallowed by the background task
+                Exception e = t.Exception.Flatten().InnerException ?? t.Exception;
+                ExceptionHandler.Log("Critical exception in the looping timer evaluation task, forwarding to exception handler");
+                ExceptionHandler.HandleException(e, "UnhandledTaskException", true);
+            }, TaskContinuationOptions.OnlyOnFaulted);
         }
 
         public static void Pause()
@@ -170,11 +177,17 @@ namespace ShutdownTimer
                     break;
 
                 case "Hibernate":
-                    Application.SetSuspendState(PowerState.Hibernate, false, false);
+                    if (!Application.SetSuspendState(PowerState.Hibernate, false, false))
+                    {
+                        throw new InvalidOperationException("Request for setting the system into hibernation state did not suceed.");
+                    }
                     break;
 
                 case "Sleep":
-                    Application.SetSuspendState(PowerState.Suspend, false, false);
+                    if (!Application.SetSuspendState(PowerState.Suspend, false, false))
+                    {
+                        throw new InvalidOperationException("Request for setting the system into suspended state did not suceed.");
+                    }
                     break;
 
                 case "Logout":

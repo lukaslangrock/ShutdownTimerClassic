@@ -16,39 +16,29 @@ namespace ShutdownTimer.Helpers
         public static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs args)
         {
             Exception e = (Exception)args.ExceptionObject;
+            HandleException(e, "UnhandledException", false); // the runtime terminates the process after this handler returns; so we don't need to request and exit
+        }
 
-            string filepath = ProduceLogfile(e, "UnhandledException", true, false);
+        public static void ThreadExceptionHandler(object sender, ThreadExceptionEventArgs args)
+        {
+            HandleException(args.Exception, "ThreadException");
+        }
 
-            string message = "An unhandled exception occurred and the application needs to be terminated!\n\n" +
+        public static void HandleException(Exception e, string type, bool terminate = true)
+        {
+            string filepath = ProduceLogfile(e, type, true, false);
+
+            string message = "The application ran into a critical error, leaving it in an unrecoverable state. As reliable operation can no longer be guaranteed, it will be terminated.\n\n" +
                 "A log file containing information about the process and the error has been saved to your desktop.\n" +
                 "Please create an issue on GitHub and include the contents of this log file to help identify and fix the issue.\n\n" +
                 "GitHub: github.com/lukaslangrock/ShutdownTimerClassic/issues\n" +
                 "Email: lukas.langrock@outlook.de";
             MessageBox.Show(message, "Shutdown Timer Classic crashed and needs to be terminated!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Process.Start(filepath); // Show log to user
-        }
 
-        public static void ThreadExceptionHandler(object sender, ThreadExceptionEventArgs args)
-        {
-            Exception e = args.Exception;
-
-            string filepath = ProduceLogfile(e, "ThreadException", true, false);
-
-            string message = "A thread exception occurred!\n\n" +
-                "A log file containing information about the process and the error has been saved to your desktop.\n" +
-                "Please create an issue on GitHub and include the contents of this log file to help identify and fix the issue.\n\n" +
-                $"Log file location: {filepath}\n" +
-                "GitHub: github.com/lukaslangrock/ShutdownTimerClassic/issues\n" +
-                "Email: lukas.langrock@outlook.de\n\n" +
-                "The application experienced a critical error and may very well be broken. It is not recommended to keep using this instance of the application!\n" +
-                "Would you like to terminate the application?";
-            DialogResult dialogResult = MessageBox.Show(message, "Shutdown Timer Classic crashed!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-            Process.Start(filepath); // Show log to user
-
-            if (dialogResult == DialogResult.Yes)
+            if (terminate)
             {
-                Process.GetCurrentProcess().Kill();
+                Environment.Exit(1);
             }
         }
 
@@ -68,8 +58,7 @@ namespace ShutdownTimer.Helpers
                     ProduceLogfile(null, "NotAnException", false, true);
                 }
             }
-            catch
-            { }
+            catch { Console.WriteLine("Failed to create autolog"); }
         }
 
         // Add a new log to the event log stack
