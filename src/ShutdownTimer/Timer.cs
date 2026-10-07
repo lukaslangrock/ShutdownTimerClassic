@@ -63,8 +63,9 @@ namespace ShutdownTimer
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.ToString());
-                        Console.WriteLine(ex.StackTrace.ToString());
+                        ExceptionHandler.Log("Exception encountered in the looping timer evaluation task:");
+                        ExceptionHandler.Log(ex.ToString());
+                        ExceptionHandler.Log(ex.StackTrace.ToString());
                     }
 
                     // repeat loop each 150ms
