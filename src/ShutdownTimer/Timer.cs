@@ -177,17 +177,11 @@ namespace ShutdownTimer
                     break;
 
                 case "Hibernate":
-                    if (!Application.SetSuspendState(PowerState.Hibernate, false, false))
-                    {
-                        throw new InvalidOperationException("Request for setting the system into hibernation state did not suceed.");
-                    }
+                    ExitWindows.Hibernate();
                     break;
 
                 case "Sleep":
-                    if (!Application.SetSuspendState(PowerState.Suspend, false, false))
-                    {
-                        throw new InvalidOperationException("Request for setting the system into suspended state did not suceed.");
-                    }
+                    ExitWindows.Sleep();
                     break;
 
                 case "Logout":

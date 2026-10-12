@@ -1,5 +1,6 @@
 ﻿using ShutdownTimer.Helpers;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -233,6 +234,20 @@ namespace ShutdownTimer
             catch
             {
                 errMessages += "TimeSpan conversion failed! Please check if your time values are within a reasonable range or represent a valid time of day, if you used the time of day mode.\n\n";
+            }
+
+            // Check if we can get permissions forExitWindowsEx() (used for shutdown/reboot/logoff)
+            try
+            {
+                if (actionComboBox.Text.Contains("Shutdown") || actionComboBox.Text.Contains("Restart") || actionComboBox.Text.Contains("Logout"))
+                {
+                    ExitWindows.GetPrivileges(); // throws on error
+                }
+            }
+            catch (Win32Exception ex)
+            {
+                errMessages += "Permission failure. Couldn't enable the required privliges for Shutdown/Restart/Logout from Windows. Error: " + ex.Message + "\n\n";
+                errMessages += "To learn more about this issue, please go the application's settings and in the \"About\"-tab, click on \"Create Logfile\".";
             }
 
             if (errMessages.Equals(""))
