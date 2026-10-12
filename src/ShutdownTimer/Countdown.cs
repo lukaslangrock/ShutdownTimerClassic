@@ -154,9 +154,9 @@ namespace ShutdownTimer
         {
             if (SettingsProvider.Settings.AdaptiveCountdownTextSize)
             {
-                int defaultWidth = 375;
-                int defaultHeight = 185;
-                int defaultFontSize = 24;
+                float defaultWidth = 375;
+                float defaultHeight = 185;
+                float defaultFontSize = 24;
 
                 float scaleX = Size.Width / defaultWidth;
                 float scaleY = Size.Height / defaultHeight;
