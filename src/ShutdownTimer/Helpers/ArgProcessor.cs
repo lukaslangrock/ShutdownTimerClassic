@@ -32,26 +32,34 @@ namespace ShutdownTimer.Helpers
         {
             ExceptionHandler.Log("Reading CLI args");
 
-            // Read args and do some processing
             for (var i = 0; i < args.Length; i++)
             {
                 ExceptionHandler.Log("Arg " + i + " = " + args[i]);
+            }
+
+            // Read args and do some processing
+            for (var i = 0; i < args.Length; i++)
+            {
                 switch (args[i])
                 {
                     case "/SetTime":
-                        argTime = args[i + 1];
+                        if (i + 1 >= args.Length || args[i + 1].StartsWith("/")) { throw new ArgumentException("Missing value for /SetTime."); }
+                        argTime = args[++i];
                         break;
 
                     case "/SetAction":
-                        argAction = args[i + 1];
+                        if (i + 1 >= args.Length || args[i + 1].StartsWith("/")) { throw new ArgumentException("Missing value for /SetAction."); }
+                        argAction = args[++i];
                         break;
 
                     case "/SetCommand":
-                        argCommand = args[i + 1];
+                        if (i + 1 >= args.Length) { throw new ArgumentException("Missing value for /SetCommand."); }
+                        argCommand = args[++i];
                         break;
 
                     case "/SetMode":
-                        argMode = args[i + 1];
+                        if (i + 1 >= args.Length || args[i + 1].StartsWith("/")) { throw new ArgumentException("Missing value for /SetMode."); }
+                        argMode = args[++i];
                         break;
 
                     case "/Graceful":
@@ -75,7 +83,8 @@ namespace ShutdownTimer.Helpers
                         break;
 
                     case "/SetPassword":
-                        argPassword = args[i + 1];
+                        if (i + 1 >= args.Length) { throw new ArgumentException("Missing value for /SetPassword."); }
+                        argPassword = args[++i];
                         break;
                 }
             }
@@ -87,7 +96,7 @@ namespace ShutdownTimer.Helpers
         {
             ExceptionHandler.Log("Parsing time argument");
 
-            if (!string.IsNullOrWhiteSpace(argTime))
+            if (argTime != null)
             {
                 if (!argTime.Contains(":"))
                 {
@@ -100,10 +109,6 @@ namespace ShutdownTimer.Helpers
                     int count = splittedTimeArg.Length - 1; // Count number of colons
                     switch (count)
                     {
-                        case 0:
-                            ExceptionHandler.Log("Invalid time argument");
-                            break;
-
                         case 1:
                             // Assuming HH:mm
                             argTimeH = Convert.ToInt32(splittedTimeArg[0]);
@@ -116,7 +121,20 @@ namespace ShutdownTimer.Helpers
                             argTimeM = Convert.ToInt32(splittedTimeArg[1]);
                             argTimeS = Convert.ToInt32(splittedTimeArg[2]);
                             break;
+
+                        default:
+                            throw new ArgumentException("Invalid /SetTime format. Expected seconds, HH:mm, or HH:mm:ss.");
                     }
+                }
+
+                if (argTimeH < 0 || argTimeM < 0 || argTimeS < 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(argTime), "Time values cannot be negative.");
+                }
+
+                if (argUseTimeOfDay && (argTimeH > 23 || argTimeM > 59 || argTimeS > 59))
+                {
+                    throw new ArgumentOutOfRangeException(nameof(argTime), "Target time of day must be a valid 24-hour time (00:00:00 to 23:59:59).");
                 }
             }
 

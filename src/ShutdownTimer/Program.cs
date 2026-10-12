@@ -23,7 +23,16 @@ namespace ShutdownTimer
             if (args.Length != 0)
             {
                 ExceptionHandler.Log("Processing CLI args");
-                ArgProcessor.ProcessArgs(args);
+                try
+                {
+                    ArgProcessor.ProcessArgs(args);
+                }
+                catch (Exception ex)
+                {
+                    ExceptionHandler.Log("Failed to process CLI args: " + ex.Message);
+                    MessageBox.Show("Failed to process command line arguments:\n\n" + ex.Message, "Invalid arguments", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 // Initialize settings
                 ExceptionHandler.Log("Load settings");
@@ -31,6 +40,14 @@ namespace ShutdownTimer
                 { SettingsProvider.TemporaryMode = true; }
                 SettingsProvider.Load();
                 ExceptionHandler.Log("Settings loaded");
+
+                string[] validActions = { "Shutdown", "Restart", "Hibernate", "Sleep", "Logout", "Lock", "Custom Command" };
+                if (Array.IndexOf(validActions, ArgProcessor.argAction) == -1)
+                {
+                    ExceptionHandler.Log("Launch aborted: invalid /SetAction argument");
+                    MessageBox.Show($"'{ArgProcessor.argAction}' is not a valid action.\n\nPlease supply a valid action using the /SetAction argument.", "Invalid action", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 switch (ArgProcessor.argMode)
                 {
@@ -59,9 +76,14 @@ namespace ShutdownTimer
 
                     case "Launch":
                     case "ForcedLaunch":
-                        bool forced = new bool();
-                        if (ArgProcessor.argMode.Equals("Launch")) { forced = false; }
-                        else { forced = true; }
+                        bool forced = !ArgProcessor.argMode.Equals("Launch");
+
+                        if (string.IsNullOrWhiteSpace(ArgProcessor.argTime) || ArgProcessor.argTimeTS <= TimeSpan.Zero)
+                        {
+                            ExceptionHandler.Log("Launch aborted: time is missing, zero, or invalid");
+                            MessageBox.Show("The countdown requires a valid time greater than zero.\n\nPlease supply one using the /SetTime argument.", "Invalid time", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
 
                         // A custom command action requires a command to execute
                         if (ArgProcessor.argAction.Equals("Custom Command") && string.IsNullOrWhiteSpace(ArgProcessor.argCommand))
@@ -81,11 +103,23 @@ namespace ShutdownTimer
                         Application.Run();
                         ExceptionHandler.CreateAutoLogIfApplicable();
                         return;
+
+                    default:
+                        if (ArgProcessor.argMode != null)
+                        {
+                            ExceptionHandler.Log("Launch aborted: invalid /SetMode argument");
+                            MessageBox.Show($"'{ArgProcessor.argMode}' is not a valid control mode.\n\nValid modes are: Prefill, Lock, Launch, ForcedLaunch.", "Invalid mode", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        break;
                 }
             }
 
             ExceptionHandler.Log("Start menu");
-            SettingsProvider.Load();
+            if (!SettingsProvider.SettingsLoaded)
+            {
+                SettingsProvider.Load();
+            }
             Application.Run(new Menu());
             ExceptionHandler.CreateAutoLogIfApplicable();
         }
