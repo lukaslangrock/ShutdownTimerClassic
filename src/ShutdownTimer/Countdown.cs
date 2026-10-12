@@ -161,8 +161,13 @@ namespace ShutdownTimer
                 float scaleX = Size.Width / defaultWidth;
                 float scaleY = Size.Height / defaultHeight;
                 float scaledSize = defaultFontSize * Math.Min(scaleX, scaleY);
+                float newSize = Math.Max(defaultFontSize, scaledSize);
 
-                timeLabel.Font = new Font(timeLabel.Font.FontFamily, Math.Max(defaultFontSize, scaledSize), timeLabel.Font.Style);
+                if (timeLabel.Font.Size == newSize) return;
+
+                var previous = timeLabel.Font;
+                timeLabel.Font = new Font(previous.FontFamily, newSize, previous.Style);
+                previous.Dispose();
             }
         }
 
