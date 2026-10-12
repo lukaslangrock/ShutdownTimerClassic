@@ -50,31 +50,24 @@ namespace ShutdownTimer.Helpers
 
             if (interpretAsTimeOfDay)
             {
-                // calculate timespan till a time of day target
-                bool today = Numerics.TodayOrTomorrow(hours, minutes, seconds, nowReference);
-                DateTime target = new DateTime(nowReference.Year, nowReference.Month, nowReference.Day, hours, minutes, seconds);
-                if (!today) { target = target.AddDays(1); }
-                ts = target.Subtract(nowReference);
+                TimeSpan targetTime = new TimeSpan(hours, minutes, seconds);
+                TimeSpan currentTime = DateTime.Now.TimeOfDay;
+
+                TimeSpan diff = targetTime - currentTime;
+
+                // if the diff evaluates negative, the target must be for tomorrow instead of today, so add another day
+                if (diff < TimeSpan.Zero)
+                {
+                    diff = diff.Add(TimeSpan.FromDays(1));
+                }
+
+                return diff;
             }
             else
             {
                 // normal timespan parsing
-                ts = new TimeSpan(hours, minutes, seconds);
+                return new TimeSpan(hours, minutes, seconds);
             }
-
-            return ts;
-        }
-
-        /// <summary>
-        /// Determine if a given set of hours, minutes, and seconds regards a time of the current day or the next day
-        /// </summary>
-        /// <returns>true if today, false if tomorrow</returns>
-        public static bool TodayOrTomorrow(int hours, int minutes, int seconds, DateTime nowReference)
-        {
-            DateTime target = new DateTime(nowReference.Year, nowReference.Month, nowReference.Day, hours, minutes, seconds);
-
-            if (target < nowReference) { return false; } // specified time is in the past (for the current day) -> for tomorrow
-            else { return true; } // specified time is in the future -> for today
         }
     }
 }
