@@ -189,9 +189,15 @@ namespace ShutdownTimer
                         "You can disable this dialog in the settings under Advanced > Password Protection.";
                     form.PasswordMode = true;
                     ExceptionHandler.Log("Prompting for password");
-                    var result = form.ShowDialog();
-                    ExceptionHandler.Log("Password set");
-                    password = form.ReturnValue;
+                    if (form.ShowDialog() == DialogResult.OK)
+                    {
+                        ExceptionHandler.Log("Password set");
+                        password = form.ReturnValue;
+                    } else
+                    {
+                        ExceptionHandler.Log("User declines password prompt; aborting");
+                        return;
+                    }
                 }
             }
 
