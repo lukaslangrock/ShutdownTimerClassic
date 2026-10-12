@@ -7,6 +7,7 @@ namespace ShutdownTimer.Helpers
         public static string argMode;
         public static string argTime;
         public static string argAction = "Shutdown";
+        public static string argCommand;
         public static string argPassword;
         public static bool argGraceful = false;
         public static bool argPreventSleep = true;
@@ -43,6 +44,10 @@ namespace ShutdownTimer.Helpers
 
                     case "/SetAction":
                         argAction = args[i + 1];
+                        break;
+
+                    case "/SetCommand":
+                        argCommand = args[i + 1];
                         break;
 
                     case "/SetMode":
@@ -121,7 +126,6 @@ namespace ShutdownTimer.Helpers
         private static void CalculateTimeSpan()
         {
             ExceptionHandler.Log("Calculating TimeSpan");
-
             argTimeTS = Numerics.CalculateCountdownTimeSpan(argTimeH, argTimeM, argTimeS, argUseTimeOfDay);
         }
     }

@@ -15,6 +15,7 @@ namespace ShutdownTimer
         public string ArgAction { get; set; }
         public string ArgMode { get; set; }
         public string ArgPassword { get; set; }
+        public string ArgCommand { get; set; }
         public bool ArgGraceful { get; set; }
         public bool ArgPreventSleep { get; set; }
         public bool ArgBackground { get; set; }
@@ -140,7 +141,11 @@ namespace ShutdownTimer
                 }
             }
 
-            if (actionComboBox.Text.Equals("Custom Command"))
+            if (!String.IsNullOrEmpty(ArgCommand))
+            {
+                command = ArgCommand;
+            }
+            else if (actionComboBox.Text.Equals("Custom Command"))
             {
                 ExceptionHandler.Log("Custom command requested");
                 using (var form = new InputBox())

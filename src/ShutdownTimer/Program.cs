@@ -47,6 +47,7 @@ namespace ShutdownTimer
                             ArgAction = ArgProcessor.argAction,
                             ArgMode = ArgProcessor.argMode,
                             ArgPassword = ArgProcessor.argPassword,
+                            ArgCommand = ArgProcessor.argCommand,
                             ArgGraceful = ArgProcessor.argGraceful,
                             ArgPreventSleep = ArgProcessor.argPreventSleep,
                             ArgBackground = ArgProcessor.argBackground,
@@ -62,9 +63,18 @@ namespace ShutdownTimer
                         if (ArgProcessor.argMode.Equals("Launch")) { forced = false; }
                         else { forced = true; }
 
+                        // A custom command action requires a command to execute
+                        if (ArgProcessor.argAction.Equals("Custom Command") && string.IsNullOrWhiteSpace(ArgProcessor.argCommand))
+                        {
+                            ExceptionHandler.Log("Launch aborted: action is 'Custom Command' but no /SetCommand argument was supplied");
+                            MessageBox.Show("The action 'Custom Command' requires a command to execute.\n\nPlease supply one using the /SetCommand argument.", "Missing custom command", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
                         ExceptionHandler.Log("Run Countdown with args");
                         Timer.CountdownTimeSpan = ArgProcessor.argTimeTS;
                         Timer.Action = ArgProcessor.argAction;
+                        Timer.Command = ArgProcessor.argCommand;
                         Timer.Graceful = ArgProcessor.argGraceful;
                         Timer.PreventSystemSleep = ArgProcessor.argPreventSleep;
                         Timer.Start(ArgProcessor.argPassword, !ArgProcessor.argBackground, forced, false);
