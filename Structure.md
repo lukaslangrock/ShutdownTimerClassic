@@ -42,7 +42,7 @@ It will call `Helpers/ExitWindows.cs` when the timer reaches zero and uses `Help
 
 **`Helpers/Format.cs`** contains string formatting functions.
 
-**`Helpers/Numerics.cs`** includes a few numerical functions which validate and process the time data.
+**`Helpers/Time.cs`** contains the core functions to process and evaluate time data.
 
 **`Helpers/Settings.cs`** loads and saves the settings to a `settings.json` file in the user's application data folder.
 It exposes a `Settings` property to the entire application which is used to get and set the desired settings. Pretty much every form uses this.

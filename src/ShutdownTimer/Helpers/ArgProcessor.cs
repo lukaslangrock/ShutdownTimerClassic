@@ -144,7 +144,7 @@ namespace ShutdownTimer.Helpers
         private static void CalculateTimeSpan()
         {
             ExceptionHandler.Log("Calculating TimeSpan");
-            argTimeTS = Numerics.CalculateCountdownTimeSpan(argTimeH, argTimeM, argTimeS, argUseTimeOfDay);
+            argTimeTS = Time.CalculateCountdownTimeSpan(argTimeH, argTimeM, argTimeS, argUseTimeOfDay, DateTime.Now);
         }
     }
 }

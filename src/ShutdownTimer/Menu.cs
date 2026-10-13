@@ -232,14 +232,31 @@ namespace ShutdownTimer
             // Respective check for either countdown or timeOfDay mode
             try
             {
-                TimeSpan ts = Numerics.CalculateCountdownTimeSpan(hoursNumericUpDown.Value, minutesNumericUpDown.Value, secondsNumericUpDown.Value, timeOfDayModeRadioButton.Checked);
+                DateTimeOffset nowReference = DateTimeOffset.Now;
+                TimeSpan ts = Time.CalculateCountdownTimeSpan(hoursNumericUpDown.Value, minutesNumericUpDown.Value, secondsNumericUpDown.Value, timeOfDayModeRadioButton.Checked, nowReference);
 
                 // Sanity check
                 if (ts.TotalDays > 100)
                 {
                     warnMessages += $"Your chosen time equates to {Math.Round(ts.TotalDays)} days ({Math.Round(ts.TotalDays / 365, 2)} years)!\n" +
-                        "It is highly discouraged to choose such an insane amount of time as either your hardware, operating system, or this is app will fail *way* before you even come close to reaching the target!" +
-                        "\n\nBut if you are actually going to do this, please tell me how long this app survived.";
+                        "This is a bit much, and the application was never designed for this kind of runtime, so good luck!\n\n";
+                }
+
+                // Check for time discontinuities when using timeOfDay mode
+                if (timeOfDayModeRadioButton.Checked)
+                {
+                    
+                    DateTimeOffset actualEnd = Time.CalculateLocalEndTime(ts, nowReference, TimeZoneInfo.Local);
+                    TimeSpan diff = actualEnd.Offset - nowReference.Offset;
+                    ExceptionHandler.Log($"Time discontinuity check: {diff.TotalSeconds} seconds diff detected");
+
+                    if (diff.TotalSeconds != 0)
+                    {
+                        warnMessages += $"Your local clock will shift during this countdown! The actual time the countdown will end on diverges from your target by {Math.Abs(diff.TotalSeconds)} seconds, that's {Math.Abs(diff.TotalHours)} hour(s). This can be caused by daylight savings transition or other scheduled events in your local timezone.\n\n" +
+                            $"The countdown will use the difference between now and your target of {nowReference.Add(ts):HH:mm:ss}. " +
+                            $"However, your clock will display {actualEnd:HH:mm:ss} when the timer ends.\n\n" +
+                            $"The countdown will always use simple arithmetic instead of relying on timezone-aware calculation. Please be aware of this discrepancy!";
+                    }
                 }
             }
             catch
@@ -380,7 +397,7 @@ namespace ShutdownTimer
 
             // Calculate TimeSpan
             ExceptionHandler.Log("Calculating timespan");
-            TimeSpan timeSpan = Numerics.CalculateCountdownTimeSpan(hoursNumericUpDown.Value, minutesNumericUpDown.Value, secondsNumericUpDown.Value, timeOfDayModeRadioButton.Checked);
+            TimeSpan timeSpan = Time.CalculateCountdownTimeSpan(hoursNumericUpDown.Value, minutesNumericUpDown.Value, secondsNumericUpDown.Value, timeOfDayModeRadioButton.Checked, DateTime.Now);
 
             Timer.CountdownTimeSpan = timeSpan;
             Timer.Action = actionComboBox.Text;

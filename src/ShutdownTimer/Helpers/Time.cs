@@ -2,7 +2,7 @@
 
 namespace ShutdownTimer.Helpers
 {
-    class Numerics
+    class Time
     {
         /// <summary>
         /// Converts a TimeSpan into hours, minutes and seconds.
@@ -39,19 +39,18 @@ namespace ShutdownTimer.Helpers
         /// <param name="pMinutes">target minute value</param>
         /// <param name="pSeconds">target second value</param>
         /// <param name="interpretAsTimeOfDay">Treats the time values as a target time of day and calculates a timespan from now to the target time instead.</param>
+        /// <param name="nowReference">reference to DateTime.Now</param>
         /// <returns></returns>
-        public static TimeSpan CalculateCountdownTimeSpan(Object pHours, Object pMinutes, Object pSeconds, bool interpretAsTimeOfDay)
+        public static TimeSpan CalculateCountdownTimeSpan(Object pHours, Object pMinutes, Object pSeconds, bool interpretAsTimeOfDay, DateTimeOffset nowReference)
         {
             int hours = Convert.ToInt32(pHours);
             int minutes = Convert.ToInt32(pMinutes);
             int seconds = Convert.ToInt32(pSeconds);
-            DateTime nowReference = DateTime.Now;
-            TimeSpan ts;
 
             if (interpretAsTimeOfDay)
             {
                 TimeSpan targetTime = new TimeSpan(hours, minutes, seconds);
-                TimeSpan currentTime = DateTime.Now.TimeOfDay;
+                TimeSpan currentTime = nowReference.TimeOfDay;
 
                 TimeSpan diff = targetTime - currentTime;
 
@@ -68,6 +67,22 @@ namespace ShutdownTimer.Helpers
                 // normal timespan parsing
                 return new TimeSpan(hours, minutes, seconds);
             }
+        }
+
+        /// <summary>
+        /// The TimeSpan calculated by CalculateCountdownTimeSpan is very naive, however real world time includes jumps and discontinuities, such as daylight savings time.
+        /// As the result, the countdown will terminate at a time different than what the user put in (regarding only timeOfDay mode).
+        /// This function calculates the real local end time a user can expect, in order to inform them of what's going to happen and why.
+        /// </summary>
+        /// <param name="target">calculated timespan from now until countdown end</param>
+        /// <param name="nowReference">reference time to DateTime.Now</param>
+        /// <returns>the point in time when the countdown will terminate</returns>
+        public static DateTimeOffset CalculateLocalEndTime(TimeSpan target, DateTimeOffset nowReference, TimeZoneInfo tzReference)
+        {
+            DateTimeOffset countdownEndTime = nowReference.Add(target);
+            DateTimeOffset actualEndTime = TimeZoneInfo.ConvertTime(countdownEndTime, tzReference);
+
+            return actualEndTime;
         }
     }
 }

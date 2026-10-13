@@ -667,7 +667,7 @@ namespace ShutdownTimer
         {
             if (logTimerCounter <= 0)
             {
-                ExceptionHandler.Log("Heartbeat: The countdown reads " + Numerics.ConvertTimeSpanToString(ts) + " with memory usage at " + Format.BytesToString(Process.GetCurrentProcess().PrivateMemorySize64) + ". Next heartbeat in 100,000 ticks.");
+                ExceptionHandler.Log("Heartbeat: The countdown reads " + Time.ConvertTimeSpanToString(ts) + " with memory usage at " + Format.BytesToString(Process.GetCurrentProcess().PrivateMemorySize64) + ". Next heartbeat in 100,000 ticks.");
                 logTimerCounter = 100000;
             }
             else
@@ -687,7 +687,7 @@ namespace ShutdownTimer
                 }
 
                 // Update time labels
-                string elapsedTime = Numerics.ConvertTimeSpanToString(ts);
+                string elapsedTime = Time.ConvertTimeSpanToString(ts);
                 timeLabel.Text = elapsedTime;
                 timeMenuItem.Text = elapsedTime;
 
