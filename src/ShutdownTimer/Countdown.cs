@@ -317,6 +317,8 @@ namespace ShutdownTimer
                 ExceptionHandler.Log("Clearing EXECUTION_STATE flags");
                 ExecutionState.SetThreadExecutionState(ExecutionState.EXECUTION_STATE.ES_CONTINUOUS);
                 ExceptionHandler.Log("Restart");
+                ExceptionHandler.Log("Releasing application Mutex");
+                ApplicationInstanceManager.ReleaseMutex();
                 Application.Restart();
             }
         }
