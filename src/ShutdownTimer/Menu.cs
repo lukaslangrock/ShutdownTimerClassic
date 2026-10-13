@@ -134,9 +134,9 @@ namespace ShutdownTimer
 
             if (!listOfWarningsFound.Equals(""))
             {
-                if (MessageBox.Show(listOfWarningsFound, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation) != DialogResult.OK)
+                if (MessageBox.Show(listOfWarningsFound + "Do you wish to continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) != DialogResult.Yes)
                 {
-                    ExceptionHandler.Log("User cancelled due to warnings");
+                    ExceptionHandler.Log("User didn't accept the warnings; aborting");
                     return;
                 }
             }
@@ -255,7 +255,7 @@ namespace ShutdownTimer
                         warnMessages += $"Your local clock will shift during this countdown! The actual time the countdown will end on diverges from your target by {Math.Abs(diff.TotalSeconds)} seconds, that's {Math.Abs(diff.TotalHours)} hour(s). This can be caused by daylight savings transition or other scheduled events in your local timezone.\n\n" +
                             $"The countdown will use the difference between now and your target of {nowReference.Add(ts):HH:mm:ss}. " +
                             $"However, your clock will display {actualEnd:HH:mm:ss} when the timer ends.\n\n" +
-                            $"The countdown will always use simple arithmetic instead of relying on timezone-aware calculation. Please be aware of this discrepancy!";
+                            $"The countdown will always use simple arithmetic instead of relying on timezone-aware calculation. Please be aware of this discrepancy!\n\n";
                     }
                 }
             }
@@ -286,6 +286,7 @@ namespace ShutdownTimer
             else
             {
                 ExceptionHandler.Log("Ran all checks, the following errors have been found:\n" + errMessages);
+                ExceptionHandler.Log("as well as the following warnings:\n" + warnMessages);
                 return (false, errMessages, warnMessages);
             }
         }
