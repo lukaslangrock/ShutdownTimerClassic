@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -12,6 +12,7 @@ namespace ShutdownTimer.Helpers
     public static class ExceptionHandler
     {
         private static StringBuilder eventLog = new StringBuilder(); // storage for event logs
+        private static readonly object eventLogRWLock = new object(); // lock for thread-safe logging
 
         public static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs args)
         {
@@ -62,10 +63,15 @@ namespace ShutdownTimer.Helpers
         }
 
         // Add a new log to the event log stack
-        public static void Log(string data)
+        public static void Log(string data,
+            [CallerMemberName] string callerName = "?", [CallerFilePath] string filePath = "?", [CallerLineNumber] int lineNumber = -1)
         {
-            MethodBase method = new StackTrace().GetFrame(1).GetMethod();
-            eventLog.AppendLine($"{DateTime.Now.ToString("[HH:mm:ss.ffff]")}[{method.ReflectedType}:{method.Name}] {data}");
+            string entry = $"{DateTime.Now.ToString("[HH:mm:ss.ffff]")}[{Path.GetFileName(filePath)}:{lineNumber}:{callerName}] {data}";
+
+            lock (eventLogRWLock)
+            {
+                eventLog.AppendLine(entry);
+            }
         }
 
 
@@ -142,7 +148,10 @@ namespace ShutdownTimer.Helpers
             }
 
             log.AppendLine("\n\n---- Internal Event Log ----");
-            log.Append(eventLog);
+            lock (eventLogRWLock)
+            {
+                log.Append(eventLog);
+            }
 
             log.Append("\n\n---- End of Log ----");
 
