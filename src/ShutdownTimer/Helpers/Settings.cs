@@ -65,36 +65,43 @@ namespace ShutdownTimer.Helpers
                 ClearSettings();
             }
 
-            // If settings were created by an earlier version some migration steps might have to occur before using them
-            ExceptionHandler.Log("Check settings version");
-            if (Settings.AppVersion != null && Settings.AppVersion != "")
+            try
             {
-                // 
-                String[] importVerString = Settings.AppVersion.Split('.');
-                int[] importVer = new int[] { 0, 0, 0, 0 }; // defaults in case string is corrupted and does not contain 4 numbers
-                for (int i = 0; i < 4; i++) // read version number into usable integer array
+                // If settings were created by an earlier version some migration steps might have to occur before using them
+                ExceptionHandler.Log("Check settings version");
+                if (Settings.AppVersion != null && Settings.AppVersion != "")
                 {
-                    try { importVer[i] = Convert.ToInt32(importVerString[i]); }
-                    catch { ExceptionHandler.Log("Part " + (i + 1).ToString() + " of settings version number unreadable '" + importVerString[i] + "' filling with 0"); }
-                }
-
-                if (importVer[0] == 1) // everything v1.X
-                {
-                    if (importVer[1] < 3) // for < v1.3
+                    // 
+                    String[] importVerString = Settings.AppVersion.Split('.');
+                    int[] importVer = new int[] { 0, 0, 0, 0 }; // defaults in case string is corrupted and does not contain 4 numbers
+                    for (int i = 0; i < 4; i++) // read version number into usable integer array
                     {
-                        // Issue #49: When reading from earlier settings version DefaultTimer.CountdownMode does not exist and is initialized as false but default should be true
-                        Settings.DefaultTimer.CountdownMode = true;
-                        ExceptionHandler.Log("Set DefaultTimer.CountdownMode to true as migration step from <v1.3");
+                        try { importVer[i] = Convert.ToInt32(importVerString[i]); }
+                        catch { ExceptionHandler.Log("Part " + (i + 1).ToString() + " of settings version number unreadable '" + importVerString[i] + "' filling with 0"); }
                     }
 
-                    if (importVer[1] == 3 && importVer[2] == 0) // for = v1.3.0
+                    if (importVer[0] == 1) // everything v1.X
                     {
-                        // Issue #49: Same as above, except we force change this to lessen the general impact of the issue.
-                        // It's not very nice, especially for people who were not impact and changed this to false manually, but the group impacted is way larger than the one not impacted
-                        Settings.DefaultTimer.CountdownMode = true;
-                        ExceptionHandler.Log("Forced DefaultTimer.CountdownMode to true as mitigation for users impacted by Issue #49");
+                        if (importVer[1] < 3) // for < v1.3
+                        {
+                            // Issue #49: When reading from earlier settings version DefaultTimer.CountdownMode does not exist and is initialized as false but default should be true
+                            Settings.DefaultTimer.CountdownMode = true;
+                            ExceptionHandler.Log("Set DefaultTimer.CountdownMode to true as migration step from <v1.3");
+                        }
+
+                        if (importVer[1] == 3 && importVer[2] == 0) // for = v1.3.0
+                        {
+                            // Issue #49: Same as above, except we force change this to lessen the general impact of the issue.
+                            // It's not very nice, especially for people who were not impact and changed this to false manually, but the group impacted is way larger than the one not impacted
+                            Settings.DefaultTimer.CountdownMode = true;
+                            ExceptionHandler.Log("Forced DefaultTimer.CountdownMode to true as mitigation for users impacted by Issue #49");
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Log("Skipping settings migration due to error: " + ex.Message);
             }
 
             ExceptionHandler.Log("Set product version in settings");
