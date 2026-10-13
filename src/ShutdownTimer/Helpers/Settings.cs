@@ -56,6 +56,15 @@ namespace ShutdownTimer.Helpers
             }
         }
 
+        public static void ClearSettings()
+        {
+            ExceptionHandler.Log("Clearing settings");
+
+            Settings = new SettingsData();
+            ExceptionHandler.Log("Created default settings object");
+            Save();
+        }
+
         private static void CheckSettings()
         {
             ExceptionHandler.Log("Validating settings object");
@@ -63,15 +72,15 @@ namespace ShutdownTimer.Helpers
             {
                 ExceptionHandler.Log("Settings null or corrupted; initializing defaults");
                 ClearSettings();
+                return;
             }
 
             try
             {
-                // If settings were created by an earlier version some migration steps might have to occur before using them
-                ExceptionHandler.Log("Check settings version");
-                if (Settings.AppVersion != null && Settings.AppVersion != "")
+                // If settings were created by an earlier version, some migrations might have to occur
+                ExceptionHandler.Log("Checking settings version");
+                if (!String.IsNullOrEmpty(Settings.AppVersion) && Settings.AppVersion != Application.ProductVersion)
                 {
-                    // 
                     String[] importVerString = Settings.AppVersion.Split('.');
                     int[] importVer = new int[] { 0, 0, 0, 0 }; // defaults in case string is corrupted and does not contain 4 numbers
                     for (int i = 0; i < 4; i++) // read version number into usable integer array
@@ -80,7 +89,7 @@ namespace ShutdownTimer.Helpers
                         catch { ExceptionHandler.Log("Part " + (i + 1).ToString() + " of settings version number unreadable '" + importVerString[i] + "' filling with 0"); }
                     }
 
-                    if (importVer[0] == 1) // everything v1.X
+                    if (importVer[0] == 1) // only upgrade settings inside the same v1.X major
                     {
                         if (importVer[1] < 3) // for < v1.3
                         {
@@ -104,53 +113,28 @@ namespace ShutdownTimer.Helpers
                 ExceptionHandler.Log("Skipping settings migration due to error: " + ex.Message);
             }
 
-            ExceptionHandler.Log("Set product version in settings");
+            ExceptionHandler.Log("Update settings with current product version");
             Settings.AppVersion = Application.ProductVersion;
 
-            ExceptionHandler.Log("Check TrayIconTheme field");
-            if (Settings.TrayIconTheme is null)
+            if (Settings.DefaultTimer == null)
             {
-                ExceptionHandler.Log("Restore TrayIconTheme default");
+                ExceptionHandler.Log("DefaultTimer null or corrupted; initializing defaults");
+                Settings.DefaultTimer = new TimerData();
+            }
+
+            if (String.IsNullOrEmpty(Settings.TrayIconTheme))
+            {
+                ExceptionHandler.Log("TrayIconTheme null or empty; initializing default");
                 Settings.TrayIconTheme = "Automatic";
             }
 
-            ExceptionHandler.Log("Check DefaultTimer field");
-            if (Settings.DefaultTimer is null)
+            if (Settings.BackgroundColor.IsEmpty)
             {
-                ExceptionHandler.Log("Restore DefaultTimer defaults");
-                Settings.DefaultTimer = new TimerData
-                {
-                    Action = "Shutdown",
-                    Graceful = false,
-                    PreventSleep = true,
-                    Background = false,
-                    CountdownMode = true,
-                    Hours = 0,
-                    Minutes = 0,
-                    Seconds = 0
-                };
-            }
-
-            ExceptionHandler.Log("Check BackgroundColor field");
-            if (Settings.BackgroundColor == Color.Empty)
-            {
-                ExceptionHandler.Log("Restore BackgroundColor defaults");
+                ExceptionHandler.Log("BackgroundColor null or empty; initializing default");
                 Settings.BackgroundColor = Color.RoyalBlue;
             }
 
             ExceptionHandler.Log("Settings validated");
-        }
-
-        public static void ClearSettings()
-        {
-            ExceptionHandler.Log("Clearing settings");
-
-            Settings = new SettingsData();
-            ExceptionHandler.Log("Created default settings object");
-            CheckSettings();
-            Save();
-
-            ExceptionHandler.Log("Settings cleared");
         }
 
         public static void Save()
@@ -182,12 +166,12 @@ namespace ShutdownTimer.Helpers
     public class SettingsData
     {
         // meta
-        public string AppVersion { get; set; }
+        public string AppVersion { get; set; } = Application.ProductVersion;
 
         // general settings
         public bool RememberLastState { get; set; }
-        public string TrayIconTheme { get; set; }
-        public TimerData DefaultTimer { get; set; }
+        public string TrayIconTheme { get; set; } = "Automatic";
+        public TimerData DefaultTimer { get; set; } = new TimerData();
         public bool RememberLastScreenPositionUI { get; set; }
         public LastScreenPosition LastScreenPositionUI { get; set; }
         public bool RememberLastScreenPositionCountdown { get; set; }
@@ -199,7 +183,7 @@ namespace ShutdownTimer.Helpers
         public bool DisableAnimations { get; set; }
         public bool DisableNotifications { get; set; }
         public bool PasswordProtection { get; set; }
-        public Color BackgroundColor { get; set; }
+        public Color BackgroundColor { get; set; } = Color.RoyalBlue;
         public bool AdaptiveCountdownTextSize { get; set; }
         public bool HideTrayIcon { get; set; }
         public bool SaveEventLogOnExit { get; set; }
@@ -207,14 +191,14 @@ namespace ShutdownTimer.Helpers
 
     public class TimerData
     {
-        public string Action { get; set; }
-        public bool Graceful { get; set; }
-        public bool PreventSleep { get; set; }
-        public bool Background { get; set; }
-        public bool CountdownMode { get; set; }
-        public int Hours { get; set; }
-        public int Minutes { get; set; }
-        public int Seconds { get; set; }
+        public string Action { get; set; } = "Shutdown";
+        public bool Graceful { get; set; } = false;
+        public bool PreventSleep { get; set; } = true;
+        public bool Background { get; set; } = false;
+        public bool CountdownMode { get; set; } = true;
+        public int Hours { get; set; } = 0;
+        public int Minutes { get; set; } = 0;
+        public int Seconds { get; set; } = 0;
     }
 
     public class LastScreenPosition
