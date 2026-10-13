@@ -526,6 +526,11 @@ namespace ShutdownTimer
                 TopMost = false;
                 var result = form.ShowDialog();
                 TopMost = !SettingsProvider.Settings.DisableAlwaysOnTop;
+                if (form.DialogResult == DialogResult.Cancel)
+                {
+                    ExceptionHandler.Log("Unlock aborted by user.");
+                    return false;
+                }
                 if (form.ReturnValue == Password)
                 {
                     ExceptionHandler.Log("Successfully unlocked");
