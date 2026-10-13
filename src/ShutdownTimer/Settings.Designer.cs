@@ -68,6 +68,7 @@
             this.passwordLabel = new System.Windows.Forms.Label();
             this.passwordCheckBox = new System.Windows.Forms.CheckBox();
             this.countdownGroupBox = new System.Windows.Forms.GroupBox();
+            this.hideTrayIconCheckBox = new System.Windows.Forms.CheckBox();
             this.transparentWindowCheckBox = new System.Windows.Forms.CheckBox();
             this.enableAdaptiveCountdownTextSizeCheckBox = new System.Windows.Forms.CheckBox();
             this.setBackgroundColorLinkLabel = new System.Windows.Forms.LinkLabel();
@@ -92,7 +93,6 @@
             this.appSourceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appLicenseLinkLabel = new System.Windows.Forms.LinkLabel();
             this.appInfoLabel = new System.Windows.Forms.Label();
-            this.hideTrayIconCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.titlebarPictureBox)).BeginInit();
             this.settingsTabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -576,6 +576,17 @@
             this.countdownGroupBox.TabStop = false;
             this.countdownGroupBox.Text = "Countdown window";
             // 
+            // hideTrayIconCheckBox
+            // 
+            this.hideTrayIconCheckBox.AutoSize = true;
+            this.hideTrayIconCheckBox.Location = new System.Drawing.Point(6, 134);
+            this.hideTrayIconCheckBox.Name = "hideTrayIconCheckBox";
+            this.hideTrayIconCheckBox.Size = new System.Drawing.Size(185, 17);
+            this.hideTrayIconCheckBox.TabIndex = 371;
+            this.hideTrayIconCheckBox.Text = "Hide tray icon (not recommended)";
+            this.hideTrayIconCheckBox.UseVisualStyleBackColor = true;
+            this.hideTrayIconCheckBox.CheckedChanged += new System.EventHandler(this.hideTrayIconCheckBox_CheckedChanged);
+            // 
             // transparentWindowCheckBox
             // 
             this.transparentWindowCheckBox.AutoSize = true;
@@ -670,23 +681,23 @@
             // forceFlagRadioButton
             // 
             this.forceFlagRadioButton.AutoSize = true;
-            this.forceFlagRadioButton.Location = new System.Drawing.Point(9, 68);
+            this.forceFlagRadioButton.Location = new System.Drawing.Point(9, 45);
             this.forceFlagRadioButton.Name = "forceFlagRadioButton";
-            this.forceFlagRadioButton.Size = new System.Drawing.Size(133, 17);
-            this.forceFlagRadioButton.TabIndex = 290;
+            this.forceFlagRadioButton.Size = new System.Drawing.Size(92, 17);
+            this.forceFlagRadioButton.TabIndex = 280;
             this.forceFlagRadioButton.TabStop = true;
-            this.forceFlagRadioButton.Text = "EWX_FORCEIFHUNG";
+            this.forceFlagRadioButton.Text = "EWX_FORCE";
             this.forceFlagRadioButton.UseVisualStyleBackColor = true;
             // 
             // forceIfHungFlagRadioButton
             // 
             this.forceIfHungFlagRadioButton.AutoSize = true;
-            this.forceIfHungFlagRadioButton.Location = new System.Drawing.Point(9, 45);
+            this.forceIfHungFlagRadioButton.Location = new System.Drawing.Point(9, 68);
             this.forceIfHungFlagRadioButton.Name = "forceIfHungFlagRadioButton";
-            this.forceIfHungFlagRadioButton.Size = new System.Drawing.Size(92, 17);
-            this.forceIfHungFlagRadioButton.TabIndex = 280;
+            this.forceIfHungFlagRadioButton.Size = new System.Drawing.Size(133, 17);
+            this.forceIfHungFlagRadioButton.TabIndex = 290;
             this.forceIfHungFlagRadioButton.TabStop = true;
-            this.forceIfHungFlagRadioButton.Text = "EWX_FORCE";
+            this.forceIfHungFlagRadioButton.Text = "EWX_FORCEIFHUNG";
             this.forceIfHungFlagRadioButton.UseVisualStyleBackColor = true;
             // 
             // forceFlagLabel
@@ -849,17 +860,6 @@
             this.appInfoLabel.Size = new System.Drawing.Size(62, 13);
             this.appInfoLabel.TabIndex = 450;
             this.appInfoLabel.Text = "Application:";
-            // 
-            // hideTrayIconCheckBox
-            // 
-            this.hideTrayIconCheckBox.AutoSize = true;
-            this.hideTrayIconCheckBox.Location = new System.Drawing.Point(6, 134);
-            this.hideTrayIconCheckBox.Name = "hideTrayIconCheckBox";
-            this.hideTrayIconCheckBox.Size = new System.Drawing.Size(185, 17);
-            this.hideTrayIconCheckBox.TabIndex = 371;
-            this.hideTrayIconCheckBox.Text = "Hide tray icon (not recommended)";
-            this.hideTrayIconCheckBox.UseVisualStyleBackColor = true;
-            this.hideTrayIconCheckBox.CheckedChanged += new System.EventHandler(this.hideTrayIconCheckBox_CheckedChanged);
             // 
             // Settings
             // 

@@ -71,8 +71,8 @@ namespace ShutdownTimer
             secondsNumericUpDown.Value = SettingsProvider.Settings.DefaultTimer.Seconds;
 
             // advanced settings
-            forceIfHungFlagRadioButton.Checked = !SettingsProvider.Settings.ForceIfHungFlag;
-            forceFlagRadioButton.Checked = SettingsProvider.Settings.ForceIfHungFlag;
+            forceIfHungFlagRadioButton.Checked = SettingsProvider.Settings.ForceIfHungFlag;
+            forceFlagRadioButton.Checked = !SettingsProvider.Settings.ForceIfHungFlag;
             disableAlwaysOnTopCheckBox.Checked = SettingsProvider.Settings.DisableAlwaysOnTop;
             disableAnimationsCheckBox.Checked = SettingsProvider.Settings.DisableAnimations;
             setBackgroundColorLinkLabel.Enabled = disableAnimationsCheckBox.Checked;
@@ -107,7 +107,7 @@ namespace ShutdownTimer
             }
 
             // advanced settings
-            SettingsProvider.Settings.ForceIfHungFlag = forceFlagRadioButton.Checked;
+            SettingsProvider.Settings.ForceIfHungFlag = forceIfHungFlagRadioButton.Checked;
             SettingsProvider.Settings.DisableAlwaysOnTop = disableAlwaysOnTopCheckBox.Checked;
             SettingsProvider.Settings.DisableAnimations = disableAnimationsCheckBox.Checked;
             SettingsProvider.Settings.DisableNotifications = disableNotificationsCheckBox.Checked;
