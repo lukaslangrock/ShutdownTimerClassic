@@ -70,7 +70,7 @@ The same menu can also be accessed by right clicking in the countdown window.
 
 # CLI 💻
 
-You can also use the command line to start the Shutdown Timer with specific arguments and settings.  
+You can also use the command line to start the Shutdown Timer with specific arguments and settings. The instant `/SetMode` is provided, existing application settings and user preferences are fully ignored, unless `/UseSettings` is supplied.
 **Warning**: The application does not validate arguments the same way it does user input within the form. Spelling errors or missing arguments can cause unintended behaviour. Please test your command before using it in scripts!
 
 To launch the application with additional arguments, navigate to folder where the application binary can be found with your file explorer. If you are using the Microsoft Store version, I recommend downloading a second version from the GitHub releases page instead, as the binaries from the Store are not intended to be launched by the user.  
@@ -107,7 +107,8 @@ Argument                 Description
 /Background              Runs the countdown in the background.
                          This is not a silent mode, the user will still get notifications and can use the tray menu.
 
-/NoSettings              Uses temporary ephemeral settings and ignores the `settings.json` file.
+/UseSettings             Respect the user settings and preferences even when using CLI arguments.
+                         By default, ephemeral settings are used when CLI arguments are applied. Use this argument to restore typical behaviour.
 
 /TargetTimeOfDay         Counts down towards a given time (of day) instead of counting down from it.
 ```

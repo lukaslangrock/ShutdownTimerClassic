@@ -36,8 +36,12 @@ namespace ShutdownTimer
 
                 // Initialize settings
                 ExceptionHandler.Log("Load settings");
-                if (ArgProcessor.argNoSettings)
-                { SettingsProvider.TemporaryMode = true; }
+                if (!ArgProcessor.argUseSettings && !String.IsNullOrEmpty(ArgProcessor.argMode))
+                {
+                    // unless explicitly requested, do not load settings when running in CLI mode
+                    // The use /SetMode acts as the central trigger to apply CLI values, thus its presence will block loading/saving settings
+                    SettingsProvider.TemporaryMode = true;
+                }
                 SettingsProvider.Load();
                 ExceptionHandler.Log("Settings loaded");
 
