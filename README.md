@@ -6,8 +6,9 @@ Shutdown Timer Classic is a small Windows application that allows you to set a t
 
 I am also planning on developing a more advanced and sleek version of this app in the future.
 
-**Want to contribute or take a look at my code?** Awesome, I welcome all and any contributions and would love to hear your opinion.
-Take a look at my [file and folder structure](Structure.md) document to read more about how everything ties together.
+**Want to contribute or take a look at my code?** Awesome, I welcome *human* contributions and would love to hear your opinion. To get started, take a look at my [file and folder structure](Structure.md) document to read more about how everything ties together.
+
+You may use AI to assist in parts, but **please don't post AI generated text**. Issues and PRs should never be posted by an LLM, as I (a human) will need to review them, and I'd like to work with other humans instead of bots. If you make use of AI which goes further than research or simple autocompletion, please outline your use of AI.
 
 # Installation 💿
 
