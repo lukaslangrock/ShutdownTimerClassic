@@ -22,6 +22,8 @@ namespace ShutdownTimer
             // Prevent font-fallback and subsequent layout issues. This application is currently only in English and doesn't require display of non-Latin characters.
             this.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
 
+            UIFont.Apply(this);
+
             LoadSettings();
         }
 
