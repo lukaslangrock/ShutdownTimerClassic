@@ -53,7 +53,7 @@ namespace ShutdownTimer.Helpers
         {
             try
             {
-                if (SettingsProvider.SettingsLoaded && SettingsProvider.Settings.SaveEventLogOnExit)
+                if (SettingsProvider.Settings.SaveEventLogOnExit)
                 {
                     Log("Autosaving log as defined per developer option. This feature can be turned off in Settings > Advanced > Developer options");
                     ProduceLogfile(null, "NotAnException", false, true);

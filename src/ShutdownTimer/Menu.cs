@@ -345,7 +345,7 @@ namespace ShutdownTimer
         /// </summary>
         private void SaveSettings()
         {
-            if (SettingsProvider.SettingsLoaded)
+            if (SettingsProvider.Settings != null)
             {
                 ExceptionHandler.Log("Saving settings...");
 

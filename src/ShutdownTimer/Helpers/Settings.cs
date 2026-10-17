@@ -9,7 +9,6 @@ namespace ShutdownTimer.Helpers
     public static class SettingsProvider
     {
         public static SettingsData Settings { get; set; } // current settings
-        public static bool SettingsLoaded = false;
         public static bool TemporaryMode = false;
         private static readonly string settingsDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Shutdown Timer Classic";
         private static readonly string settingsPath = settingsDirectory + "\\settings.json";
@@ -18,42 +17,48 @@ namespace ShutdownTimer.Helpers
         {
             ExceptionHandler.Log("Loading settings");
 
-            if (!TemporaryMode)
-            {
-                // make sure respective appdata dir exists
-                if (!Directory.Exists(settingsDirectory))
-                {
-                    ExceptionHandler.Log("Creating settings directory");
-                    Directory.CreateDirectory(settingsDirectory);
-                }
-
-                // make sure settings.json exists
-                if (!File.Exists(settingsPath))
-                {
-                    ExceptionHandler.Log("Settings file not found; creating new settings object");
-                    SettingsData emptySettingsData = new SettingsData();
-                    ExceptionHandler.Log("Serializing settings");
-                    string emptySettingsDataJson = JsonConvert.SerializeObject(emptySettingsData, Formatting.Indented);
-                    ExceptionHandler.Log("Writing settings.json");
-                    File.WriteAllText(settingsPath, emptySettingsDataJson);
-                }
-
-                ExceptionHandler.Log("Loading settings.json");
-                string settingsJson = File.ReadAllText(settingsPath);
-                Settings = new SettingsData();
-                try { Settings = JsonConvert.DeserializeObject<SettingsData>(settingsJson); } catch (Exception ex) { ExceptionHandler.Log("Error deserializing object: " + ex.Message); }
-                CheckSettings();
-                SettingsLoaded = true;
-                ExceptionHandler.Log("Successfully loaded settings to an object in application memory");
-            }
-            else
+            if (TemporaryMode)
             {
                 ExceptionHandler.Log("Initializing temporary settings (TemporaryMode)");
                 Settings = new SettingsData();
                 CheckSettings();
-                SettingsLoaded = true;
                 ExceptionHandler.Log("Temporary settings initialized");
+                return;
             }
+
+            // make sure respective appdata dir exists
+            if (!Directory.Exists(settingsDirectory))
+            {
+                ExceptionHandler.Log("Creating settings directory");
+                Directory.CreateDirectory(settingsDirectory);
+            }
+
+            // make sure settings.json exists
+            if (!File.Exists(settingsPath))
+            {
+                ExceptionHandler.Log("Settings file not found; creating new settings object");
+                SettingsData emptySettingsData = new SettingsData();
+                ExceptionHandler.Log("Serializing settings");
+                string emptySettingsDataJson = JsonConvert.SerializeObject(emptySettingsData, Formatting.Indented);
+                ExceptionHandler.Log("Writing settings.json");
+                File.WriteAllText(settingsPath, emptySettingsDataJson);
+            }
+
+            ExceptionHandler.Log("Loading settings.json");
+            string settingsJson = File.ReadAllText(settingsPath);
+
+            Settings = new SettingsData();
+            try
+            {
+                Settings = JsonConvert.DeserializeObject<SettingsData>(settingsJson);
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Log("Error deserializing object: " + ex.Message);
+            }
+            CheckSettings();
+
+            ExceptionHandler.Log("Successfully loaded settings to an object in application memory");
         }
 
         public static void ClearSettings()
@@ -62,6 +67,7 @@ namespace ShutdownTimer.Helpers
 
             Settings = new SettingsData();
             ExceptionHandler.Log("Created default settings object");
+
             Save();
         }
 
@@ -139,27 +145,25 @@ namespace ShutdownTimer.Helpers
 
         public static void Save()
         {
-            if (!TemporaryMode)
-            {
-                ExceptionHandler.Log("Saving settings");
-
-                if (SettingsLoaded)
-                {
-                    ExceptionHandler.Log("Serializing settings");
-                    string settingsJson = JsonConvert.SerializeObject(Settings, Formatting.Indented);
-                    ExceptionHandler.Log("Writing settings.json");
-                    File.WriteAllText(settingsPath, settingsJson);
-                    ExceptionHandler.Log("Settings saved");
-                }
-                else
-                {
-                    ExceptionHandler.Log("Ignore save: settings not loaded");
-                }
-            }
-            else
+            if (TemporaryMode)
             {
                 ExceptionHandler.Log("Ignore save: TemporaryMode enabled");
+                return;
             }
+
+            if (Settings == null)
+            {
+                ExceptionHandler.Log("Ignore save: settings not loaded");
+                return;
+            }
+
+            ExceptionHandler.Log("Serializing settings");
+            string settingsJson = JsonConvert.SerializeObject(Settings, Formatting.Indented);
+            ExceptionHandler.Log("Writing settings.json.tmp");
+            File.WriteAllText(settingsPath + ".tmp", settingsJson);
+            ExceptionHandler.Log("Replacing settings.json");
+            File.Replace(settingsPath + ".tmp", settingsPath, null);
+            ExceptionHandler.Log("Settings saved");
         }
     }
 

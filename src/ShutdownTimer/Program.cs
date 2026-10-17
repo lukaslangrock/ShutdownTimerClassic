@@ -116,7 +116,7 @@ namespace ShutdownTimer
             }
 
             ExceptionHandler.Log("Start menu");
-            if (!SettingsProvider.SettingsLoaded)
+            if (SettingsProvider.Settings == null)
             {
                 SettingsProvider.Load();
             }
