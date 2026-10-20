@@ -201,8 +201,8 @@
             this.AccessibleDescription = "Shows the time left until power action gets executed.";
             this.AccessibleName = "Shutdown Timer Countdown";
             this.AccessibleRole = System.Windows.Forms.AccessibleRole.Alert;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.RoyalBlue;
             this.ClientSize = new System.Drawing.Size(359, 146);
             this.ContextMenuStrip = this.contextMenuStrip;

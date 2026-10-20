@@ -308,8 +308,8 @@
             this.AcceptButton = this.startButton;
             this.AccessibleDescription = "The main window where you can choose the time and power action.";
             this.AccessibleName = "Shutdown Timer";
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(284, 348);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.versionLabel);

@@ -73,6 +73,7 @@
       <DependentUpon>Countdown.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ApplicationInstanceManager.cs" />
+    <Compile Include="Helpers\DpiScaling.cs" />
     <Compile Include="Helpers\ArgProcessor.cs" />
     <Compile Include="Helpers\ExceptionHandler.cs" />
     <Compile Include="Helpers\ExecutionState.cs" />

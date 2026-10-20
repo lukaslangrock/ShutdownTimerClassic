@@ -116,7 +116,7 @@
             // titlebarPictureBox
             // 
             this.titlebarPictureBox.BackColor = System.Drawing.Color.Black;
-            this.titlebarPictureBox.Location = new System.Drawing.Point(18, 43);
+            this.titlebarPictureBox.Location = new System.Drawing.Point(18, 51);
             this.titlebarPictureBox.Name = "titlebarPictureBox";
             this.titlebarPictureBox.Size = new System.Drawing.Size(113, 5);
             this.titlebarPictureBox.TabIndex = 0;
@@ -126,7 +126,7 @@
             // 
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLabel.Location = new System.Drawing.Point(12, 9);
+            this.titleLabel.Location = new System.Drawing.Point(12, 17);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(113, 31);
             this.titleLabel.TabIndex = 570;
@@ -135,10 +135,10 @@
             // appLabel
             // 
             this.appLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.appLabel.AutoSize = true;
-            this.appLabel.Location = new System.Drawing.Point(167, 9);
+            this.appLabel.AutoSize = false;
+            this.appLabel.Location = new System.Drawing.Point(110, 0);
             this.appLabel.Name = "appLabel";
-            this.appLabel.Size = new System.Drawing.Size(155, 13);
+            this.appLabel.Size = new System.Drawing.Size(212, 16);
             this.appLabel.TabIndex = 580;
             this.appLabel.Text = "ShutdownTimerClassic@v0.0.0";
             this.appLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -148,7 +148,7 @@
             this.footerLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.footerLabel.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.footerLabel.Location = new System.Drawing.Point(12, 495);
+            this.footerLabel.Location = new System.Drawing.Point(12, 503);
             this.footerLabel.Name = "footerLabel";
             this.footerLabel.Size = new System.Drawing.Size(310, 18);
             this.footerLabel.TabIndex = 560;
@@ -158,10 +158,10 @@
             // githubLinkLabel
             // 
             this.githubLinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.githubLinkLabel.AutoSize = true;
-            this.githubLinkLabel.Location = new System.Drawing.Point(241, 22);
+            this.githubLinkLabel.AutoSize = false;
+            this.githubLinkLabel.Location = new System.Drawing.Point(226, 23);
             this.githubLinkLabel.Name = "githubLinkLabel";
-            this.githubLinkLabel.Size = new System.Drawing.Size(81, 13);
+            this.githubLinkLabel.Size = new System.Drawing.Size(96, 16);
             this.githubLinkLabel.TabIndex = 590;
             this.githubLinkLabel.TabStop = true;
             this.githubLinkLabel.Text = "View on GitHub";
@@ -176,7 +176,7 @@
             this.settingsTabControl.Controls.Add(this.tabPage1);
             this.settingsTabControl.Controls.Add(this.tabPage2);
             this.settingsTabControl.Controls.Add(this.tabPage3);
-            this.settingsTabControl.Location = new System.Drawing.Point(18, 54);
+            this.settingsTabControl.Location = new System.Drawing.Point(18, 62);
             this.settingsTabControl.Name = "settingsTabControl";
             this.settingsTabControl.SelectedIndex = 0;
             this.settingsTabControl.Size = new System.Drawing.Size(304, 438);
@@ -507,13 +507,14 @@
             // openAppDataLinkLabel
             // 
             this.openAppDataLinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.openAppDataLinkLabel.AutoSize = true;
-            this.openAppDataLinkLabel.Location = new System.Drawing.Point(174, 40);
+            this.openAppDataLinkLabel.AutoSize = false;
+            this.openAppDataLinkLabel.Location = new System.Drawing.Point(150, 38);
             this.openAppDataLinkLabel.Name = "openAppDataLinkLabel";
-            this.openAppDataLinkLabel.Size = new System.Drawing.Size(104, 13);
+            this.openAppDataLinkLabel.Size = new System.Drawing.Size(128, 16);
             this.openAppDataLinkLabel.TabIndex = 430;
             this.openAppDataLinkLabel.TabStop = true;
             this.openAppDataLinkLabel.Text = "Open appdata folder";
+            this.openAppDataLinkLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.openAppDataLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.openAppDataLinkLabel_LinkClicked);
             // 
             // saveLogsCheckBox
@@ -543,10 +544,9 @@
             // 
             this.passwordLabel.Location = new System.Drawing.Point(6, 16);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(272, 28);
+            this.passwordLabel.Size = new System.Drawing.Size(272, 30);
             this.passwordLabel.TabIndex = 390;
-            this.passwordLabel.Text = "Locks the countdown UI with a password you can set when starting a shutdown after" +
-    " clicking start.";
+            this.passwordLabel.Text = "Locks the countdown UI with a password you can set\r\nwhen starting a shutdown after clicking start.";
             // 
             // passwordCheckBox
             // 
@@ -669,13 +669,14 @@
             // forceFlagDocsLinkLabel
             // 
             this.forceFlagDocsLinkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.forceFlagDocsLinkLabel.AutoSize = true;
-            this.forceFlagDocsLinkLabel.Location = new System.Drawing.Point(199, 72);
+            this.forceFlagDocsLinkLabel.AutoSize = false;
+            this.forceFlagDocsLinkLabel.Location = new System.Drawing.Point(182, 70);
             this.forceFlagDocsLinkLabel.Name = "forceFlagDocsLinkLabel";
-            this.forceFlagDocsLinkLabel.Size = new System.Drawing.Size(79, 13);
+            this.forceFlagDocsLinkLabel.Size = new System.Drawing.Size(96, 16);
             this.forceFlagDocsLinkLabel.TabIndex = 300;
             this.forceFlagDocsLinkLabel.TabStop = true;
             this.forceFlagDocsLinkLabel.Text = "Documentation";
+            this.forceFlagDocsLinkLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.forceFlagDocsLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ForceFlagDocsLinkLabel_LinkClicked);
             // 
             // forceFlagRadioButton
@@ -707,8 +708,7 @@
             this.forceFlagLabel.Name = "forceFlagLabel";
             this.forceFlagLabel.Size = new System.Drawing.Size(277, 26);
             this.forceFlagLabel.TabIndex = 270;
-            this.forceFlagLabel.Text = "Changes how running applications are force-closed when\r\nusing a non-graceful shut" +
-    "down.";
+            this.forceFlagLabel.Text = "Changes how running applications are force-closed\r\nwhen using a non-graceful shutdown.";
             // 
             // tabPage3
             // 
@@ -724,8 +724,7 @@
             // 
             // aboutGroupBox
             // 
-            this.aboutGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.aboutGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.aboutGroupBox.Controls.Add(this.logButton);
             this.aboutGroupBox.Controls.Add(this.emailbutton);
@@ -863,9 +862,9 @@
             // 
             // Settings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 522);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(334, 530);
             this.Controls.Add(this.githubLinkLabel);
             this.Controls.Add(this.footerLabel);
             this.Controls.Add(this.appLabel);

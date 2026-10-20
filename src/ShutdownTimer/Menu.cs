@@ -73,6 +73,7 @@ namespace ShutdownTimer
             this.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
 
             ExceptionHandler.Log("Form initialized");
+            DpiScaling.CorrectInitialDpi(this);
         }
 
         private void Menu_Shown(object sender, EventArgs e)

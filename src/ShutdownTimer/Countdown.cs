@@ -143,6 +143,14 @@ namespace ShutdownTimer
 
             ExceptionHandler.Log("Updating UI");
             UpdateUI(Timer.CountdownTimeSpan);
+            DpiScaling.CorrectInitialDpi(this);
+
+            // Re-establish the clock's anchor distances after initial DPI scaling.
+            // The bottom anchor must remain enabled so resizing still fills the window.
+            int clockTop = titlebarPictureBox.Bottom + (int)Math.Round(3f * DeviceDpi / 96f);
+            int clockBottom = ClientSize.Height - (int)Math.Round(9f * DeviceDpi / 96f);
+            timeLabel.Bounds = Rectangle.FromLTRB(titlebarPictureBox.Left, clockTop,
+                titlebarPictureBox.Right, Math.Max(clockTop, clockBottom));
 
             ExceptionHandler.Log("Countdown sequence started");
         }

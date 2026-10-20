@@ -23,6 +23,7 @@ namespace ShutdownTimer
             this.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
 
             LoadSettings();
+            DpiScaling.CorrectInitialDpi(this);
         }
 
         private void Settings_FormClosing(object sender, FormClosingEventArgs e)
