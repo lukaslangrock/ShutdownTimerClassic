@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using ShutdownTimer.Helpers;
 
 namespace ShutdownTimer
 {
@@ -26,6 +27,8 @@ namespace ShutdownTimer
 
             // Prevent font-fallback and subsequent layout issues. This application is currently only in English and doesn't require display of non-Latin characters.
             this.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 0);
+
+            UIFont.Apply(this);
         }
 
         private void OkButton_Click(object sender, EventArgs e)
